@@ -1,19 +1,24 @@
 <template>
   <el-container class="home-container">
     <el-main class="content">
-      <img class="avatar-img" alt="Vue logo" src="./../assets/avatar.jpg">
+      <img class="avatar-img" alt="Vue logo" src="./../assets/images/avatar.jpg">
       <h1>{{ msg }}</h1>
       <ul>
         <li><a class="link-btn" href="https://github.com/Snail-Lu" target="_blank" rel="noopener">Github</a></li>
         <li><a class="link-btn" href="https://snail-lu.github.io" target="_blank" rel="noopener">Github Pages</a></li>
         <li><a class="link-btn" href="https://www.cnblogs.com/snaillu/" target="_blank" rel="noopener">Blog</a></li>
-        <li><a class="link-btn" href="https://snail-lu.github.io/portfolio" target="_blank" rel="noopener">portfolio</a></li>
+        <li><a class="link-btn" href="https://snail-lu.github.io/portfolio" target="_blank" rel="noopener">Portfolio</a></li>
       </ul>
     </el-main>
     <el-footer class="footer">
-      <div>
-        Copyright © <a class="link-btn" href="https://www.yes-i-do.cn">yes-i-do.cn</a>. All Rights Reserved. 备案号：<a class="link-btn" target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">皖ICP备2020019744号</a>
-      </div>
+      <span>Copyright ©</span>
+      <a class="footer-link" href="https://www.yes-i-do.cn">yes-i-do.cn</a>
+      <span> All Rights Reserved.</span>
+      <a target="_blank" class="footer-link beian-link" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34160202000555">
+        <img src="./../assets/images/beian.png" />
+        <p>皖公网安备 34160202000555号</p>
+      </a>
+      <a class="footer-link" target="_blank" href="https://beian.miit.gov.cn/">皖ICP备2020019744号</a>
     </el-footer>
   </el-container>
 </template>
@@ -52,8 +57,26 @@ export default {
 
 .footer {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  font-size:14px;
+  color: #000;
+}
+
+.footer-link {
+  color: #000;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.beian-link {
+  display: flex;
+  align-items: center;
+}
+
+.beian-link img {
+  width: 20px;
+  height: 20px;
 }
 
 ul {
