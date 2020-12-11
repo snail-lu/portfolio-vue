@@ -1,7 +1,7 @@
 <template>
   <el-container class="home-container">
     <el-main class="content">
-      <img class="avatar-img" alt="Vue logo" src="./../assets/images/avatar.jpg">
+      <img class="avatar-img" alt="Vue logo" src="./../../assets/images/avatar.jpg">
       <h1>{{ msg }}</h1>
       <ul>
         <li><a class="link-btn" href="https://github.com/Snail-Lu" target="_blank" rel="noopener">Github</a></li>
@@ -15,7 +15,7 @@
       <a class="footer-link" href="https://www.yes-i-do.cn">yes-i-do.cn</a>
       <span> All Rights Reserved.</span>
       <a target="_blank" class="footer-link beian-link" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34160202000555">
-        <img src="./../assets/images/beian.png" />
+        <img src="./../../assets/images/beian.png" />
         <p>皖公网安备 34160202000555号</p>
       </a>
       <a class="footer-link" target="_blank" href="https://beian.miit.gov.cn/">皖ICP备2020019744号</a>
