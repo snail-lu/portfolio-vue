@@ -7,7 +7,8 @@
         <li><a class="link-btn" href="https://github.com/Snail-Lu" target="_blank" rel="noopener">Github</a></li>
         <li><a class="link-btn" href="https://snail-lu.github.io" target="_blank" rel="noopener">Github Pages</a></li>
         <li><a class="link-btn" href="https://www.cnblogs.com/snaillu/" target="_blank" rel="noopener">Blog</a></li>
-        <li><a class="link-btn" href="https://snail-lu.github.io/portfolio" target="_blank" rel="noopener">Portfolio</a></li>
+        <li><a class="link-btn" href="https://www.yes-i-do.cn/portfolio/" target="_blank" rel="noopener">Portfolio</a></li>
+        <li><router-link to="/example">Example</router-link></li>
       </ul>
     </el-main>
     <el-footer class="footer">
