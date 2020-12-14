@@ -1,0 +1,31 @@
+.resume-container {
+    min-height: 100%;
+    background-color: #fff;
+    width: 70%;
+    padding: 20px 0;
+    box-sizing: border-box;
+    text-align: left;
+
+    .resume-l{
+        background-color: #ccc;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 70px;
+    }
+
+    .avatar-box {
+        background-color: #fff;
+        width: 100px;
+        height: 100px;
+    }
+
+    .basic-info, .basic-skill, .education-info {
+        ul, li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-align: left;
+        }
+    }
+}

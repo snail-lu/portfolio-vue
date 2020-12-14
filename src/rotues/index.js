@@ -19,6 +19,9 @@ export default [
                 }
             }
         ]
-        
+    },
+    {
+        path: '/resume',
+        component: () => import('../views/Resume/resume.vue')
     }
 ]

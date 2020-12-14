@@ -27,5 +27,6 @@ html, body {
   text-align: center;
   color: #2c3e50;
   height: 100%;
+  background-color: #f6f6f6;
 }
 </style>
