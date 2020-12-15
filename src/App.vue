@@ -17,8 +17,10 @@ export default {
 
 <style>
 html, body {
-  min-height: 100%;
+  height: 100%;
+  overflow: auto;
   margin: 0;
+  background-color: #f6f6f6;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -27,6 +29,5 @@ html, body {
   text-align: center;
   color: #2c3e50;
   height: 100%;
-  background-color: #f6f6f6;
 }
 </style>
