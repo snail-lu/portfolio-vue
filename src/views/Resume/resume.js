@@ -3,14 +3,19 @@ export default {
     },
     data() {
         return {
-            isChecked: true
+            isChecked: false
         }
     },
     methods: {
         checkPassword() {
-            this.$prompt('请输入密码', '提示', {
+            this.$prompt('', '请输入密码', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
+                showClose: false,
+                showCancelButton: false,
+                closeOnClickModal: false,
+                closeOnPressEscape: false,
+                closeOnHashChange: false
             }).then((val) => {
                 if(val.value=="668812"){
                     this.$message({
@@ -23,6 +28,7 @@ export default {
                         type: 'error',
                         message: '密码错误！'
                     })
+                    this.checkPassword();
                 }
 
             }).catch(() => {
@@ -34,6 +40,6 @@ export default {
         }
     },
     mounted () {
-        // this.checkPassword();
+        this.checkPassword();
     },
 };
