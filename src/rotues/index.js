@@ -25,6 +25,14 @@ export default [
                 meta: {
                     title: ''
                 }
+            },
+            {
+                path: 'tabletransfer',
+                component: () => import('../views/example/tabletransfer/tabletransfer.vue'),
+                name: '',
+                meta: {
+                    title: ''
+                }
             }
         ]
     },
