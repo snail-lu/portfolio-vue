@@ -3,9 +3,11 @@
         <el-col :span="10">
             <el-row>待选区</el-row>
             <el-table
-                :data="fullTableData"
+                :data="table1Data"
                 style="width: 100%"
-                @selection-change="onFullTabelSelect">
+                ref="table1"
+                stripe
+                @selection-change="onTable1Select">
                 <el-table-column
                     type="selection"
                     width="55">
@@ -22,15 +24,17 @@
             </el-table>
         </el-col>
         <el-col :span="4">
-            <el-button>添加</el-button>
-            <el-button>删除</el-button>
+            <el-button type="primary" @click="onAdd">添加</el-button>
+            <el-button type="primary" @click="onDelete">删除</el-button>
         </el-col>
         <el-col :span="10">
             <el-row>已选区</el-row>
             <el-table
-                :data="selectedTableData"
+                :data="table2Data"
                 style="width: 100%"
-                @selection-change="onSelectedTableSelect">
+                ref="table2"
+                strip
+                @selection-change="onTable2Select">
                 <el-table-column
                     type="selection"
                     width="55">
@@ -53,7 +57,7 @@
     export default {
         data() {
             return {
-                fullTableData: [{
+                table1Data: [{
                     id: '1',
                     name: '张帅',
                     address: '南京市秦淮区秦虹路98号',
@@ -70,15 +74,43 @@
                     name: '孟帅',
                     address: '湖北省武汉市硚口区解放大道586号',
                 }],
-                selectedTableData: []
+                table2Data: [],
+                selectedTable1Data: [], // table1已选数据
+                selectedTable2Data: []  // table2已选数据
             }
         },
         methods: {
-            onFullTabelSelect(rows) {
-                this.filterAdd(rows,this.selectedTableData,'id');
+            /**
+             * table1选择事件处理函数
+             * @param {array} rows 已勾选的数据
+             */
+            onTable1Select(rows) {
+                this.selectedTable1Data = [...rows];
             },
-            onSelectedTableSelect(rows) {
-                this.filterDelete(rows,this.selectedTableData, 'id')
+
+            /**
+             * table2选择事件处理函数
+             * @param {array} rows 已勾选的数据
+             */
+            onTable2Select(rows) {
+                this.selectedTable2Data = [...rows];
+            },
+
+            /**
+             * 添加按钮事件处理函数
+             */
+            onAdd() {
+                this.filterAdd(this.selectedTable1Data, this.table2Data, 'id');
+                this.selectedTable1Data = [];
+                this.$refs.table1.clearSelection();
+            },
+
+            /**
+             * 删除按钮事件处理函数
+             */
+            onDelete() {
+                this.table2Data = this.filterDelete(this.selectedTable2Data, this.table2Data, 'id');
+                this.selectedTable2Data = [];
             },
 
             /**
@@ -89,8 +121,8 @@
              * @param {boolean} isEnd   往尾部添加？默认往头部添加
              */
             filterAdd (records=[], targetRecords=[], compareProperty, isEnd = false) {
-                const o = {}
-                records.forEach(record=>{
+                const o = {};
+                targetRecords.forEach(record=>{
                     o[record[compareProperty]] = 1;
                 })
                 records.forEach(record=>{
@@ -109,18 +141,15 @@
              * @param {array} records   待删除数据
              * @param {array} targetRecords   目标数据
              * @param {string} compareProperty  对比的重复属性
+             * @return {array} 删除待删除数据后的目标数据
              */
             filterDelete (records=[], targetRecords=[], compareProperty) {
-                const o = {}
+                const o = {};
                 records.forEach(record=>{
                     o[record[compareProperty]] = 1;
                 })
-                for (let j = 0; j < targetRecords.length; j++) {
-                   const record = targetRecords[j]
-                   if (o[record[compareProperty]]) {
-                       targetRecords.splice(j, 1)
-                   }
-                }
+
+                return targetRecords.filter((item) => !o[item[compareProperty]])
             }
         },
     }
