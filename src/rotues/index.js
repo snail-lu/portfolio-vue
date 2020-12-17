@@ -17,6 +17,14 @@ export default [
                 meta: {
                     title: ''
                 }
+            },
+            {
+                path: 'table',
+                component: () => import('../views/example/table/table.vue'),
+                name: '',
+                meta: {
+                    title: ''
+                }
             }
         ]
     },
