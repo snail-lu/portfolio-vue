@@ -121,12 +121,12 @@
              * @param {boolean} isEnd   往尾部添加？默认往头部添加
              */
             filterAdd (records=[], targetRecords=[], compareProperty, isEnd = false) {
-                const o = {};
+                const o = new Set();
                 targetRecords.forEach(record=>{
-                    o[record[compareProperty]] = 1;
+                    o.add(record[compareProperty]);
                 })
                 records.forEach(record=>{
-                    if(!o[record[compareProperty]]) {
+                    if(!o.has(record[compareProperty])) {
                         if (isEnd) {
                             targetRecords.push(record);
                         } else {
@@ -144,12 +144,12 @@
              * @return {array} 删除待删除数据后的目标数据
              */
             filterDelete (records=[], targetRecords=[], compareProperty) {
-                const o = {};
+                const o = new Set();
                 records.forEach(record=>{
-                    o[record[compareProperty]] = 1;
+                    o.add(record[compareProperty]);
                 })
 
-                return targetRecords.filter((item) => !o[item[compareProperty]])
+                return targetRecords.filter((item) => !o.has(item[compareProperty]))
             }
         },
     }
