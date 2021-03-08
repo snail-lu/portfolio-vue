@@ -1,0 +1,29 @@
+.example-images-container {
+    background-color: #fff;
+    width: 70%;
+    margin: 0 auto;
+
+    .page-title {
+        font-size: 18px;
+        padding: 20px;
+    }
+}
+
+.example-box {
+    flex-wrap: wrap;
+    
+
+    .example-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+
+        .example-title{
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    }
+
+}

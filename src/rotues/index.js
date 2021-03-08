@@ -39,5 +39,9 @@ export default [
     {
         path: '/resume',
         component: () => import('../views/Resume/resume.vue')
+    },
+    {
+        path: '/resume/image',
+        component: ()=>import('../views/Resume/images/images.vue')
     }
 ]
