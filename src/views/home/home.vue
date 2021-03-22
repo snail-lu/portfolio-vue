@@ -3,7 +3,7 @@
     <el-main class="content">
       <img class="avatar-img" alt="Vue logo" src="./../../assets/images/avatar.jpg">
       <h1>{{ msg }}</h1>
-      <ul>
+      <ul class="navbar-list">
         <li><a class="link-btn" href="https://www.cnblogs.com/snaillu/" target="_blank" rel="noopener">Blog</a></li>
         <li><a class="link-btn" href="https://www.yes-i-do.cn/portfolio/" target="_blank" rel="noopener">Portfolio</a></li>
         <li><a class="link-btn" href="https://github.com/Snail-Lu" target="_blank" rel="noopener">Github</a></li>
@@ -33,7 +33,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss" scoped>
 
 .home-container {
   height: 100%;
@@ -53,6 +53,11 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  .navbar-list { 
+    margin-top: 10px;
+    font-size: 16px;
+  }
 }
 
 .footer {
