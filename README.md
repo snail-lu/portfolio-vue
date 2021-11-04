@@ -1,5 +1,5 @@
-# my-web-site
-
+# vue-demo
+基于vue搭建的demo项目，项目中多为平时开发遇到的需求实现。
 ## Project setup
 ```
 npm install

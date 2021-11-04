@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: "/home"
+  publicPath: "/vue-demo"
 }
