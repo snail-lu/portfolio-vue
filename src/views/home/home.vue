@@ -5,21 +5,11 @@
       <h1>{{ msg }}</h1>
       <ul class="navbar-list">
         <li><a class="link-btn" href="https://www.cnblogs.com/snaillu/" target="_blank" rel="noopener">Blog</a></li>
-        <li><a class="link-btn" href="https://www.yes-i-do.cn/portfolio/" target="_blank" rel="noopener">Portfolio</a></li>
+        <li><a class="link-btn" href="https://snail-lu.github.io/portfolio/" target="_blank" rel="noopener">Portfolio</a></li>
         <li><router-link to="/example">Example</router-link></li>
         <li><router-link to="/resume">Resume</router-link></li>
       </ul>
     </el-main>
-    <el-footer class="footer">
-      <span>Copyright ©</span>
-      <a class="footer-link" href="https://www.yes-i-do.cn">yes-i-do.cn</a>
-      <span> All Rights Reserved.</span>
-      <a target="_blank" class="footer-link beian-link" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34160202000555">
-        <img src="./../../assets/images/beian.png" />
-        <p>皖公网安备 34160202000555号</p>
-      </a>
-      <a class="footer-link" target="_blank" href="https://beian.miit.gov.cn/">皖ICP备2020019744号</a>
-    </el-footer>
   </el-container>
 </template>
 
