@@ -10,7 +10,7 @@ Vue.use(VueRouter);
 Vue.config.productionTip = false
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: '/vue-demo', // 页面基础路径
   routes
 })
