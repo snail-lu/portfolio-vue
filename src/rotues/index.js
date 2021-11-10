@@ -27,6 +27,14 @@ export default [
                 }
             },
             {
+                path: 'table-select',
+                component: () => import('../views/example/tableSelect/index.vue'),
+                name: '',
+                meta: {
+                    title: ''
+                }
+            },
+            {
                 path: 'tabletransfer',
                 component: () => import('../views/example/tabletransfer/tabletransfer.vue'),
                 name: '',
