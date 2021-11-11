@@ -171,27 +171,3 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-/deep/ .el-table__body-wrapper {
-  overflow-y: auto;
-}
-/deep/ .el-table__expanded-cell {
-  padding-right: 0;
-}
-.el-form-item {
-  margin-left: 2%;
-}
-.line {
-  text-align: center;
-}
-
-.video {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-}
-
-.preview-video {
-  width: 100%;
-}
-</style>
