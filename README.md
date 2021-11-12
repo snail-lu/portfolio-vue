@@ -1,29 +1,27 @@
-# vue-demo
+## vue-demo
 基于vue搭建的demo项目，项目中多为平时开发遇到的需求实现。
-## Project setup
+### 安装依赖
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 本地热启动
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 生产打包
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### 代码lint
 ```
 npm run lint
 ```
 
-### Deploy to github pages
+### 发布到github pages
 ```
 npm run deploy
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
