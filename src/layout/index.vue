@@ -2,7 +2,7 @@
 	<div :class="classObj" class="app-wrapper">
 		<div v-if="device === 'mobile' && sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
 		<div class="header">
-			<span class="title"></span>
+			<span class="title">VUE项目集</span>
 			<div class="option">
 				<el-dropdown @command="logout">
 					<span class="el-dropdown-link" style="display:flex;align-items:center">
@@ -10,11 +10,10 @@
 							src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
 							style="margin-right:10px"
 						></el-avatar>
-						<span> {{ userInfo.username || 'admin' }}<i class="el-icon-arrow-down el-icon--right"></i> </span>
 					</span>
-					<el-dropdown-menu slot="dropdown">
+					<!-- <el-dropdown-menu slot="dropdown">
 						<el-dropdown-item>退出登录</el-dropdown-item>
-					</el-dropdown-menu>
+					</el-dropdown-menu> -->
 				</el-dropdown>
 			</div>
 		</div>

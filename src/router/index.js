@@ -10,12 +10,12 @@ export const constantRoutes = [
 	{
 		path: '/',
 		component: Layout,
-		redirect: '/main',
+		redirect: '/home',
 		children: [
 			{
-				path: 'main',
-				name: 'main',
-				component: () => import('@/views/common/main.vue'),
+				path: 'home',
+				name: 'home',
+				component: () => import('@/views/home/home.vue'),
 				meta: {
 					title: '首页',
 					icon: 'el-icon-s-home'
@@ -106,7 +106,7 @@ export const constantRoutes = [
 
 const createRouter = () =>
 	new Router({
-		mode: 'history', // require service support
+		mode: 'hash', // require service support
 		scrollBehavior: () => ({
 			y: 0
 		}),
