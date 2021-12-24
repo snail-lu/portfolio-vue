@@ -11,7 +11,7 @@ Vue.config.productionTip = false
 
 const router = new VueRouter({
   mode: 'hash',
-  base: '/vue-demo', // 页面基础路径
+  base: '/portfolio-vue', // 页面基础路径
   routes
 })
 new Vue({
