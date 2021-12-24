@@ -1,12 +1,17 @@
-import menuSetting from './modules/menuSetting'
-import managerGroup from './modules/managerGroup'
-import dataStore from './modules/dataStore'
+import Vue from 'vue'
+import Vuex from 'vuex'
 import getters from './getters'
+import app from './modules/app'
+import settings from './modules/settings'
 
-const store = {
-  menuSetting,
-  managerGroup,
-  dataStore
-}
+Vue.use(Vuex)
 
-export { store, getters }
+const store = new Vuex.Store({
+  modules: {
+    app,
+    settings
+  },
+  getters
+})
+
+export default store

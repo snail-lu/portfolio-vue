@@ -1,5 +1,6 @@
 # Vue Portfolio
-基于vue2搭建的demo项目，项目中多为平时开发遇到的需求实现。[线上地址](https://snail-lu.github.io/portfolio-vue/)
+
+基于 vue2 搭建的 demo 项目，项目中多为平时开发遇到的需求实现。[线上地址](https://snail-lu.github.io/portfolio-vue/)
 
 ## 基本使用
 
@@ -20,4 +21,3 @@ npm run build
 // 部署到 github pages
 npm run deploy
 ```
-
