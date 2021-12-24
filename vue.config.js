@@ -11,7 +11,7 @@ const name = defaultSettings.title || '' // page title
 const port = process.env.port || process.env.npm_config_port || 8080 // dev port
 
 module.exports = {
-	publicPath: '/',
+	publicPath: process.env.NODE_ENV === 'production' ? '/portfolio-vue/' : '/',
 	outputDir: 'dist',
 	assetsDir: 'static',
 	lintOnSave: process.env.NODE_ENV === 'development',

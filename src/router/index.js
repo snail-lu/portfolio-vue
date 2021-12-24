@@ -107,6 +107,7 @@ export const constantRoutes = [
 const createRouter = () =>
 	new Router({
 		mode: 'hash', // require service support
+		base: '/portfolio-vue',
 		scrollBehavior: () => ({
 			y: 0
 		}),
