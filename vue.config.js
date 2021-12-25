@@ -12,7 +12,7 @@ const port = process.env.port || process.env.npm_config_port || 8080 // dev port
 
 module.exports = {
 	publicPath: process.env.NODE_ENV === 'production' ? '/portfolio-vue/' : '/',
-	outputDir: 'dist',
+	outputDir: 'build',
 	assetsDir: 'static',
 	lintOnSave: process.env.NODE_ENV === 'development',
 	productionSourceMap: false,
