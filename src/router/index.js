@@ -23,7 +23,6 @@ export const constantRoutes = [
 			}
 		]
 	},
-
 	// 公用DEMO
 	{
 		path: '/example',
@@ -36,7 +35,6 @@ export const constantRoutes = [
 			{
 				path: 'tree',
 				component: () => import('../views/example/tree/tree.vue'),
-				name: '',
 				meta: {
 					title: '节点树展开/收缩'
 				}
@@ -44,7 +42,6 @@ export const constantRoutes = [
 			{
 				path: 'table',
 				component: () => import('../views/example/table/table.vue'),
-				name: '',
 				meta: {
 					title: '表格自定义排序'
 				}
@@ -52,7 +49,6 @@ export const constantRoutes = [
 			{
 				path: 'table-select',
 				component: () => import('../views/example/tableSelect/index.vue'),
-				name: '',
 				meta: {
 					title: '表格分页多选'
 				}
@@ -60,7 +56,6 @@ export const constantRoutes = [
 			{
 				path: 'tabletransfer',
 				component: () => import('../views/example/tabletransfer/tabletransfer.vue'),
-				name: '',
 				meta: {
 					title: '表格穿梭'
 				}
@@ -92,21 +87,21 @@ export const constantRoutes = [
 		]
 	},
 	{
-		path: '/404',
-		component: () => import('@/views/common/404.vue'),
+		path: '*',
+		redirect: '/404',
 		hidden: true
 	},
 	// 404 page must be placed at the end !!!
 	{
-		path: '*',
-		redirect: '/404',
+		path: '/404',
+		component: () => import('@/views/common/404.vue'),
 		hidden: true
 	}
 ]
 
 const createRouter = () =>
 	new Router({
-		mode: 'hash', // require service support
+		mode: 'hash',
 		base: '/portfolio-vue',
 		scrollBehavior: () => ({
 			y: 0
