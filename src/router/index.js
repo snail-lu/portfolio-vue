@@ -34,30 +34,51 @@ export const constantRoutes = [
 		children: [
 			{
 				path: 'tree',
-				component: () => import('../views/example/tree/tree.vue'),
+				component: () => import('../views/demo/tree/tree.vue'),
+				name: '',
 				meta: {
 					title: '节点树展开/收缩'
 				}
 			},
 			{
 				path: 'table',
-				component: () => import('../views/example/table/table.vue'),
+				component: () => import('../views/demo/table/table.vue'),
+				name: '',
 				meta: {
 					title: '表格自定义排序'
 				}
 			},
 			{
 				path: 'table-select',
-				component: () => import('../views/example/tableSelect/index.vue'),
+				component: () => import('../views/demo/tableSelect/index.vue'),
+				name: '',
 				meta: {
 					title: '表格分页多选'
 				}
 			},
 			{
 				path: 'tabletransfer',
-				component: () => import('../views/example/tabletransfer/tabletransfer.vue'),
+				component: () => import('../views/demo/tabletransfer/tabletransfer.vue'),
+				name: '',
 				meta: {
 					title: '表格穿梭'
+				}
+			},
+			{
+				path: 'phone-model',
+				component: () => import('../views/demo/tabletransfer/tabletransfer.vue'),
+				name: '',
+				meta: {
+					title: '手机模型',
+					hidden: true
+				}
+			},
+			{
+				path: 'hotspot',
+				component: () => import('../views/demo/hotspot/index.vue'),
+				name: '',
+				meta: {
+					title: '图片上绘制热区'
 				}
 			}
 		]
