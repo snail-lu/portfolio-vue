@@ -28,7 +28,7 @@ export const constantRoutes = [
 		path: '/example',
 		component: Layout,
 		meta: {
-			title: '后台管理常用实现',
+			title: 'DEMO',
 			icon: 'el-icon-menu'
 		},
 		children: [
