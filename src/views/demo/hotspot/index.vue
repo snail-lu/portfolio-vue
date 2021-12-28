@@ -6,35 +6,19 @@
 				src="https://m.360buyimg.com/babel/s1125x807_jfs/t1/172671/31/25159/274740/61c88e08Efd7f8050/29da51f1330c8aae.jpg!q70.dpg.webp"
 				alt=""
 				@mousedown.left.stop="mouseDown($event)"
-				@mousemove.left.stop="mouseMove($event)"
 			/>
 			<!--当前正在绘制的热区蒙版-->
 			<div
-				v-show="drawBoxShow"
-				class="area"
+				v-show="drawBoxVisible"
+				class="spot"
 				:style="{ width: width + 'px', height: height + 'px', left: startX + 'px', top: startY + 'px' }"
 			/>
 
 			<!--已有的热区蒙版-->
-			<div
-				v-for="(item, index) in areaDataList"
-				:id="index"
-				:key="index"
-				class="area flex-box-column flex-h-center flex-v-center"
-				:style="{
-					width: item.width + 'px',
-					height: item.height + 'px',
-					left: item.startX + 'px',
-					top: item.startY + 'px'
-				}"
-			>
-				{{ `热区${index}` }}
-				<i class="el-icon-close" @click="delAreaBox(index)"></i>
-				<div class="resize-area"></div>
-			</div>
+			<hot-spot-item v-for="(item, index) in spotDataList" :id="index" :key="index" :area-init="item" @del="delSpot" />
 		</div>
-		<div class="hot-area-list">
-			<div class="hot-area-info" v-for="(item, index) in areaDataList" :key="index">
+		<div class="hot-spot-list">
+			<div class="hot-spot-item" v-for="(item, index) in spotDataList" :key="index">
 				<div class="info-header">热区{{ index }}</div>
 				<div class="title">起点坐标：</div>
 				<div class="flex-box flex-v-center">
@@ -60,34 +44,39 @@
 </template>
 
 <script>
+import HotSpotItem from './components/HotSpotItem.vue'
 export default {
+	components: {
+		HotSpotItem
+	},
 	data() {
 		return {
-			areaDataList: [],
+			spotDataList: [],
 			startX: 0,
 			startY: 0,
 			width: 0,
 			height: 0,
-			drawBoxShow: false
+			drawBoxVisible: false
 		}
 	},
 	methods: {
-		// 显示绘制热区弹窗
-		showEditHotAreaDialog(index) {
-			this.currentImgIndex = index
-			this.dialogVisible = true
-		},
-
 		// 绘制热区开始
 		mouseDown(e) {
-			this.drawBoxShow = true
+			this.drawBoxVisible = true
 			this.startX = e.layerX
 			this.startY = e.layerY
+
+			if (!document.onmousemove) {
+				document.onmousemove = ev => {
+					this.width = ev.layerX - this.startX
+					this.height = ev.layerY - this.startY
+				}
+			}
 		},
 
 		// 移动绘制热区
 		mouseMove(ev) {
-			if (this.drawBoxShow) {
+			if (this.drawBoxVisible) {
 				this.width = ev.layerX - this.startX
 				this.height = ev.layerY - this.startY
 			}
@@ -95,9 +84,9 @@ export default {
 
 		// 绘制热区结束
 		mouseUp(e) {
-			console.log(e, 'end')
-			const { drawBoxShow, startX, startY, width, height } = this
-			if (drawBoxShow && width > 10 && height > 10) {
+			document.onmousemove = null
+			const { drawBoxVisible, startX, startY, width, height } = this
+			if (drawBoxVisible && width > 10 && height > 10) {
 				const data = {
 					startX,
 					startY,
@@ -105,10 +94,10 @@ export default {
 					height,
 					link: ''
 				}
-				this.areaDataList.push(data)
+				this.spotDataList.push(data)
 			}
 			// 数据重置
-			this.drawBoxShow = false
+			this.drawBoxVisible = false
 			this.startX = 0
 			this.startY = 0
 			this.width = 0
@@ -116,8 +105,8 @@ export default {
 		},
 
 		// 删除指定热区
-		delAreaBox(index) {
-			this.areaDataList.splice(index, 1)
+		delSpot(index) {
+			this.spotDataList.splice(index, 1)
 		}
 	}
 }
@@ -150,7 +139,7 @@ export default {
 			cursor: crosshair;
 		}
 
-		.area {
+		.spot {
 			position: absolute;
 			background: rgba(#2980b9, 0.3);
 			border: 1px dashed #34495e;
@@ -166,21 +155,13 @@ export default {
 				border-radius: 100px;
 				font-size: 12px;
 			}
-
-			.resize-area {
-				width: 4px;
-				height: 4px;
-				position: absolute;
-				bottom: 0;
-				left: 0;
-			}
 		}
 	}
 
-	.hot-area-list {
+	.hot-spot-list {
 		margin-left: 20px;
 
-		.hot-area-info {
+		.hot-spot-item {
 			background-color: #f5f5f5;
 			padding: 10px 20px;
 			margin-bottom: 10px;
