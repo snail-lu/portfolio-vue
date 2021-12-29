@@ -3,7 +3,7 @@
 		<div class="img-box" @mouseup.left.stop="mouseUp($event)">
 			<img
 				class="img"
-				src="https://m.360buyimg.com/babel/s1125x807_jfs/t1/172671/31/25159/274740/61c88e08Efd7f8050/29da51f1330c8aae.jpg!q70.dpg.webp"
+				src="https://cdn.jsdelivr.net/gh/Snail-Lu/imageGalleries/gh-pages/2021-12/hotspot-example.webp"
 				alt=""
 				@mousedown.left.stop="mouseDown($event)"
 			/>
