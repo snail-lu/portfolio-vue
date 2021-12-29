@@ -66,7 +66,7 @@ export const constantRoutes = [
 			},
 			{
 				path: 'phone-model',
-				component: () => import('../views/demo/tabletransfer/tabletransfer.vue'),
+				component: () => import('../views/demo/phoneModel/index.vue'),
 				name: '',
 				meta: {
 					title: '手机模型',
