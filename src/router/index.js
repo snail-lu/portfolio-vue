@@ -90,6 +90,7 @@ export const constantRoutes = [
 			title: '简历',
 			icon: 'el-icon-menu'
 		},
+		hidden: true,
 		children: [
 			{
 				path: 'index',
