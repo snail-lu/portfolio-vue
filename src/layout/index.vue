@@ -4,16 +4,16 @@
 		<div class="header">
 			<span class="title">VUE项目集</span>
 			<div class="option">
-				<el-dropdown @command="logout">
+				<el-dropdown @command="handleCommand">
 					<span class="el-dropdown-link" style="display:flex;align-items:center">
 						<el-avatar
 							src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
 							style="margin-right:10px"
 						></el-avatar>
 					</span>
-					<!-- <el-dropdown-menu slot="dropdown">
-						<el-dropdown-item>退出登录</el-dropdown-item>
-					</el-dropdown-menu> -->
+					<el-dropdown-menu slot="dropdown">
+						<el-dropdown-item command="resume">About ME</el-dropdown-item>
+					</el-dropdown-menu>
 				</el-dropdown>
 			</div>
 		</div>
@@ -75,6 +75,11 @@ export default {
 	methods: {
 		handleClickOutside() {
 			this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
+		},
+		handleCommand(command) {
+			if (command == 'resume') {
+				this.$router.push({ path: '/resume/index' })
+			}
 		},
 		logout() {
 			const that = this
