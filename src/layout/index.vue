@@ -1,7 +1,7 @@
 <template>
 	<div :class="classObj" class="app-wrapper">
 		<div v-if="device === 'mobile' && sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
-		<div class="header">
+		<!-- <div class="header">
 			<span class="title">VUE项目集</span>
 			<div class="option">
 				<el-dropdown @command="handleCommand">
@@ -16,13 +16,14 @@
 					</el-dropdown-menu>
 				</el-dropdown>
 			</div>
-		</div>
+		</div> -->
+		<topbar />
 		<div class="main">
-			<sidebar class="sidebar-container" />
+			<!-- <sidebar class="sidebar-container" /> -->
 			<div class="main-container">
-				<div :class="{ 'fixed-header': fixedHeader }">
+				<!-- <div :class="{ 'fixed-header': fixedHeader }">
 					<navbar />
-				</div>
+				</div> -->
 				<app-main />
 			</div>
 		</div>
@@ -30,7 +31,7 @@
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain } from './components'
+import { Navbar, Sidebar, AppMain, Topbar } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 import { logout } from '@/api/system'
 
@@ -44,7 +45,8 @@ export default {
 	components: {
 		Navbar,
 		Sidebar,
-		AppMain
+		AppMain,
+		Topbar
 	},
 	mixins: [ResizeMixin],
 	computed: {
