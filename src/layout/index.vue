@@ -20,12 +20,12 @@
 		<topbar />
 		<div class="main">
 			<!-- <sidebar class="sidebar-container" /> -->
-			<div class="main-container">
-				<!-- <div :class="{ 'fixed-header': fixedHeader }">
+			<!-- <div class="main-container">
+				<div :class="{ 'fixed-header': fixedHeader }">
 					<navbar />
-				</div> -->
-				<app-main />
-			</div>
+				</div>
+			</div> -->
+			<app-main />
 		</div>
 	</div>
 </template>
