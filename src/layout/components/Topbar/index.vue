@@ -1,6 +1,6 @@
 <template>
-	<div :class="{ 'has-logo': showLogo }">
-		<logo v-if="showLogo" :collapse="isCollapse" />
+	<div class="topbar-wrapper flex-box" :style="{ background: variables.menuBg }">
+		<logo />
 		<el-menu
 			:default-active="activeMenu"
 			:collapse="isCollapse"
@@ -29,13 +29,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
-// import Logo from './Logo'
+import Logo from './Logo'
 // import SidebarItem from './SidebarItem'
 import variables from '@/styles/variables.scss'
 
 export default {
 	name: 'Topbar',
-	// components: { SidebarItem, Logo },
+	components: { Logo },
 	computed: {
 		...mapGetters(['sidebar']),
 		routes() {
@@ -62,3 +62,9 @@ export default {
 	}
 }
 </script>
+<style lang="scss" scoped>
+.topbar-wrapper {
+	width: 100%;
+	padding-left: 20%;
+}
+</style>
