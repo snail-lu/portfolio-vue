@@ -68,3 +68,28 @@ div:focus {
 .app-container {
 	padding: 20px;
 }
+
+.flex-box {
+	display: flex;
+}
+
+.flex-box-column {
+	display: flex;
+	flex-direction: column;
+}
+
+.flex-h-center {
+	justify-content: center;
+}
+
+.flex-v-center {
+	align-items: center;
+}
+
+.flex-item-1 {
+	flex: 1;
+}
+
+.flex-shrink-0 {
+	flex-shrink: 0;
+}
