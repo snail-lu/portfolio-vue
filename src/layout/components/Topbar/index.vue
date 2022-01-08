@@ -1,6 +1,7 @@
 <template>
 	<div class="topbar-wrapper flex-box flex-v-center" :style="{ background: variables.menuBg }">
 		<logo />
+
 		<el-menu
 			:collapse="isCollapse"
 			:background-color="variables.menuBg"
@@ -10,7 +11,7 @@
 			mode="horizontal"
 		>
 			<!-- <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" /> -->
-			<el-menu-item index="1">ELEMENT-UI</el-menu-item>
+			<el-menu-item index="1">首页</el-menu-item>
 			<el-menu-item index="2">DEMO</el-menu-item>
 			<el-menu-item index="3">OTHER</el-menu-item>
 			<el-menu-item index="4">ABOUT</el-menu-item>
@@ -57,5 +58,13 @@ export default {
 .topbar-wrapper {
 	width: 100%;
 	padding-left: 20%;
+
+	.el-menu {
+		border-bottom: none;
+		margin-left: 50px;
+		&-item {
+			border-bottom: none;
+		}
+	}
 }
 </style>
