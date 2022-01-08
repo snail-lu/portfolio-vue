@@ -1,28 +1,19 @@
 <template>
-	<div class="topbar-wrapper flex-box" :style="{ background: variables.menuBg }">
+	<div class="topbar-wrapper flex-box flex-v-center" :style="{ background: variables.menuBg }">
 		<logo />
 		<el-menu
-			:default-active="activeMenu"
 			:collapse="isCollapse"
 			:background-color="variables.menuBg"
 			:text-color="variables.menuText"
 			:unique-opened="false"
 			:active-text-color="variables.menuActiveText"
-			:collapse-transition="false"
 			mode="horizontal"
 		>
 			<!-- <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" /> -->
 			<el-menu-item index="1">ELEMENT-UI</el-menu-item>
-			<el-submenu index="2">
-				<template slot="title"
-					>DEMO</template
-				>
-				<el-menu-item index="2-1">选项1</el-menu-item>
-				<el-menu-item index="2-2">选项2</el-menu-item>
-				<el-menu-item index="2-3">选项3</el-menu-item>
-			</el-submenu>
+			<el-menu-item index="2">DEMO</el-menu-item>
 			<el-menu-item index="3">OTHER</el-menu-item>
-			<el-menu-item index="4"><a href="https://www.ele.me" target="_blank">ABOUT</a></el-menu-item>
+			<el-menu-item index="4">ABOUT</el-menu-item>
 		</el-menu>
 	</div>
 </template>

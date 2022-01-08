@@ -2,7 +2,7 @@
 	<div class="topbar-logo-container">
 		<transition name="sidebarLogoFade">
 			<router-link key="collapse" class="sidebar-logo-link" to="/">
-				<img v-if="logo" :src="logo" class="sidebar-logo" />
+				<img src="../../../assets/images/logo.png" class="sidebar-logo" />
 			</router-link>
 		</transition>
 	</div>
@@ -18,9 +18,7 @@ export default {
 		}
 	},
 	data() {
-		return {
-			logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
-		}
+		return {}
 	}
 }
 </script>
@@ -37,25 +35,24 @@ export default {
 
 .topbar-logo-container {
 	position: relative;
-	// width: 100%;
+	width: 50px;
 	height: 50px;
 	line-height: 50px;
-	background: #2b2f3a;
 	text-align: center;
 	overflow: hidden;
 
-	& .sidebar-logo-link {
+	.sidebar-logo-link {
 		height: 100%;
 		width: 100%;
 
-		& .sidebar-logo {
-			width: 32px;
-			height: 32px;
+		.sidebar-logo {
+			width: 50px;
+			height: 40px;
 			vertical-align: middle;
-			margin-right: 12px;
+			border-radius: 25px;
 		}
 
-		& .sidebar-title {
+		.sidebar-title {
 			display: inline-block;
 			margin: 0;
 			color: #fff;
