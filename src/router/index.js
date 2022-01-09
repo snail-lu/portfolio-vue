@@ -20,94 +20,90 @@ export const constantRoutes = [
 					title: '首页',
 					icon: 'el-icon-s-home'
 				}
+			},
+			{
+				path: 'projects',
+				component: () => import('@/views/projects/index')
+			},
+			{
+				path: 'about',
+				component: () => import('../views/about/index.vue')
+				// children: [
+				// 	{
+				// 		path: 'resume',
+				// 		component: () => import('../views/about/resume/resume.vue'),
+				// 		meta: {
+				// 			title: '我的简历'
+				// 		}
+				// 	},
+				// 	{
+				// 		path: 'image',
+				// 		component: () => import('../views/about/resume/images/images.vue'),
+				// 		meta: {
+				// 			title: '作品图'
+				// 		}
+				// 	}
+				// ]
+			},
+			// 公用DEMO
+			{
+				path: '/demo',
+				component: () => import('../views/demo/index'),
+				children: [
+					{
+						path: 'tree',
+						component: () => import('../views/demo/tree/tree.vue'),
+						name: '',
+						meta: {
+							title: '节点树展开/收缩'
+						}
+					},
+					{
+						path: 'table',
+						component: () => import('../views/demo/table/table.vue'),
+						name: '',
+						meta: {
+							title: '表格自定义排序'
+						}
+					},
+					{
+						path: 'table-select',
+						component: () => import('../views/demo/tableSelect/index.vue'),
+						name: '',
+						meta: {
+							title: '表格分页多选'
+						}
+					},
+					{
+						path: 'tabletransfer',
+						component: () => import('../views/demo/tabletransfer/tabletransfer.vue'),
+						name: '',
+						meta: {
+							title: '表格穿梭'
+						}
+					},
+					{
+						path: 'phone-model',
+						component: () => import('../views/demo/phoneModel/index.vue'),
+						name: '',
+						meta: {
+							title: '手机模型',
+							hidden: true
+						}
+					},
+					{
+						path: 'hotspot',
+						component: () => import('../views/demo/hotspot/index.vue'),
+						name: '',
+						meta: {
+							title: '图片上绘制热区'
+						}
+					}
+				]
 			}
 		]
 	},
-	// 公用DEMO
-	{
-		path: '/example',
-		component: Layout,
-		meta: {
-			title: 'DEMO',
-			icon: 'el-icon-menu'
-		},
-		children: [
-			{
-				path: 'tree',
-				component: () => import('../views/demo/tree/tree.vue'),
-				name: '',
-				meta: {
-					title: '节点树展开/收缩'
-				}
-			},
-			{
-				path: 'table',
-				component: () => import('../views/demo/table/table.vue'),
-				name: '',
-				meta: {
-					title: '表格自定义排序'
-				}
-			},
-			{
-				path: 'table-select',
-				component: () => import('../views/demo/tableSelect/index.vue'),
-				name: '',
-				meta: {
-					title: '表格分页多选'
-				}
-			},
-			{
-				path: 'tabletransfer',
-				component: () => import('../views/demo/tabletransfer/tabletransfer.vue'),
-				name: '',
-				meta: {
-					title: '表格穿梭'
-				}
-			},
-			{
-				path: 'phone-model',
-				component: () => import('../views/demo/phoneModel/index.vue'),
-				name: '',
-				meta: {
-					title: '手机模型',
-					hidden: true
-				}
-			},
-			{
-				path: 'hotspot',
-				component: () => import('../views/demo/hotspot/index.vue'),
-				name: '',
-				meta: {
-					title: '图片上绘制热区'
-				}
-			}
-		]
-	},
-	{
-		path: '/resume',
-		component: Layout,
-		meta: {
-			title: '简历',
-			icon: 'el-icon-menu'
-		},
-		hidden: true,
-		children: [
-			{
-				path: 'index',
-				component: () => import('../views/Resume/resume.vue'),
-				meta: {
-					title: '我的简历'
-				}
-			},
-			{
-				path: 'image',
-				component: () => import('../views/Resume/images/images.vue'),
-				meta: {
-					title: '作品图'
-				}
-			}
-		]
-	},
+
 	{
 		path: '*',
 		redirect: '/404',
