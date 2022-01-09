@@ -13,7 +13,7 @@ export const constantRoutes = [
 		redirect: '/home',
 		children: [
 			{
-				path: 'home',
+				path: '/home',
 				name: 'home',
 				component: () => import('@/views/home/home.vue'),
 				meta: {
@@ -22,34 +22,27 @@ export const constantRoutes = [
 				}
 			},
 			{
-				path: 'projects',
-				component: () => import('@/views/projects/index')
-			},
-			{
-				path: 'about',
-				component: () => import('../views/about/index.vue')
-				// children: [
-				// 	{
-				// 		path: 'resume',
-				// 		component: () => import('../views/about/resume/resume.vue'),
-				// 		meta: {
-				// 			title: '我的简历'
-				// 		}
-				// 	},
-				// 	{
-				// 		path: 'image',
-				// 		component: () => import('../views/about/resume/images/images.vue'),
-				// 		meta: {
-				// 			title: '作品图'
-				// 		}
-				// 	}
-				// ]
-			},
-			// 公用DEMO
-			{
-				path: '/demo',
-				component: () => import('../views/demo/index'),
+				path: '/projects',
+				component: {
+					render: h => h('router-view')
+				},
 				children: [
+					{
+						path: '',
+						component: () => import('@/views/projects/index')
+					}
+				]
+			},
+			{
+				path: 'demo',
+				component: {
+					render: h => h('router-view')
+				},
+				children: [
+					{
+						path: '',
+						component: () => import('../views/demo/index')
+					},
 					{
 						path: 'tree',
 						component: () => import('../views/demo/tree/tree.vue'),
@@ -97,6 +90,32 @@ export const constantRoutes = [
 						name: '',
 						meta: {
 							title: '图片上绘制热区'
+						}
+					}
+				]
+			},
+			{
+				path: 'about',
+				component: {
+					render: h => h('router-view')
+				},
+				children: [
+					{
+						path: '',
+						component: () => import('../views/about/index.vue')
+					},
+					{
+						path: 'resume',
+						component: () => import('../views/about/resume/resume.vue'),
+						meta: {
+							title: '我的简历'
+						}
+					},
+					{
+						path: 'image',
+						component: () => import('../views/about/resume/images/images.vue'),
+						meta: {
+							title: '作品图'
 						}
 					}
 				]
