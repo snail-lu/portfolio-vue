@@ -3,7 +3,6 @@
 		<logo />
 
 		<el-menu
-			:collapse="isCollapse"
 			:background-color="variables.menuBg"
 			:text-color="variables.menuText"
 			:unique-opened="false"
