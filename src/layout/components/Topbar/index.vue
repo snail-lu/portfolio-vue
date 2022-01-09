@@ -9,12 +9,13 @@
 			:unique-opened="false"
 			:active-text-color="variables.menuActiveText"
 			mode="horizontal"
+			:router="true"
 		>
 			<!-- <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" /> -->
-			<el-menu-item index="1">首页</el-menu-item>
-			<el-menu-item index="2">DEMO</el-menu-item>
-			<el-menu-item index="3">OTHER</el-menu-item>
-			<el-menu-item index="4">ABOUT</el-menu-item>
+			<el-menu-item index="home">首页</el-menu-item>
+			<el-menu-item index="projects">项目</el-menu-item>
+			<el-menu-item index="demo">示例</el-menu-item>
+			<el-menu-item index="about">关于</el-menu-item>
 		</el-menu>
 	</div>
 </template>
