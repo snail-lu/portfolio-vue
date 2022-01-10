@@ -2,8 +2,8 @@
 	<div class="demo-list-container">
 		<el-row class="header">演示示例</el-row>
 		<el-row class="demo-list" :gutter="20">
-			<el-col class="demo-item" v-for="demoItem in demoList" :key="demoItem.path" :span="8">
-				<div class="demo-item-header">{{ demoItem.title }}</div>
+			<el-col class="demo-item" v-for="(demoItem, demoIndex) in demoList" :key="demoItem.path" :span="8">
+				<div class="demo-item-header" :class="`bg-color${demoIndex}`">{{ demoItem.title }}</div>
 				<div class="demo-item-content">
 					<div class="demo-item-path">
 						{{ demoItem.path }}
@@ -59,6 +59,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@for $i from 1 through 30 {
+	.bg-color#{$i} {
+		color: #fff;
+		background-color: rgba(random(255), random(255), random(255), 0.8);
+	}
+}
 .header {
 	text-align: center;
 	font-size: 20px;
@@ -71,8 +77,14 @@ export default {
 
 	.demo-item {
 		margin-bottom: 20px;
+
+		&:nth-child(1) {
+			.demo-item-header {
+				background-color: rgba(134, 35, 63, 0.8) !important;
+			}
+		}
 		&-header {
-			background-color: rgb(224, 63, 63);
+			// background-color: rgb(224, 63, 63);
 			color: #fff;
 			height: 100px;
 			line-height: 100px;
