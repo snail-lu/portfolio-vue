@@ -1,8 +1,8 @@
 <template>
 	<div class="topbar-logo-container">
-		<transition name="sidebarLogoFade">
-			<router-link key="collapse" class="sidebar-logo-link" to="/">
-				<img src="../../../assets/images/logo.png" class="sidebar-logo" />
+		<transition name="topbarLogoFade">
+			<router-link key="collapse" class="topbar-logo-link" to="/">
+				<img src="../../../assets/images/logo.png" class="topbar-logo" />
 			</router-link>
 		</transition>
 	</div>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-	name: 'SidebarLogo',
+	name: 'topbarLogo',
 	props: {},
 	data() {
 		return {}
@@ -19,12 +19,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.sidebarLogoFade-enter-active {
+@keyframes swiming {
+	0% {
+		transform: rotate(-20deg);
+	}
+
+	50% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(10deg);
+	}
+}
+
+.topbarLogoFade-enter-active {
 	transition: opacity 1.5s;
 }
 
-.sidebarLogoFade-enter,
-.sidebarLogoFade-leave-to {
+.topbarLogoFade-enter,
+.topbarLogoFade-leave-to {
 	opacity: 0;
 }
 
@@ -36,18 +50,19 @@ export default {
 	text-align: center;
 	overflow: hidden;
 
-	.sidebar-logo-link {
+	.topbar-logo-link {
 		height: 100%;
 		width: 100%;
 
-		.sidebar-logo {
+		.topbar-logo {
 			width: 50px;
 			height: 40px;
 			vertical-align: middle;
 			border-radius: 25px;
+			animation: swiming 1s linear alternate infinite;
 		}
 
-		.sidebar-title {
+		.topbar-title {
 			display: inline-block;
 			margin: 0;
 			color: #fff;
@@ -56,12 +71,6 @@ export default {
 			font-size: 14px;
 			font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
 			vertical-align: middle;
-		}
-	}
-
-	&.collapse {
-		.sidebar-logo {
-			margin-right: 0px;
 		}
 	}
 }
