@@ -5,7 +5,7 @@
 			<el-col class="demo-item" v-for="(demoItem, demoIndex) in demoList" :key="demoItem.path" :span="8">
 				<div class="demo-item-header" :class="`bg-color${demoIndex}`">{{ demoItem.title }}</div>
 				<div class="demo-item-content">
-					<div class="demo-item-path">
+					<div class="demo-item-path" @click="pushUrl(demoItem.path)">
 						{{ demoItem.path }}
 					</div>
 					<div class="demo-item-desc">
@@ -53,6 +53,12 @@ export default {
 					desc: '图片上绘制热区实现'
 				}
 			]
+		}
+	},
+
+	methods: {
+		pushUrl(path) {
+			this.$router.push({ path: `/demo/${path}` })
 		}
 	}
 }
