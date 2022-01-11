@@ -59,7 +59,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@for $i from 1 through 30 {
+@for $i from 0 through 30 {
 	.bg-color#{$i} {
 		color: #fff;
 		background-color: rgba(random(255), random(255), random(255), 0.8);
@@ -78,11 +78,6 @@ export default {
 	.demo-item {
 		margin-bottom: 20px;
 
-		&:nth-child(1) {
-			.demo-item-header {
-				background-color: rgba(134, 35, 63, 0.8) !important;
-			}
-		}
 		&-header {
 			// background-color: rgb(224, 63, 63);
 			color: #fff;
