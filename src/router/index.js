@@ -44,7 +44,7 @@ export const constantRoutes = [
 						component: () => import('../views/demo/index')
 					},
 					{
-						path: 'tree',
+						path: 'tree-expand',
 						component: () => import('../views/demo/tree/tree.vue'),
 						name: '',
 						meta: {
@@ -52,7 +52,7 @@ export const constantRoutes = [
 						}
 					},
 					{
-						path: 'table',
+						path: 'table-sort',
 						component: () => import('../views/demo/table/table.vue'),
 						name: '',
 						meta: {
@@ -68,7 +68,7 @@ export const constantRoutes = [
 						}
 					},
 					{
-						path: 'tabletransfer',
+						path: 'table-transfer',
 						component: () => import('../views/demo/tabletransfer/tabletransfer.vue'),
 						name: '',
 						meta: {
