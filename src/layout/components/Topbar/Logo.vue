@@ -59,7 +59,7 @@ export default {
 			height: 40px;
 			vertical-align: middle;
 			border-radius: 25px;
-			animation: swiming 1s linear alternate infinite;
+			animation: swiming 0.8s linear alternate infinite;
 		}
 
 		.topbar-title {

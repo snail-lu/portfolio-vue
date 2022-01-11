@@ -3,7 +3,7 @@
 		<el-row class="header">演示示例</el-row>
 		<el-row class="demo-list" :gutter="20">
 			<el-col class="demo-item" v-for="(demoItem, demoIndex) in demoList" :key="demoItem.path" :span="8">
-				<div class="demo-item-header" :class="`bg-color${demoIndex}`">{{ demoItem.title }}</div>
+				<div class="demo-item-header" :class="`bg-color${demoIndex % 30}`">{{ demoItem.title }}</div>
 				<div class="demo-item-content">
 					<div class="demo-item-path" @click="pushUrl(demoItem.path)">
 						{{ demoItem.path }}
@@ -68,7 +68,11 @@ export default {
 @for $i from 0 through 30 {
 	.bg-color#{$i} {
 		color: #fff;
-		background-color: rgba(random(255), random(255), random(255), 0.8);
+		background-image: linear-gradient(
+			to right,
+			rgba(random(255), random(255), random(255), 0.5),
+			rgba(random(255), random(255), random(255), 0.5)
+		);
 	}
 }
 .header {
@@ -95,7 +99,7 @@ export default {
 		&-content {
 			background-color: #fff;
 			height: 150px;
-			padding: 10px;
+			padding: 20px 10px 10px 10px;
 			text-align: center;
 		}
 
