@@ -5,9 +5,9 @@
 			<el-col class="demo-item" v-for="(demoItem, demoIndex) in demoList" :key="demoItem.path" :span="8">
 				<div class="demo-item-header" :class="`bg-color${demoIndex % 30}`">{{ demoItem.title }}</div>
 				<div class="demo-item-content">
-					<div class="demo-item-path" @click="pushUrl(demoItem.path)">
+					<a class="demo-item-path" :href="demoItem.reposity" target="__blank">
 						{{ demoItem.path }}
-					</div>
+					</a>
 					<div class="demo-item-desc">
 						{{ demoItem.desc }}
 					</div>
