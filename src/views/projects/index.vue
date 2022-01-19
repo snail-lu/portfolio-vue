@@ -1,6 +1,6 @@
 <template>
 	<div class="demo-list-container">
-		<el-row class="header">Vue项目</el-row>
+		<el-row class="header"></el-row>
 		<el-row class="demo-list" :gutter="20">
 			<el-col class="demo-item" v-for="(demoItem, demoIndex) in demoList" :key="demoItem.path" :span="8">
 				<div class="demo-item-header" :class="`bg-color${demoIndex % 30}`">{{ demoItem.title }}</div>
