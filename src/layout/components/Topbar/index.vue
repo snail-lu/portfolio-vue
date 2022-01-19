@@ -11,10 +11,7 @@
 			:router="true"
 		>
 			<!-- <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" /> -->
-			<el-menu-item index="home">首页</el-menu-item>
-			<el-menu-item index="projects">项目</el-menu-item>
-			<el-menu-item index="demo">示例</el-menu-item>
-			<el-menu-item index="about">关于</el-menu-item>
+			<el-menu-item :index="item.path" v-for="item in menuList" :key="item.path">{{ item.name }}</el-menu-item>
 		</el-menu>
 	</div>
 </template>
@@ -24,6 +21,7 @@ import { mapGetters } from 'vuex'
 import Logo from './Logo'
 // import SidebarItem from './SidebarItem'
 import variables from '@/styles/variables.scss'
+import config from '@/config/index'
 
 export default {
 	name: 'Topbar',
@@ -33,23 +31,11 @@ export default {
 		routes() {
 			return this.$router.options.routes
 		},
-		activeMenu() {
-			const route = this.$route
-			const { meta, path } = route
-			// if set path, the sidebar will highlight the path you set
-			if (meta.activeMenu) {
-				return meta.activeMenu
-			}
-			return path
-		},
-		showLogo() {
-			return this.$store.state.settings.sidebarLogo
-		},
 		variables() {
 			return variables
 		},
-		isCollapse() {
-			return !this.sidebar.opened
+		menuList() {
+			return config.menu || []
 		}
 	}
 }
