@@ -9,8 +9,8 @@
 			:active-text-color="variables.menuActiveText"
 			mode="horizontal"
 			:router="true"
+			:default-active="currentRoute"
 		>
-			<!-- <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" /> -->
 			<el-menu-item :index="item.path" v-for="item in menuList" :key="item.path">{{ item.name }}</el-menu-item>
 		</el-menu>
 	</div>
@@ -21,21 +21,22 @@ import { mapGetters } from 'vuex'
 import Logo from './Logo'
 // import SidebarItem from './SidebarItem'
 import variables from '@/styles/variables.scss'
-import config from '@/config/index'
+// import config from '@/config/index'
 
+const settings = require('@/settings.js')
 export default {
 	name: 'Topbar',
 	components: { Logo },
 	computed: {
 		...mapGetters(['sidebar']),
-		routes() {
-			return this.$router.options.routes
+		currentRoute() {
+			return this.$route.path
 		},
 		variables() {
 			return variables
 		},
 		menuList() {
-			return config.menu || []
+			return settings.menu || []
 		}
 	}
 }
