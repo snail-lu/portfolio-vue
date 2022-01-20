@@ -5,7 +5,7 @@
 			<el-col class="demo-item" v-for="(demoItem, demoIndex) in demoList" :key="demoItem.path" :span="8">
 				<div class="demo-item-header" :class="`bg-color${demoIndex % 30}`">{{ demoItem.title }}</div>
 				<div class="demo-item-content">
-					<a class="demo-item-path" :href="demoItem.reposity" target="__blank">
+					<a class="demo-item-path" :href="demoItem.url ? demoItem.url : demoItem.reposity" target="__blank">
 						{{ demoItem.path }}
 					</a>
 					<div class="demo-item-desc">
@@ -26,12 +26,14 @@ export default {
 					path: 'vue-management-system',
 					title: '后台管理系统项目框架',
 					reposity: 'https://github.com/Snail-Lu/vue-management-system',
+					url: '',
 					desc: '基于Element-UI的后台管理系统项目框架'
 				},
 				{
 					path: 'vue-vant-mall',
 					title: '移动端商城项目框架',
 					reposity: 'https://github.com/Snail-Lu/vue-vant-mall',
+					url: 'https://snail-lu.github.io/vue-vant-mall',
 					desc: '基于vue-cli + vant创建的移动端项目框架'
 				}
 			]
