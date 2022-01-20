@@ -56,7 +56,7 @@ export default {
 
 		.topbar-logo {
 			width: 50px;
-			height: 40px;
+			height: 50px;
 			vertical-align: middle;
 			border-radius: 25px;
 			// animation: swiming 0.8s linear alternate infinite;
