@@ -20,14 +20,14 @@ export default {
 <style scoped>
 .app-main {
 	/*50 = navbar  */
-	/* height: calc(100vh - 120px); */
-	height: 100%;
+	height: calc(100vh - 60px);
+	/* height: 100%; */
 	width: 100%;
 	position: relative;
 	overflow: auto;
-	background-color: #f0f0f0;
-	padding: 25px;
 	box-sizing: border-box;
+	margin: 0 auto;
+	/* padding: 0 10px; */
 }
 .root {
 	/* margin: 25px; */

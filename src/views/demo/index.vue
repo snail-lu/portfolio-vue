@@ -1,6 +1,6 @@
 <template>
 	<div class="demo-list-container">
-		<el-row class="header"></el-row>
+		<!-- <el-row class="header"></el-row> -->
 		<el-row class="demo-list" :gutter="20">
 			<el-col class="demo-item" v-for="(demoItem, demoIndex) in demoList" :key="demoItem.path" :span="8">
 				<div class="demo-item-header" :class="`bg-color${demoIndex % 30}`">{{ demoItem.title }}</div>
@@ -81,12 +81,16 @@ export default {
 	height: 70px;
 	line-height: 70px;
 }
+.demo-list-container {
+	overflow-x: hidden;
+}
 
 .demo-list {
-	padding: 0 20%;
+	padding: 50px 25%;
 
 	.demo-item {
 		margin-bottom: 20px;
+		cursor: pointer;
 
 		&-header {
 			// background-color: rgb(224, 63, 63);

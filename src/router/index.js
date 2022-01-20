@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Layout from '../layout/index.vue'
 
 Vue.use(Router)
 
 /* Layout */
-import Layout from '@/layout'
 export const constantRoutes = [
 	// 主页面
 	{

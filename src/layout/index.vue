@@ -1,32 +1,8 @@
 <template>
 	<div :class="classObj" class="app-wrapper">
 		<div v-if="device === 'mobile' && sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
-		<!-- <div class="header">
-			<span class="title">VUE项目集</span>
-			<div class="option">
-				<el-dropdown @command="handleCommand">
-					<span class="el-dropdown-link" style="display:flex;align-items:center">
-						<el-avatar
-							src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-							style="margin-right:10px"
-						></el-avatar>
-					</span>
-					<el-dropdown-menu slot="dropdown">
-						<el-dropdown-item command="resume">About ME</el-dropdown-item>
-					</el-dropdown-menu>
-				</el-dropdown>
-			</div>
-		</div> -->
 		<topbar />
-		<div class="main">
-			<!-- <sidebar class="sidebar-container" /> -->
-			<!-- <div class="main-container">
-				<div :class="{ 'fixed-header': fixedHeader }">
-					<navbar />
-				</div>
-			</div> -->
-			<app-main />
-		</div>
+		<app-main />
 	</div>
 </template>
 
@@ -119,6 +95,7 @@ export default {
 	position: relative;
 	height: 100%;
 	width: 100%;
+	background-color: #f0f0f0;
 	&.mobile.openSidebar {
 		position: fixed;
 		top: 0;
