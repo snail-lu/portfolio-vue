@@ -14,6 +14,13 @@ export default {
 			reposity: 'https://github.com/Snail-Lu/vue-vant-mall',
 			url: 'https://snail-lu.github.io/vue-vant-mall',
 			desc: '基于vue-cli + vant创建的移动端项目框架'
+		},
+		{
+			path: 'uni-app-mall',
+			title: '微信小程序商城项目',
+			reposity: 'https://github.com/Snail-Lu/uni-app-mall',
+			url: '',
+			desc: '基于uni-app创建的小程序商城项目'
 		}
 	],
 
