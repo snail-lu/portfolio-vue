@@ -18,41 +18,14 @@
 </template>
 
 <script>
+import config from '@/config/index'
 export default {
 	data() {
-		return {
-			demoList: [
-				{
-					path: 'tree-expand',
-					title: '节点树展开/收缩',
-					desc: 'Element-UI中el-tree中节点树控制节点全展开/全收缩'
-				},
-				{
-					path: 'table-sort',
-					title: '表格自定义排序',
-					desc: 'Element-UI中el-table中表格自定义排序'
-				},
-				{
-					path: 'table-select',
-					title: '表格分页多选',
-					desc: 'Element-UI中el-table中表格翻页后表格行选择'
-				},
-				{
-					path: 'table-transfer',
-					title: '表格穿梭',
-					desc: 'Element-UI中el-table内容选中穿梭框简单实现'
-				},
-				{
-					path: 'phone-model',
-					title: '手机模型',
-					desc: '手机模型简单实现'
-				},
-				{
-					path: 'hotspot',
-					title: '图片上绘制热区',
-					desc: '图片上绘制热区实现'
-				}
-			]
+		return {}
+	},
+	computed: {
+		demoList() {
+			return config.demoList || []
 		}
 	},
 
