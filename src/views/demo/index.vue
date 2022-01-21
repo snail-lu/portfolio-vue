@@ -71,6 +71,8 @@ export default {
 			height: 100px;
 			line-height: 100px;
 			text-align: center;
+			border-top-left-radius: 10px;
+			border-top-right-radius: 10px;
 		}
 
 		&-content {
@@ -78,6 +80,8 @@ export default {
 			height: 150px;
 			padding: 20px 10px 10px 10px;
 			text-align: center;
+			border-bottom-left-radius: 10px;
+			border-bottom-right-radius: 10px;
 		}
 
 		&-path {
@@ -90,7 +94,7 @@ export default {
 
 		&-desc {
 			color: #999;
-			font-size: 14px;
+			font-size: 13px;
 		}
 	}
 }

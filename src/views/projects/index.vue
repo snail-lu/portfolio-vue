@@ -1,6 +1,5 @@
 <template>
 	<div class="demo-list-container">
-		<el-row class="header"></el-row>
 		<el-row class="demo-list" :gutter="20">
 			<el-col class="demo-item" v-for="(demoItem, demoIndex) in projectsList" :key="demoItem.path" :span="8">
 				<div class="demo-item-header" :class="`bg-color${demoIndex % 30}`">{{ demoItem.title }}</div>
@@ -55,8 +54,12 @@ export default {
 	line-height: 70px;
 }
 
+.demo-list-container {
+	overflow-x: hidden;
+}
+
 .demo-list {
-	padding: 0 20%;
+	padding: 50px 25%;
 
 	.demo-item {
 		margin-bottom: 20px;
@@ -67,6 +70,8 @@ export default {
 			height: 100px;
 			line-height: 100px;
 			text-align: center;
+			border-top-left-radius: 10px;
+			border-top-right-radius: 10px;
 		}
 
 		&-content {
@@ -74,6 +79,8 @@ export default {
 			height: 150px;
 			padding: 20px 10px 10px 10px;
 			text-align: center;
+			border-bottom-left-radius: 10px;
+			border-bottom-right-radius: 10px;
 		}
 
 		&-path {
@@ -86,7 +93,7 @@ export default {
 
 		&-desc {
 			color: #999;
-			font-size: 14px;
+			font-size: 13px;
 		}
 	}
 }
