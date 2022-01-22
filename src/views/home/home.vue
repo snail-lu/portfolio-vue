@@ -2,7 +2,19 @@
 	<el-container class="home-container">
 		<el-main class="content">
 			<!-- <img class="avatar-img" alt="Vue logo" src="./../../assets/images/avatar.jpg" /> -->
-			<h1>{{ msg }}</h1>
+			<!-- <h1>{{ msg }}</h1> -->
+			<video
+				class="home-video"
+				src="https://cdn.jsdelivr.net/gh/Snail-Lu/imageGalleries/portfolio-vue/videos/beach-during-sunset.mp4"
+				autoplay
+				loop
+			></video>
+			<audio
+				ref="bgm"
+				src="https://cdn.jsdelivr.net/gh/Snail-Lu/imageGalleries/portfolio-vue/videos/beach-during-sunset.mp3"
+				autoplay
+				loop
+			></audio>
 		</el-main>
 	</el-container>
 </template>
@@ -14,6 +26,9 @@ export default {
 		return {
 			msg: 'Welcome~'
 		}
+	},
+	mounted() {
+		this.$refs.bgm.volume = 0.1
 	}
 }
 </script>
@@ -25,59 +40,13 @@ export default {
 	/* background-image: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%); */
 	// background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
 }
-.avatar-img {
-	width: 120px;
-	height: 120px;
-	border-radius: 50%;
-	overflow: hidden;
-	border: 2px solid #f0dfb3;
-}
 
 .content {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-
-	.navbar-list {
-		margin-top: 10px;
-		font-size: 16px;
-	}
-}
-
-.footer {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 14px;
-	color: #000;
-}
-
-.footer-link {
-	color: #000;
-	margin: 0 10px;
-	text-decoration: none;
-}
-
-.beian-link {
-	display: flex;
-	align-items: center;
-}
-
-.beian-link img {
-	width: 20px;
-	height: 20px;
-}
-
-ul {
-	list-style-type: none;
 	padding: 0;
-}
-li {
-	display: inline-block;
-	margin: 0 10px;
-}
-a {
-	color: #42b983;
+	height: calc(100vh - 60px);
+	overflow: hidden;
+	.home-video {
+		width: 100%;
+	}
 }
 </style>
