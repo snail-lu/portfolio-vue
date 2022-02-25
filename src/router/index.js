@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from '../layout/index.vue'
+import demoRoutes from './demo'
 
 Vue.use(Router)
 
 /* Layout */
-export const constantRoutes = [
+export const routes = [
 	// 主页面
 	{
 		path: '/',
@@ -30,67 +31,6 @@ export const constantRoutes = [
 					{
 						path: '',
 						component: () => import('@/views/projects/index')
-					}
-				]
-			},
-			{
-				path: 'demo',
-				component: {
-					render: h => h('router-view')
-				},
-				children: [
-					{
-						path: '',
-						component: () => import('../views/demo/index')
-					},
-					{
-						path: 'tree-expand',
-						component: () => import('../views/demo/tree/tree.vue'),
-						name: '',
-						meta: {
-							title: '节点树展开/收缩'
-						}
-					},
-					{
-						path: 'table-sort',
-						component: () => import('../views/demo/table/table.vue'),
-						name: '',
-						meta: {
-							title: '表格自定义排序'
-						}
-					},
-					{
-						path: 'table-select',
-						component: () => import('../views/demo/tableSelect/index.vue'),
-						name: '',
-						meta: {
-							title: '表格分页多选'
-						}
-					},
-					{
-						path: 'table-transfer',
-						component: () => import('../views/demo/tabletransfer/tabletransfer.vue'),
-						name: '',
-						meta: {
-							title: '表格穿梭'
-						}
-					},
-					{
-						path: 'phone-model',
-						component: () => import('../views/demo/phoneModel/index.vue'),
-						name: '',
-						meta: {
-							title: '手机模型',
-							hidden: true
-						}
-					},
-					{
-						path: 'hotspot',
-						component: () => import('../views/demo/hotspot/index.vue'),
-						name: '',
-						meta: {
-							title: '图片上绘制热区'
-						}
 					}
 				]
 			},
@@ -135,6 +75,9 @@ export const constantRoutes = [
 	}
 ]
 
+// 合并demo路由
+routes[0].children.push(demoRoutes)
+
 const createRouter = () =>
 	new Router({
 		mode: 'hash',
@@ -142,7 +85,7 @@ const createRouter = () =>
 		scrollBehavior: () => ({
 			y: 0
 		}),
-		routes: constantRoutes
+		routes
 	})
 
 const router = createRouter()
