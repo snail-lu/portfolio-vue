@@ -1,5 +1,5 @@
 <template>
-	<div class="tree-container">
+	<div class="demo-container">
 		<el-row>
 			<el-link
 				icon="el-icon-link"
@@ -127,7 +127,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tree-container {
+.demo-container {
 	padding: 50px 25%;
 
 	.el-row {
