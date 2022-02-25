@@ -55,6 +55,11 @@ export default {
 			path: 'hotspot',
 			title: '图片上绘制热区',
 			desc: '图片上绘制热区实现'
+		},
+		{
+			path: 'large-file-upload',
+			title: '大文件上传',
+			desc: '大文件上传常用组件前端实践'
 		}
 	]
 }

@@ -16,8 +16,11 @@ import request from '@/utils/request'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+import uploader from 'vue-simple-uploader'
+
 // set ElementUI lang to EN
 Vue.use(ElementUI, { znLcale })
+Vue.use(uploader)
 
 Vue.prototype.req = request
 
