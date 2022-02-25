@@ -11,7 +11,7 @@
 		@mousedown.left.stop="mouseDown($event)"
 		@mouseup.left.stop="mouseUp($event)"
 	>
-		<span class="promptText">热区{{ id }}</span>
+		<span class="promptText">热区{{ id + 1 }}</span>
 		<!--删除-->
 		<div class="del" @click.stop="del()">×</div>
 		<!--形变点-->
@@ -96,7 +96,7 @@ export default {
 		right: 0;
 		top: 0;
 		transform: translate(50%, -50%);
-		cursor: default;
+		cursor: pointer;
 		text-align: center;
 	}
 	.shape {
