@@ -3,8 +3,8 @@
 		<el-row>
 			<el-link
 				icon="el-icon-link"
-				href="https://snail-lu.github.io/2020-05-07-element-ui-zhong-biao-ge-zi-ding-yi-pai-xu.html"
-				>表格自定义排序</el-link
+				href="https://snail-lu.github.io/2020-05-08-element-ui-zhong-biao-ge-chuan-suo-gong-neng.html"
+				>表格穿梭</el-link
 			>
 		</el-row>
 		<el-row type="flex">
