@@ -30,7 +30,7 @@ export default {
 	computed: {
 		...mapGetters(['sidebar']),
 		currentRoute() {
-			return this.$route.path
+			return '/' + this.$route.path.split('/')[1]
 		},
 		variables() {
 			return variables
