@@ -34,7 +34,7 @@ export default {
 		},
 		{
 			path: 'table-transfer',
-			component: () => import('../views/demo/tabletransfer/tabletransfer.vue'),
+			component: () => import('../views/demo/tabletransfer/index.vue'),
 			name: '',
 			meta: {
 				title: '表格穿梭'
