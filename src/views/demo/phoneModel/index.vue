@@ -1,6 +1,6 @@
 // 此DEMO样式参考vue-phone-model，github地址：https://github.com/panio123/vue-phone-model
 <template>
-	<div class="phone-model">
+	<div class="demo-container">
 		<div class="phone-wrap">
 			<div class="phone-box">
 				<div class="phone-receiver-wrap">
@@ -73,8 +73,11 @@ export default {
 </script>
 
 <style lang="scss">
-.phone-model {
-	margin: 0 auto;
+.demo-container {
+	padding-top: 10px;
+	display: flex;
+	justify-content: center;
+
 	.phone-wrap {
 		border-bottom: 75px solid #383735;
 		border-top: 50px solid #383735;
