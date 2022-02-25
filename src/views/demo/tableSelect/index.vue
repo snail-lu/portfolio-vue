@@ -3,7 +3,7 @@
 		<el-row>
 			<el-link
 				icon="el-icon-link"
-				href="https://snail-lu.github.io/2020-05-07-element-ui-zhong-biao-ge-zi-ding-yi-pai-xu.html"
+				href="https://snail-lu.github.io/2021-11-11-element-ui-zhong-el-table-fan-ye-duo-xuan-shi-xian.html"
 				>表格分页多选</el-link
 			>
 		</el-row>
