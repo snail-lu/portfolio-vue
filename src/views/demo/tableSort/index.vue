@@ -7,7 +7,14 @@
 				>表格自定义排序</el-link
 			>
 		</el-row>
-		<el-table :data="tableData" stripe style="margin: 0 auto;" @sort-change="onSortChange">
+		<el-table
+			:data="tableData"
+			stripe
+			style="margin: 0 auto;"
+			@sort-change="onSortChange"
+			:header-cell-style="{ background: '#F5F7FA', color: '#606266', textAlign: 'center' }"
+			:cell-style="{ textAlign: 'center' }"
+		>
 			<el-table-column prop="date" label="日期" width="180" sortable="custom" :sort-orders="['ascending','descending']">
 			</el-table-column>
 			<el-table-column prop="name" label="姓名" width="180"> </el-table-column>
