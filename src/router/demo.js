@@ -1,7 +1,7 @@
 export default {
 	path: '/demo',
 	component: {
-		render: h => h('router-view')
+		render: (h) => h('router-view')
 	},
 	children: [
 		{
@@ -63,6 +63,14 @@ export default {
 			name: '',
 			meta: {
 				title: '常用大文件上传组件使用实践'
+			}
+		},
+		{
+			path: 'three-js',
+			component: () => import('../views/demo/threeJs/index.vue'),
+			name: '',
+			meta: {
+				title: 'three.js实践'
 			}
 		}
 	]

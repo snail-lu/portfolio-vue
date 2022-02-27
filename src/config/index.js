@@ -60,6 +60,11 @@ export default {
 			path: 'large-file-upload',
 			title: '大文件上传',
 			desc: '大文件上传常用组件前端实践'
+		},
+		{
+			path: 'three-js',
+			title: 'three.js实践',
+			desc: 'Three.js实践'
 		}
 	]
 }
