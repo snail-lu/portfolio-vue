@@ -63,7 +63,6 @@ export default {
 
 	.demo-item {
 		margin-bottom: 20px;
-		cursor: pointer;
 
 		&-header {
 			// background-color: rgb(224, 63, 63);
