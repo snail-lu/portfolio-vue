@@ -1,5 +1,5 @@
 <template>
-	<div class="demo-container">
+	<div class="demo-container flex-box flex-h-center">
 		<canvas id="three" ref="three"></canvas>
 	</div>
 </template>
@@ -82,8 +82,10 @@ export default {
 			/**
 			 * 相机设置
 			 */
-			const width = window.innerWidth //窗口宽度
-			const height = window.innerHeight //窗口高度
+			// const width = window.innerWidth //窗口宽度
+			// const height = window.innerHeight //窗口高度
+			const width = 900
+			const height = 600
 			const k = width / height //窗口宽高比
 			const s = 200 //三维场景显示范围控制系数，系数越大，显示的范围越大
 			//创建相机对象
