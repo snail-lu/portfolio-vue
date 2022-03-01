@@ -21,6 +21,13 @@ export default {
 			reposity: 'https://github.com/Snail-Lu/uni-app-mall',
 			url: '',
 			desc: '基于uni-app创建的小程序商城项目'
+		},
+		{
+			path: 'official-website',
+			title: '纯静态官方网站',
+			reposity: 'https://github.com/Snail-Lu/official-website',
+			url: '',
+			desc: '基于vue3开发的纯静态公司官网项目'
 		}
 	],
 
