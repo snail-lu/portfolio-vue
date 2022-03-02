@@ -72,6 +72,11 @@ export default {
 			path: 'three-js',
 			title: 'three.js实践',
 			desc: 'Three.js实践'
+		},
+		{
+			path: 'lazy-load',
+			title: '图片懒加载',
+			desc: '基于IntersectionObserver API实现的图片懒加载'
 		}
 	]
 }

@@ -72,6 +72,14 @@ export default {
 			meta: {
 				title: 'three.js实践'
 			}
+		},
+		{
+			path: 'lazy-load',
+			component: () => import('../views/demo/lazyLoad/index.vue'),
+			name: '',
+			meta: {
+				title: '图片懒加载'
+			}
 		}
 	]
 }
