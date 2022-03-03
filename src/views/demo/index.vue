@@ -1,18 +1,18 @@
 <template>
 	<div class="demo-list-container">
-		<!-- <el-row class="header"></el-row> -->
 		<el-row class="demo-list" :gutter="20">
-			<el-col class="demo-item" v-for="(demoItem, demoIndex) in demoList" :key="demoItem.path" :span="8">
-				<div class="demo-item-header" :class="`bg-color${demoIndex % 30}`">{{ demoItem.title }}</div>
-				<div class="demo-item-content">
-					<div class="demo-item-path" @click="pushUrl(demoItem.path)">
-						{{ demoItem.path }}
+			<el-col class="demo-item" v-for="(demoItem, demoIndex) in demoList" :key="demoItem.path" :span="8"
+				><div
+					class="grid-content flex-box-column flex-h-end"
+					:class="`bg-color${demoIndex % 30}`"
+					@click="pushUrl(demoItem.path)"
+				>
+					<div class="demo-info">
+						<div class="demo-item-title">{{ demoItem.title }}</div>
+						<div class="demo-item-desc">{{ demoItem.desc }}</div>
 					</div>
-					<div class="demo-item-desc">
-						{{ demoItem.desc }}
-					</div>
-				</div>
-			</el-col>
+				</div></el-col
+			>
 		</el-row>
 	</div>
 </template>
@@ -40,19 +40,13 @@ export default {
 <style lang="scss" scoped>
 @for $i from 0 through 30 {
 	.bg-color#{$i} {
-		color: #fff;
+		color: #000;
 		background-image: linear-gradient(
-			to right,
+			random(360) + deg,
 			rgba(random(255), random(255), random(255), 0.5),
 			rgba(random(255), random(255), random(255), 0.5)
 		);
 	}
-}
-.header {
-	text-align: center;
-	font-size: 20px;
-	height: 70px;
-	line-height: 70px;
 }
 .demo-list-container {
 	overflow-x: hidden;
@@ -64,36 +58,36 @@ export default {
 	.demo-item {
 		margin-bottom: 20px;
 
-		&-header {
-			// background-color: rgb(224, 63, 63);
-			color: #fff;
-			height: 100px;
-			line-height: 100px;
-			text-align: center;
-			border-top-left-radius: 10px;
-			border-top-right-radius: 10px;
-		}
-
-		&-content {
-			background-color: #fff;
-			height: 150px;
-			padding: 20px 10px 10px 10px;
-			text-align: center;
-			border-bottom-left-radius: 10px;
-			border-bottom-right-radius: 10px;
-		}
-
-		&-path {
-			display: inline-block;
-			font-size: 18px;
-			border-bottom: 1px solid #aaa;
-			margin-bottom: 30px;
+		.grid-content {
+			border-radius: 6px;
+			height: 230px;
 			cursor: pointer;
+			&:hover {
+				box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.46), 0 4px 20px 0 rgba(0, 0, 0, 0.12),
+					0 4px 6px -5px rgba(0, 0, 0, 0.2);
+				.demo-item-title {
+					display: inline-block;
+					border-bottom: 1px solid #000;
+				}
+			}
+		}
+
+		.demo-info {
+			height: 80px;
+			padding: 10px 20px;
+			background-color: rgba(255, 255, 255, 0.5);
+			box-shadow: 0 -8px 8px 5px rgba(255, 255, 255, 0.5);
+		}
+
+		&-title {
+			color: #000;
+			font-size: 16px;
 		}
 
 		&-desc {
-			color: #999;
+			color: #666;
 			font-size: 13px;
+			margin-top: 10px;
 		}
 	}
 }
