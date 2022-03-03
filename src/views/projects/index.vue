@@ -2,13 +2,15 @@
 	<div class="demo-list-container">
 		<el-row class="demo-list" :gutter="20">
 			<el-col class="demo-item" v-for="(demoItem, demoIndex) in projectsList" :key="demoItem.path" :span="8">
-				<div class="demo-item-header" :class="`bg-color${demoIndex % 30}`">{{ demoItem.title }}</div>
-				<div class="demo-item-content">
-					<a class="demo-item-path" :href="demoItem.url ? demoItem.url : demoItem.reposity" target="__blank">
-						{{ demoItem.path }}
-					</a>
-					<div class="demo-item-desc">
-						{{ demoItem.desc }}
+				<div class="grid-content">
+					<div class="demo-item-header" :class="`bg-color${demoIndex % 30}`"></div>
+					<div class="demo-item-content">
+						<a class="demo-item-title" :href="demoItem.url ? demoItem.url : demoItem.reposity" target="__blank">
+							{{ demoItem.title }}
+						</a>
+						<div class="demo-item-desc">
+							{{ demoItem.desc }}
+						</div>
 					</div>
 				</div>
 			</el-col>
@@ -64,31 +66,40 @@ export default {
 	.demo-item {
 		margin-bottom: 20px;
 
+		.grid-content {
+			cursor: pointer;
+			border-radius: 5px;
+			background-color: #fff;
+			overflow: hidden;
+
+			&:hover {
+				box-shadow: 0 0 10px #ccc;
+			}
+		}
+
 		&-header {
 			// background-color: rgb(224, 63, 63);
 			color: #fff;
 			height: 100px;
 			line-height: 100px;
 			text-align: center;
-			border-top-left-radius: 10px;
-			border-top-right-radius: 10px;
 		}
 
 		&-content {
-			background-color: #fff;
 			height: 150px;
 			padding: 20px 10px 10px 10px;
 			text-align: center;
-			border-bottom-left-radius: 10px;
-			border-bottom-right-radius: 10px;
 		}
 
-		&-path {
+		&-title {
 			display: inline-block;
 			font-size: 18px;
-			border-bottom: 1px solid #aaa;
 			margin-bottom: 30px;
-			cursor: pointer;
+			box-sizing: border-box;
+
+			&:hover {
+				border-bottom: 1px solid #aaa;
+			}
 		}
 
 		&-desc {
