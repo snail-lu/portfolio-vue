@@ -3,28 +3,28 @@ export default {
 	projectsList: [
 		{
 			path: 'vue-management-system',
-			title: '后台管理系统项目框架',
+			title: '商城后台管理系统',
 			reposity: 'https://github.com/Snail-Lu/vue-management-system',
 			url: '',
-			desc: '基于Element-UI的后台管理系统项目框架'
+			desc: '基于Element-UI的商城后台管理系统项目'
 		},
 		{
 			path: 'vue-vant-mall',
-			title: '移动端商城项目框架',
+			title: '移动端H5商城',
 			reposity: 'https://github.com/Snail-Lu/vue-vant-mall',
 			url: 'https://snail-lu.github.io/vue-vant-mall',
-			desc: '基于vue-cli + vant创建的移动端项目框架'
+			desc: '基于vue-cli + vant创建的移动端商城项目'
 		},
 		{
 			path: 'uni-app-mall',
-			title: '微信小程序商城项目',
+			title: '微信小程序商城',
 			reposity: 'https://github.com/Snail-Lu/uni-app-mall',
 			url: '',
-			desc: '基于uni-app创建的小程序商城项目'
+			desc: '基于uni-app创建的小程序商城'
 		},
 		{
 			path: 'official-website',
-			title: '纯静态官方网站',
+			title: '纯静态官网',
 			reposity: 'https://github.com/Snail-Lu/official-website',
 			url: '',
 			desc: '基于vue3开发的纯静态公司官网项目'
