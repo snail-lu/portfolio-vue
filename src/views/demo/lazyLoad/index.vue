@@ -5,7 +5,7 @@
 		</el-row>
 		<div class="goods-list">
 			<div class="goods-item" v-for="(item, index) in list" :key="index">
-				<lazy-load-img :src="item" width="400px" height="500px"></lazy-load-img>
+				<lazy-load-img :src="item" width="100%"></lazy-load-img>
 			</div>
 		</div>
 	</div>
@@ -59,7 +59,6 @@ export default {
 
 	.goods-item {
 		width: 100%;
-		height: 500px;
 
 		img {
 			width: 100%;
