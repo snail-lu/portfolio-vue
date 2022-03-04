@@ -154,7 +154,7 @@ export default {
 				}
 			},
 			{
-				rootMargin: '0px 0px 0px 0px' // 交叉过视图的100，才开始派发事件
+				rootMargin: '0px 0px 100px 0px' // 扩展底部视图范围100px，当loadImg距离视窗100px以内时，触发回调
 			}
 		)
 
