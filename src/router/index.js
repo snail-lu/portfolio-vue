@@ -25,7 +25,7 @@ export const routes = [
 			{
 				path: '/projects',
 				component: {
-					render: h => h('router-view')
+					render: (h) => h('router-view')
 				},
 				children: [
 					{
@@ -37,7 +37,7 @@ export const routes = [
 			{
 				path: 'about',
 				component: {
-					render: h => h('router-view')
+					render: (h) => h('router-view')
 				},
 				children: [
 					{

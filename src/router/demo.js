@@ -80,6 +80,14 @@ export default {
 			meta: {
 				title: '图片懒加载'
 			}
+		},
+		{
+			path: 'masonry',
+			component: () => import('../views/demo/masonry/index.vue'),
+			name: '',
+			meta: {
+				title: '瀑布流'
+			}
 		}
 	]
 }
