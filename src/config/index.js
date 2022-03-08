@@ -77,6 +77,16 @@ export default {
 			path: 'lazy-load',
 			title: '图片懒加载',
 			desc: '基于IntersectionObserver API实现的图片懒加载'
+		},
+		{
+			path: 'masonry',
+			title: '瀑布流',
+			desc: '基于masonry库实现的瀑布流布局'
+		},
+		{
+			path: 'color-picker',
+			title: '颜色选择器',
+			desc: '颜色选择器组件'
 		}
 	]
 }
