@@ -3,18 +3,18 @@
 		<el-main class="content">
 			<!-- <img class="avatar-img" alt="Vue logo" src="./../../assets/images/avatar.jpg" /> -->
 			<!-- <h1>{{ msg }}</h1> -->
-			<video
+			<!-- <video
 				class="home-video"
 				src="https://cdn.jsdelivr.net/gh/Snail-Lu/imageGalleries/portfolio-vue/videos/beach-during-sunset.mp4"
 				autoplay
 				loop
-			></video>
-			<audio
+			></video> -->
+			<!-- <audio
 				ref="bgm"
 				src="https://cdn.jsdelivr.net/gh/Snail-Lu/imageGalleries/portfolio-vue/videos/beach-during-sunset.mp3"
 				autoplay
 				loop
-			></audio>
+			></audio> -->
 		</el-main>
 	</el-container>
 </template>
@@ -45,6 +45,10 @@ export default {
 	padding: 0;
 	height: calc(100vh - 60px);
 	overflow: hidden;
+	background-image: url('https://cdn.jsdelivr.net/gh/Snail-Lu/imageGalleries/portfolio-vue/images/deer-bg.jpg');
+	background-size: cover;
+	background-position: center;
+
 	.home-video {
 		width: 100%;
 	}
