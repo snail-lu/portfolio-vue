@@ -82,11 +82,6 @@ export default {
 			path: 'masonry',
 			title: '瀑布流',
 			desc: '基于masonry库实现的瀑布流布局'
-		},
-		{
-			path: 'color-picker',
-			title: '颜色选择器',
-			desc: '颜色选择器组件'
 		}
 	]
 }
