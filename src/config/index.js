@@ -5,7 +5,7 @@ export default {
 			path: 'vue-management-system',
 			title: '商城后台管理系统',
 			reposity: 'https://github.com/Snail-Lu/vue-management-system',
-			url: '',
+			url: 'https://snail-lu.github.io/vue-management-system',
 			desc: '基于Element-UI的商城后台管理系统项目'
 		},
 		{
@@ -26,7 +26,7 @@ export default {
 			path: 'official-website',
 			title: '纯静态官网',
 			reposity: 'https://github.com/Snail-Lu/official-website',
-			url: '',
+			url: 'https://snail-lu.github.io/official-website',
 			desc: '基于vue3开发的纯静态公司官网项目'
 		}
 	],
