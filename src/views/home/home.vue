@@ -3,12 +3,9 @@
 		<el-main class="content">
 			<!-- <img class="avatar-img" alt="Vue logo" src="./../../assets/images/avatar.jpg" /> -->
 			<!-- <h1>{{ msg }}</h1> -->
-			<!-- <video
-				class="home-video"
-				src="https://cdn.jsdelivr.net/gh/Snail-Lu/imageGalleries/portfolio-vue/videos/beach-during-sunset.mp4"
-				autoplay
-				loop
-			></video> -->
+			<video class="home-video"
+				src="https://cdn.jsdelivr.net/gh/Snail-Lu/imageGalleries/portfolio-vue/videos/bg.mp4" autoplay loop
+				muted></video>
 			<!-- <audio
 				ref="bgm"
 				src="https://cdn.jsdelivr.net/gh/Snail-Lu/imageGalleries/portfolio-vue/videos/beach-during-sunset.mp3"
@@ -28,7 +25,7 @@ export default {
 		}
 	},
 	mounted() {
-		this.$refs.bgm.volume = 0.1
+		// this.$refs.bgm.volume = 0.1
 	}
 }
 </script>
