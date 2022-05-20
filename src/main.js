@@ -13,7 +13,6 @@ import store from './store'
 import router from './router'
 import request from '@/utils/request'
 
-import '@/icons' // icon
 import '@/permission' // permission control
 
 import uploader from 'vue-simple-uploader'
@@ -27,8 +26,8 @@ Vue.prototype.req = request
 Vue.config.productionTip = false
 
 new Vue({
-	el: '#app',
-	router,
-	store,
-	render: h => h(App)
+    el: '#app',
+    router,
+    store,
+    render: (h) => h(App)
 })
