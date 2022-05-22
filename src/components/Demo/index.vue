@@ -2,7 +2,7 @@
     <div class="demo-wrapper">
         <div class="header flex-box flex-v-center">
             <div class="flex-item-1 title">{{ data.title }}</div>
-            <el-tooltip class="item" effect="dark" content="查看文章" placement="top-start">
+            <el-tooltip class="item" effect="dark" content="查看文章" placement="top-start" v-if="data.url">
                 <el-link class="article-link" :underline="false" icon="el-icon-view" :href="data.url"></el-link>
             </el-tooltip>
         </div>
