@@ -1,27 +1,22 @@
 <template>
-    <div class="demo-container">
-        <div class="flex-box flex-v-center">
-            <div class="flex-item-1 title">节点树展开/收缩</div>
-            <el-tooltip class="item" effect="dark" content="查看文章" placement="top-start">
-                <el-link
-                    class="article-link"
-                    :underline="false"
-                    icon="el-icon-view"
-                    href="https://snail-lu.vercel.app/2020-05-05-element-ui-zhong-el-tree-zu-jian-jie-dian-quan-zhan-kai-yu-quan-shou-suo-gong-neng-shi-xian.html"
-                ></el-link>
-            </el-tooltip>
-        </div>
-        <el-button type="primary" @click="onExpand" size="mini"
-            >{{ this.expandAll ? '收缩' : '展开' }}所有节点</el-button
-        >
+    <demo :data="demoInfo">
+        <el-button type="primary" @click="onExpand" size="mini">{{ expandAll ? '收缩' : '展开' }}所有节点</el-button>
         <el-tree :data="data" ref="tree"></el-tree>
-    </div>
+    </demo>
 </template>
 
 <script>
+import Demo from '@/components/Demo'
 export default {
+    components: {
+        Demo
+    },
     data() {
         return {
+            demoInfo: {
+                title: '节点树展开/收缩',
+                url: 'https://snail-lu.vercel.app/2020-05-05-element-ui-zhong-el-tree-zu-jian-jie-dian-quan-zhan-kai-yu-quan-shou-suo-gong-neng-shi-xian.html'
+            },
             expandAll: false,
             data: [
                 {
@@ -133,23 +128,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.demo-container {
-    margin: 50px 25%;
-    background-color: #fff;
-    border-radius: 6px;
-    padding: 20px;
-
-    .title {
-        text-align: center;
-        font-size: 20px;
-    }
-
-    .article-link {
-        font-size: 18px;
-    }
-
-    .el-button {
-        margin-bottom: 10px;
-    }
+.el-button {
+    margin-bottom: 10px;
 }
 </style>

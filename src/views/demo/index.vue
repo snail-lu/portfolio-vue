@@ -2,12 +2,6 @@
     <div class="demo-list-container">
         <el-row class="demo-list" :gutter="40">
             <el-col class="demo-item" v-for="demo in demoList" :key="demo.path" :span="8">
-                <!-- <div class="grid-content flex-box-column flex-h-end" @click="pushUrl(demoItem.path)">
-                    <div class="demo-info">
-                        <div class="demo-item-title">{{ demoItem.title }}</div>
-                        <div class="demo-item-desc">{{ demoItem.desc }}</div>
-                    </div>
-                </div> -->
                 <card :data="demo" />
             </el-col>
         </el-row>
