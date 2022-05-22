@@ -1,6 +1,8 @@
 <template>
     <div class="topbar-wrapper flex-box flex-v-center">
-        <logo />
+        <router-link key="collapse" class="topbar-logo" to="/">
+            <img src="../../assets/icons/logo.png" class="topbar-logo" />
+        </router-link>
 
         <el-menu
             :text-color="variables.menuText"
@@ -16,16 +18,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import Logo from './Logo'
 import variables from '@/styles/variables.scss'
 
 const settings = require('@/settings.js')
 export default {
     name: 'Topbar',
-    components: { Logo },
     computed: {
-        ...mapGetters(['sidebar']),
         currentRoute() {
             return '/' + this.$route.path.split('/')[1]
         },
@@ -42,8 +40,14 @@ export default {
 .topbar-wrapper {
     width: 100%;
     padding-left: 20%;
-    // background-image: linear-gradient(to top, #bdc2e8 0%, #bdc2e8 1%, #e6dee9 100%);
     background-color: rgba(0, 0, 0, 0.5);
+
+    .topbar-logo {
+        width: 50px;
+        height: 50px;
+        vertical-align: middle;
+        border-radius: 25px;
+    }
 
     .el-menu {
         border-bottom: none;
@@ -51,10 +55,17 @@ export default {
         background-color: transparent;
         &-item {
             border-bottom: none;
+            font-size: 16px;
+            padding: 0 30px;
+
             &:hover,
             &:focus {
                 background-color: transparent;
             }
+        }
+
+        .is-active {
+            font-weight: bold;
         }
     }
 }
