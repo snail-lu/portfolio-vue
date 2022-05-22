@@ -81,6 +81,14 @@ div:focus {
     justify-content: center;
 }
 
+.flex-h-between {
+    justify-content: space-between;
+}
+
+.flex-h-around {
+    justify-content: space-around;
+}
+
 .flex-h-end {
     justify-content: end;
 }
