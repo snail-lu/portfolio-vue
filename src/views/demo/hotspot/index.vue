@@ -26,23 +26,17 @@
         <div class="hot-spot-list flex-box flex-wrap">
             <div class="hot-spot-item" v-for="(item, index) in spotDataList" :key="index">
                 <div class="info-header">热区{{ index + 1 }}</div>
-                <div class="title">起点坐标：</div>
-                <div class="flex-box flex-v-center">
-                    <div class="label">x：</div>
-                    <el-input v-model="item.startX" :disabled="true"></el-input>
-                    <div class="label" style="margin-left: 20px">y：</div>
-                    <el-input v-model="item.startY" :disabled="true"></el-input>
+                <div class="info-content flex-box flex-v-center">
+                    <div class="label">起点坐标：</div>
+                    <div>{{ `(${item.startX},${item.startY})` }}</div>
                 </div>
-                <div class="title">热区宽高：</div>
-                <div class="flex-box flex-v-center">
-                    <div class="label">宽：</div>
-                    <el-input v-model="item.width" :disabled="true"></el-input>
-                    <div class="label" style="margin-left: 20px">高：</div>
-                    <el-input v-model="item.height" :disabled="true"></el-input>
+                <div class="info-content flex-box flex-v-center">
+                    <div class="label">热区宽/高：</div>
+                    {{ `${item.width}/${item.height}` }}
                 </div>
-                <div class="title">热区链接：</div>
-                <div class="flex-box">
-                    <el-input v-model="item.link"></el-input>
+                <div class="info-content flex-box flex-v-center">
+                    <div class="label">热区链接：</div>
+                    <el-input v-model="item.link" class="flex-item-1" placeholder="请输入热区链接"></el-input>
                 </div>
             </div>
         </div>
@@ -156,25 +150,25 @@ export default {
 .hot-spot-list {
     margin-top: 10px;
     .hot-spot-item {
-        width: 30%;
+        width: 45%;
         background-color: #f5f5f5;
         padding: 10px 20px;
         margin-bottom: 10px;
-        margin-right: 20px;
+        margin-right: 2.5%;
+        border-radius: 6px;
 
         .info-header {
             font-weight: bold;
             margin-bottom: 10px;
             text-align: center;
+            font-size: 14px;
         }
 
-        .title {
-            line-height: 2.5;
-        }
-
-        .label {
-            width: 30px;
-            flex-shrink: 0;
+        .info-content {
+            margin-bottom: 20px;
+            .label {
+                font-size: 13px;
+            }
         }
     }
 }
