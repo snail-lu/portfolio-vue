@@ -12,9 +12,11 @@
                     :header-cell-style="{ background: '#F5F7FA', color: '#606266', textAlign: 'center' }"
                     :cell-style="{ textAlign: 'center' }"
                 >
-                    <el-table-column type="selection" width="30"> </el-table-column>
-                    <el-table-column prop="name" label="姓名" width="60"> </el-table-column>
-                    <el-table-column prop="address" label="地址"> </el-table-column>
+                    <el-table-column type="selection" />
+                    <el-table-column prop="name" label="姓名" />
+                    <el-table-column label="性别">
+                        <template slot-scope="scope">{{ scope.row.sex | sexFilter }}</template>
+                    </el-table-column>
                 </el-table>
             </el-col>
             <el-col :span="4" class="btn-groups">
@@ -32,9 +34,11 @@
                     :header-cell-style="{ background: '#F5F7FA', color: '#606266', textAlign: 'center' }"
                     :cell-style="{ textAlign: 'center' }"
                 >
-                    <el-table-column type="selection" width="30"> </el-table-column>
-                    <el-table-column prop="name" label="姓名" width="60"> </el-table-column>
-                    <el-table-column prop="address" label="地址"> </el-table-column>
+                    <el-table-column type="selection" />
+                    <el-table-column prop="name" label="姓名" />
+                    <el-table-column label="性别">
+                        <template slot-scope="scope">{{ scope.row.sex | sexFilter }}</template>
+                    </el-table-column>
                 </el-table>
             </el-col>
         </el-row>
@@ -47,6 +51,12 @@ export default {
     components: {
         Demo
     },
+    filters: {
+        sexFilter(val) {
+            const map = { 1: '男', 2: '女' }
+            return map[val]
+        }
+    },
     data() {
         return {
             demoInfo: {
@@ -57,32 +67,32 @@ export default {
                 {
                     id: '1',
                     name: '张帅',
-                    address: '南京市秦淮区秦虹路98号'
+                    sex: 1
                 },
                 {
                     id: '2',
                     name: '王帅',
-                    address: '北京市朝阳区东三环北路甲26号'
+                    sex: 1
                 },
                 {
                     id: '3',
                     name: '刘帅',
-                    address: '上海市浦东新区潍坊西路与浦城路交叉路口往西北约50米'
+                    sex: 1
                 },
                 {
                     id: '4',
                     name: '孟帅',
-                    address: '湖北省武汉市硚口区解放大道586号'
+                    sex: 1
                 },
                 {
                     id: '5',
                     name: '牛帅',
-                    address: '河南省郑州市硚口区解放大道586号'
+                    sex: 1
                 },
                 {
                     id: '6',
                     name: '孙帅',
-                    address: '安徽省合肥市硚口区解放大道586号'
+                    sex: 1
                 }
             ],
             table2Data: [],
@@ -167,25 +177,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.demo-container {
-    padding: 50px 25%;
+.el-row {
+    text-align: center;
+    margin-bottom: 10px;
+}
 
-    .el-row {
-        text-align: center;
-        margin-bottom: 10px;
-    }
+.el-link {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+}
 
-    .el-link {
-        font-size: 18px;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-
-    .btn-groups {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
+.btn-groups {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 </style>
