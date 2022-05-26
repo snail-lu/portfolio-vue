@@ -96,6 +96,12 @@ export default {
             path: 'masonry',
             title: '瀑布流',
             desc: '基于masonry库实现的瀑布流布局'
+        },
+        {
+            id: 11,
+            path: 'photo-wall',
+            title: '照片墙',
+            desc: '可以自定义拖拽/摆放的照片墙'
         }
     ]
 }
