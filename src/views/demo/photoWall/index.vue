@@ -35,7 +35,7 @@ export default {
                     element.msRequestFullscreen()
                 }
             }
-            changeSetting({ key: 'fullScreen', value: !this.fullscreen })
+            this.changeSetting({ key: 'fullScreen', value: !this.fullscreen })
         }
     }
 }
