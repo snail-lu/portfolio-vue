@@ -1,5 +1,5 @@
 const state = {
-    fullScreen: false
+    isScreenFull: false
 }
 
 const mutations = {

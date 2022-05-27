@@ -6,7 +6,7 @@
 import { mapActions, mapGetters } from 'vuex'
 export default {
     computed: {
-        ...mapGetters(['fullScreen'])
+        ...mapGetters(['isScreenFull'])
     },
     methods: {
         ...mapActions('settings', ['changeSetting']),
@@ -35,7 +35,7 @@ export default {
                     element.msRequestFullscreen()
                 }
             }
-            this.changeSetting({ key: 'fullScreen', value: !this.fullscreen })
+            this.changeSetting({ key: 'isScreenFull', value: !this.isScreenFull })
         }
     }
 }

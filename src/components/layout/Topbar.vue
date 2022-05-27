@@ -1,5 +1,5 @@
 <template>
-    <div class="topbar-wrapper flex-box flex-v-center" v-if="!fullScreen">
+    <div class="topbar-wrapper flex-box flex-v-center" v-if="!isScreenFull">
         <router-link key="collapse" class="topbar-logo" to="/">
             <img src="../../assets/icons/logo.png" class="topbar-logo" />
         </router-link>
@@ -25,7 +25,7 @@ const settings = require('@/settings.js')
 export default {
     name: 'Topbar',
     computed: {
-        ...mapGetters(['fullScreen']),
+        ...mapGetters(['isScreenFull']),
         currentRoute() {
             return '/' + this.$route.path.split('/')[1]
         },

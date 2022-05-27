@@ -1,4 +1,4 @@
 const getters = {
-    fullScreen: (state) => state.settings.fullScreen
+    isScreenFull: (state) => state.settings.isScreenFull
 }
 export default getters
