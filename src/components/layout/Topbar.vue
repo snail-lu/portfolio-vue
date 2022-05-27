@@ -18,12 +18,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import variables from '@/styles/variables.scss'
 
 const settings = require('@/settings.js')
 export default {
     name: 'Topbar',
     computed: {
+        ...mapGetters(['fullScreen']),
         currentRoute() {
             return '/' + this.$route.path.split('/')[1]
         },
