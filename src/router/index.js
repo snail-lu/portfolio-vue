@@ -18,8 +18,7 @@ export const routes = [
                 name: 'home',
                 component: () => import('@/views/home/home.vue'),
                 meta: {
-                    title: '首页',
-                    icon: 'el-icon-s-home'
+                    title: '首页'
                 }
             },
             {
@@ -30,7 +29,10 @@ export const routes = [
                 children: [
                     {
                         path: '',
-                        component: () => import('@/views/projects/index')
+                        component: () => import('@/views/projects/index'),
+                        meta: {
+                            title: '项目'
+                        }
                     }
                 ]
             },
@@ -42,7 +44,10 @@ export const routes = [
                 children: [
                     {
                         path: '',
-                        component: () => import('../views/about/index.vue')
+                        component: () => import('../views/about/index.vue'),
+                        meta: {
+                            title: '关于'
+                        }
                     },
                     {
                         path: 'resume',
