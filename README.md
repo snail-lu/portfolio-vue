@@ -21,3 +21,7 @@ npm run build
 // 部署到 github pages
 npm run deploy
 ```
+
+### 待优化内容
+
+-   `Element-UI`按需引入
