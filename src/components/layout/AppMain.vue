@@ -1,5 +1,5 @@
 <template>
-    <section class="app-main">
+    <section class="app-main" :class="{ 'app-main-fullscreen': isScreenFull }">
         <transition name="fade-transform" mode="out-in">
             <router-view :key="key" />
         </transition>
@@ -7,9 +7,11 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
     name: 'AppMain',
     computed: {
+        ...mapState('settings', ['isScreenFull']),
         key() {
             return this.$route.path
         }
@@ -28,6 +30,10 @@ export default {
     box-sizing: border-box;
     margin: 0 auto;
     /* padding: 0 10px; */
+}
+
+.app-main-fullscreen {
+    height: 100vh;
 }
 </style>
 
