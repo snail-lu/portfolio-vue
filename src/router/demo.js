@@ -97,7 +97,7 @@ export default {
             component: () => import('../views/demo/photoWall/index.vue'),
             name: '',
             meta: {
-                title: '瀑布流'
+                title: '照片墙'
             }
         }
     ]
