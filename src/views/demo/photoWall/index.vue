@@ -1,15 +1,14 @@
 <template>
     <div class="photo-wall-container">
         <div>
-            <el-upload class="upload-demo" drag action="#" multiple :auto-upload="false" :on-change="onUploadFile">
-                <i class="el-icon-upload"></i>
-                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-                <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+            <el-upload class="upload-demo" action="#" multiple :auto-upload="false" :on-change="onUploadFile">
+                本地图片
             </el-upload>
+            <button @click="handleFullScreen">全屏</button>
         </div>
-        <!-- <photo /> -->
-        <div>
-            <img :src="file.raw" v-for="file in fileList" :key="file.uid" />
+
+        <div class="photo-list">
+            <photo :src="file.raw | imgUrlFilter" v-for="file in fileList" :key="file.uid" />
         </div>
     </div>
 </template>
@@ -20,6 +19,11 @@ import Photo from './components/photo'
 export default {
     components: {
         Photo
+    },
+    filters: {
+        imgUrlFilter(val) {
+            return URL.createObjectURL(val)
+        }
     },
     data() {
         return {
@@ -64,8 +68,12 @@ export default {
 
 <style lang="scss" scoped>
 .photo-wall-container {
-    position: relative;
     height: 1000px;
     width: 100%;
+
+    .photo-list {
+        position: relative;
+        height: 1000px;
+    }
 }
 </style>

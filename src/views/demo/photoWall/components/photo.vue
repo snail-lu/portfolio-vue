@@ -1,9 +1,13 @@
 <template>
-    <vue-draggable-resizable :w="100" :h="100" @dragging="onDrag" @resizing="onResize" :parent="true">
-        <p>
-            Hello! I'm a flexible component. You can drag me around and you can resize me.<br />
-            X: {{ x }} / Y: {{ y }} - Width: {{ width }} / Height: {{ height }}
-        </p>
+    <vue-draggable-resizable
+        :w="100"
+        :h="100"
+        @dragging="onDrag"
+        @resizing="onResize"
+        :parent="true"
+        class-name="my-photo"
+    >
+        <img :src="src" />
     </vue-draggable-resizable>
 </template>
 
@@ -12,6 +16,9 @@ import VueDraggableResizable from 'vue-draggable-resizable'
 export default {
     components: {
         VueDraggableResizable
+    },
+    props: {
+        src: ''
     },
     data() {
         return {
@@ -36,4 +43,10 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.my-photo {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
+</style>
