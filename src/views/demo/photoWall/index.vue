@@ -1,10 +1,14 @@
 <template>
     <div class="photo-wall-container">
-        <div>
-            <el-upload class="upload-demo" action="#" multiple :auto-upload="false" :on-change="onUploadFile">
-                本地图片
+        <div class="btn-groups flex-box flex-h-center" :class="{ 'btn-groups-screenfull': isScreenFull }">
+            <el-upload action="#" multiple :auto-upload="false" :on-change="onUploadFile" :show-file-list="false">
+                <i class="btn el-icon-picture-outline upload-btn" title="打开本地图片"></i>
             </el-upload>
-            <button @click="handleFullScreen">全屏</button>
+            <i
+                class="btn el-icon-full-screen"
+                :title="isScreenFull ? '退出全屏' : '全屏'"
+                @click="handleFullScreen"
+            ></i>
         </div>
 
         <div class="photo-list">
@@ -14,7 +18,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import Photo from './components/photo'
 export default {
     components: {
@@ -30,6 +34,9 @@ export default {
             fileList: []
         }
     },
+    computed: {
+        ...mapState('settings', ['isScreenFull'])
+    },
     destroyed() {
         window.removeEventListener('fullscreenchange', this.fullscreenchangeHandler)
     },
@@ -37,23 +44,37 @@ export default {
         ...mapActions('settings', ['changeSetting']),
         onUploadFile(file, list) {
             const { fileList } = this
-            this.fileList = [...fileList, ...list]
+            this.fileList = list
         },
         // 全屏事件
         handleFullScreen() {
             let element = document.documentElement
-            if (element.requestFullscreen) {
-                element.requestFullscreen()
-            } else if (element.webkitRequestFullScreen) {
-                element.webkitRequestFullScreen()
-            } else if (element.mozRequestFullScreen) {
-                element.mozRequestFullScreen()
-            } else if (element.msRequestFullscreen) {
-                // IE11
-                element.msRequestFullscreen()
+            if (this.isScreenFull) {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen()
+                } else if (document.webkitCancelFullScreen) {
+                    document.webkitCancelFullScreen()
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen()
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen()
+                }
+                this.changeSetting({ key: 'isScreenFull', value: false })
+                window.removeEventListener('fullscreenchange', this.fullscreenchangeHandler)
+            } else {
+                if (element.requestFullscreen) {
+                    element.requestFullscreen()
+                } else if (element.webkitRequestFullScreen) {
+                    element.webkitRequestFullScreen()
+                } else if (element.mozRequestFullScreen) {
+                    element.mozRequestFullScreen()
+                } else if (element.msRequestFullscreen) {
+                    // IE11
+                    element.msRequestFullscreen()
+                }
+                this.changeSetting({ key: 'isScreenFull', value: true })
+                window.addEventListener('fullscreenchange', this.fullscreenchangeHandler)
             }
-            window.addEventListener('fullscreenchange', this.fullscreenchangeHandler)
-            this.changeSetting({ key: 'isScreenFull', value: true })
         },
         // 退出全屏事件监听
         fullscreenchangeHandler() {
@@ -68,8 +89,34 @@ export default {
 
 <style lang="scss" scoped>
 .photo-wall-container {
-    height: 1000px;
+    height: 100%;
     width: 100%;
+    position: relative;
+
+    .btn-groups {
+        position: fixed;
+        top: 70px;
+        right: 30px;
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.5);
+        width: 100px;
+        border-radius: 6px;
+        z-index: 10;
+
+        &-screenfull {
+            top: 10px;
+        }
+
+        .btn {
+            font-size: 20px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .upload-btn {
+            margin-right: 20px;
+        }
+    }
 
     .photo-list {
         position: relative;
