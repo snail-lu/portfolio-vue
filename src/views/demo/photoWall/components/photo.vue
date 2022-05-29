@@ -7,6 +7,7 @@
         :parent="true"
         class-name="my-photo"
     >
+        <div class="close-icon" title="删除" @click="onDelete">×</div>
         <img class="pic" :src="src" />
     </vue-draggable-resizable>
 </template>
@@ -39,6 +40,9 @@ export default {
         onDrag(x, y) {
             this.x = x
             this.y = y
+        },
+        onDelete() {
+            this.$emit('onDelete')
         }
     }
 }
@@ -49,6 +53,22 @@ export default {
     background-color: #fff;
     padding: 20px;
     position: absolute;
+
+    &:hover {
+        .close-icon {
+            display: block;
+        }
+    }
+
+    .close-icon {
+        display: none;
+        position: absolute;
+        top: 2px;
+        right: 4px;
+        cursor: pointer;
+        font-size: 18px;
+        color: #999;
+    }
 
     .pic {
         width: 100%;

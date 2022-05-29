@@ -12,7 +12,12 @@
         </div>
 
         <div class="photo-list">
-            <photo :src="file.raw | imgUrlFilter" v-for="file in fileList" :key="file.uid" />
+            <photo
+                :src="file.raw | imgUrlFilter"
+                v-for="file in fileList"
+                :key="file.uid"
+                @onDelete="onDelete(file.uid)"
+            />
         </div>
     </div>
 </template>
@@ -82,6 +87,11 @@ export default {
             if (!isFull) {
                 this.changeSetting({ key: 'isScreenFull', value: false })
             }
+        },
+        // 删除
+        onDelete(uid) {
+            const fileIndex = this.fileList.findIndex((item) => item.uid === uid)
+            this.fileList.splice(fileIndex, 1)
         }
     }
 }
