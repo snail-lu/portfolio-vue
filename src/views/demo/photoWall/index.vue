@@ -11,7 +11,19 @@
             ></i>
         </div>
 
-        <div class="photo-list">
+        <div class="photo-list" v-if="fileList.length == 0">
+            <photo
+                :src="file.src"
+                v-for="file in exampleList"
+                :key="file.uid"
+                :start-x="file.startX"
+                :start-y="file.startY"
+                :initial-width="file.initialWidth"
+                :initial-height="file.initialHeight"
+                @onDelete="onDelete(file.uid)"
+            />
+        </div>
+        <div class="photo-list" v-else>
             <photo
                 :src="file.raw | imgUrlFilter"
                 v-for="file in fileList"
@@ -25,6 +37,9 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import Photo from './components/photo'
+import photo_1 from '../../../assets/images/photo-1.jpg'
+import photo_2 from '../../../assets/images/photo-2.jpg'
+import photo_3 from '../../../assets/images/photo-3.jpg'
 export default {
     components: {
         Photo
@@ -36,7 +51,33 @@ export default {
     },
     data() {
         return {
-            fileList: []
+            fileList: [],
+            exampleList: [
+                {
+                    uid: 1,
+                    src: photo_1,
+                    initialWidth: 577,
+                    initialHeight: 346,
+                    startX: 430,
+                    startY: 400
+                },
+                {
+                    uid: 2,
+                    src: photo_2,
+                    initialWidth: 426,
+                    initialHeight: 258,
+                    startX: 830,
+                    startY: 106
+                },
+                {
+                    uid: 3,
+                    src: photo_3,
+                    initialWidth: 486,
+                    initialHeight: 290,
+                    startX: 147,
+                    startY: 78
+                }
+            ]
         }
     },
     computed: {
@@ -90,8 +131,14 @@ export default {
         },
         // 删除
         onDelete(uid) {
-            const fileIndex = this.fileList.findIndex((item) => item.uid === uid)
-            this.fileList.splice(fileIndex, 1)
+            let fileIndex = -1
+            if (this.fileList.length > 0) {
+                fileIndex = this.fileList.findIndex((item) => item.uid === uid)
+                this.fileList.splice(fileIndex, 1)
+            } else {
+                fileIndex = this.exampleList.findIndex((item) => item.uid === uid)
+                this.exampleList.splice(fileIndex, 1)
+            }
         }
     }
 }

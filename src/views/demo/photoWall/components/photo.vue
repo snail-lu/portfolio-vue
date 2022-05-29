@@ -1,5 +1,7 @@
 <template>
     <vue-draggable-resizable
+        :x="x"
+        :y="y"
         :w="width"
         :h="height"
         @dragging="onDrag"
@@ -8,7 +10,7 @@
         class-name="my-photo"
     >
         <div class="close-icon" title="删除" @click="onDelete">×</div>
-        <img class="pic" :src="src" />
+        <img class="pic" :src="src" @load="onImgLoad" />
     </vue-draggable-resizable>
 </template>
 
@@ -20,14 +22,33 @@ export default {
         VueDraggableResizable
     },
     props: {
-        src: ''
+        src: {
+            type: String,
+            default: ''
+        },
+        startX: {
+            type: Number,
+            default: 0
+        },
+        startY: {
+            type: Number,
+            default: 0
+        },
+        initialWidth: {
+            type: Number,
+            default: 200
+        },
+        initialHeight: {
+            type: Number,
+            default: 200
+        }
     },
     data() {
         return {
-            x: 0,
-            y: 0,
-            width: 200,
-            height: 300
+            x: this.startX,
+            y: this.startY,
+            width: this.initialWidth,
+            height: this.initialHeight
         }
     },
     methods: {
@@ -43,6 +64,9 @@ export default {
         },
         onDelete() {
             this.$emit('onDelete')
+        },
+        onImgLoad(data) {
+            console.log(data, 'img data')
         }
     }
 }
@@ -72,6 +96,7 @@ export default {
 
     .pic {
         width: 100%;
+        object-fit: contain;
         height: 100%;
     }
 }
