@@ -99,6 +99,13 @@ export default {
             meta: {
                 title: '照片墙'
             }
+        },
+        {
+            path: 'dynamic-chart',
+            component: () => import('../views/demo/dynamicChart/index.vue'),
+            meta: {
+                title: '动态图表'
+            }
         }
     ]
 }
