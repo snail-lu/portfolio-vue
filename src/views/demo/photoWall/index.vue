@@ -35,12 +35,13 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
 import Photo from './components/photo'
 import photo_1 from '../../../assets/images/photo-1.jpg'
 import photo_2 from '../../../assets/images/photo-2.jpg'
 import photo_3 from '../../../assets/images/photo-3.jpg'
+import fullScreenMixins from '@/mixins/fullScreenMixins'
 export default {
+    mixins: [fullScreenMixins],
     components: {
         Photo
     },
@@ -80,54 +81,9 @@ export default {
             ]
         }
     },
-    computed: {
-        ...mapState('settings', ['isScreenFull'])
-    },
-    destroyed() {
-        window.removeEventListener('fullscreenchange', this.fullscreenchangeHandler)
-    },
     methods: {
-        ...mapActions('settings', ['changeSetting']),
         onUploadFile(file, list) {
-            const { fileList } = this
             this.fileList = list
-        },
-        // 全屏事件
-        handleFullScreen() {
-            let element = document.documentElement
-            if (this.isScreenFull) {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen()
-                } else if (document.webkitCancelFullScreen) {
-                    document.webkitCancelFullScreen()
-                } else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen()
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen()
-                }
-                this.changeSetting({ key: 'isScreenFull', value: false })
-                window.removeEventListener('fullscreenchange', this.fullscreenchangeHandler)
-            } else {
-                if (element.requestFullscreen) {
-                    element.requestFullscreen()
-                } else if (element.webkitRequestFullScreen) {
-                    element.webkitRequestFullScreen()
-                } else if (element.mozRequestFullScreen) {
-                    element.mozRequestFullScreen()
-                } else if (element.msRequestFullscreen) {
-                    // IE11
-                    element.msRequestFullscreen()
-                }
-                this.changeSetting({ key: 'isScreenFull', value: true })
-                window.addEventListener('fullscreenchange', this.fullscreenchangeHandler)
-            }
-        },
-        // 退出全屏事件监听
-        fullscreenchangeHandler() {
-            const isFull = document.fullscreenElement
-            if (!isFull) {
-                this.changeSetting({ key: 'isScreenFull', value: false })
-            }
         },
         // 删除
         onDelete(uid) {
