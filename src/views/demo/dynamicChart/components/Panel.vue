@@ -1,7 +1,7 @@
 <template>
-    <div class="panel-box">
-        <div class="title">{{ title }}</div>
-        <div class="content">
+    <div class="panel">
+        <div class="panel-title">{{ title }}</div>
+        <div class="panel-content">
             <slot></slot>
         </div>
     </div>
@@ -16,16 +16,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.panel-box {
-    .title {
+.panel {
+    width: 100%;
+    margin-bottom: 50px;
+    &-title {
         color: #fff;
-        font-size: 14px;
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 10px;
     }
-    .content {
-        width: 200px;
-        height: 200px;
-        color: #5f8bb5;
+    &-content {
+        width: 100%;
         background-color: rgba(95, 139, 181, 0.5);
+        border-radius: 6px;
+        padding: 20px;
+        color: #fff;
     }
 }
 </style>
