@@ -2,7 +2,14 @@
     <div class="dynamic-charts-container">
         <div class="title">
             实时销售数据可视化平台
-            <div class="date-time">{{ time }}</div>
+            <div class="date-time">
+                {{ time }}
+                <i
+                    class="el-icon-full-screen"
+                    :title="isScreenFull ? '退出全屏' : '全屏'"
+                    @click="handleFullScreen"
+                ></i>
+            </div>
         </div>
         <div class="content flex-box">
             <div>
@@ -24,7 +31,9 @@
 <script>
 import { getNowTime } from '@/utils/date'
 import Panel from './components/Panel.vue'
+import fullScreenMixins from '@/mixins/fullScreenMixins'
 export default {
+    mixins: [fullScreenMixins],
     components: {
         Panel
     },
