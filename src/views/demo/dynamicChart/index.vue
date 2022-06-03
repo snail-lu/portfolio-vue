@@ -24,7 +24,9 @@
                             <span class="amount">423432</span>
                         </div>
                     </panel>
-                    <panel title="销售额排名"> </panel>
+                    <panel title="销售额排名">
+                        <ranking-chart />
+                    </panel>
                 </div>
             </el-col>
             <el-col :xs="24" :sm="24" :md="12" :lg="12">
@@ -54,11 +56,13 @@
 <script>
 import { getNowTime } from '@/utils/date'
 import Panel from './components/Panel.vue'
+import RankingChart from '@/components/Charts/RankingChart.vue'
 import fullScreenMixins from '@/mixins/fullScreenMixins'
 export default {
     mixins: [fullScreenMixins],
     components: {
-        Panel
+        Panel,
+        RankingChart
     },
     data() {
         return {
@@ -89,7 +93,7 @@ export default {
 .dynamic-charts-container {
     width: 100%;
     overflow-x: hidden;
-    height: 100vh;
+    // height: 100vh;
     background: url('../../../assets/images/charts_bg.jpeg') top center no-repeat;
 }
 
