@@ -1,7 +1,7 @@
 <template>
     <div class="dynamic-charts-container">
         <div class="title">
-            <!-- 实时销售数据可视化平台 -->
+            实时销售数据可视化平台
             <div class="date-time">
                 {{ time }}
                 <i class="el-icon-full-screen" :title="isScreenFull ? '退出全屏' : '全屏'" @click="handleFullScreen"></i>
@@ -32,20 +32,20 @@
             <el-col :xs="24" :sm="24" :md="12" :lg="12">
                 <div class="grid-content">
                     <panel>
-                        <div class="nationwide-box"></div>
+                        <map-chart />
                     </panel>
                     <panel title="销售额统计">
-                        <div class="nationwide-box"></div>
+                        <area-chart />
                     </panel>
                 </div>
             </el-col>
             <el-col :xs="24" :sm="24" :md="6" :lg="6">
                 <div class="grid-content">
-                    <panel title="全国顾客实时总数">
-                        <div class="nationwide-box"></div>
+                    <panel title="热销单品分布">
+                        <pie-chart />
                     </panel>
                     <panel title="店铺库存">
-                        <div class="nationwide-box"></div>
+                        <bar-chart />
                     </panel>
                 </div>
             </el-col>
@@ -57,12 +57,20 @@
 import { getNowTime } from '@/utils/date'
 import Panel from './components/Panel.vue'
 import RankingChart from '@/components/Charts/RankingChart.vue'
+import AreaChart from '@/components/Charts/AreaChart.vue'
+import PieChart from '@/components/Charts/PieChart.vue'
+import BarChart from '@/components/Charts/BarChart.vue'
+import MapChart from '@/components/Charts/MapChart.vue'
 import fullScreenMixins from '@/mixins/fullScreenMixins'
 export default {
     mixins: [fullScreenMixins],
     components: {
         Panel,
-        RankingChart
+        RankingChart,
+        AreaChart,
+        PieChart,
+        BarChart,
+        MapChart
     },
     data() {
         return {
