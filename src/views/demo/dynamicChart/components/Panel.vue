@@ -27,10 +27,15 @@ export default {
     }
     &-content {
         width: 100%;
-        background-color: rgba(95, 139, 181, 0.5);
         border-radius: 6px;
         padding: 20px;
         color: #fff;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        box-sizing: border-box;
+        background: rgba(75, 139, 247, 0.05);
+        box-shadow: inset 1px 1px 16px #7ccef4;
     }
 }
 </style>
