@@ -101,6 +101,11 @@ export default {
                 }
                 let startYear = years[this.startIndex]
                 option = {
+                    toolbox: {
+                        feature: {
+                            saveAsImage: {}
+                        }
+                    },
                     grid: {
                         top: 10,
                         bottom: 30,
