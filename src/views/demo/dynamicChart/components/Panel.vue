@@ -34,18 +34,19 @@ export default {
 .panel {
     &-title {
         color: #fff;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
         // margin-bottom: 10px;
         height: 20px;
         line-height: 20px;
+        margin-bottom: 8px;
     }
     &-content {
         width: 100%;
         border-radius: 6px;
         padding: 20px;
         color: #fff;
-        height: calc(100% - 20px);
+        height: calc(100% - 28px);
         position: relative;
         box-sizing: border-box;
         overflow: hidden;
