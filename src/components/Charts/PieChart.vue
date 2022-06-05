@@ -19,16 +19,23 @@ export default {
         },
         height: {
             type: String,
-            default: '300px'
+            default: '100%'
         }
     },
     mounted() {
         this.initCharts()
     },
+    beforeMount() {
+        window.removeEventListener('resize', this.resizeCharts)
+    },
     methods: {
         initCharts() {
             this.chart = echarts.init(this.$el)
             this.setOptions()
+            window.addEventListener('resize', this.resizeCharts)
+        },
+        resizeCharts() {
+            this.chart.resize()
         },
         setOptions() {
             const option = {

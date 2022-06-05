@@ -18,7 +18,7 @@ export default {
         },
         height: {
             type: String,
-            default: '550px'
+            default: '100%'
         }
     },
     data() {
@@ -33,10 +33,17 @@ export default {
     mounted() {
         this.initCharts()
     },
+    beforeMount() {
+        window.removeEventListener('resize', this.resizeCharts)
+    },
     methods: {
         initCharts() {
             this.chart = echarts.init(this.$el)
             this.setOptions()
+            window.addEventListener('resize', this.resizeCharts)
+        },
+        resizeCharts() {
+            this.chart.resize()
         },
         getFlag(countryName) {
             if (!countryName) {

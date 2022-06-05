@@ -103,20 +103,23 @@ export default {
     height: 100%;
     // overflow: hidden;
     overflow-x: hidden;
-    background: url('../../../assets/images/charts_bg.jpeg') top center no-repeat;
+    background: url('../../../assets/images/charts_bg.jpeg') no-repeat;
+    background-position: center center;
+    background-size: cover;
 
     .page-title {
-        background: url('../../../assets/images/charts_nav.png') top center no-repeat;
+        background: url('../../../assets/images/charts_nav.png') center center no-repeat;
         text-align: center;
         height: 80px;
         line-height: 80px;
         font-size: 20px;
         color: #fff;
         position: relative;
+        margin-bottom: 5px;
 
         .date-time {
             position: absolute;
-            top: 10px;
+            top: 30px;
             right: 20px;
             line-height: 1;
             font-size: 16px;
@@ -124,7 +127,7 @@ export default {
     }
 
     .page-content {
-        height: calc(100% - 80px);
+        height: calc(100% - 85px);
 
         &-col {
             height: 100%;
