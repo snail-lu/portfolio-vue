@@ -114,9 +114,9 @@ export default {
                         }
                     },
                     grid: {
-                        top: 10,
+                        top: 40,
                         bottom: 30,
-                        left: 0,
+                        left: 20,
                         right: 40
                     },
                     xAxis: {
@@ -125,6 +125,9 @@ export default {
                             formatter: function (n) {
                                 return Math.round(n) + ''
                             }
+                        },
+                        splitLine: {
+                            show: false
                         }
                     },
                     dataset: {
