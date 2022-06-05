@@ -1,7 +1,7 @@
 <template>
     <div class="dynamic-charts-container">
         <div class="page-title">
-            实时销售数据可视化平台
+            全国销售数据可视化平台
             <div class="date-time">
                 {{ time }}
                 <i class="el-icon-full-screen" :title="isScreenFull ? '退出全屏' : '全屏'" @click="handleFullScreen"></i>
@@ -10,7 +10,7 @@
         <el-row :gutter="10" class="page-content">
             <el-col :xs="24" :sm="24" :md="6" :lg="6" class="page-content-col">
                 <div class="grid-content flex-box-column flex-h-between">
-                    <panel title="销售额" height="30%">
+                    <panel title="销售额" height="40%">
                         <div class="amount-item flex-box flex-h-between flex-v-center">
                             <span class="label">全年</span>
                             <span class="amount">1444321434</span>
@@ -24,27 +24,27 @@
                             <span class="amount">423432</span>
                         </div>
                     </panel>
-                    <panel title="销售额排名" height="68%">
+                    <panel title="销售额排名" height="58%">
                         <ranking-chart />
                     </panel>
                 </div>
             </el-col>
             <el-col :xs="24" :sm="24" :md="12" :lg="12" class="page-content-col">
                 <div class="grid-content flex-box-column flex-h-between">
-                    <panel height="65%" :showBgColor="false">
+                    <panel :showBgColor="false">
                         <map-chart />
                     </panel>
-                    <panel title="销售额统计" height="33%">
+                    <!-- <panel title="销售额统计" height="33%">
                         <area-chart />
-                    </panel>
+                    </panel> -->
                 </div>
             </el-col>
             <el-col :xs="24" :sm="24" :md="6" :lg="6" class="page-content-col">
                 <div class="grid-content flex-box-column flex-h-between">
-                    <panel title="热销单品分布" height="30%">
+                    <panel title="热销单品分布" height="40%">
                         <pie-chart />
                     </panel>
-                    <panel title="店铺库存" height="68%">
+                    <panel title="店铺库存" height="58%">
                         <bar-chart />
                     </panel>
                 </div>
@@ -108,7 +108,7 @@ export default {
     background-size: cover;
 
     .page-title {
-        background: url('../../../assets/images/charts_nav.png') center center no-repeat;
+        background: url('../../../assets/images/charts_nav.png') bottom center no-repeat;
         text-align: center;
         height: 80px;
         line-height: 80px;
@@ -119,10 +119,13 @@ export default {
 
         .date-time {
             position: absolute;
-            top: 30px;
+            top: 4px;
             right: 20px;
             line-height: 1;
-            font-size: 16px;
+            font-size: 14px;
+        }
+        .el-icon-full-screen {
+            cursor: pointer;
         }
     }
 
@@ -136,7 +139,10 @@ export default {
 }
 
 .grid-content {
+    width: 100%;
     height: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
     .amount-item {
         margin-bottom: 20px;
         &:last-child {
