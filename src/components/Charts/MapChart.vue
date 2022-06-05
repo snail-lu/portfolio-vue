@@ -83,11 +83,6 @@ export default {
                 item.push(obj)
             })
 
-            // item.map(function (i) {
-            //     i.name = i.area
-            //     i.value = i.sales //这个参数决定颜色深浅
-            //     return i
-            // })
             this.loadMap(item, 'China')
         },
         loadMap(item, name) {

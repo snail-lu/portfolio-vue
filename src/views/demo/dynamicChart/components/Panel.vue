@@ -1,7 +1,7 @@
 <template>
-    <div class="panel">
-        <div class="panel-title">{{ title }}</div>
-        <div class="panel-content">
+    <div class="panel" :style="{ width, height }">
+        <div class="panel-title" v-if="title">{{ title }}</div>
+        <div class="panel-content" :class="{ 'panel-content-with-bg': showBgColor }">
             <slot></slot>
         </div>
     </div>
@@ -10,32 +10,50 @@
 <script>
 export default {
     props: {
-        title: ''
+        title: {
+            type: String,
+            default: ''
+        },
+        width: {
+            type: String,
+            default: '100%'
+        },
+        height: {
+            type: String,
+            default: '100%'
+        },
+        showBgColor: {
+            type: Boolean,
+            default: true
+        }
     }
 }
 </script>
 
 <style lang="scss" scoped>
 .panel {
-    width: 100%;
-    margin-bottom: 50px;
     &-title {
         color: #fff;
-        font-size: 22px;
+        font-size: 18px;
         font-weight: bold;
-        margin-bottom: 10px;
+        // margin-bottom: 10px;
+        height: 20px;
+        line-height: 20px;
     }
     &-content {
         width: 100%;
         border-radius: 6px;
         padding: 20px;
         color: #fff;
-        width: 100%;
-        height: 100%;
+        height: calc(100% - 20px);
         position: relative;
         box-sizing: border-box;
-        background: rgba(75, 139, 247, 0.05);
-        box-shadow: inset 1px 1px 16px #7ccef4;
+        overflow: hidden;
+
+        &-with-bg {
+            background: rgba(75, 139, 247, 0.05);
+            box-shadow: inset 1px 1px 16px #7ccef4;
+        }
     }
 }
 </style>

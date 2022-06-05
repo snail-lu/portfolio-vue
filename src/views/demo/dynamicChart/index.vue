@@ -1,19 +1,19 @@
 <template>
     <div class="dynamic-charts-container">
-        <div class="title">
+        <div class="page-title">
             实时销售数据可视化平台
             <div class="date-time">
                 {{ time }}
                 <i class="el-icon-full-screen" :title="isScreenFull ? '退出全屏' : '全屏'" @click="handleFullScreen"></i>
             </div>
         </div>
-        <el-row :gutter="10">
-            <el-col :xs="24" :sm="24" :md="6" :lg="6">
-                <div class="grid-content">
-                    <panel title="销售额">
+        <el-row :gutter="10" class="page-content">
+            <el-col :xs="24" :sm="24" :md="6" :lg="6" class="page-content-col">
+                <div class="grid-content flex-box-column flex-h-between">
+                    <panel title="销售额" height="30%">
                         <div class="amount-item flex-box flex-h-between flex-v-center">
                             <span class="label">全年</span>
-                            <span class="amount">143244321434</span>
+                            <span class="amount">1444321434</span>
                         </div>
                         <div class="amount-item flex-box flex-h-between flex-v-center">
                             <span class="label">本月</span>
@@ -24,27 +24,27 @@
                             <span class="amount">423432</span>
                         </div>
                     </panel>
-                    <panel title="销售额排名">
+                    <panel title="销售额排名" height="68%">
                         <ranking-chart />
                     </panel>
                 </div>
             </el-col>
-            <el-col :xs="24" :sm="24" :md="12" :lg="12">
-                <div class="grid-content">
-                    <panel>
+            <el-col :xs="24" :sm="24" :md="12" :lg="12" class="page-content-col">
+                <div class="grid-content flex-box-column flex-h-between">
+                    <panel height="65%" :showBgColor="false">
                         <map-chart />
                     </panel>
-                    <panel title="销售额统计">
+                    <panel title="销售额统计" height="33%">
                         <area-chart />
                     </panel>
                 </div>
             </el-col>
-            <el-col :xs="24" :sm="24" :md="6" :lg="6">
-                <div class="grid-content">
-                    <panel title="热销单品分布">
+            <el-col :xs="24" :sm="24" :md="6" :lg="6" class="page-content-col">
+                <div class="grid-content flex-box-column flex-h-between">
+                    <panel title="热销单品分布" height="30%">
                         <pie-chart />
                     </panel>
-                    <panel title="店铺库存">
+                    <panel title="店铺库存" height="68%">
                         <bar-chart />
                     </panel>
                 </div>
@@ -100,30 +100,40 @@ export default {
 <style lang="scss" scoped>
 .dynamic-charts-container {
     width: 100%;
+    height: 100%;
+    // overflow: hidden;
     overflow-x: hidden;
-    // height: 100vh;
     background: url('../../../assets/images/charts_bg.jpeg') top center no-repeat;
-}
 
-.title {
-    background: url('../../../assets/images/charts_nav.png') top center no-repeat;
-    text-align: center;
-    height: 80px;
-    line-height: 80px;
-    font-size: 20px;
-    color: #fff;
-    position: relative;
+    .page-title {
+        background: url('../../../assets/images/charts_nav.png') top center no-repeat;
+        text-align: center;
+        height: 80px;
+        line-height: 80px;
+        font-size: 20px;
+        color: #fff;
+        position: relative;
 
-    .date-time {
-        position: absolute;
-        top: 10px;
-        right: 20px;
-        line-height: 1;
-        font-size: 16px;
+        .date-time {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            line-height: 1;
+            font-size: 16px;
+        }
+    }
+
+    .page-content {
+        height: calc(100% - 80px);
+
+        &-col {
+            height: 100%;
+        }
     }
 }
 
 .grid-content {
+    height: 100%;
     .amount-item {
         margin-bottom: 20px;
         &:last-child {
