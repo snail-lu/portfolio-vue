@@ -45,39 +45,29 @@ export default {
         resizeCharts() {
             this.chart.resize()
         },
-        getFlag(countryName) {
-            if (!countryName) {
-                return ''
-            }
-            return (
-                flags.find(function (item) {
-                    return item.name === countryName
-                }) || {}
-            ).emoji
-        },
         setOptions() {
             var option
             const dimension = 0
             const countryColors = {
-                Australia: '#00008b',
-                Canada: '#f00',
-                China: '#ffde00',
-                Cuba: '#002a8f',
-                Finland: '#003580',
-                France: '#ed2939',
-                Germany: '#000',
-                Iceland: '#003897',
-                India: '#f93',
-                Japan: '#bc002d',
-                'North Korea': '#024fa2',
-                'South Korea': '#000',
-                'New Zealand': '#00247d',
-                Norway: '#ef2b2d',
-                Poland: '#dc143c',
-                Russia: '#d52b1e',
-                Turkey: '#e30a17',
-                'United Kingdom': '#00247d',
-                'United States': '#b22234'
+                Australia: '#FF6666',
+                Canada: '#FFFF00',
+                China: '#006699',
+                Cuba: '#FF9966',
+                Finland: '#0066CC',
+                France: '#339933',
+                Germany: '#99CC33',
+                Iceland: '#99CCCC',
+                India: '#333399',
+                Japan: '#CCCC00',
+                'North Korea': '#990066',
+                'South Korea': '#FF9900',
+                'New Zealand': '#009966',
+                Norway: '#FF6600',
+                Poland: '#663366',
+                Russia: '#CCCC99',
+                Turkey: '#993366',
+                'United Kingdom': '#9999CC',
+                'United States': '#CC99CC'
             }
             const promise1 = this.req({
                 url: 'https://fastly.jsdelivr.net/npm/emoji-flags@1.3.0/data.json',
@@ -96,16 +86,6 @@ export default {
                         years.push(data[i][4])
                     }
                 }
-                function getFlag(countryName) {
-                    if (!countryName) {
-                        return ''
-                    }
-                    return (
-                        flags.find(function (item) {
-                            return item.name === countryName
-                        }) || {}
-                    ).emoji
-                }
                 let startYear = years[this.startIndex]
                 option = {
                     toolbox: {
@@ -117,16 +97,14 @@ export default {
                         top: 40,
                         bottom: 30,
                         left: 20,
-                        right: 40
+                        right: 60
                     },
                     xAxis: {
                         max: 'dataMax',
-                        axisLabel: {
-                            formatter: function (n) {
-                                return Math.round(n) + ''
-                            }
-                        },
                         splitLine: {
+                            show: false
+                        },
+                        axisLabel: {
                             show: false
                         }
                     },
@@ -138,19 +116,15 @@ export default {
                     yAxis: {
                         type: 'category',
                         inverse: true,
-                        max: 10,
+                        max: 4,
                         axisLabel: {
-                            show: false,
-                            fontSize: 14,
-                            formatter: function (value) {
-                                return value + '{flag|' + getFlag(value) + '}'
-                            },
-                            rich: {
-                                flag: {
-                                    fontSize: 25,
-                                    padding: 5
-                                }
-                            }
+                            show: false
+                        },
+                        axisTick: {
+                            show: false
+                        },
+                        axisLine: {
+                            show: false
                         },
                         animationDuration: 300,
                         animationDurationUpdate: 300
@@ -161,6 +135,7 @@ export default {
                             seriesLayoutBy: 'column',
                             type: 'bar',
                             itemStyle: {
+                                borderRadius: [5, 5, 5, 5],
                                 color: function (param) {
                                     return countryColors[param.value[3]] || '#5470c6'
                                 }
@@ -174,7 +149,8 @@ export default {
                                 precision: 1,
                                 position: 'right',
                                 valueAnimation: true,
-                                fontFamily: 'monospace'
+                                fontFamily: 'sans-serif',
+                                color: '#000'
                             }
                         }
                     ],
@@ -182,22 +158,22 @@ export default {
                     animationDuration: 0,
                     animationDurationUpdate: this.updateFrequency,
                     animationEasing: 'linear',
-                    animationEasingUpdate: 'linear',
-                    graphic: {
-                        elements: [
-                            {
-                                type: 'text',
-                                right: 160,
-                                bottom: 60,
-                                style: {
-                                    text: startYear,
-                                    font: 'bolder 80px monospace',
-                                    fill: 'rgba(100, 100, 100, 0.25)'
-                                },
-                                z: 100
-                            }
-                        ]
-                    }
+                    animationEasingUpdate: 'linear'
+                    // graphic: {
+                    //     elements: [
+                    //         {
+                    //             type: 'text',
+                    //             right: 160,
+                    //             bottom: 60,
+                    //             style: {
+                    //                 text: startYear,
+                    //                 font: 'bolder 80px monospace',
+                    //                 fill: 'rgba(100, 100, 100, 1)'
+                    //             },
+                    //             z: 100
+                    //         }
+                    //     ]
+                    // }
                 }
                 // console.log(option);
                 this.option = option
@@ -221,7 +197,7 @@ export default {
                 return d[4] === year
             })
             option.series[0].data = source
-            option.graphic.elements[0].style.text = year
+            // option.graphic.elements[0].style.text = year
             this.chart.setOption(option)
         }
     }
