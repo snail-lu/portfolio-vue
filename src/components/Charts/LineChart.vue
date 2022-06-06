@@ -38,19 +38,19 @@ export default {
         },
         setOptions() {
             function randomData() {
-                now = new Date(+now + oneDay)
+                now = new Date(+now + steps)
                 value = value + Math.random() * 21 - 10
                 return {
-                    // name: now.toString(),
-                    name: echarts.number.parseDate(now),
-                    value: [[now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'), Math.round(value)]
+                    name: now.toString(),
+                    // value: [[now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'), Math.round(value)]
+                    value: [now, Math.round(value)]
                 }
             }
             let data = []
-            let now = new Date(2022, 9, 3)
-            let oneDay = 24 * 3600 * 1000
+            let now = new Date() - 60 * 1000
+            let steps = 1000
             let value = Math.random() * 1000
-            for (var i = 0; i < 1000; i++) {
+            for (var i = 0; i < 60; i++) {
                 data.push(randomData())
             }
             console.log(data, 'data')
@@ -74,7 +74,8 @@ export default {
                     },
                     axisLabel: {
                         show: true,
-                        formatter: '{MM}月'
+                        formatter: '{HH}:{mm}:{ss}',
+                        hideOverlap: true
                     }
                 },
                 yAxis: {
@@ -103,10 +104,8 @@ export default {
                 ]
             }
             setInterval(() => {
-                for (var i = 0; i < 5; i++) {
-                    data.shift()
-                    data.push(randomData())
-                }
+                data.shift()
+                data.push(randomData())
                 this.chart.setOption({
                     series: [
                         {
