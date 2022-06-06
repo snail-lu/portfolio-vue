@@ -41,11 +41,14 @@
             </el-col>
             <el-col :xs="24" :sm="24" :md="6" :lg="6" class="page-content-col">
                 <div class="grid-content flex-box-column flex-h-between">
-                    <panel title="热销单品分布" height="40%">
+                    <panel title="热销单品分布" height="32%">
                         <pie-chart />
                     </panel>
-                    <panel title="店铺库存" height="58%">
+                    <panel title="店铺库存" height="32%">
                         <bar-chart />
+                    </panel>
+                    <panel title="今日销售走势" height="32%">
+                        <line-chart />
                     </panel>
                 </div>
             </el-col>
@@ -57,7 +60,7 @@
 import { getNowTime } from '@/utils/date'
 import Panel from './components/Panel.vue'
 import RankingChart from '@/components/Charts/RankingChart.vue'
-import AreaChart from '@/components/Charts/AreaChart.vue'
+import LineChart from '@/components/Charts/LineChart.vue'
 import PieChart from '@/components/Charts/PieChart.vue'
 import BarChart from '@/components/Charts/BarChart.vue'
 import MapChart from '@/components/Charts/MapChart.vue'
@@ -67,7 +70,7 @@ export default {
     components: {
         Panel,
         RankingChart,
-        AreaChart,
+        LineChart,
         PieChart,
         BarChart,
         MapChart
