@@ -86,7 +86,6 @@ routes[0].children.push(demoRoutes)
 const createRouter = () =>
     new Router({
         mode: 'hash',
-        base: '/portfolio-vue',
         scrollBehavior: () => ({
             y: 0
         }),
