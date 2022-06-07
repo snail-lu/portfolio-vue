@@ -22,10 +22,15 @@ export default {
             default: '100%'
         }
     },
+    data() {
+        return {
+            chart: null
+        }
+    },
     mounted() {
         this.initCharts()
     },
-    beforeMount() {
+    beforeDestroy() {
         window.removeEventListener('resize', this.resizeCharts)
     },
     methods: {

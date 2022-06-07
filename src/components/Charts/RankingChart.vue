@@ -33,7 +33,7 @@ export default {
     mounted() {
         this.initCharts()
     },
-    beforeMount() {
+    beforeDestroy() {
         window.removeEventListener('resize', this.resizeCharts)
     },
     methods: {
