@@ -4,20 +4,15 @@
         <div class="user-info">
             <div class="nickname">Snail Lu</div>
             <div class="job">Web Developer</div>
-            <div class="desc">
-                A web developer based in Shanghai. Engaged in web development since 2019. Good at mini-program and web
-                development.
-            </div>
+            <div class="desc">A web developer based in Shanghai. Engaged in web development since 2019. Good at mini-program and web development.</div>
         </div>
         <div class="flex-box flex-h-between flex-v-center">
             <img src="@/assets/icons/email.svg" class="icon" title="email：snaillu@yeah.net" />
-            <a href="https://snail-lu.vercel.app" target="_blank">
-                <img src="@/assets/icons/blogs.svg" class="icon" title="blog"
-            /></a>
-            <a href="https://github.com/Snail-Lu" target="_blank">
+            <a href="https://snail-lu.vercel.app" target="_blank"> <img src="@/assets/icons/blogs.svg" class="icon" title="blog" /></a>
+            <a href="https://github.com/Snail-Lu/portfolio-vue" target="_blank">
                 <img src="@/assets/icons/gitHub.svg" class="icon" title="github" />
             </a>
-            <a href="https://snail-lu.github.io/portfolio-vue/" target="_blank">
+            <a href="https://portfolio-snail.vercel.app" target="_blank">
                 <img src="@/assets/icons/network.svg" class="icon" title="portfolio" />
             </a>
         </div>
