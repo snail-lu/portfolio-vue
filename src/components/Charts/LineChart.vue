@@ -78,6 +78,12 @@ export default {
                         hideOverlap: true
                     }
                 },
+                grid: {
+                    top: '10%',
+                    left: '10%',
+                    right: '5%',
+                    bottom: '15%'
+                },
                 yAxis: {
                     type: 'value',
                     boundaryGap: [0, '100%'],
