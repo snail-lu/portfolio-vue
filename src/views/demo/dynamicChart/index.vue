@@ -10,21 +10,26 @@
         <el-row :gutter="10" class="page-content">
             <el-col :xs="24" :sm="24" :md="6" :lg="6" class="page-content-col">
                 <div class="grid-content flex-box-column flex-h-between">
-                    <panel title="销售额" height="40%">
-                        <div class="amount-item flex-box flex-h-between flex-v-center">
-                            <span class="label">全年</span>
-                            <span class="amount">1444321434</span>
-                        </div>
-                        <div class="amount-item flex-box flex-h-between flex-v-center">
-                            <span class="label">本月</span>
-                            <span class="amount">324325343</span>
-                        </div>
-                        <div class="amount-item flex-box flex-h-between flex-v-center">
-                            <span class="label">今日</span>
-                            <span class="amount">423432</span>
+                    <panel title="销售额" height="32%">
+                        <div class="sales-amount-box flex-box-column flex-h-between">
+                            <div class="amount-item flex-box flex-h-between flex-v-center">
+                                <span class="label">全年</span>
+                                <span class="amount">1444321434</span>
+                            </div>
+                            <div class="amount-item flex-box flex-h-between flex-v-center">
+                                <span class="label">本月</span>
+                                <span class="amount">324325343</span>
+                            </div>
+                            <div class="amount-item flex-box flex-h-between flex-v-center">
+                                <span class="label">今日</span>
+                                <span class="amount">423432</span>
+                            </div>
                         </div>
                     </panel>
-                    <panel title="销售额排名" height="58%">
+                    <panel title="业绩完成比例" height="32%">
+                        <liquid-chart />
+                    </panel>
+                    <panel title="销售额排名" height="32%">
                         <ranking-chart />
                     </panel>
                 </div>
@@ -64,6 +69,7 @@ import LineChart from '@/components/Charts/LineChart.vue'
 import PieChart from '@/components/Charts/PieChart.vue'
 import BarChart from '@/components/Charts/BarChart.vue'
 import MapChart from '@/components/Charts/MapChart.vue'
+import LiquidChart from '@/components/Charts/LiquidChart.vue'
 import fullScreenMixins from '@/mixins/fullScreenMixins'
 export default {
     mixins: [fullScreenMixins],
@@ -73,7 +79,8 @@ export default {
         LineChart,
         PieChart,
         BarChart,
-        MapChart
+        MapChart,
+        LiquidChart
     },
     data() {
         return {
@@ -146,12 +153,11 @@ export default {
     height: 100%;
     padding: 0 20px;
     box-sizing: border-box;
-    .amount-item {
-        margin-bottom: 20px;
-        &:last-child {
-            margin-bottom: 0;
-        }
 
+    .sales-amount-box {
+        height: 100%;
+    }
+    .amount-item {
         .label {
             font-size: 20px;
         }
