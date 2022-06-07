@@ -1,7 +1,6 @@
 /* eslint-disable prefer-const */
 import router from './router'
 import NProgress from 'nprogress' // progress bar
-import Cookies from 'js-cookie'
 import 'nprogress/nprogress.css' // progress bar style
 import getPageTitle from '@/utils/get-page-title'
 

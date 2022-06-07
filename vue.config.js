@@ -1,4 +1,4 @@
-'use strict'
+const { defineConfig } = require('@vue/cli-service')
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
 
@@ -10,19 +10,15 @@ const name = defaultSettings.title || '' // page title
 
 const port = process.env.port || process.env.npm_config_port || 8080 // dev port
 
-module.exports = {
+module.exports = defineConfig({
     publicPath: '/',
-    outputDir: 'build',
+    outputDir: 'dist',
     assetsDir: 'static',
     lintOnSave: process.env.NODE_ENV === 'development',
     productionSourceMap: false,
     devServer: {
         port: port,
         open: false,
-        overlay: {
-            warnings: false,
-            errors: true
-        },
         proxy: {
             // 代理所有以‘/api’开头的网络请求
             '/api': {
@@ -46,20 +42,6 @@ module.exports = {
         config.plugins.delete('preload') // TODO: need test
         config.plugins.delete('prefetch') // TODO: need test
 
-        // set svg-sprite-loader
-        config.module.rule('svg').exclude.add(resolve('src/icons')).end()
-        config.module
-            .rule('icons')
-            .test(/\.svg$/)
-            .include.add(resolve('src/icons'))
-            .end()
-            .use('svg-sprite-loader')
-            .loader('svg-sprite-loader')
-            .options({
-                symbolId: 'icon-[name]'
-            })
-            .end()
-
         // set preserveWhitespace
         config.module
             .rule('vue')
@@ -76,16 +58,6 @@ module.exports = {
             .when(process.env.NODE_ENV === 'development', (config) => config.devtool('cheap-source-map'))
 
         config.when(process.env.NODE_ENV !== 'development', (config) => {
-            config
-                .plugin('ScriptExtHtmlWebpackPlugin')
-                .after('html')
-                .use('script-ext-html-webpack-plugin', [
-                    {
-                        // `runtime` must same as runtimeChunk name. default is `runtime`
-                        inline: /runtime\..*\.js$/
-                    }
-                ])
-                .end()
             config.optimization.splitChunks({
                 chunks: 'all',
                 cacheGroups: {
@@ -112,4 +84,4 @@ module.exports = {
             config.optimization.runtimeChunk('single')
         })
     }
-}
+})
