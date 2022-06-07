@@ -1,12 +1,21 @@
-# Vue Portfolio
+<h2 align="center">Vue Portfolio</h2>
+<p align="center">
+    <a href="https://portfolio-snail.vercel.app" target="_blank">线上地址</a>
+    ·
+    <a href="https://github.com/Snail-Lu/portfolio-vue" target="_blank">仓库地址</a>
+    ·
+    <a href="https://github.com/Snail-Lu/portfolio-vue/issues" target="_blank">建议意见</a>
+</p>
 
-基于 vue2 搭建的 demo 项目，项目中多为平时开发遇到的需求实现。[线上地址](https://snail-lu.github.io/portfolio-vue/)
+## 简介
+
+基于 `Vue2` 搭建的项目集，项目中多为平时开发遇到的需求或有趣的 demo。
 
 ## 基本使用
 
 ```bash
 // 克隆代码
-git clone git@github.com:Snail-Lu/portfolio-vue.git
+git clone https://github.com/Snail-Lu/portfolio-vue.git
 
 // 安装依赖
 cd portfolio-vue
