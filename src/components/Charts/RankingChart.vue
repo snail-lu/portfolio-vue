@@ -90,14 +90,16 @@ export default {
                 option = {
                     toolbox: {
                         feature: {
-                            saveAsImage: {}
+                            saveAsImage: {
+                                title: '保存为图片'
+                            }
                         }
                     },
                     grid: {
-                        top: 40,
-                        bottom: 30,
-                        left: 20,
-                        right: 60
+                        top: '18%',
+                        left: '5%',
+                        right: '20%',
+                        bottom: 0
                     },
                     xAxis: {
                         max: 'dataMax',

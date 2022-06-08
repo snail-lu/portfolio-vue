@@ -34,7 +34,7 @@ export default {
 .panel {
     &-title {
         color: #fff;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: bold;
         // margin-bottom: 10px;
         height: 20px;

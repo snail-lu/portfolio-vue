@@ -26,7 +26,7 @@
                             </div>
                         </div>
                     </panel>
-                    <panel title="业绩完成比例" height="32%">
+                    <panel title="销售目标完成度" height="32%">
                         <liquid-chart />
                     </panel>
                     <panel title="销售额排名" height="32%">
