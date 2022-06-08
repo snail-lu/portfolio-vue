@@ -14,15 +14,16 @@
                         <div class="sales-amount-box flex-box-column flex-h-between">
                             <div class="amount-item flex-box flex-h-between flex-v-center">
                                 <span class="label">全年</span>
-                                <span class="amount">1444321434</span>
+                                <!-- <span class="amount"></span> -->
+                                <countTo :startVal="432112" :endVal="43243214" :duration="1000" class="amount"></countTo>
                             </div>
                             <div class="amount-item flex-box flex-h-between flex-v-center">
                                 <span class="label">本月</span>
-                                <span class="amount">324325343</span>
+                                <countTo :startVal="432112" :endVal="43243214" :duration="1000" class="amount"></countTo>
                             </div>
                             <div class="amount-item flex-box flex-h-between flex-v-center">
                                 <span class="label">今日</span>
-                                <span class="amount">423432</span>
+                                <countTo :startVal="432112" :endVal="43243214" :duration="1000" class="amount"></countTo>
                             </div>
                         </div>
                     </panel>
@@ -71,6 +72,7 @@ import BarChart from '@/components/Charts/BarChart.vue'
 import MapChart from '@/components/Charts/MapChart.vue'
 import LiquidChart from '@/components/Charts/LiquidChart.vue'
 import fullScreenMixins from '@/mixins/fullScreenMixins'
+import countTo from 'vue-count-to'
 export default {
     mixins: [fullScreenMixins],
     components: {
@@ -80,7 +82,8 @@ export default {
         PieChart,
         BarChart,
         MapChart,
-        LiquidChart
+        LiquidChart,
+        countTo
     },
     data() {
         return {
@@ -159,12 +162,12 @@ export default {
     }
     .amount-item {
         .label {
-            font-size: 20px;
+            font-size: 16px;
         }
         .amount {
             position: relative;
             margin-right: 20px;
-            font-size: 30px;
+            font-size: 20px;
             line-height: 1;
 
             &::after {
