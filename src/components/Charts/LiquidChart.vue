@@ -40,16 +40,6 @@ export default {
         setOptions() {
             let value = 66 / 100
             const option = {
-                title: {
-                    text: '完成比例',
-                    left: 'center',
-                    top: 140,
-                    textStyle: {
-                        color: '#fff',
-                        fontWeight: 'normal',
-                        fontSize: 26
-                    }
-                },
                 series: [
                     {
                         type: 'liquidFill',
@@ -60,10 +50,10 @@ export default {
                         outline: {
                             // 轮廓设置
                             show: true,
-                            borderDistance: 10, // 边框与球中间间距
+                            borderDistance: 0, // 边框与球中间间距
                             itemStyle: {
-                                borderWidth: 2,
-                                borderColor: '#ECECF8'
+                                borderWidth: 5,
+                                borderColor: '#7ccef4'
                             }
                         },
                         itemStyle: {
@@ -73,9 +63,9 @@ export default {
                             }
                         },
                         backgroundStyle: {
-                            borderWidth: 5,
-                            borderColor: '#EEF2FD',
-                            shadowColor: '#008DCE',
+                            borderWidth: 0,
+                            // borderColor: '#EEF2FD',
+                            // shadowColor: '#008DCE',
                             color: '#001348'
                         },
                         label: {
