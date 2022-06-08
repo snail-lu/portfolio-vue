@@ -152,7 +152,7 @@ export default {
                                 position: 'right',
                                 valueAnimation: true,
                                 fontFamily: 'sans-serif',
-                                color: '#000'
+                                color: '#fff'
                             }
                         }
                     ],

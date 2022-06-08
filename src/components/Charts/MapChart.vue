@@ -102,8 +102,13 @@ export default {
                 echarts.registerMap(name, mapData)
                 var option = {
                     title: {
-                        text: '全国各省销售额',
-                        left: 'center'
+                        text: '全国销售额统计图',
+                        left: 'center',
+                        textStyle: {
+                            color: '#fff',
+                            fontWeight: 'normal'
+                        },
+                        top: '10%'
                     },
                     tooltip: {
                         formatter: function (params) {
@@ -131,7 +136,8 @@ export default {
                         show: true,
                         feature: {
                             saveAsImage: {
-                                pixelRatio: 4
+                                pixelRatio: 4,
+                                title: '保存为图片'
                             }
                         }
                     },
@@ -140,6 +146,7 @@ export default {
                             type: 'map',
                             mapType: name,
                             selectedMode: 'false', //是否允许选中多个区域
+                            roam: true, // 开启缩放和移动
                             label: {
                                 normal: {
                                     show: true
