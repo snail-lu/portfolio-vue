@@ -9,7 +9,7 @@
         </div>
         <el-row :gutter="10" class="page-content">
             <el-col :xs="24" :sm="24" :md="6" :lg="6" class="page-content-col">
-                <div class="grid-content flex-box-column flex-h-between">
+                <div class="grid-content flex-box-column flex-h-around">
                     <panel title="销售额" height="32%">
                         <div class="sales-amount-box flex-box-column flex-h-between">
                             <div class="amount-item flex-box flex-h-between flex-v-center">
@@ -35,7 +35,7 @@
                 </div>
             </el-col>
             <el-col :xs="24" :sm="24" :md="12" :lg="12" class="page-content-col">
-                <div class="grid-content flex-box-column flex-h-between">
+                <div class="grid-content flex-box-column flex-h-around">
                     <panel :showBgColor="false">
                         <map-chart />
                     </panel>
@@ -45,7 +45,7 @@
                 </div>
             </el-col>
             <el-col :xs="24" :sm="24" :md="6" :lg="6" class="page-content-col">
-                <div class="grid-content flex-box-column flex-h-between">
+                <div class="grid-content flex-box-column flex-h-around">
                     <panel title="热销单品分布" height="32%">
                         <pie-chart />
                     </panel>
