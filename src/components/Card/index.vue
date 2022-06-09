@@ -1,6 +1,8 @@
 <template>
     <div class="card flex-box-column flex-h-between" @click="pushUrl">
-        <div :class="`header bg-color${data.id}`"></div>
+        <div :class="`header bg-color${data.id}`">
+            <img class="cover" :src="data.coverUrl" />
+        </div>
         <div class="card-info">
             <div class="card-info-title">{{ data.title }}</div>
             <div class="card-info-desc">{{ data.desc }}</div>
@@ -32,11 +34,7 @@ export default {
 @for $i from 1 through 30 {
     .bg-color#{$i} {
         color: #fff;
-        background-image: linear-gradient(
-            to right,
-            rgba(random(255), random(255), random(255), 0.4),
-            rgba(random(255), random(255), random(255), 0.4)
-        );
+        background-image: linear-gradient(to right, rgba(random(255), random(255), random(255), 0.4), rgba(random(255), random(255), random(255), 0.4));
     }
 }
 .card {
@@ -49,6 +47,13 @@ export default {
 
     .header {
         height: 80%;
+        overflow: hidden;
+
+        .cover {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
     }
 
     &-info {
