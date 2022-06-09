@@ -47,7 +47,6 @@ export default {
             this.timer = setInterval(() => {
                 const { annualQuota, monthlyQuota, dailyQuota } = this
                 const n = randomData(1000, 10000)
-                console.log(n, 'n')
                 this.oldAnnualQuota = annualQuota
                 this.oldMonthlyQuota = monthlyQuota
                 this.oldDailyQuota = dailyQuota
