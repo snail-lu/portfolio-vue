@@ -36,6 +36,7 @@
         "@vue/cli-service": "~5.0.4",
         "@vue/test-utils": "1.0.0-beta.29",
         "autoprefixer": "^9.5.1",
+        "babel-plugin-component": "^1.1.1",
         "eslint": "^8.17.0",
         "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-vue": "^9.1.0",
