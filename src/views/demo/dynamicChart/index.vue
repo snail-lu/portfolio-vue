@@ -11,21 +11,7 @@
             <el-col :xs="24" :sm="24" :md="6" :lg="6" class="page-content-col">
                 <div class="grid-content flex-box-column flex-h-around">
                     <panel title="销售额" height="32%">
-                        <div class="sales-amount-box flex-box-column flex-h-between">
-                            <div class="amount-item flex-box flex-h-between flex-v-center">
-                                <span class="label">全年</span>
-                                <!-- <span class="amount"></span> -->
-                                <countTo :startVal="432112" :endVal="43243214" :duration="1000" class="amount"></countTo>
-                            </div>
-                            <div class="amount-item flex-box flex-h-between flex-v-center">
-                                <span class="label">本月</span>
-                                <countTo :startVal="432112" :endVal="43243214" :duration="1000" class="amount"></countTo>
-                            </div>
-                            <div class="amount-item flex-box flex-h-between flex-v-center">
-                                <span class="label">今日</span>
-                                <countTo :startVal="432112" :endVal="43243214" :duration="1000" class="amount"></countTo>
-                            </div>
-                        </div>
+                        <count-chart />
                     </panel>
                     <panel title="销售目标完成度" height="32%">
                         <liquid-chart />
@@ -40,9 +26,6 @@
                     <panel :showBgColor="false">
                         <map-chart />
                     </panel>
-                    <!-- <panel title="销售额统计" height="33%">
-                        <area-chart />
-                    </panel> -->
                 </div>
             </el-col>
             <el-col :xs="24" :sm="24" :md="6" :lg="6" class="page-content-col">
@@ -72,7 +55,7 @@ import BarChart from '@/components/Charts/BarChart.vue'
 import MapChart from '@/components/Charts/MapChart.vue'
 import LiquidChart from '@/components/Charts/LiquidChart.vue'
 import fullScreenMixins from '@/mixins/fullScreenMixins'
-import countTo from 'vue-count-to'
+import CountChart from '@/components/Charts/CountChart.vue'
 export default {
     mixins: [fullScreenMixins],
     components: {
@@ -83,7 +66,7 @@ export default {
         BarChart,
         MapChart,
         LiquidChart,
-        countTo
+        CountChart
     },
     data() {
         return {
@@ -156,30 +139,5 @@ export default {
     height: 100%;
     padding: 0 16px;
     box-sizing: border-box;
-
-    .sales-amount-box {
-        height: 100%;
-    }
-    .amount-item {
-        .label {
-            font-size: 16px;
-        }
-        .amount {
-            position: relative;
-            margin-right: 20px;
-            font-size: 20px;
-            line-height: 1;
-
-            &::after {
-                position: absolute;
-                content: '元';
-                display: block;
-                bottom: 3px;
-                right: -16px;
-                font-size: 10px;
-                line-height: 1;
-            }
-        }
-    }
 }
 </style>
