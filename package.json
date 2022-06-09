@@ -6,9 +6,9 @@
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "lint": "eslint --ext .js,.vue src",
-        "deploy": "gh-pages -d build",
+        "deploy": "gh-pages -d dist",
         "predeploy": "npm run build",
-        "preview": "node build/index.js --preview"
+        "preview": "node dist/index.js --preview"
     },
     "dependencies": {
         "axios": "0.18.1",
