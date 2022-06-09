@@ -1,4 +1,6 @@
 /**
+ * url参数部分转对象
+ *
  * @param {string} url
  * @returns {Object}
  */
