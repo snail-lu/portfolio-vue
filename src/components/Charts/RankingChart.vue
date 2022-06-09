@@ -70,11 +70,11 @@ export default {
                 'United States': '#CC99CC'
             }
             const promise1 = this.req({
-                url: 'https://fastly.jsdelivr.net/npm/emoji-flags@1.3.0/data.json',
+                url: '/rankingChart/data',
                 method: 'GET'
             })
             const promise2 = this.req({
-                url: 'https://fastly.jsdelivr.net/gh/apache/echarts-website@asf-site/examples/data/asset/data/life-expectancy-table.json',
+                url: '/rankingChart/life-expectancy-table',
                 method: 'GET'
             })
             Promise.all([promise1, promise2]).then((values) => {

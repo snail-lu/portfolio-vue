@@ -1,12 +1,9 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
-import router from '../router'
 // create an axios instance
-// 用户未登录
-const USER_NOT_LOGIN_ERROR = '0030072'
 
 const service = axios.create({
-    // baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+    baseURL: 'https://www.fastmock.site/mock/570d7b757920a8c74dd3d814aec1242d/portfolio-vue', // url = base url + request url
     // withCredentials: true, // send cookies when cross-domain requests
     timeout: 500000 // request timeout
 })
