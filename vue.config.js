@@ -1,6 +1,7 @@
 const { defineConfig } = require('@vue/cli-service')
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 function resolve(dir) {
     return path.join(__dirname, dir)
@@ -10,11 +11,13 @@ const name = defaultSettings.title || '' // page title
 
 const port = process.env.port || process.env.npm_config_port || 8080 // dev port
 
+const isDev = process.env.NODE_ENV === 'development' // 开发环境
+
 module.exports = defineConfig({
     publicPath: '/',
     outputDir: 'dist',
     assetsDir: 'static',
-    lintOnSave: process.env.NODE_ENV === 'development',
+    lintOnSave: isDev,
     productionSourceMap: false,
     devServer: {
         port: port,
@@ -55,9 +58,9 @@ module.exports = defineConfig({
 
         config
             // https://webpack.js.org/configuration/devtool/#development
-            .when(process.env.NODE_ENV === 'development', (config) => config.devtool('cheap-source-map'))
+            .when(isDev, (config) => config.devtool('cheap-source-map'))
 
-        config.when(process.env.NODE_ENV !== 'development', (config) => {
+        config.when(!isDev, (config) => {
             config.optimization.splitChunks({
                 chunks: 'all',
                 cacheGroups: {
@@ -72,6 +75,16 @@ module.exports = defineConfig({
                         priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
                         test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
                     },
+                    ehcarts: {
+                        name: 'chunk-echarts', // split echarts into a single package
+                        priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+                        test: /[\\/]node_modules[\\/]_?echarts(.*)/ // in order to adapt to cnpm
+                    },
+                    threejs: {
+                        name: 'chunk-thressjs', // split three into a single package
+                        priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+                        test: /[\\/]node_modules[\\/]_?three(.*)/ // in order to adapt to cnpm
+                    },
                     commons: {
                         name: 'chunk-commons',
                         test: resolve('src/components'), // can customize your rules
@@ -83,5 +96,8 @@ module.exports = defineConfig({
             })
             config.optimization.runtimeChunk('single')
         })
+
+        // bundle analyzer
+        config.plugin('webpack-bundle-analyzer').use(BundleAnalyzerPlugin)
     }
 })
