@@ -1,7 +1,10 @@
 const { defineConfig } = require('@vue/cli-service')
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const CompressionPlugin = require('compression-webpack-plugin')
+
+const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)/i
 
 function resolve(dir) {
     return path.join(__dirname, dir)
@@ -70,6 +73,19 @@ module.exports = defineConfig({
         config
             // https://webpack.js.org/configuration/devtool/#development
             .when(isDev, (config) => config.devtool('cheap-source-map'))
+
+        // 打包压缩
+        config.when(!isDev, (config) => {
+            config.plugin('compressionPlugin').use(
+                new CompressionPlugin({
+                    algorithm: 'gzip',
+                    text: productionGzipExtensions,
+                    threshold: 10240, // 单位字节（bytes），大于10k才会进行压缩
+                    minRatio: 0.8, // 默认压缩率，压缩结果低于该值才会进行压缩
+                    deleteOriginalAssets: false // 是否删除源文件，建议不删，防止某些浏览器无法解析gzip时可以使用源文件显示
+                })
+            )
+        })
 
         config.when(!isDev, (config) => {
             config.optimization.splitChunks({
