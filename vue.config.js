@@ -98,6 +98,6 @@ module.exports = defineConfig({
         })
 
         // bundle analyzer
-        config.plugin('webpack-bundle-analyzer').use(BundleAnalyzerPlugin)
+        // config.plugin('webpack-bundle-analyzer').use(BundleAnalyzerPlugin)
     }
 })
