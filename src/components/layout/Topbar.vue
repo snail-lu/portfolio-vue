@@ -4,22 +4,16 @@
             <img src="../../assets/icons/logo.png" class="topbar-logo" />
         </router-link>
 
-        <el-menu
-            :text-color="variables.menuText"
-            :unique-opened="false"
-            :active-text-color="variables.menuActiveText"
-            mode="horizontal"
-            :router="true"
-            :default-active="currentRoute"
-        >
-            <el-menu-item :index="item.path" v-for="item in menuList" :key="item.path">{{ item.name }}</el-menu-item>
-        </el-menu>
+        <ul class="menu-list flex-box flex-v-center">
+            <li v-for="item in menuList" :key="item.path" class="menu-item" :class="{ 'menu-item-active': currentRoute == item.path }">
+                <router-link :to="item.path"> {{ item.name }}</router-link>
+            </li>
+        </ul>
     </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import variables from '@/styles/variables.module.scss'
 
 const settings = require('@/settings.js')
 export default {
@@ -28,9 +22,6 @@ export default {
         ...mapGetters(['isScreenFull']),
         currentRoute() {
             return '/' + this.$route.path.split('/')[1]
-        },
-        variables() {
-            return variables
         },
         menuList() {
             return settings.menu || []
@@ -42,6 +33,7 @@ export default {
 .topbar-wrapper {
     width: 100%;
     padding-left: 20%;
+    height: 60px;
     backdrop-filter: blur(12px) saturate(100%);
     background-color: rgba(245, 244, 241, 0.25);
 
@@ -50,25 +42,18 @@ export default {
         height: 50px;
         vertical-align: middle;
         border-radius: 25px;
+        margin-right: 50px;
     }
 
-    .el-menu {
-        border-bottom: none;
-        margin-left: 50px;
-        background-color: transparent;
-        &-item {
-            border-bottom: none;
-            font-size: 16px;
+    .menu-list {
+        .menu-item {
             padding: 0 30px;
+            color: $menuText;
 
-            &:hover,
-            &:focus {
-                background-color: transparent;
+            &-active {
+                color: $menuActiveText;
+                font-weight: bold;
             }
-        }
-
-        .is-active {
-            font-weight: bold;
         }
     }
 }
