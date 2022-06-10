@@ -42,7 +42,8 @@ export default {
 .topbar-wrapper {
     width: 100%;
     padding-left: 20%;
-    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px) saturate(100%);
+    background-color: rgba(245, 244, 241, 0.25);
 
     .topbar-logo {
         width: 50px;
