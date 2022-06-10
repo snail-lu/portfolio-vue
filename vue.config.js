@@ -33,6 +33,17 @@ module.exports = defineConfig({
             }
         }
     },
+    css: {
+        loaderOptions: {
+            scss: {
+                additionalData: `
+                    @import "~@/styles/variables.scss";
+                    @import "~@/styles/mixin.scss";
+                    @import "~@/styles/transition.scss";
+                `
+            }
+        }
+    },
     configureWebpack: {
         name: name,
         resolve: {
