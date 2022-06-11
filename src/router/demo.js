@@ -106,6 +106,13 @@ export default {
             meta: {
                 title: '动态图表'
             }
+        },
+        {
+            path: 'css-demos',
+            component: () => import('../views/demo/cssDemos/index.vue'),
+            meta: {
+                title: 'CSS DEMOS'
+            }
         }
     ]
 }

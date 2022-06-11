@@ -46,6 +46,14 @@ export default {
     // demo列表
     demoList: [
         {
+            id: 13,
+            path: 'css-demos',
+            title: 'CSS DEMO库',
+            desc: '纯CSS实现的DEMO合集',
+            coverUrl:
+                'https://ouch-cdn2.icons8.com/ljMlLxJIb3IVgWrhlk-dBnDMyYj05lRSWlgP4p4t0tI/rs:fit:256:256/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvNjYw/L2U2Y2VhNTNhLWQ4/OGUtNGYxNi1iMGJi/LWM3Zjg5MmQ4YzM3/YS5wbmc.png'
+        },
+        {
             id: 12,
             path: 'dynamic-chart',
             title: 'echarts动态图表',
