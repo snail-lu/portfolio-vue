@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Layout from '../components/layout'
 import demoRoutes from './demo'
 
 Vue.use(Router)
@@ -10,12 +9,11 @@ export const routes = [
     // 主页面
     {
         path: '/',
-        component: Layout,
+        component: () => import('@/components/layout/index'),
         redirect: '/home',
         children: [
             {
                 path: '/home',
-                name: 'home',
                 component: () => import('@/views/home/home.vue'),
                 meta: {
                     title: '首页'
@@ -37,7 +35,7 @@ export const routes = [
                 ]
             },
             {
-                path: 'about',
+                path: '/about',
                 component: {
                     render: (h) => h('router-view')
                 },
@@ -86,17 +84,14 @@ routes[0].children.push(demoRoutes)
 const createRouter = () =>
     new Router({
         mode: 'hash',
-        scrollBehavior: () => ({
-            y: 0
-        }),
+        scrollBehavior: (to, from, savedPosition) => {
+            if (savedPosition) {
+                return savedPosition
+            } else {
+                return { y: 0 }
+            }
+        },
         routes
     })
 
-const router = createRouter()
-
-export function resetRouter() {
-    const newRouter = createRouter()
-    router.matcher = newRouter.matcher // reset router
-}
-
-export default router
+export default createRouter()
