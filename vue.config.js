@@ -79,7 +79,7 @@ module.exports = defineConfig({
             config.plugin('compressionPlugin').use(
                 new CompressionPlugin({
                     algorithm: 'gzip',
-                    text: productionGzipExtensions,
+                    test: productionGzipExtensions,
                     threshold: 10240, // 单位字节（bytes），大于10k才会进行压缩
                     minRatio: 0.8, // 默认压缩率，压缩结果低于该值才会进行压缩
                     deleteOriginalAssets: false // 是否删除源文件，建议不删，防止某些浏览器无法解析gzip时可以使用源文件显示
