@@ -1,8 +1,10 @@
 <template>
     <section class="app-main" :class="{ 'app-main-fullscreen': isScreenFull }">
-        <transition name="fade-transform" mode="out-in">
+        <!-- <transition name="fade-transform" mode="out-in"> -->
+        <keep-alive>
             <router-view :key="key" />
-        </transition>
+        </keep-alive>
+        <!-- </transition> -->
     </section>
 </template>
 
