@@ -22,13 +22,12 @@ export default {
 <style scoped lang="scss">
 .app-main {
     /*60 = topbar  */
-    height: calc(100vh - 60px);
+    min-height: calc(100vh - 60px);
     width: 100%;
     position: relative;
     overflow: auto;
     box-sizing: border-box;
     margin: 0 auto;
-    @include scrollBar;
 }
 
 .app-main-fullscreen {

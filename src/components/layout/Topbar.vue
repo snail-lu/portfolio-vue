@@ -31,11 +31,15 @@ export default {
 </script>
 <style lang="scss" scoped>
 .topbar-wrapper {
-    width: 100%;
     padding-left: 20%;
+    box-sizing: border-box;
     height: 60px;
     backdrop-filter: blur(12px) saturate(100%);
     background-color: rgba(245, 244, 241, 0.25);
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 10;
 
     .topbar-logo {
         width: 50px;
