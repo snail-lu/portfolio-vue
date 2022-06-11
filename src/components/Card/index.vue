@@ -1,7 +1,7 @@
 <template>
     <div class="card flex-box-column flex-h-between" @click="pushUrl">
         <div :class="`header bg-color${data.id} ${isLoading ? 'animated-bg' : ''}`">
-            <img class="cover" :src="data.coverUrl" @load="load" @error="error" v-if="!isError" />
+            <img class="cover" :src="data.coverUrl" @load="load" @error="error" v-if="!isError" loading="lazy" />
             <div class="placeholder-cover" v-else>
                 <img class="placeholder-cover1" src="@/assets/icons/smile.svg" />
                 <img class="placeholder-cover2" src="@/assets/icons/wink.svg" />
