@@ -81,15 +81,27 @@ export const routes = [
 // 合并demo路由
 routes[0].children.push(demoRoutes)
 
+// 停用浏览器自动恢复滚动位置的默认行为，改为手动触发
+// if ('scrollRestoration' in history) {
+//     // console.log(history, 'history')
+//     // history.scrollRestoration = 'manual'
+// }
+
 const createRouter = () =>
     new Router({
-        mode: 'hash',
+        mode: 'history',
         scrollBehavior: (to, from, savedPosition) => {
+            // console.log(savedPosition, 'savedPostion')
             if (savedPosition) {
                 return savedPosition
             } else {
                 return { y: 0 }
             }
+            // return new Promise((resolve, reject) => {
+            //     setTimeout(() => {
+            //         resolve(savedPosition ? savedPosition : { x: 0, y: 0 })
+            //     }, 500)
+            // })
         },
         routes
     })
