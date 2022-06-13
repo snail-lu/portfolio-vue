@@ -55,8 +55,21 @@ export default {
             color: $menuText;
 
             &-active {
-                color: $menuActiveText;
+                // color: $menuActiveText;
                 font-weight: bold;
+                position: relative;
+
+                &::after {
+                    position: absolute;
+                    content: '';
+                    display: block;
+                    height: 8px;
+                    width: 50px;
+                    bottom: -13px;
+                    left: calc(50% - 25px);
+                    background-image: url('../../assets/icons/wave.png');
+                    background-size: contain;
+                }
             }
         }
     }
