@@ -6,11 +6,14 @@
                     <template slot="title">
                         <div class="flex-box">
                             <div class="idx-label">1</div>
-                            <div>光影掠过文字</div>
+                            <div class="title-txt">光影掠过文字</div>
                         </div>
                     </template>
-                    <div class="demo-content flex-box flex-v-center flex-h-center">
+                    <div class="demo-content flex-box-column">
                         <div class="demo-1" data-text="长风破浪会有时，直挂云帆济沧海。">长风破浪会有时，直挂云帆济沧海。</div>
+                        <div class="code-box">
+                            <code-editor v-if="activeNames.includes('1')" />
+                        </div>
                     </div>
                     <div></div>
                 </el-collapse-item>
@@ -21,17 +24,20 @@
 
 <script>
 import Demo from '@/components/Demo'
+import CodeEditor from '@/components/CodeEditor'
 export default {
     components: {
-        Demo
+        Demo,
+        CodeEditor
     },
     data() {
         return {
             demoInfo: {
-                title: '纯CSS效果DEMO合集',
+                title: 'CSS DEMO合集',
                 url: ''
             },
-            activeNames: []
+            activeNames: [],
+            demoList: [{}]
         }
     }
 }
@@ -72,14 +78,18 @@ export default {
         right: 0;
     }
 }
+
+.title-txt {
+    user-select: none;
+}
 .demo-content {
-    background-color: #fbfbfb;
+    background-color: #f2f2f2;
     min-height: 100px;
 }
 
 .demo-1 {
     position: relative;
-    margin: auto;
+    margin: 20px auto;
     font-size: 30px;
     word-spacing: 0.2em;
     line-height: 1;
@@ -129,5 +139,9 @@ export default {
     100% {
         background-position: 130% 0;
     }
+}
+
+.code-box {
+    width: 100%;
 }
 </style>

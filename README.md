@@ -35,3 +35,7 @@ npm run deploy
 
 -   `Element-UI`按需引入（已优化）
 -   首屏白屏增加 loading 效果（已优化）
+
+## 参考文档
+
+[codemirror](https://codemirror.net/5/doc/manual.html#usage)
