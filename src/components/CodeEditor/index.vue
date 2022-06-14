@@ -7,7 +7,7 @@
                     type="text"
                     icon="el-icon-document-copy"
                     class="copy-btn"
-                    v-clipboard="options.value"
+                    v-clipboard="value"
                     v-clipboard:success="onCopySuccess"
                     v-clipboard:error="onCopyError"
                     >复制</el-button
@@ -74,7 +74,7 @@ export default {
             default: 'javascript'
         },
         // 代码内容
-        code: {
+        value: {
             type: String,
             default: ''
         }
@@ -82,7 +82,7 @@ export default {
     data() {
         return {
             options: {
-                value: this.code, // 代码内容
+                value: this.value, // 代码内容
                 mode: 'javascript', // 编辑器的语言
                 theme: 'lesser-dark', // 主题
                 indentWithTabs: true, // tab缩进
@@ -106,15 +106,21 @@ export default {
     methods: {
         codeEditorInit() {
             const { options } = this
+            console.log(options, 'options')
             // 在普通元素上创建编辑器
             const myCodeEditor = CodeMirror(this.$refs.codeEditor, options)
             // 在textarea元素上创建编辑器
             // const myCodeEditor = CodeMirror.fromTextArea(this.$refs.codeEditor, options)
 
-            // 代码自动提示功能
-            myCodeEditor.on('inputRead', function () {
+            myCodeEditor.on('inputRead', () => {
+                // 代码自动提示功能
                 myCodeEditor.showHint()
+
+                // 组件v-model实现
+                const value = myCodeEditor.getValue()
+                this.$emit('input', value)
             })
+
             this.myCodeEditor = myCodeEditor
         },
         onCopySuccess() {
