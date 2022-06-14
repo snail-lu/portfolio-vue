@@ -146,7 +146,7 @@ export default {
         color: #fff;
         display: flex;
         justify-content: space-between;
-        padding: 16px 10px;
+        padding: 10px;
         font-size: 14px;
 
         .copy-btn {

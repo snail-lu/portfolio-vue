@@ -6,8 +6,7 @@
             </el-col>
         </el-row>
         <div class="footer">
-            <span>插图：</span>
-            <a class="link" href="https://icons8.com" target="_blank">ICONS8</a>
+            <a class="link" href="https://icons8.com" target="_blank" title="插图链接">ICONS8</a>
         </div>
     </div>
 </template>
@@ -63,7 +62,7 @@ export default {
 .footer {
     text-align: center;
     margin-bottom: 20px;
-    font-size: 13px;
+    font-size: 12px;
 
     .link {
         color: #fff;
