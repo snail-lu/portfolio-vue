@@ -14,29 +14,54 @@
                 >
             </div>
         </div>
-        <textarea ref="codeEditor" class="code-editor" v-model="options.value"></textarea>
+        <div ref="codeEditor"></div>
     </div>
 </template>
 
 <script>
-import 'codemirror/lib/codemirror.css'
+import CodeMirror from 'codemirror/lib/codemirror' // 引入codemirror js文件
+import 'codemirror/lib/codemirror.css' // 引入codemirror css文件
+
+// import 'codemirror/theme/gruvbox-dark.css' // 引入主题 可以从 codemirror/theme/ 下引入多个
+import 'codemirror/theme/lesser-dark.css' // 引入主题 可以从 codemirror/theme/ 下引入多个
+
+import 'codemirror/mode/javascript/javascript' // 引入语言模式 可以从codemirror/mode/ 下引入多个
+import 'codemirror/mode/css/css' // 引入语言模式 可以从codemirror/mode/ 下引入多个
+
+// 搜索功能
+// find：Ctrl-F (PC), Cmd-F (Mac)
+// findNext：Ctrl-G (PC), Cmd-G (Mac)
+// findPrev：Shift-Ctrl-G (PC), Shift-Cmd-G (Mac)
+// replace：Shift-Ctrl-F (PC), Cmd-Alt-F (Mac)
+// replaceAll：Shift-Ctrl-R (PC), Shift-Cmd-Alt-F (Mac)
+import 'codemirror/addon/dialog/dialog.css'
+import 'codemirror/addon/dialog/dialog'
+import 'codemirror/addon/search/searchcursor'
+import 'codemirror/addon/search/search'
+import 'codemirror/addon/search/jump-to-line'
+import 'codemirror/addon/search/matchesonscrollbar'
+import 'codemirror/addon/search/match-highlighter'
+
+// 代码提示 具体语言可以从 codemirror/addon/hint/ 下引入多个
 import 'codemirror/addon/hint/show-hint.css'
-import CodeMirror from 'codemirror/lib/codemirror'
-import 'codemirror/mode/javascript/javascript' // 语言模式引入
-import 'codemirror/mode/css/css' // 语言模式引入
-import 'codemirror/addon/edit/matchbrackets'
-import 'codemirror/addon/selection/active-line'
 import 'codemirror/addon/hint/show-hint'
 import 'codemirror/addon/hint/javascript-hint'
-// 引入主题 可以从 codemirror/theme/ 下引入多个
-import 'codemirror/theme/gruvbox-dark.css'
+import 'codemirror/addon/hint/css-hint'
+
+// 高亮行
+import 'codemirror/addon/selection/active-line'
+import 'codemirror/addon/selection/selection-pointer'
+
+// 自动括号匹配
+import 'codemirror/addon/edit/matchbrackets'
+
 export default {
     name: 'CodeEditor',
     props: {
         // 编辑器标题
         title: {
             type: String,
-            default: '示例代码'
+            default: '代码编辑器'
         },
         // 代码只读
         readOnly: {
@@ -59,13 +84,18 @@ export default {
             options: {
                 value: this.code, // 代码内容
                 mode: 'javascript', // 编辑器的语言
-                theme: 'gruvbox-dark', // 主题
-                indentWithTabs: true,
-                smartIndent: true,
+                theme: 'lesser-dark', // 主题
+                indentWithTabs: true, // tab缩进
+                smartIndent: true, // 智能缩进
                 lineNumbers: true, // 显示行号
                 lineWrapping: true, // 超长行自动换行
-                readOnly: this.readOnly // 只读
-                // matchBrackets: true
+                readOnly: this.readOnly, // 只读
+                matchBrackets: true, // 自动匹配括号
+                styleActiveLine: true, // 高亮行功能
+                hintOptions: {
+                    // 提示选项
+                    completeSingle: false
+                }
             },
             myCodeEditor: null
         }
@@ -76,13 +106,16 @@ export default {
     methods: {
         codeEditorInit() {
             const { options } = this
-            console.log(options, 'options')
-            // this.myCodeEditor = CodeMirror(this.$refs.codeEditor, options)
-            this.myCodeEditor = CodeMirror.fromTextArea(this.$refs.codeEditor, options)
-            // 代码自动提示功能，记住使用cursorActivity事件不要使用change事件，这是一个坑，那样页面直接会卡死
-            // myCodeEditor.on('cursorActivity', function () {
-            //     myCodeEditor.showHint()
-            // })
+            // 在普通元素上创建编辑器
+            const myCodeEditor = CodeMirror(this.$refs.codeEditor, options)
+            // 在textarea元素上创建编辑器
+            // const myCodeEditor = CodeMirror.fromTextArea(this.$refs.codeEditor, options)
+
+            // 代码自动提示功能
+            myCodeEditor.on('inputRead', function () {
+                myCodeEditor.showHint()
+            })
+            this.myCodeEditor = myCodeEditor
         },
         onCopySuccess() {
             this.$message.success('复制成功')
@@ -93,8 +126,13 @@ export default {
     }
 }
 </script>
-
-<style lang="scss" scoped>
+<style lang="scss">
+// 编辑器字体大小修改
+.CodeMirror {
+    font-size: 16px;
+}
+</style>
+<style lang="scss" lang="scss">
 .code-editor-container {
     .header {
         background-color: #333;
@@ -110,20 +148,4 @@ export default {
         }
     }
 }
-
-// .code-editor {
-//     width: 100%;
-//     height: 100px;
-//     animation: editorShow 3s;
-//     // overflow: hidden;
-// }
-
-// @keyframes editorShow {
-//     0% {
-//         height: 0;
-//     }
-//     100% {
-//         height: 100px;
-//     }
-// }
 </style>
