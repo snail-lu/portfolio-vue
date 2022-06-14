@@ -24,11 +24,12 @@ export default {
 
     .bear {
         position: absolute;
-        top: calc(50% - 50px);
-        width: 200px;
-        height: 100px;
-        background: url('../../assets/images/bear.png') no-repeat;
-        animation: run 1s steps(8) infinite;
+        top: calc(50% - 150px);
+        width: 400px;
+        height: 300px;
+        // background: url('../../assets/images/bear.png') no-repeat;
+        background: url('@/assets/icons/dancer.gif') 100%/100% no-repeat;
+        // animation: run 1s steps(8) infinite;
     }
 
     @keyframes run {
