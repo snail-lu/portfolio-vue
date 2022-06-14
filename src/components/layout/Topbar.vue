@@ -55,7 +55,7 @@ export default {
             color: $menuText;
 
             &-active {
-                // color: $menuActiveText;
+                color: $menuActiveText;
                 font-weight: bold;
                 position: relative;
 
