@@ -14,7 +14,7 @@ import store from './store'
 import router from './router'
 import request from '@/utils/request'
 
-import '@/permission' // permission control
+import '@/router/permission' // permission control
 
 import uploader from 'vue-simple-uploader'
 
