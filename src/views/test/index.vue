@@ -1,6 +1,6 @@
 <template>
     <div>
-        <code-editor :code="code" :read-only="false" />
+        <code-editor :read-only="false" v-model="code" />
     </div>
 </template>
 
