@@ -5,6 +5,10 @@
                 <card :data="demo" />
             </el-col>
         </el-row>
+        <!-- <div class="footer">
+            <span>插图：</span>
+            <a class="link" href="https://icons8.com" target="_blank">ICONS8</a>
+        </div> -->
     </div>
 </template>
 
@@ -90,6 +94,17 @@ export default {
             color: #999;
             font-size: 13px;
         }
+    }
+}
+
+.footer {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 13px;
+
+    .link {
+        color: #fff;
+        text-decoration: underline;
     }
 }
 </style>

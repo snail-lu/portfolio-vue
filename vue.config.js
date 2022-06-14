@@ -74,7 +74,7 @@ module.exports = defineConfig({
             // https://webpack.js.org/configuration/devtool/#development
             .when(isDev, (config) => config.devtool('cheap-source-map'))
 
-        // 打包压缩
+        // 打包压缩成gz格式，需要配合nginx配置使用
         config.when(!isDev, (config) => {
             config.plugin('compressionPlugin').use(
                 new CompressionPlugin({
