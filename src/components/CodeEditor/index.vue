@@ -136,6 +136,7 @@ export default {
 // 编辑器字体大小修改
 .CodeMirror {
     font-size: 16px;
+    height: auto;
 }
 </style>
 <style lang="scss" lang="scss">
