@@ -96,7 +96,7 @@ export default {
 <style lang="scss" scoped>
 .dynamic-charts-container {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     // overflow: hidden;
     overflow-x: hidden;
     background: url('../../../assets/images/charts_bg.jpeg') no-repeat;
@@ -126,7 +126,7 @@ export default {
     }
 
     .page-content {
-        height: calc(100% - 85px);
+        height: calc(100vh - 85px);
 
         &-col {
             height: 100%;

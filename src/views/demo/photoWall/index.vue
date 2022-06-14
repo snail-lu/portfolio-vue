@@ -4,11 +4,7 @@
             <el-upload action="#" multiple :auto-upload="false" :on-change="onUploadFile" :show-file-list="false">
                 <i class="btn el-icon-picture-outline upload-btn" title="打开本地图片"></i>
             </el-upload>
-            <i
-                class="btn el-icon-full-screen"
-                :title="isScreenFull ? '退出全屏' : '全屏'"
-                @click="handleFullScreen"
-            ></i>
+            <i class="btn el-icon-full-screen" :title="isScreenFull ? '退出全屏' : '全屏'" @click="handleFullScreen"></i>
         </div>
 
         <div class="photo-list" v-if="fileList.length == 0">
@@ -24,12 +20,7 @@
             />
         </div>
         <div class="photo-list" v-else>
-            <photo
-                :src="file.raw | imgUrlFilter"
-                v-for="file in fileList"
-                :key="file.uid"
-                @onDelete="onDelete(file.uid)"
-            />
+            <photo :src="file.raw | imgUrlFilter" v-for="file in fileList" :key="file.uid" @onDelete="onDelete(file.uid)" />
         </div>
     </div>
 </template>
@@ -60,7 +51,7 @@ export default {
                     initialWidth: 577,
                     initialHeight: 346,
                     startX: 430,
-                    startY: 400
+                    startY: 330
                 },
                 {
                     uid: 2,
@@ -68,7 +59,7 @@ export default {
                     initialWidth: 426,
                     initialHeight: 258,
                     startX: 830,
-                    startY: 106
+                    startY: 56
                 },
                 {
                     uid: 3,
@@ -76,7 +67,7 @@ export default {
                     initialWidth: 486,
                     initialHeight: 290,
                     startX: 147,
-                    startY: 78
+                    startY: 38
                 }
             ]
         }
@@ -102,23 +93,19 @@ export default {
 
 <style lang="scss" scoped>
 .photo-wall-container {
-    height: 100%;
+    height: 100vh;
     width: 100%;
     position: relative;
 
     .btn-groups {
-        position: fixed;
-        top: 70px;
+        position: absolute;
+        top: 20px;
         right: 30px;
         padding: 10px;
         background-color: rgba(255, 255, 255, 0.5);
         width: 100px;
         border-radius: 6px;
         z-index: 10;
-
-        &-screenfull {
-            top: 10px;
-        }
 
         .btn {
             font-size: 20px;
@@ -133,7 +120,7 @@ export default {
 
     .photo-list {
         position: relative;
-        height: 1000px;
+        height: 100%;
     }
 }
 </style>

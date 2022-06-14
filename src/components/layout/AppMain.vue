@@ -25,7 +25,7 @@ export default {
 .app-main {
     /*60 = topbar  */
     min-height: calc(100vh - 60px);
-    width: 100%;
+    // width: 100%;
     position: relative;
     overflow: auto;
     box-sizing: border-box;
