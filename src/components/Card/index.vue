@@ -60,14 +60,18 @@ export default {
 .card {
     background-color: #fff;
     border-radius: 10px;
-    height: 230px;
     cursor: pointer;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     overflow: hidden;
 
     .header {
-        height: 80%;
-        overflow: hidden;
+        height: 180px;
+
+        .cover {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
 
         .placeholder-cover {
             width: 50%;
@@ -93,12 +97,6 @@ export default {
             .placeholder-cover2 {
                 display: block;
             }
-        }
-
-        .cover {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
         }
     }
 
