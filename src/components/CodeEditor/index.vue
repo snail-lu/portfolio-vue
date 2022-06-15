@@ -14,7 +14,7 @@
                 >
             </div>
         </div>
-        <div ref="codeEditor"></div>
+        <div ref="codeEditor" :style="{ height }"></div>
     </div>
 </template>
 
@@ -77,6 +77,10 @@ export default {
         value: {
             type: String,
             default: ''
+        },
+        height: {
+            type: String,
+            default: 'auto'
         }
     },
     data() {
@@ -136,7 +140,7 @@ export default {
 // 编辑器字体大小修改
 .CodeMirror {
     font-size: 16px;
-    height: auto;
+    height: 100%;
 }
 </style>
 <style lang="scss" lang="scss">
@@ -146,8 +150,10 @@ export default {
         color: #fff;
         display: flex;
         justify-content: space-between;
-        padding: 10px;
+        height: 40px;
+        line-height: 40px;
         font-size: 14px;
+        padding: 0 10px;
 
         .copy-btn {
             cursor: pointer;
