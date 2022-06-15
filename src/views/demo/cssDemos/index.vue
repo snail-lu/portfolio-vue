@@ -2,18 +2,43 @@
     <demo :data="demoInfo">
         <div class="css-demos-list">
             <el-collapse v-model="activeNames">
+                <!-- demo 1 -->
                 <el-collapse-item name="1">
                     <template slot="title">
                         <div class="flex-box">
                             <div class="idx-label">1</div>
-                            <div class="title-txt">光影掠过文字</div>
+                            <div class="title-txt">文字光影掠过效果</div>
                         </div>
                     </template>
                     <div class="demo-content flex-box-column">
+                        <el-link class="view-code-btn color-black" icon="el-icon-connection" href="https://codepen.io/snaillu/pen/qBxgopK" target="_blank"
+                            >查看代码</el-link
+                        >
                         <div class="demo-1" data-text="长风破浪会有时，直挂云帆济沧海。">长风破浪会有时，直挂云帆济沧海。</div>
-                        <div class="code-box" v-if="activeNames.includes('1')">
-                            <code-editor mode="html" v-model="demoList[0].code1" title="HTML代码" />
-                            <code-editor mode="css" v-model="demoList[0].code2" title="CSS代码" />
+                    </div>
+                    <div></div>
+                </el-collapse-item>
+                <!-- demo 2 -->
+                <el-collapse-item name="2">
+                    <template slot="title">
+                        <div class="flex-box">
+                            <div class="idx-label">2</div>
+                            <div class="title-txt">图片3D翻转及镜面投影</div>
+                        </div>
+                    </template>
+                    <div class="demo-content flex-box-column">
+                        <el-link class="view-code-btn" icon="el-icon-connection" href="https://codepen.io/snaillu/pen/WNMPddX" target="_blank"
+                            >查看代码</el-link
+                        >
+                        <div class="demo-2">
+                            <div class="card">
+                                <div class="card-item card-item-front">
+                                    <img class="card-item-img" src="https://i.loli.net/2019/11/16/FLnzi5Kq4tkRZSm.jpg" />
+                                </div>
+                                <div class="card-item card-item-back">
+                                    <img class="card-item-img" src="https://i.loli.net/2019/10/18/buDT4YS6zUMfHst.jpg" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div></div>
@@ -37,14 +62,7 @@ export default {
                 title: 'CSS DEMO合集',
                 url: ''
             },
-            activeNames: [],
-            demoList: [
-                {
-                    idx: 1,
-                    code1: '<div class="demo-1" data-text="长风破浪会有时，直挂云帆济沧海。">长风破浪会有时，直挂云帆济沧海。</div>',
-                    code2: '.demo-1 {\n    position: relative;\n    margin: 20px auto;\n    font-size: 30px;\n    word-spacing: 0.2em;\n    line-height: 1;\n    color: transparent;\n    background-color: #e8a95b;\n    background-clip: text;\n\n    &::after {\n        content: attr(data-text);\n        position: absolute;\n        left: 0;\n        top: 0;\n        width: 100%;\n        height: 100%;\n        z-index: 5;\n        //生成的光影渐变背景\n        background-image: linear-gradient(\n            120deg,\n            transparent 0%,\n            transparent 6rem,\n            white 11rem,\n            transparent 11.15rem,\n            transparent 15rem,\n            rgba(255, 255, 255, 0.3) 20rem,\n            transparent 25rem,\n            transparent 27rem,\n            rgba(255, 255, 255, 0.6) 32rem,\n            white 33rem,\n            rgba(255, 255, 255, 0.3) 33.15rem,\n            transparent 38rem,\n            transparent 40rem,\n            rgba(255, 255, 255, 0.3) 45rem,\n            transparent 50rem,\n            transparent 100%\n        );\n        background-clip: text;\n        background-size: 50% 100%;\n        background-repeat: no-repeat;\n        animation: shine 4s infinite linear;\n    }\n}\n\n@keyframes shine {\n    0% {\n        background-position: -100% 0;\n    }\n    100% {\n        background-position: 130% 0;\n    }\n}'
-                }
-            ]
+            activeNames: []
         }
     }
 }
@@ -92,11 +110,24 @@ export default {
 .demo-content {
     background-color: #f2f2f2;
     min-height: 100px;
+    position: relative;
+}
+
+.view-code-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #fff;
+    z-index: 10;
+}
+
+.color-black {
+    color: #000;
 }
 
 .demo-1 {
     position: relative;
-    margin: 20px auto;
+    margin: auto;
     font-size: 30px;
     word-spacing: 0.2em;
     line-height: 1;
@@ -148,7 +179,49 @@ export default {
     }
 }
 
-.code-box {
+.demo-2 {
     width: 100%;
+    height: 600px;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+    perspective: 500px;
+
+    .card {
+        position: relative;
+        width: 200px;
+        height: 280px;
+        cursor: pointer;
+        transition: 1s ease-in-out;
+        transform-style: preserve-3d;
+
+        &:hover {
+            transform: rotateY(0.5turn);
+        }
+
+        &-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            // 隐藏背面的元素
+            backface-visibility: hidden;
+            transition: 1s ease-in-out;
+            // 镜像效果，暂不支持firefox及IE
+            -webkit-box-reflect: below 0 linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.6));
+
+            &-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            &-back {
+                transform: rotateY(0.5turn);
+            }
+        }
+    }
 }
 </style>
