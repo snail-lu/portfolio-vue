@@ -111,7 +111,14 @@ export default {
             path: 'css-demos',
             component: () => import('../views/demo/cssDemos/index.vue'),
             meta: {
-                title: 'CSS DEMOS'
+                title: 'CSS DEMO'
+            }
+        },
+        {
+            path: 'code-editor',
+            component: () => import('../views/demo/codeEditor/index.vue'),
+            meta: {
+                title: '代码编辑器'
             }
         }
     ]

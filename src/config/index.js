@@ -46,6 +46,14 @@ export default {
     // demo列表
     demoList: [
         {
+            id: 14,
+            path: 'code-editor',
+            title: '代码编辑器',
+            desc: '基于codemirror实现的代码编辑器',
+            coverUrl:
+                'https://ouch-cdn2.icons8.com/BiPBVv7esTtPkp3-b0gpHuUcNlhjtYrJ7Op9uDkOTVE/rs:fit:256:256/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvMTcv/NDkwMjVmZjctMWU5/Ni00MTNjLTg0NTkt/OWRhYjA4ZmViZjg3/LnN2Zw.png'
+        },
+        {
             id: 13,
             path: 'css-demos',
             title: 'CSS DEMO',
