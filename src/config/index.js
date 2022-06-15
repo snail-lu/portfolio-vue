@@ -48,7 +48,7 @@ export default {
         {
             id: 13,
             path: 'css-demos',
-            title: 'CSS DEMO库',
+            title: 'CSS DEMO',
             desc: '纯CSS实现的DEMO合集',
             coverUrl:
                 'https://ouch-cdn2.icons8.com/_bN6rv0CLIWcKM8fT4uafDU0ENGXI_dpSayR_2cm_L8/rs:fit:256:208/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvMTkx/LzRiMzM4M2VjLWM5/OWYtNDkzMS1hZTI0/LWRmYTg1YTk5N2Q2/Yy5wbmc.png'
