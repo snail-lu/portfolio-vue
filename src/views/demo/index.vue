@@ -6,7 +6,7 @@
             </el-col>
         </el-row>
         <div class="footer">
-            <a class="link" href="https://icons8.com" target="_blank" title="插图链接">ICONS8</a>
+            Illustration by <a class="link" href="https://icons8.com/illustrations/" target="_blank">Icons 8</a> from <a class="link" href="https://icons8.com/illustrations" target="_blank">Ouch!</a>
         </div>
     </div>
 </template>
