@@ -1,6 +1,14 @@
 // demo列表
 export default [
     {
+        id: 15,
+        path: 'promotion-calendar',
+        title: '促销日历',
+        desc: '电商促销日历',
+        coverUrl:
+            'https://ouch-cdn2.icons8.com/yH6k5FAwojyYjnCRTSNtaAlkeR4UuNBXTz7NElTzVvs/rs:fit:256:256/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvNjM0/Lzk0YzJlMzAzLWEz/MjgtNGY3Ny05MjM4/LTY0NmQ1ZDU0OTY0/MC5zdmc.png'
+    },
+    {
         id: 14,
         path: 'code-editor',
         title: '代码编辑器',

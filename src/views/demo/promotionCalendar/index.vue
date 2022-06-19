@@ -1,0 +1,53 @@
+<template>
+    <demo :data="demoInfo">
+        <el-calendar v-model="value">
+            <template v-slot:dateCell="{ data }">
+                <div :class="data.isSelected ? 'is-selected' : ''">
+                    {{ data.day.split('-').slice(2).join('') }} {{ data.isSelected ? '✔️' : '' }}
+                </div>
+            </template>
+        </el-calendar>
+    </demo>
+</template>
+
+<script>
+import Demo from '@/components/Demo'
+// import { Calendar } from '@/components/Calendar'
+export default {
+    components: {
+        Demo
+    },
+    name: 'PromotionCalendar',
+    data() {
+        return {
+            demoInfo: {
+                title: '促销日历',
+                url: ''
+            },
+            value: new Date()
+        }
+    },
+    created() {},
+    methods: {}
+}
+</script>
+<style lang="scss" scoped>
+.demo-container {
+    padding: 50px 25%;
+
+    .el-row {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .el-link {
+        font-size: 18px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .el-button {
+        margin: 0 10px 10px 0;
+    }
+}
+</style>

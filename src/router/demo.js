@@ -120,6 +120,13 @@ export default {
             meta: {
                 title: '代码编辑器'
             }
+        },
+        {
+            path: 'promotion-calendar',
+            component: () => import('../views/demo/promotionCalendar/index.vue'),
+            meta: {
+                title: '促销日历'
+            }
         }
     ]
 }
