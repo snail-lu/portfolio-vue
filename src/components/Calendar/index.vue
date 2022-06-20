@@ -6,15 +6,9 @@
             </div>
             <div class="el-calendar__button-group" v-if="validatedRange.length === 0">
                 <el-button-group>
-                    <el-button type="plain" size="mini" @click="selectDate('prev-month')">
-                        {{ t('el.datepicker.prevMonth') }}
-                    </el-button>
-                    <el-button type="plain" size="mini" @click="selectDate('today')">
-                        {{ t('el.datepicker.today') }}
-                    </el-button>
-                    <el-button type="plain" size="mini" @click="selectDate('next-month')">
-                        {{ t('el.datepicker.nextMonth') }}
-                    </el-button>
+                    <el-button type="plain" size="mini" @click="selectDate('prev-month')"> 上个月 </el-button>
+                    <el-button type="plain" size="mini" @click="selectDate('today')"> 今天 </el-button>
+                    <el-button type="plain" size="mini" @click="selectDate('next-month')"> 下个月 </el-button>
                 </el-button-group>
             </div>
         </div>
@@ -37,7 +31,7 @@
 </template>
 
 <script>
-import Locale from 'element-ui/src/mixins/locale'
+// import Locale from 'element-ui/src/mixins/locale'
 import fecha from 'element-ui/src/utils/date'
 import DateTable from './date-table'
 import { validateRangeInOneMonth } from 'element-ui/src/utils/date-util'
@@ -49,7 +43,7 @@ const oneDay = 86400000
 export default {
     name: 'Calendar',
 
-    mixins: [Locale],
+    // mixins: [Locale],
 
     components: {
         DateTable
@@ -143,7 +137,7 @@ export default {
         i18nDate() {
             const year = this.date.getFullYear()
             const month = this.date.getMonth() + 1
-            return `${year} ${this.t('el.datepicker.year')} ${this.t('el.datepicker.month' + month)}`
+            return `${year} 年 ${month} 月`
         },
 
         formatedToday() {
