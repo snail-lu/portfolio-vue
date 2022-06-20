@@ -1,12 +1,12 @@
 <template>
     <table
         :class="{
-            'el-calendar-table': true
+            'calendar-table': true
         }"
         :cellspacing="0"
         :cellpadding="0"
     >
-        <thead v-if="!hideHeader">
+        <thead>
             <th v-for="day in weekDays" :key="day">{{ day }}</th>
         </thead>
         <tbody>
@@ -14,12 +14,11 @@
                 v-for="(row, index) in rows"
                 :key="index"
                 :class="{
-                    'el-calendar-table__row': true,
-                    'el-calendar-table__row--hide-border': index === 0 && hideHeader
+                    'calendar-table__row': true
                 }"
             >
                 <td v-for="(cell, key) in row" :key="key" :class="getCellClass(cell)" @click="pickDay(cell)">
-                    <div class="el-calendar-day">
+                    <div class="calendar-day">
                         <span>{{ cell.text }}</span>
                     </div>
                 </td>
@@ -29,7 +28,7 @@
 </template>
 <script>
 import fecha from 'element-ui/src/utils/date'
-import { range as rangeArr, getFirstDayOfMonth, getPrevMonthLastDays, getMonthDays, getI18nSettings } from 'element-ui/src/utils/date-util'
+import { range as rangeArr, getFirstDayOfMonth, getPrevMonthLastDays, getMonthDays } from 'element-ui/src/utils/date-util'
 
 export default {
     props: {
@@ -43,7 +42,7 @@ export default {
 
     data() {
         return {
-            WEEK_DAYS: getI18nSettings().dayNames
+            WEEK_DAYS: ['日', '一', '二', '三', '四', '五', '六']
         }
     },
 
@@ -162,3 +161,50 @@ export default {
     }
 }
 </script>
+<style lang="scss" scoped>
+.calendar-table {
+    table-layout: fixed;
+    width: 100%;
+}
+.calendar-table thead th {
+    padding: 12px 0;
+    color: #606266;
+    font-weight: 400;
+}
+.calendar-table td.next,
+.calendar-table td.prev {
+    color: #c0c4cc;
+}
+.calendar-table td {
+    border-bottom: 1px solid #ebeef5;
+    border-right: 1px solid #ebeef5;
+    vertical-align: top;
+    -webkit-transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease;
+}
+.calendar-table td.is-selected {
+    background-color: #f2f8fe;
+}
+.calendar-table td.is-today {
+    color: #409eff;
+}
+.calendar-table tr:first-child td {
+    border-top: 1px solid #ebeef5;
+}
+.calendar-table tr td:first-child {
+    border-left: 1px solid #ebeef5;
+}
+.calendar-table tr.calendar-table__row--hide-border td {
+    border-top: none;
+}
+.calendar-table .calendar-day {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 8px;
+    height: 85px;
+}
+.calendar-table .calendar-day:hover {
+    cursor: pointer;
+    background-color: #f2f8fe;
+}
+</style>

@@ -18,7 +18,7 @@ export default {
 
 <style lang="scss" scoped>
 .test-container {
-    width: 40%;
+    width: 50%;
     margin: 0 auto;
 }
 </style>
