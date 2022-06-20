@@ -19,12 +19,7 @@
             </div>
         </div>
         <div class="el-calendar__body" v-if="validatedRange.length === 0" key="no-range">
-            <date-table
-                :date="date"
-                :selected-day="realSelectedDay"
-                :first-day-of-week="realFirstDayOfWeek"
-                @pick="pickDay"
-            />
+            <date-table :date="date" :selected-day="realSelectedDay" :first-day-of-week="realFirstDayOfWeek" @pick="pickDay" />
         </div>
         <div v-else class="el-calendar__body" key="has-range">
             <date-table
@@ -66,15 +61,7 @@ export default {
             type: Array,
             validator(range) {
                 if (Array.isArray(range)) {
-                    return (
-                        range.length === 2 &&
-                        range.every(
-                            (item) =>
-                                typeof item === 'string' ||
-                                typeof item === 'number' ||
-                                item instanceof Date
-                        )
-                    )
+                    return range.length === 2 && range.every((item) => typeof item === 'string' || typeof item === 'number' || item instanceof Date)
                 } else {
                     return true
                 }
@@ -88,7 +75,7 @@ export default {
 
     provide() {
         return {
-            elCalendar: this
+            Calendar: this
         }
     },
 
@@ -123,11 +110,7 @@ export default {
 
         rangeValidator(date, isStart) {
             const firstDayOfWeek = this.realFirstDayOfWeek
-            const expected = isStart
-                ? firstDayOfWeek
-                : firstDayOfWeek === 0
-                ? 6
-                : firstDayOfWeek - 1
+            const expected = isStart ? firstDayOfWeek : firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1
             const message = `${isStart ? 'start' : 'end'} of range should be ${weekDays[expected]}.`
             if (date.getDay() !== expected) {
                 console.warn('[ElementCalendar]', message, 'Invalid range will be ignored.')
@@ -160,9 +143,7 @@ export default {
         i18nDate() {
             const year = this.date.getFullYear()
             const month = this.date.getMonth() + 1
-            return `${year} ${this.t('el.datepicker.year')} ${this.t(
-                'el.datepicker.month' + month
-            )}`
+            return `${year} ${this.t('el.datepicker.year')} ${this.t('el.datepicker.month' + month)}`
         },
 
         formatedToday() {
@@ -220,9 +201,7 @@ export default {
                 let startDay = new Date(start.getFullYear(), start.getMonth() + 1, 1)
                 const lastDay = this.toDate(startDay.getTime() - oneDay)
                 if (!validateRangeInOneMonth(startDay, end)) {
-                    console.warn(
-                        '[ElementCalendar]start time and end time interval must not exceed two months'
-                    )
+                    console.warn('[ElementCalendar]start time and end time interval must not exceed two months')
                     return []
                 }
                 // 第一个月的时间范围

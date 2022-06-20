@@ -25,7 +25,7 @@ export default {
         firstDayOfWeek: Number
     },
 
-    inject: ['elCalendar'],
+    inject: ['Calendar'],
 
     data() {
         return {
@@ -75,7 +75,7 @@ export default {
         },
 
         cellRenderProxy({ text, type }) {
-            let render = this.elCalendar.$scopedSlots.dateCell
+            let render = this.Calendar.$scopedSlots.dateCell
             if (!render) return <span>{text}</span>
 
             const day = this.getFormateDate(text, type)
@@ -106,7 +106,7 @@ export default {
         },
 
         formatedToday() {
-            return this.elCalendar.formatedToday
+            return this.Calendar.formatedToday
         },
 
         isInRange() {
@@ -118,12 +118,10 @@ export default {
             // if range exists, should render days in range.
             if (this.isInRange) {
                 const [start, end] = this.range
-                const currentMonthRange = rangeArr(end.getDate() - start.getDate() + 1).map(
-                    (_, index) => ({
-                        text: start.getDate() + index,
-                        type: 'current'
-                    })
-                )
+                const currentMonthRange = rangeArr(end.getDate() - start.getDate() + 1).map((_, index) => ({
+                    text: start.getDate() + index,
+                    type: 'current'
+                }))
                 let remaining = currentMonthRange.length % 7
                 remaining = remaining === 0 ? 0 : 7 - remaining
                 const nextMonthRange = rangeArr(remaining).map((_, index) => ({
@@ -135,14 +133,11 @@ export default {
                 const date = this.date
                 let firstDay = getFirstDayOfMonth(date)
                 firstDay = firstDay === 0 ? 7 : firstDay
-                const firstDayOfWeek =
-                    typeof this.firstDayOfWeek === 'number' ? this.firstDayOfWeek : 1
-                const prevMonthDays = getPrevMonthLastDays(date, firstDay - firstDayOfWeek).map(
-                    (day) => ({
-                        text: day,
-                        type: 'prev'
-                    })
-                )
+                const firstDayOfWeek = typeof this.firstDayOfWeek === 'number' ? this.firstDayOfWeek : 1
+                const prevMonthDays = getPrevMonthLastDays(date, firstDay - firstDayOfWeek).map((day) => ({
+                    text: day,
+                    type: 'prev'
+                }))
                 const currentMonthDays = getMonthDays(date).map((day) => ({
                     text: day,
                     type: 'current'
@@ -192,17 +187,12 @@ export default {
                         <tr
                             class={{
                                 'el-calendar-table__row': true,
-                                'el-calendar-table__row--hide-border':
-                                    index === 0 && this.hideHeader
+                                'el-calendar-table__row--hide-border': index === 0 && this.hideHeader
                             }}
                             key={index}
                         >
                             {row.map((cell, key) => (
-                                <td
-                                    key={key}
-                                    class={this.getCellClass(cell)}
-                                    onClick={this.pickDay.bind(this, cell)}
-                                >
+                                <td key={key} class={this.getCellClass(cell)} onClick={this.pickDay.bind(this, cell)}>
                                     <div class="el-calendar-day">{this.cellRenderProxy(cell)}</div>
                                 </td>
                             ))}

@@ -1,21 +1,22 @@
 <template>
     <demo :data="demoInfo">
-        <el-calendar v-model="value">
+        <calendar v-model="value">
             <template v-slot:dateCell="{ data }">
                 <div :class="data.isSelected ? 'is-selected' : ''">
                     {{ data.day.split('-').slice(2).join('') }} {{ data.isSelected ? '✔️' : '' }}
                 </div>
             </template>
-        </el-calendar>
+        </calendar>
     </demo>
 </template>
 
 <script>
 import Demo from '@/components/Demo'
-// import { Calendar } from '@/components/Calendar'
+import Calendar from '@/components/Calendar'
 export default {
     components: {
-        Demo
+        Demo,
+        Calendar
     },
     name: 'PromotionCalendar',
     data() {

@@ -1,14 +1,14 @@
 <template>
     <div>
-        <code-editor :read-only="false" v-model="code" />
+        <Calendar />
     </div>
 </template>
 
 <script>
-import CodeEditor from '@/components/CodeEditor'
+import Calendar from '@/components/Calendar'
 export default {
     components: {
-        CodeEditor
+        Calendar
     },
     data() {
         return {
