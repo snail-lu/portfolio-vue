@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="test-container">
         <Calendar />
     </div>
 </template>
@@ -11,11 +11,14 @@ export default {
         Calendar
     },
     data() {
-        return {
-            code: 'function myScript(){\n  return 100;\n}\n'
-        }
+        return {}
     }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.test-container {
+    width: 40%;
+    margin: 0 auto;
+}
+</style>
