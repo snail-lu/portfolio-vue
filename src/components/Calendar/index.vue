@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="calendar__body">
-            <date-table :date="date" :selected-day="realSelectedDay" />
+            <date-table :date="date" />
         </div>
     </div>
 </template>
@@ -33,6 +33,12 @@ export default {
             Calendar: this
         }
     },
+    data() {
+        return {
+            selectedDay: '',
+            now: new Date()
+        }
+    },
 
     methods: {
         /**
@@ -40,7 +46,7 @@ export default {
          * @param {*} day
          */
         pickDay(day) {
-            this.realSelectedDay = day
+            this.selectedDay = day
         },
 
         /**
@@ -59,70 +65,48 @@ export default {
                 day = this.formatedToday
             }
 
-            if (day === this.formatedDate) return
             this.pickDay(day)
-        },
-
-        toDate(val) {
-            if (!val) {
-                throw new Error('invalid val')
-            }
-            return val instanceof Date ? val : new Date(val)
         }
     },
 
     computed: {
+        // 上个月月份前缀
         prevMonthDatePrefix() {
             const temp = new Date(this.date.getTime())
             temp.setDate(0)
             return dateFormat(temp, 'yyyy-mm')
         },
 
+        // 当前月月份前缀
         curMonthDatePrefix() {
-            return dateFormat(this.date, 'yyyy-mm')
+            return dateFormat(this.now, 'yyyy-mm')
         },
 
+        // 下个月月份前缀
         nextMonthDatePrefix() {
             const temp = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1)
             return dateFormat(temp, 'yyyy-mm')
         },
 
-        formatedDate() {
-            return dateFormat(this.date, 'yyyy-mm-dd')
-        },
-
+        // 当前显示的月份
         currentDate() {
             const year = this.date.getFullYear()
             const month = this.date.getMonth() + 1
             return `${year} 年 ${month} 月`
         },
 
+        // 格式化今日
         formatedToday() {
             return dateFormat(this.now, 'yyyy-mm-dd')
         },
 
-        realSelectedDay: {
-            get() {
-                return this.selectedDay
-            },
-            set(val) {
-                this.selectedDay = val
-            }
-        },
-
+        // 日历要展示的日期
         date() {
-            if (this.realSelectedDay) {
+            if (this.selectedDay) {
                 const d = this.selectedDay.split('-')
                 return new Date(d[0], d[1] - 1, d[2])
             }
             return this.now
-        }
-    },
-
-    data() {
-        return {
-            selectedDay: '',
-            now: new Date()
         }
     }
 }
