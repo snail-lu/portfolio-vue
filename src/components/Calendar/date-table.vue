@@ -1,12 +1,6 @@
 <template>
-    <table
-        :class="{
-            'calendar-table': true
-        }"
-        :cellspacing="0"
-        :cellpadding="0"
-    >
-        <thead>
+    <table class="calendar-table" :cellspacing="0" :cellpadding="0">
+        <thead class="calendar-table-head">
             <th v-for="day in weekDays" :key="day">{{ day }}</th>
         </thead>
         <tbody>
@@ -38,7 +32,7 @@ export default {
 
     data() {
         return {
-            weekDays: ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+            weekDays: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
         }
     },
 
@@ -151,6 +145,10 @@ export default {
 .calendar-table {
     table-layout: fixed;
     width: 100%;
+}
+
+.calendar-table-head {
+    background-color: #ecf5ff;
 }
 .calendar-table thead th {
     padding: 12px 0;

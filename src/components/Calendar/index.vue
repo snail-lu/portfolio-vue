@@ -5,11 +5,9 @@
                 {{ currentDate }}
             </div>
             <div class="calendar__button-group">
-                <el-button-group>
-                    <el-button type="plain" size="mini" @click="selectDate('prev-month')"> 上个月 </el-button>
-                    <el-button type="plain" size="mini" @click="selectDate('today')"> 今天 </el-button>
-                    <el-button type="plain" size="mini" @click="selectDate('next-month')"> 下个月 </el-button>
-                </el-button-group>
+                <button class="btn" @click="selectDate('prev-month')">上个月</button>
+                <button class="btn" @click="selectDate('today')">今天</button>
+                <button class="btn" @click="selectDate('next-month')">下个月</button>
             </div>
         </div>
         <div class="calendar__body">
@@ -127,5 +125,32 @@ export default {
 }
 .calendar__body {
     padding: 12px 20px 35px;
+}
+
+.calendar__button-group {
+    .btn {
+        line-height: 1;
+        white-space: nowrap;
+        cursor: pointer;
+        background: #fff;
+        border: 1px solid #dcdfe6;
+        color: #606266;
+        -webkit-appearance: none;
+        text-align: center;
+        box-sizing: border-box;
+        outline: 0;
+        margin: 0;
+        transition: 0.1s;
+        font-weight: 500;
+        font-size: 12px;
+        padding: 7px 15px;
+        &:hover {
+            background-color: #ecf5ff;
+            color: #44a2fd;
+        }
+    }
+    & > .btn:not(:last-child) {
+        margin-right: -1px;
+    }
 }
 </style>
