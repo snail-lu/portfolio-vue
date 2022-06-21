@@ -13,29 +13,19 @@
             </div>
         </div>
         <div class="calendar__body">
-            <date-table :date="date" :selected-day="realSelectedDay" :first-day-of-week="realFirstDayOfWeek" @pick="pickDay" />
+            <date-table :date="date" :selected-day="realSelectedDay" />
         </div>
     </div>
 </template>
 
 <script>
-import fecha from 'element-ui/src/utils/date'
 import DateTable from './date-table'
-
-const validTypes = ['prev-month', 'today', 'next-month']
+import { dateFormat } from '@/utils/date'
 
 export default {
     name: 'Calendar',
     components: {
         DateTable
-    },
-
-    props: {
-        value: [Date, String, Number],
-        firstDayOfWeek: {
-            type: Number,
-            default: 1
-        }
     },
 
     provide() {
@@ -85,20 +75,20 @@ export default {
         prevMonthDatePrefix() {
             const temp = new Date(this.date.getTime())
             temp.setDate(0)
-            return fecha.format(temp, 'yyyy-MM')
+            return dateFormat(temp, 'yyyy-mm')
         },
 
         curMonthDatePrefix() {
-            return fecha.format(this.date, 'yyyy-MM')
+            return dateFormat(this.date, 'yyyy-mm')
         },
 
         nextMonthDatePrefix() {
             const temp = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1)
-            return fecha.format(temp, 'yyyy-MM')
+            return dateFormat(temp, 'yyyy-mm')
         },
 
         formatedDate() {
-            return fecha.format(this.date, 'yyyy-MM-dd')
+            return dateFormat(this.date, 'yyyy-mm-dd')
         },
 
         currentDate() {
@@ -108,38 +98,24 @@ export default {
         },
 
         formatedToday() {
-            return fecha.format(this.now, 'yyyy-MM-dd')
+            return dateFormat(this.now, 'yyyy-mm-dd')
         },
 
         realSelectedDay: {
             get() {
-                if (!this.value) return this.selectedDay
-                return this.formatedDate
+                return this.selectedDay
             },
             set(val) {
                 this.selectedDay = val
-                const date = new Date(val)
-                this.$emit('input', date)
             }
         },
 
         date() {
-            if (!this.value) {
-                if (this.realSelectedDay) {
-                    const d = this.selectedDay.split('-')
-                    return new Date(d[0], d[1] - 1, d[2])
-                }
-                return this.now
-            } else {
-                return this.toDate(this.value)
+            if (this.realSelectedDay) {
+                const d = this.selectedDay.split('-')
+                return new Date(d[0], d[1] - 1, d[2])
             }
-        },
-
-        realFirstDayOfWeek() {
-            if (this.firstDayOfWeek < 1 || this.firstDayOfWeek > 6) {
-                return 0
-            }
-            return Math.floor(this.firstDayOfWeek)
+            return this.now
         }
     },
 

@@ -17,7 +17,7 @@
                     'calendar-table__row': true
                 }"
             >
-                <td v-for="(cell, key) in row" :key="key" :class="getCellClass(cell)" @click="pickDay(cell)">
+                <td v-for="(cell, key) in row" :key="key" :class="getCellClass(cell)">
                     <div class="calendar-day">
                         <span>{{ cell.text }}</span>
                     </div>
@@ -27,22 +27,20 @@
     </table>
 </template>
 <script>
-import fecha from 'element-ui/src/utils/date'
-import { range as rangeArr, getFirstDayOfMonth, getPrevMonthLastDays, getMonthDays } from 'element-ui/src/utils/date-util'
+import { getMonthDays, getFirstDayOfMonth, getPrevMonthLastDays, rangeArr, dateFormat } from '@/utils/date'
 
 export default {
     props: {
         selectedDay: String, // formated date yyyy-MM-dd
         date: Date,
-        hideHeader: Boolean,
-        firstDayOfWeek: Number
+        hideHeader: Boolean
     },
 
     inject: ['Calendar'],
 
     data() {
         return {
-            WEEK_DAYS: ['日', '一', '二', '三', '四', '五', '六']
+            WEEK_DAYS: ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
         }
     },
 
@@ -80,11 +78,6 @@ export default {
                 }
             }
             return classes
-        },
-
-        pickDay({ text, type }) {
-            const date = this.getFormateDate(text, type)
-            this.$emit('pick', date)
         }
 
         // cellRenderProxy({ text, type }) {
@@ -107,16 +100,16 @@ export default {
         prevMonthDatePrefix() {
             const temp = new Date(this.date.getTime())
             temp.setDate(0)
-            return fecha.format(temp, 'yyyy-MM')
+            return dateFormat(temp, 'yyyy-mm')
         },
 
         curMonthDatePrefix() {
-            return fecha.format(this.date, 'yyyy-MM')
+            return dateFormat(this.date, 'yyyy-mm')
         },
 
         nextMonthDatePrefix() {
             const temp = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1)
-            return fecha.format(temp, 'yyyy-MM')
+            return dateFormat(temp, 'yyyy-mm')
         },
 
         formatedToday() {
@@ -129,8 +122,7 @@ export default {
             const date = this.date
             let firstDay = getFirstDayOfMonth(date)
             firstDay = firstDay === 0 ? 7 : firstDay
-            const firstDayOfWeek = typeof this.firstDayOfWeek === 'number' ? this.firstDayOfWeek : 1
-            const prevMonthDays = getPrevMonthLastDays(date, firstDay - firstDayOfWeek).map((day) => ({
+            const prevMonthDays = getPrevMonthLastDays(date, firstDay - 1).map((day) => ({
                 text: day,
                 type: 'prev'
             }))

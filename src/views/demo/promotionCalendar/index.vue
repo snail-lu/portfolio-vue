@@ -1,10 +1,8 @@
 <template>
     <demo :data="demoInfo">
-        <calendar v-model="value">
+        <calendar>
             <template v-slot:dateCell="{ data }">
-                <div :class="data.isSelected ? 'is-selected' : ''">
-                    {{ data.day.split('-').slice(2).join('') }} {{ data.isSelected ? '✔️' : '' }}
-                </div>
+                <div :class="data.isSelected ? 'is-selected' : ''">{{ data.day.split('-').slice(2).join('') }} {{ data.isSelected ? '✔️' : '' }}</div>
             </template>
         </calendar>
     </demo>
@@ -24,8 +22,7 @@ export default {
             demoInfo: {
                 title: '促销日历',
                 url: ''
-            },
-            value: new Date()
+            }
         }
     },
     created() {},
