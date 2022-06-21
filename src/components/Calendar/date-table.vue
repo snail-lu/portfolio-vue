@@ -14,6 +14,9 @@
                 <td v-for="(cell, key) in row" :key="key" :class="getCellClass(cell)">
                     <div class="calendar-day">
                         <span>{{ cell.text }}</span>
+                        <div v-for="(schedule, idx) in scheduleList[index]" :key="idx">
+                            <div class="schedule-placeholder" v-if="schedule[key]">{{ schedule[key].title }}</div>
+                        </div>
                     </div>
                 </td>
             </tr>
@@ -25,14 +28,42 @@ import { getMonthDays, getFirstDayOfMonth, getPrevMonthLastDays, rangeArr, dateF
 
 export default {
     props: {
-        date: Date
+        date: Date,
+        schedule: Array
     },
 
     inject: ['Calendar'],
 
     data() {
         return {
-            weekDays: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            weekDays: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+            scheduleList: [
+                [
+                    [
+                        null,
+                        null,
+                        {
+                            title: '618大促',
+                            id: 1,
+                            isStart: true
+                        },
+                        {
+                            title: '618大促',
+                            id: 1,
+                            isStart: false
+                        },
+                        null,
+                        null,
+                        null
+                    ]
+                ],
+                [[]],
+                [[]],
+                [[]],
+                [[]],
+                [[]],
+                [[]]
+            ]
         }
     },
 
@@ -54,7 +85,6 @@ export default {
             const classes = [type]
             if (type === 'current') {
                 const date = this.getFormateDate(text, type)
-                console.log(date, 'date')
                 if (date === this.formatedToday) {
                     classes.push('is-today')
                 }
@@ -69,21 +99,6 @@ export default {
                 return days.slice(start, start + 7)
             })
         }
-
-        // cellRenderProxy({ text, type }) {
-        //     // let render = this.Calendar.$scopedSlots.dateCell
-        //     // if (!render) return <span>{text}</span>
-
-        //     const day = this.getFormateDate(text, type)
-        //     const date = new Date(day)
-        //     const data = {
-        //         isSelected: this.selectedDay === day,
-        //         type: `${type}-month`,
-        //         day
-        //     }
-        //     console.log(data, 'data')
-        //     // return render({ date, data })
-        // }
     },
 
     computed: {
@@ -109,31 +124,44 @@ export default {
         formatedToday() {
             return this.Calendar.formatedToday
         },
+
         // 行数据
         rows() {
+            const { date, schedule } = this
             let days = []
 
-            const date = this.date
             // 计算当前月份第一天是周几
             let firstDay = getFirstDayOfMonth(date)
             firstDay = firstDay === 0 ? 7 : firstDay
             // 截取获取上月尾部天数，组装数据
             const prevMonthDays = getPrevMonthLastDays(date, firstDay - 1).map((day) => ({
+                formatedDate: this.getFormateDate(day, 'prev'),
                 text: day,
                 type: 'prev'
             }))
             // 本月天数，组装天数
             const currentMonthDays = getMonthDays(date).map((day) => ({
+                formatedDate: this.getFormateDate(day, 'current'),
                 text: day,
                 type: 'current'
             }))
             days = [...prevMonthDays, ...currentMonthDays]
             // 截取下个月头部天数，组装数据，总共显示42天
-            const nextMonthDays = rangeArr(42 - days.length).map((_, index) => ({
-                text: index + 1,
+            const nextMonthDays = rangeArr(42 - days.length).map((text) => ({
+                formatedDate: this.getFormateDate(text, 'next'),
+                text,
                 type: 'next'
             }))
             days = days.concat(nextMonthDays)
+
+            // 促销数据组装进日期数据中
+            // if (schedule && schedule.length > 0) {
+            //     schedule.forEach(s => {
+            //         days.forEach(day => {
+
+            //         })
+            //     })
+            // }
 
             // 转换成二维数组形式
             return this.toNestedArr(days)
@@ -186,6 +214,14 @@ export default {
     box-sizing: border-box;
     padding: 8px;
     height: 85px;
+
+    .schedule-placeholder {
+        width: 100%;
+        height: 20px;
+        background-color: rgba(250, 210, 51, 0.985);
+        color: #fff;
+        font-size: 14px;
+    }
 }
 .calendar-table .calendar-day:hover {
     cursor: pointer;

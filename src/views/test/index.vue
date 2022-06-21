@@ -1,6 +1,6 @@
 <template>
     <div class="test-container">
-        <Calendar />
+        <Calendar :schedule="schedule" />
     </div>
 </template>
 
@@ -11,7 +11,22 @@ export default {
         Calendar
     },
     data() {
-        return {}
+        return {
+            schedule: [
+                {
+                    title: '618大促',
+                    start: '2022-06-01',
+                    end: '2022-06-21',
+                    id: 1
+                },
+                {
+                    title: '日常促销',
+                    start: '2022-06-05',
+                    end: '2022-06-07',
+                    id: 2
+                }
+            ]
+        }
     }
 }
 </script>

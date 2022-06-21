@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="calendar__body">
-            <date-table :date="date" />
+            <date-table :date="date" :schedule="schedule" />
         </div>
     </div>
 </template>
@@ -24,6 +24,9 @@ export default {
     name: 'Calendar',
     components: {
         DateTable
+    },
+    props: {
+        schedule: Array
     },
 
     provide() {
