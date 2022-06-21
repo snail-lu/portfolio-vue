@@ -77,11 +77,6 @@ export default {
             return dateFormat(temp, 'yyyy-mm')
         },
 
-        // 当前月月份前缀
-        curMonthDatePrefix() {
-            return dateFormat(this.now, 'yyyy-mm')
-        },
-
         // 下个月月份前缀
         nextMonthDatePrefix() {
             const temp = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1)

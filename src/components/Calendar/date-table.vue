@@ -31,53 +31,49 @@ import { getMonthDays, getFirstDayOfMonth, getPrevMonthLastDays, rangeArr, dateF
 
 export default {
     props: {
-        selectedDay: String, // formated date yyyy-MM-dd
-        date: Date,
-        hideHeader: Boolean
+        date: Date
     },
 
     inject: ['Calendar'],
 
     data() {
         return {
-            WEEK_DAYS: ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+            weekDays: ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
         }
     },
 
     methods: {
-        toNestedArr(days) {
-            return rangeArr(days.length / 7).map((_, index) => {
-                const start = index * 7
-                return days.slice(start, start + 7)
-            })
-        },
-
+        // 根据日期的type，转换日期格式成yyyy-mm-dd
         getFormateDate(day, type) {
-            if (!day || ['prev', 'current', 'next'].indexOf(type) === -1) {
-                throw new Error('invalid day or type')
-            }
             let prefix = this.curMonthDatePrefix
             if (type === 'prev') {
                 prefix = this.prevMonthDatePrefix
             } else if (type === 'next') {
                 prefix = this.nextMonthDatePrefix
             }
-            day = `00${day}`.slice(-2)
+            day = `0${day}`.slice(-2)
             return `${prefix}-${day}`
         },
 
+        // 根据日期的type，赋予对应的展示样式
         getCellClass({ text, type }) {
             const classes = [type]
             if (type === 'current') {
                 const date = this.getFormateDate(text, type)
-                if (date === this.selectedDay) {
-                    classes.push('is-selected')
-                }
+                console.log(date, 'date')
                 if (date === this.formatedToday) {
                     classes.push('is-today')
                 }
             }
             return classes
+        },
+
+        // 一维数组转为二维数组
+        toNestedArr(days) {
+            return rangeArr(days.length / 7).map((_, index) => {
+                const start = index * 7
+                return days.slice(start, start + 7)
+            })
         }
 
         // cellRenderProxy({ text, type }) {
@@ -97,21 +93,25 @@ export default {
     },
 
     computed: {
+        // 上个月月份前缀
         prevMonthDatePrefix() {
             const temp = new Date(this.date.getTime())
             temp.setDate(0)
             return dateFormat(temp, 'yyyy-mm')
         },
 
+        // 当前月月份前缀
         curMonthDatePrefix() {
             return dateFormat(this.date, 'yyyy-mm')
         },
 
+        // 下个月月份前缀
         nextMonthDatePrefix() {
             const temp = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1)
             return dateFormat(temp, 'yyyy-mm')
         },
 
+        // 格式化今日
         formatedToday() {
             return this.Calendar.formatedToday
         },
@@ -120,35 +120,29 @@ export default {
             let days = []
 
             const date = this.date
+            // 计算当前月份第一天是周几
             let firstDay = getFirstDayOfMonth(date)
             firstDay = firstDay === 0 ? 7 : firstDay
+            // 截取获取上月尾部天数，组装数据
             const prevMonthDays = getPrevMonthLastDays(date, firstDay - 1).map((day) => ({
                 text: day,
                 type: 'prev'
             }))
+            // 本月天数，组装天数
             const currentMonthDays = getMonthDays(date).map((day) => ({
                 text: day,
                 type: 'current'
             }))
             days = [...prevMonthDays, ...currentMonthDays]
+            // 截取下个月头部天数，组装数据，总共显示42天
             const nextMonthDays = rangeArr(42 - days.length).map((_, index) => ({
                 text: index + 1,
                 type: 'next'
             }))
             days = days.concat(nextMonthDays)
 
+            // 转换成二维数组形式
             return this.toNestedArr(days)
-        },
-
-        weekDays() {
-            const start = this.firstDayOfWeek
-            const { WEEK_DAYS } = this
-
-            if (typeof start !== 'number' || start === 0) {
-                return WEEK_DAYS.slice()
-            } else {
-                return WEEK_DAYS.slice(start).concat(WEEK_DAYS.slice(0, start))
-            }
         }
     }
 }
