@@ -15,7 +15,11 @@
                     <div class="calendar-day">
                         <span>{{ cell.text }}</span>
                         <div v-for="(schedule, idx) in scheduleList[index]" :key="idx">
-                            <div class="schedule-placeholder" v-if="schedule[key]">{{ schedule[key].title }}</div>
+                            <div class="schedule-placeholder" v-if="schedule[key].isPlaceholder"></div>
+
+                            <div class="schedule-item" :class="{ 'is-start': schedule[key].isStart }" v-else>
+                                {{ schedule[key].showTitle ? schedule[key].title : '' }}
+                            </div>
                         </div>
                     </div>
                 </td>
@@ -36,34 +40,7 @@ export default {
 
     data() {
         return {
-            weekDays: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-            scheduleList: [
-                [
-                    [
-                        null,
-                        null,
-                        {
-                            title: '618大促',
-                            id: 1,
-                            isStart: true
-                        },
-                        {
-                            title: '618大促',
-                            id: 1,
-                            isStart: false
-                        },
-                        null,
-                        null,
-                        null
-                    ]
-                ],
-                [[]],
-                [[]],
-                [[]],
-                [[]],
-                [[]],
-                [[]]
-            ]
+            weekDays: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
         }
     },
 
@@ -80,16 +57,35 @@ export default {
             return `${prefix}-${day}`
         },
 
+        // 根据yyyy-mm-dd格式的日期获取时间戳
+        getFormateDateTimestamp(date) {
+            const d = date.split('-')
+            return new Date(d[0], d[1] - 1, d[2]).getTime()
+        },
+
         // 根据日期的type，赋予对应的展示样式
-        getCellClass({ text, type }) {
+        getCellClass({ type, formatedDate }) {
             const classes = [type]
             if (type === 'current') {
-                const date = this.getFormateDate(text, type)
-                if (date === this.formatedToday) {
+                if (formatedDate === this.formatedToday) {
                     classes.push('is-today')
                 }
             }
             return classes
+        },
+
+        // 日期对象包装
+        transformMonthDays(days, type) {
+            return days.map((day) => {
+                const formatedDate = this.getFormateDate(day, type)
+                const timestamp = this.getFormateDateTimestamp(formatedDate)
+                return {
+                    formatedDate,
+                    timestamp,
+                    text: day,
+                    type
+                }
+            })
         },
 
         // 一维数组转为二维数组
@@ -127,44 +123,84 @@ export default {
 
         // 行数据
         rows() {
-            const { date, schedule } = this
+            const { date } = this
             let days = []
+            let scheduleList = []
 
             // 计算当前月份第一天是周几
             let firstDay = getFirstDayOfMonth(date)
             firstDay = firstDay === 0 ? 7 : firstDay
             // 截取获取上月尾部天数，组装数据
-            const prevMonthDays = getPrevMonthLastDays(date, firstDay - 1).map((day) => ({
-                formatedDate: this.getFormateDate(day, 'prev'),
-                text: day,
-                type: 'prev'
-            }))
+            const prevMonthDays = this.transformMonthDays(getPrevMonthLastDays(date, firstDay - 1), 'prev')
             // 本月天数，组装天数
-            const currentMonthDays = getMonthDays(date).map((day) => ({
-                formatedDate: this.getFormateDate(day, 'current'),
-                text: day,
-                type: 'current'
-            }))
+            const currentMonthDays = this.transformMonthDays(getMonthDays(date), 'current')
             days = [...prevMonthDays, ...currentMonthDays]
             // 截取下个月头部天数，组装数据，总共显示42天
-            const nextMonthDays = rangeArr(42 - days.length).map((text) => ({
-                formatedDate: this.getFormateDate(text, 'next'),
-                text,
-                type: 'next'
-            }))
+            const nextMonthDays = this.transformMonthDays(rangeArr(42 - days.length), 'next')
             days = days.concat(nextMonthDays)
-
-            // 促销数据组装进日期数据中
-            // if (schedule && schedule.length > 0) {
-            //     schedule.forEach(s => {
-            //         days.forEach(day => {
-
-            //         })
-            //     })
-            // }
 
             // 转换成二维数组形式
             return this.toNestedArr(days)
+        },
+
+        scheduleList() {
+            const r = [[], [], [], [], [], []]
+            const { rows, schedule } = this
+            // 日程表数据中的起始和结束日期转为时间戳，便于后面进行时间范围判断
+            const transformedSchedule = schedule.map((s) => {
+                return {
+                    ...s,
+                    startTimestamp: this.getFormateDateTimestamp(s.start),
+                    endTimestamp: this.getFormateDateTimestamp(s.end)
+                }
+            })
+
+            transformedSchedule.forEach((ts) => {
+                rows.forEach((rowItem, rowIndex) => {
+                    const schedulePlaceholderRow = [
+                        {
+                            isPlaceholder: true
+                        },
+                        {
+                            isPlaceholder: true
+                        },
+                        {
+                            isPlaceholder: true
+                        },
+                        {
+                            isPlaceholder: true
+                        },
+                        {
+                            isPlaceholder: true
+                        },
+                        {
+                            isPlaceholder: true
+                        },
+                        {
+                            isPlaceholder: true
+                        }
+                    ]
+                    rowItem.forEach((column, columnIndex) => {
+                        // 当前日期是否在活动日期范围内
+                        if (column.timestamp >= ts.startTimestamp && column.timestamp <= ts.endTimestamp) {
+                            const scheduleRow = r[rowIndex]
+                            if (scheduleRow.length == 0) {
+                                scheduleRow.push(schedulePlaceholderRow)
+                            } else if (scheduleRow[scheduleRow.length - 1][columnIndex].id) {
+                                scheduleRow.push(schedulePlaceholderRow)
+                            }
+                            // debugger
+                            r[rowIndex][scheduleRow.length - 1][columnIndex] = {
+                                isStart: column.timestamp === ts.startTimestamp,
+                                showTitle: column.timestamp === ts.startTimestamp || columnIndex === 0,
+                                title: ts.title || '',
+                                id: ts.id
+                            }
+                        }
+                    })
+                })
+            })
+            return r
         }
     }
 }
@@ -173,58 +209,82 @@ export default {
 .calendar-table {
     table-layout: fixed;
     width: 100%;
+
+    &-head {
+        background-color: #ecf5ff;
+        th {
+            padding: 12px 0;
+            color: #606266;
+            font-weight: 400;
+        }
+    }
+
+    td {
+        border-bottom: 1px solid #ebeef5;
+        border-right: 1px solid #ebeef5;
+        vertical-align: top;
+        -webkit-transition: background-color 0.2s ease;
+        transition: background-color 0.2s ease;
+
+        &.next,
+        &.prev {
+            color: #c0c4cc;
+        }
+
+        &.is-selected {
+            background-color: #f2f8fe;
+        }
+
+        &.is-today {
+            color: #409eff;
+        }
+    }
+
+    tr:first-child td {
+        border-top: 1px solid #ebeef5;
+    }
+
+    tr td:first-child {
+        border-left: 1px solid #ebeef5;
+    }
+
+    tr.calendar-table__row--hide-border td {
+        border-top: none;
+    }
 }
 
-.calendar-table-head {
-    background-color: #ecf5ff;
-}
-.calendar-table thead th {
-    padding: 12px 0;
-    color: #606266;
-    font-weight: 400;
-}
-.calendar-table td.next,
-.calendar-table td.prev {
-    color: #c0c4cc;
-}
-.calendar-table td {
-    border-bottom: 1px solid #ebeef5;
-    border-right: 1px solid #ebeef5;
-    vertical-align: top;
-    -webkit-transition: background-color 0.2s ease;
-    transition: background-color 0.2s ease;
-}
-.calendar-table td.is-selected {
-    background-color: #f2f8fe;
-}
-.calendar-table td.is-today {
-    color: #409eff;
-}
-.calendar-table tr:first-child td {
-    border-top: 1px solid #ebeef5;
-}
-.calendar-table tr td:first-child {
-    border-left: 1px solid #ebeef5;
-}
-.calendar-table tr.calendar-table__row--hide-border td {
-    border-top: none;
-}
-.calendar-table .calendar-day {
+.calendar-day {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 8px;
+    // padding: 8px;
     height: 85px;
 
     .schedule-placeholder {
         width: 100%;
         height: 20px;
-        background-color: rgba(250, 210, 51, 0.985);
-        color: #fff;
-        font-size: 14px;
+        margin-bottom: 4px;
     }
-}
-.calendar-table .calendar-day:hover {
-    cursor: pointer;
-    background-color: #f2f8fe;
+
+    .schedule-item {
+        width: 100%;
+        height: 20px;
+        background-color: #66cccc;
+        color: #fff;
+        font-size: 13px;
+        line-height: 20px;
+        margin-bottom: 4px;
+        padding-left: 4px;
+        box-sizing: border-box;
+    }
+
+    .is-start {
+        margin-left: 4px;
+        width: calc(100% - 4px);
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: #f2f8fe;
+    }
 }
 </style>
