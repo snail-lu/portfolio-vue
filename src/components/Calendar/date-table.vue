@@ -17,7 +17,12 @@
                         <div v-for="(schedule, idx) in scheduleList[index]" :key="idx">
                             <div class="schedule-placeholder" v-if="schedule[key].isPlaceholder"></div>
 
-                            <div class="schedule-item" :class="{ 'is-start': schedule[key].isStart }" v-else>
+                            <div
+                                class="schedule-item"
+                                :class="{ 'is-start': schedule[key].isStart }"
+                                :style="{ 'background-color': schedule[key].bgColor }"
+                                v-else
+                            >
                                 {{ schedule[key].showTitle ? schedule[key].title : '' }}
                             </div>
                         </div>
@@ -94,6 +99,24 @@ export default {
                 const start = index * 7
                 return days.slice(start, start + 7)
             })
+        },
+        /**
+         * 计算可以被插入的行
+         * @param {Array} arr 二维数组 [[{},{},{},{},{},{},{}],[{},{},{},{},{},{},{}],...]
+         * @param {number} startIndex 起始index
+         * @param {number} length 要插入的数据的长度
+         */
+        getInsertRow(arr, startIndex, length) {
+            if (arr.length === 0) return 0
+            const endIndex = startIndex + length > 7 ? 7 : startIndex + length + 1
+            let row = -1
+            for (let i = 0, len = arr.length; i < len; i++) {
+                if (arr[i].slice(startIndex, endIndex).every((item) => item.isPlaceholder)) {
+                    row = i
+                    break
+                }
+            }
+            return row
         }
     },
 
@@ -125,7 +148,6 @@ export default {
         rows() {
             const { date } = this
             let days = []
-            let scheduleList = []
 
             // 计算当前月份第一天是周几
             let firstDay = getFirstDayOfMonth(date)
@@ -144,18 +166,27 @@ export default {
         },
 
         scheduleList() {
+            // 六周日历数据对应六周的日程集合，每周下，可能有多个日程行
             const r = [[], [], [], [], [], []]
             const { rows, schedule } = this
+            const bgColors = ['#99CCCC', '#99CCFF', '#FF99CC', '#FF9999', '#99CC66', '#FF9900', '#666699', '#FF6666']
             // 日程表数据中的起始和结束日期转为时间戳，便于后面进行时间范围判断
-            const transformedSchedule = schedule.map((s) => {
+            const transformedSchedule = schedule.map((s, index) => {
+                const startTimestamp = this.getFormateDateTimestamp(s.start)
+                const endTimestamp = this.getFormateDateTimestamp(s.end)
+                const durationDays = (endTimestamp - startTimestamp) / (24 * 60 * 60 * 1000)
                 return {
                     ...s,
-                    startTimestamp: this.getFormateDateTimestamp(s.start),
-                    endTimestamp: this.getFormateDateTimestamp(s.end)
+                    startTimestamp,
+                    endTimestamp,
+                    bgColor: bgColors[index % 9],
+                    durationDays
                 }
             })
 
+            // 日程活动遍历，将活动数据填进对应的行中
             transformedSchedule.forEach((ts) => {
+                // 对6周日历数据进行遍历
                 rows.forEach((rowItem, rowIndex) => {
                     const schedulePlaceholderRow = [
                         {
@@ -180,21 +211,36 @@ export default {
                             isPlaceholder: true
                         }
                     ]
+                    // 单周数据遍历，根据时间戳来判断遍历到的日期是否在活动时间内，是的话，将活动数据填充到该行该列下
+                    let insertRow = 0
                     rowItem.forEach((column, columnIndex) => {
                         // 当前日期是否在活动日期范围内
                         if (column.timestamp >= ts.startTimestamp && column.timestamp <= ts.endTimestamp) {
+                            // 活动起始日标志
+                            const isStart = column.timestamp === ts.startTimestamp
+                            // 第rowIndex周日程数据集合
                             const scheduleRow = r[rowIndex]
-                            if (scheduleRow.length == 0) {
-                                scheduleRow.push(schedulePlaceholderRow)
-                            } else if (scheduleRow[scheduleRow.length - 1][columnIndex].id) {
-                                scheduleRow.push(schedulePlaceholderRow)
+                            if (isStart) {
+                                // 根据起始日及跨度天数计算数据要插入到第几行日程行
+                                insertRow = this.getInsertRow(scheduleRow, columnIndex, ts.durationDays)
                             }
-                            // debugger
-                            r[rowIndex][scheduleRow.length - 1][columnIndex] = {
-                                isStart: column.timestamp === ts.startTimestamp,
-                                showTitle: column.timestamp === ts.startTimestamp || columnIndex === 0,
+                            // 第rowIndex周未插入过日程行
+                            if (scheduleRow.length == 0) {
+                                // 插入一个日程行
+                                scheduleRow.push(schedulePlaceholderRow)
+                            } else if (insertRow === -1) {
+                                // 之前的日程行中没有可以插入的位置，新增一个日程行
+                                scheduleRow.push(schedulePlaceholderRow)
+                                // 插入指针指向最后一行日程行
+                                insertRow = scheduleRow.length - 1
+                            }
+                            // 修改第insertRow行日程行的第columnIndex列数据
+                            scheduleRow[insertRow][columnIndex] = {
+                                isStart,
+                                showTitle: isStart || columnIndex === 0,
                                 title: ts.title || '',
-                                id: ts.id
+                                id: ts.id,
+                                bgColor: ts.bgColor
                             }
                         }
                     })
@@ -257,7 +303,7 @@ export default {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     // padding: 8px;
-    height: 85px;
+    min-height: 85px;
 
     .schedule-placeholder {
         width: 100%;
