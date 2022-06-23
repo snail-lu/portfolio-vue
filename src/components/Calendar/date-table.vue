@@ -211,7 +211,7 @@ export default {
                             isPlaceholder: true
                         }
                     ]
-                    // 单周数据遍历，根据时间戳来判断遍历到的日期是否在活动时间内，是的话，将活动数据填充到该行该列下
+                    // 单周数据遍历，根据时间戳来判断遍历到的日期是否在活动时间内，是的话，将活动数据填充到该周日程行中
                     let insertRow = 0
                     rowItem.forEach((column, columnIndex) => {
                         // 当前日期是否在活动日期范围内
