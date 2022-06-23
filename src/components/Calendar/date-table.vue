@@ -12,7 +12,7 @@
                 }"
             >
                 <td v-for="(cell, key) in row" :key="key" :class="getCellClass(cell)">
-                    <div class="calendar-day">
+                    <div class="calendar-day" @click="onPickDay(cell)">
                         <span>{{ cell.text }}</span>
                         <div v-for="(schedule, idx) in scheduleList[index]" :key="idx">
                             <div class="schedule-placeholder" v-if="schedule[key].isPlaceholder"></div>
@@ -117,6 +117,10 @@ export default {
                 }
             }
             return row
+        },
+        // 点击某一天
+        onPickDay(cell) {
+            this.$emit('pick', cell)
         }
     },
 
@@ -172,8 +176,8 @@ export default {
             const bgColors = ['#99CCCC', '#99CCFF', '#FF99CC', '#FF9999', '#99CC66', '#FF9900', '#666699', '#FF6666']
             // 日程表数据中的起始和结束日期转为时间戳，便于后面进行时间范围判断
             const transformedSchedule = schedule.map((s, index) => {
-                const startTimestamp = this.getFormateDateTimestamp(s.start)
-                const endTimestamp = this.getFormateDateTimestamp(s.end)
+                const startTimestamp = this.getFormateDateTimestamp(s.startDate)
+                const endTimestamp = this.getFormateDateTimestamp(s.endDate)
                 const durationDays = (endTimestamp - startTimestamp) / (24 * 60 * 60 * 1000)
                 return {
                     ...s,
@@ -188,6 +192,7 @@ export default {
             transformedSchedule.forEach((ts) => {
                 // 对6周日历数据进行遍历
                 rows.forEach((rowItem, rowIndex) => {
+                    // 空日程行数据，7个元素，分别对应周一~周日
                     const schedulePlaceholderRow = [
                         {
                             isPlaceholder: true
@@ -224,17 +229,17 @@ export default {
                                 // 根据起始日及跨度天数计算数据要插入到第几行日程行
                                 insertRow = this.getInsertRow(scheduleRow, columnIndex, ts.durationDays)
                             }
-                            // 第rowIndex周未插入过日程行
+                            // 当前周未插入过日程行
                             if (scheduleRow.length == 0) {
                                 // 插入一个日程行
                                 scheduleRow.push(schedulePlaceholderRow)
                             } else if (insertRow === -1) {
-                                // 之前的日程行中没有可以插入的位置，新增一个日程行
+                                // 当前周之前的日程行中没有可以插入的位置，新增一个日程行
                                 scheduleRow.push(schedulePlaceholderRow)
                                 // 插入指针指向最后一行日程行
                                 insertRow = scheduleRow.length - 1
                             }
-                            // 修改第insertRow行日程行的第columnIndex列数据
+                            // 修改当前周第insertRow行日程行的第columnIndex列数据
                             scheduleRow[insertRow][columnIndex] = {
                                 isStart,
                                 showTitle: isStart || columnIndex === 0,

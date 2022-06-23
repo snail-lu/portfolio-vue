@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="calendar__body">
-            <date-table :date="date" :schedule="schedule" />
+            <date-table :date="date" :schedule="schedule" @pick="onPickDay" />
         </div>
     </div>
 </template>
@@ -43,14 +43,6 @@ export default {
 
     methods: {
         /**
-         * 切换到指定的日期
-         * @param {*} day
-         */
-        pickDay(day) {
-            this.selectedDay = day
-        },
-
-        /**
          * 切换上一月/今天/下一月
          *
          * @param {string} type 切换类型
@@ -66,7 +58,12 @@ export default {
                 day = this.formatedToday
             }
 
-            this.pickDay(day)
+            this.selectedDay = day
+        },
+
+        // 点选某一天
+        onPickDay(cell) {
+            this.$emit('pick', cell)
         }
     },
 
