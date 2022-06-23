@@ -63,7 +63,12 @@ export default {
 
         // 点选某一天
         pickDay(cell) {
-            this.$emit('pick', cell)
+            this.$emit('pick-day', cell)
+        },
+        // 点选某一日程
+        pickSchedule(schedule) {
+            const { id, title } = schedule
+            this.$emit('pick-schedule', { id, title })
         }
     },
 

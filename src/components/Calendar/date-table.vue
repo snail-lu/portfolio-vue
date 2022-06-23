@@ -12,8 +12,9 @@
                 }"
             >
                 <td v-for="(cell, key) in row" :key="key" :class="getCellClass(cell)">
-                    <div class="calendar-day" @click="onPickDay(cell)">
+                    <div class="calendar-day" @click.stop="onPickDay(cell)">
                         <span>{{ cell.text }}</span>
+                        <!-- 多行日程行列表渲染 -->
                         <div v-for="(schedule, idx) in scheduleList[index]" :key="idx">
                             <div class="schedule-placeholder" v-if="schedule[key].isPlaceholder"></div>
 
@@ -21,6 +22,7 @@
                                 class="schedule-item"
                                 :class="{ 'is-start': schedule[key].isStart }"
                                 :style="{ 'background-color': schedule[key].bgColor }"
+                                @click.stop="onPickSchedule(schedule[key])"
                                 v-else
                             >
                                 {{ schedule[key].showTitle ? schedule[key].title : '' }}
@@ -121,6 +123,10 @@ export default {
         // 点击某一天
         onPickDay(cell) {
             this.Calendar.pickDay(cell)
+        },
+        // 点击某一日程
+        onPickSchedule(schedule) {
+            this.Calendar.pickSchedule(schedule)
         }
     },
 
@@ -183,7 +189,7 @@ export default {
                     ...s,
                     startTimestamp,
                     endTimestamp,
-                    bgColor: bgColors[index % 9],
+                    bgColor: bgColors[index % 8],
                     durationDays
                 }
             })
@@ -225,9 +231,13 @@ export default {
                             const isStart = column.timestamp === ts.startTimestamp
                             // 第rowIndex周日程数据集合
                             const scheduleRow = r[rowIndex]
+                            // debugger
                             if (isStart) {
                                 // 根据起始日及跨度天数计算数据要插入到第几行日程行
                                 insertRow = this.getInsertRow(scheduleRow, columnIndex, ts.durationDays)
+                            } else if (columnIndex === 0) {
+                                const durationDays = (ts.endTimestamp - column.timestamp) / (24 * 60 * 60 * 1000)
+                                insertRow = this.getInsertRow(scheduleRow, columnIndex, durationDays)
                             }
                             // 当前周未插入过日程行
                             if (scheduleRow.length == 0) {

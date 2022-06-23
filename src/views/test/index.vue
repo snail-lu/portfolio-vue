@@ -1,7 +1,7 @@
 <template>
     <div class="test-container">
-        <Calendar :schedule="schedule" @pick="onPickDay" />
-        <el-dialog title="新增促销活动" :visible.sync="dialogFormVisible" width="500px">
+        <Calendar :schedule="schedule" @pick-day="onPickDay" @pick-schedule="onPickSchedule" />
+        <el-dialog :title="form.id ? '编辑促销日程' : '新增促销日程'" :visible.sync="dialogFormVisible" width="500px">
             <el-form :model="form" :rules="formRules" label-width="100px" ref="form">
                 <el-form-item label="活动名称:" prop="title">
                     <el-input v-model="form.title" autocomplete="off" style="width: 300px"></el-input>
@@ -13,7 +13,7 @@
                     <el-date-picker v-model="form.endDate" type="date" style="width: 300px" value-format="yyyy-MM-dd"> </el-date-picker>
                 </el-form-item>
             </el-form>
-            <div slot="footer" class="dialog-footer">
+            <div slot="footer">
                 <el-button @click="onDialogBtnClick('cancel')">取 消</el-button>
                 <el-button type="primary" @click="onDialogBtnClick('confirm')">确 定</el-button>
             </div>
@@ -37,46 +37,58 @@ export default {
                     id: 1
                 },
                 {
-                    title: '日常促销1',
+                    title: '日常促销2',
                     startDate: '2022-06-02',
                     endDate: '2022-06-04',
                     id: 2
                 },
                 {
-                    title: '日常促销2',
+                    title: '日常促销3',
                     startDate: '2022-06-03',
                     endDate: '2022-06-06',
                     id: 3
                 },
                 {
-                    title: '日常促销3',
+                    title: '日常促销4',
                     startDate: '2022-06-04',
                     endDate: '2022-06-05',
                     id: 4
                 },
                 {
-                    title: '日常促销4',
-                    startDate: '2022-06-07',
-                    endDate: '2022-06-08',
-                    id: 4
-                },
-                {
                     title: '日常促销5',
-                    startDate: '2022-06-07',
-                    endDate: '2022-06-09',
+                    startDate: '2022-06-06',
+                    endDate: '2022-06-08',
                     id: 5
                 },
                 {
                     title: '日常促销6',
-                    startDate: '2022-06-17',
-                    endDate: '2022-06-19',
+                    startDate: '2022-06-07',
+                    endDate: '2022-06-09',
                     id: 6
                 },
                 {
                     title: '日常促销7',
                     startDate: '2022-06-18',
-                    endDate: '2022-06-22',
+                    endDate: '2022-06-20',
                     id: 7
+                },
+                {
+                    title: '日常促销8',
+                    startDate: '2022-06-19',
+                    endDate: '2022-06-21',
+                    id: 8
+                },
+                {
+                    title: '日常促销9',
+                    startDate: '2022-06-23',
+                    endDate: '2022-06-24',
+                    id: 9
+                },
+                {
+                    title: '日常促销10',
+                    startDate: '2022-06-21',
+                    endDate: '2022-06-22',
+                    id: 10
                 }
             ],
             dialogFormVisible: false,
@@ -93,25 +105,50 @@ export default {
         }
     },
     methods: {
+        // 点击某一天
         onPickDay(day) {
             const { formatedDate } = day
             this.dialogFormVisible = true
             this.form.startDate = formatedDate
         },
+        // 点击某一日程
+        onPickSchedule(schedule) {
+            const { id } = schedule
+            const scheduleItem = this.schedule.find((item) => item.id === id)
+            if (scheduleItem) {
+                this.form = { ...scheduleItem }
+                this.dialogFormVisible = true
+            }
+        },
+        // 日程弹窗按钮事件处理
         onDialogBtnClick(type) {
             if (type === 'cancel') {
                 this.dialogFormVisible = false
+                this.$refs['form'].resetFields()
+                this.form = {
+                    title: '',
+                    startDate: '',
+                    endDate: ''
+                }
             } else if (type === 'confirm') {
                 this.$refs['form'].validate(async (valid) => {
                     if (valid) {
-                        this.dialogFormVisible = false
                         const { schedule, form } = this
-                        const newId = schedule[schedule.length - 1].id + 1
-                        const newScheduleItem = {
-                            ...form,
-                            id: newId
+                        // form中已有id，说明是已经插入过的日程
+                        if (form.id) {
+                            const scheduleIndex = this.schedule.findIndex((item) => item.id === form.id)
+                            this.$set(this.schedule, scheduleIndex, form)
+                        } else {
+                            // 插入新数据
+                            const newId = schedule[schedule.length - 1].id + 1
+                            const newScheduleItem = {
+                                ...form,
+                                id: newId
+                            }
+                            this.schedule.push(newScheduleItem)
                         }
-                        this.schedule.push(newScheduleItem)
+
+                        this.dialogFormVisible = false
                     }
                 })
             }
