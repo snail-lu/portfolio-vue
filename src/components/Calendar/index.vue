@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="calendar__body">
-            <date-table :date="date" :schedule="schedule" @pick="onPickDay" />
+            <date-table :date="date" :schedule="schedule" />
         </div>
     </div>
 </template>
@@ -62,7 +62,7 @@ export default {
         },
 
         // 点选某一天
-        onPickDay(cell) {
+        pickDay(cell) {
             this.$emit('pick', cell)
         }
     },

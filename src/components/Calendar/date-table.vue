@@ -120,7 +120,7 @@ export default {
         },
         // 点击某一天
         onPickDay(cell) {
-            this.$emit('pick', cell)
+            this.Calendar.pickDay(cell)
         }
     },
 
