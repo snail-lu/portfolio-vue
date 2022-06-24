@@ -1,165 +1,148 @@
 <template>
-    <div class="test-container">
-        <Calendar :schedule="schedule" @pick-day="onPickDay" @pick-schedule="onPickSchedule" />
-        <el-dialog :title="form.id ? '编辑促销日程' : '新增促销日程'" :visible.sync="dialogFormVisible" width="500px">
-            <el-form :model="form" :rules="formRules" label-width="100px" ref="form">
-                <el-form-item label="活动名称:" prop="title">
-                    <el-input v-model="form.title" autocomplete="off" style="width: 300px"></el-input>
-                </el-form-item>
-                <el-form-item label="开始日期：" prop="startDate">
-                    <el-date-picker v-model="form.startDate" type="date" style="width: 300px" value-format="yyyy-MM-dd"> </el-date-picker>
-                </el-form-item>
-                <el-form-item label="结束日期：" prop="endDate">
-                    <el-date-picker v-model="form.endDate" type="date" style="width: 300px" value-format="yyyy-MM-dd"> </el-date-picker>
-                </el-form-item>
-            </el-form>
-            <div slot="footer">
-                <el-button @click="onDialogBtnClick('cancel')">取 消</el-button>
-                <el-button type="primary" @click="onDialogBtnClick('confirm')">确 定</el-button>
-            </div>
-        </el-dialog>
+    <div class="test-continer">
+        <canvas id="container" ref="container"></canvas>
     </div>
 </template>
 
 <script>
-import Calendar from '@/components/Calendar'
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { Water } from 'three/examples/jsm/objects/Water.js';
+import { Sky } from 'three/examples/jsm/objects/Sky.js';
+import waterTexture from '@/assets/three3d/waternormals.jpg';
+
+let camera, scene, renderer;
+let controls, water, sun, mesh;
 export default {
-    components: {
-        Calendar
-    },
+    name: 'ThreeModel',
     data() {
-        return {
-            schedule: [
-                {
-                    title: '日常促销1',
-                    startDate: '2022-06-01',
-                    endDate: '2022-06-03',
-                    id: 1
-                },
-                {
-                    title: '日常促销2',
-                    startDate: '2022-06-02',
-                    endDate: '2022-06-04',
-                    id: 2
-                },
-                {
-                    title: '日常促销3',
-                    startDate: '2022-06-03',
-                    endDate: '2022-06-06',
-                    id: 3
-                },
-                {
-                    title: '日常促销4',
-                    startDate: '2022-06-04',
-                    endDate: '2022-06-05',
-                    id: 4
-                },
-                {
-                    title: '日常促销5',
-                    startDate: '2022-06-06',
-                    endDate: '2022-06-08',
-                    id: 5
-                },
-                {
-                    title: '日常促销6',
-                    startDate: '2022-06-07',
-                    endDate: '2022-06-09',
-                    id: 6
-                },
-                {
-                    title: '日常促销7',
-                    startDate: '2022-06-18',
-                    endDate: '2022-06-20',
-                    id: 7
-                },
-                {
-                    title: '日常促销8',
-                    startDate: '2022-06-19',
-                    endDate: '2022-06-21',
-                    id: 8
-                },
-                {
-                    title: '日常促销9',
-                    startDate: '2022-06-23',
-                    endDate: '2022-06-24',
-                    id: 9
-                },
-                {
-                    title: '日常促销10',
-                    startDate: '2022-06-21',
-                    endDate: '2022-06-22',
-                    id: 10
-                }
-            ],
-            dialogFormVisible: false,
-            form: {
-                title: '',
-                startDate: '',
-                endDate: ''
-            },
-            formRules: {
-                title: [{ required: true, message: '请输入活动名称', trigger: 'blur' }],
-                startDate: [{ required: true, message: '请选择日期', trigger: 'change' }],
-                endDate: [{ required: true, message: '请选择日期', trigger: 'change' }]
-            }
-        }
+        return {};
+    },
+    mounted() {
+        this.init();
+        this.animate();
     },
     methods: {
-        // 点击某一天
-        onPickDay(day) {
-            const { formatedDate } = day
-            this.dialogFormVisible = true
-            this.form.startDate = formatedDate
-        },
-        // 点击某一日程
-        onPickSchedule(schedule) {
-            const { id } = schedule
-            const scheduleItem = this.schedule.find((item) => item.id === id)
-            if (scheduleItem) {
-                this.form = { ...scheduleItem }
-                this.dialogFormVisible = true
-            }
-        },
-        // 日程弹窗按钮事件处理
-        onDialogBtnClick(type) {
-            if (type === 'cancel') {
-                this.dialogFormVisible = false
-                this.$refs['form'].resetFields()
-                this.form = {
-                    title: '',
-                    startDate: '',
-                    endDate: ''
-                }
-            } else if (type === 'confirm') {
-                this.$refs['form'].validate(async (valid) => {
-                    if (valid) {
-                        const { schedule, form } = this
-                        // form中已有id，说明是已经插入过的日程
-                        if (form.id) {
-                            const scheduleIndex = this.schedule.findIndex((item) => item.id === form.id)
-                            this.$set(this.schedule, scheduleIndex, form)
-                        } else {
-                            // 插入新数据
-                            const newId = schedule[schedule.length - 1].id + 1
-                            const newScheduleItem = {
-                                ...form,
-                                id: newId
-                            }
-                            this.schedule.push(newScheduleItem)
-                        }
+        init() {
+            // 创建场景对象Scene
+            scene = new THREE.Scene();
+            //
+            renderer = new THREE.WebGLRenderer({
+                canvas: this.$refs.container
+            });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
-                        this.dialogFormVisible = false
-                    }
-                })
+            camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 20000);
+            camera.position.set(30, 30, 100);
+
+            //
+
+            sun = new THREE.Vector3();
+
+            // Water
+
+            const waterGeometry = new THREE.PlaneGeometry(10000, 10000);
+
+            water = new Water(waterGeometry, {
+                textureWidth: 512,
+                textureHeight: 512,
+                waterNormals: new THREE.TextureLoader().load(waterTexture, function (texture) {
+                    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+                }),
+                sunDirection: new THREE.Vector3(),
+                sunColor: 0xffffff,
+                waterColor: 0x001e0f,
+                distortionScale: 3.7,
+                fog: scene.fog !== undefined
+            });
+
+            water.rotation.x = -Math.PI / 2;
+
+            scene.add(water);
+
+            // Skybox
+
+            const sky = new Sky();
+            sky.scale.setScalar(10000);
+            scene.add(sky);
+
+            const skyUniforms = sky.material.uniforms;
+
+            skyUniforms['turbidity'].value = 10;
+            skyUniforms['rayleigh'].value = 2;
+            skyUniforms['mieCoefficient'].value = 0.005;
+            skyUniforms['mieDirectionalG'].value = 0.8;
+
+            const parameters = {
+                elevation: 2,
+                azimuth: 180
+            };
+
+            const pmremGenerator = new THREE.PMREMGenerator(renderer);
+
+            function updateSun() {
+                const phi = THREE.MathUtils.degToRad(90 - parameters.elevation);
+                const theta = THREE.MathUtils.degToRad(parameters.azimuth);
+
+                sun.setFromSphericalCoords(1, phi, theta);
+
+                sky.material.uniforms['sunPosition'].value.copy(sun);
+                water.material.uniforms['sunDirection'].value.copy(sun).normalize();
+
+                scene.environment = pmremGenerator.fromScene(sky).texture;
             }
+
+            updateSun();
+
+            //
+
+            // const geometry = new THREE.BoxGeometry(30, 30, 30);
+            // const material = new THREE.MeshStandardMaterial({ roughness: 0 });
+
+            // mesh = new THREE.Mesh(geometry, material);
+            // scene.add(mesh);
+
+            //
+
+            controls = new OrbitControls(camera, renderer.domElement);
+            controls.maxPolarAngle = Math.PI * 0.495;
+            controls.target.set(0, 10, 0);
+            controls.minDistance = 40.0;
+            controls.maxDistance = 200.0;
+            controls.update();
+
+            //
+
+            window.addEventListener('resize', this.onWindowResize);
+        },
+
+        onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        },
+
+        animate() {
+            requestAnimationFrame(this.animate);
+            this.render();
+        },
+
+        render() {
+            // const time = performance.now() * 0.001;
+
+            // mesh.position.y = Math.sin(time) * 20 + 5;
+            // mesh.rotation.x = time * 0.5;
+            // mesh.rotation.z = time * 0.51;
+
+            water.material.uniforms['time'].value += 1.0 / 60.0;
+
+            renderer.render(scene, camera);
         }
     }
-}
+};
 </script>
 
-<style lang="scss" scoped>
-.test-container {
-    width: 50%;
-    margin: 0 auto;
-}
-</style>
+<style lang="scss" scoped></style>
