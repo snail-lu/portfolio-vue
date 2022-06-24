@@ -1,7 +1,5 @@
 <template>
-    <div class="test-continer">
-        <canvas id="container" ref="container"></canvas>
-    </div>
+    <canvas id="container" ref="container"></canvas>
 </template>
 
 <script>
@@ -12,7 +10,7 @@ import { Sky } from 'three/examples/jsm/objects/Sky.js';
 import waterTexture from '@/assets/three3d/waternormals.jpg';
 
 let camera, scene, renderer;
-let controls, water, sun, mesh;
+let controls, water, sun;
 export default {
     name: 'ThreeModel',
     data() {
@@ -26,25 +24,28 @@ export default {
         init() {
             // 创建场景对象Scene
             scene = new THREE.Scene();
-            //
+            // 创建渲染器对象
+            console.log(this.$refs.container, 'container');
             renderer = new THREE.WebGLRenderer({
                 canvas: this.$refs.container
             });
-            renderer.setPixelRatio(window.devicePixelRatio);
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
+            console.log(window, 'window');
+
+            renderer.setPixelRatio(window.devicePixelRatio); // 设置设备像素比
+            renderer.setSize(window.innerWidth, window.innerHeight); // 设置渲染区域尺寸
+            renderer.toneMapping = THREE.ACESFilmicToneMapping; // 设置色调映射
+
+            // 创建透视相机对象
             camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 20000);
-            camera.position.set(30, 30, 100);
+            camera.position.set(30, 30, 100); // 设置相机位置
 
-            //
+            // 创建一个三维向量对象，用于渲染太阳
+            // sun = new THREE.Vector3();
 
-            sun = new THREE.Vector3();
-
-            // Water
-
+            // 创建一个平面几何体
             const waterGeometry = new THREE.PlaneGeometry(10000, 10000);
-
+            // 创建水平面对象
             water = new Water(waterGeometry, {
                 textureWidth: 512,
                 textureHeight: 512,
@@ -62,8 +63,7 @@ export default {
 
             scene.add(water);
 
-            // Skybox
-
+            // 创建天空对象
             const sky = new Sky();
             sky.scale.setScalar(10000);
             scene.add(sky);
@@ -80,13 +80,15 @@ export default {
                 azimuth: 180
             };
 
+            // 创建一个三维向量对象，用于渲染太阳
+            sun = new THREE.Vector3();
             const pmremGenerator = new THREE.PMREMGenerator(renderer);
 
             function updateSun() {
-                const phi = THREE.MathUtils.degToRad(90 - parameters.elevation);
-                const theta = THREE.MathUtils.degToRad(parameters.azimuth);
+                const phi = THREE.MathUtils.degToRad(90 - parameters.elevation); // 与y轴的极角
+                const theta = THREE.MathUtils.degToRad(parameters.azimuth); // 与y轴的赤道角
 
-                sun.setFromSphericalCoords(1, phi, theta);
+                sun.setFromSphericalCoords(1, phi, theta); // 从球坐标中的radius、phi和theta设置该向量。
 
                 sky.material.uniforms['sunPosition'].value.copy(sun);
                 water.material.uniforms['sunDirection'].value.copy(sun).normalize();
@@ -96,16 +98,7 @@ export default {
 
             updateSun();
 
-            //
-
-            // const geometry = new THREE.BoxGeometry(30, 30, 30);
-            // const material = new THREE.MeshStandardMaterial({ roughness: 0 });
-
-            // mesh = new THREE.Mesh(geometry, material);
-            // scene.add(mesh);
-
-            //
-
+            // 轨道控制器，控制相机围绕目标进行轨道运动
             controls = new OrbitControls(camera, renderer.domElement);
             controls.maxPolarAngle = Math.PI * 0.495;
             controls.target.set(0, 10, 0);
@@ -113,8 +106,7 @@ export default {
             controls.maxDistance = 200.0;
             controls.update();
 
-            //
-
+            // 监听窗口缩放
             window.addEventListener('resize', this.onWindowResize);
         },
 
@@ -145,4 +137,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#container {
+    display: block;
+    // vertical-align: top;
+}
+</style>
