@@ -1,150 +1,89 @@
 <template>
-    <div class="test-container"><canvas id="container" ref="container"></canvas></div>
+    <div class="masonry">
+        <div class="colmun" ref="column1">
+            <img class="item" :src="i.img" :key="i.id" v-for="i in data1" :title="i.id" />
+        </div>
+        <div class="colmun" ref="column2">
+            <img class="item" :src="i.img" :key="i.id" v-for="i in data2" :title="i.id" />
+        </div>
+        <div class="colmun" ref="column3">
+            <img class="item" :src="i.img" :key="i.id" v-for="i in data3" :title="i.id" />
+        </div>
+    </div>
 </template>
 
 <script>
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { Water } from 'three/examples/jsm/objects/Water.js';
-import { Sky } from 'three/examples/jsm/objects/Sky.js';
-import waterTexture from '@/assets/three3d/waternormals.jpg';
-
-let camera, scene, renderer;
-let controls, water, sun;
+import { getMinValueIndexOfArr } from '@/utils/index';
 export default {
-    name: 'ThreeModel',
     data() {
-        return {};
+        return {
+            data: [], // 完整的data
+            insertIndex: 0, // 数据插入记号
+            //第一列
+            data1: [],
+            //第二列
+            data2: [],
+            //第三列
+            data3: []
+        };
     },
-    mounted() {
-        this.init();
-        this.animate();
+    created() {
+        this.initData();
     },
     methods: {
-        init() {
-            // 创建场景对象Scene
-            scene = new THREE.Scene();
-            // 创建渲染器对象
-            renderer = new THREE.WebGLRenderer({
-                canvas: this.$refs.container
+        async initData() {
+            let data = [];
+            let res = await this.req({
+                url: '/masonry/list'
             });
-
-            const { innerWidth, innerHeight, devicePixelRatio } = window;
-
-            renderer.setPixelRatio(devicePixelRatio); // 设置设备像素比
-
-            // 现在电脑的高分辨率屏幕一般都会设置缩放（我的屏幕设置了125%）
-            // 此时window.innerHeight = Math.round(屏幕缩放后分辨率)
-            // 这时候如果给元素设置的高度 = window.innerHeight，可能就会出现滚动条
-            // 这里利用devicePixelRatio计算一下window.innerHeight缩放前的高度
-            // 对缩放前的高度抹零后再计算缩放值，这样就能保证永远不会出现滚动条
-            const canvasHeight = (Math.floor(innerHeight * devicePixelRatio) / devicePixelRatio).toFixed(2);
-            renderer.setSize(innerWidth, canvasHeight); // 设置渲染区域尺寸
-            renderer.toneMapping = THREE.ACESFilmicToneMapping; // 设置色调映射
-
-            // 创建透视相机对象
-            camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 20000);
-            camera.position.set(30, 30, 100); // 设置相机位置
-
-            // 创建一个三维向量对象，用于渲染太阳
-            // sun = new THREE.Vector3();
-
-            // 创建一个平面几何体
-            const waterGeometry = new THREE.PlaneGeometry(10000, 10000);
-            // 创建水平面对象
-            water = new Water(waterGeometry, {
-                textureWidth: 512,
-                textureHeight: 512,
-                waterNormals: new THREE.TextureLoader().load(waterTexture, function (texture) {
-                    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-                }),
-                sunDirection: new THREE.Vector3(),
-                sunColor: 0xffffff,
-                waterColor: 0x001e0f,
-                distortionScale: 3.7,
-                fog: scene.fog !== undefined
-            });
-
-            water.rotation.x = -Math.PI / 2;
-
-            scene.add(water);
-
-            // 创建天空对象
-            const sky = new Sky();
-            sky.scale.setScalar(10000);
-            scene.add(sky);
-
-            const skyUniforms = sky.material.uniforms;
-
-            skyUniforms['turbidity'].value = 10;
-            skyUniforms['rayleigh'].value = 2;
-            skyUniforms['mieCoefficient'].value = 0.005;
-            skyUniforms['mieDirectionalG'].value = 0.8;
-
-            const parameters = {
-                elevation: 2,
-                azimuth: 180
-            };
-
-            // 创建一个三维向量对象，用于渲染太阳
-            sun = new THREE.Vector3();
-            const pmremGenerator = new THREE.PMREMGenerator(renderer);
-
-            function updateSun() {
-                const phi = THREE.MathUtils.degToRad(90 - parameters.elevation); // 与y轴的极角
-                const theta = THREE.MathUtils.degToRad(parameters.azimuth); // 与y轴的赤道角
-
-                sun.setFromSphericalCoords(1, phi, theta); // 从球坐标中的radius、phi和theta设置该向量。
-
-                sky.material.uniforms['sunPosition'].value.copy(sun);
-                water.material.uniforms['sunDirection'].value.copy(sun).normalize();
-
-                scene.environment = pmremGenerator.fromScene(sky).texture;
+            if (res.data && res.data.list) {
+                data = res.data.list;
             }
+            this.data1.push(data[0]);
+            this.data2.push(data[1]);
+            this.data3.push(data[2]);
+            this.insertIndex = 3;
+            this.data = data.slice(0, 10);
 
-            updateSun();
-
-            // 轨道控制器，实现缩放平移等效果
-            controls = new OrbitControls(camera, renderer.domElement);
-            controls.maxPolarAngle = Math.PI * 0.495;
-            controls.target.set(0, 10, 0);
-            controls.minDistance = 40.0;
-            controls.maxDistance = 200.0;
-            controls.update();
-
-            // 监听窗口缩放
-            window.addEventListener('resize', this.onWindowResize);
+            this.insertData();
         },
 
-        onWindowResize() {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
+        // 根据列高度来决定下个数据要插入的列
+        insertData() {
+            this.$nextTick(() => {
+                const { data, insertIndex } = this;
+                if (insertIndex < data.length) {
+                    const column1Height = this.$refs.column1.offsetHeight;
+                    const column2Height = this.$refs.column2.offsetHeight;
+                    const column3Height = this.$refs.column3.offsetHeight;
+                    const minColumnIndex = getMinValueIndexOfArr([column1Height, column2Height, column3Height]);
 
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        },
-
-        animate() {
-            requestAnimationFrame(this.animate);
-            this.render();
-        },
-
-        render() {
-            // const time = performance.now() * 0.001;
-
-            // mesh.position.y = Math.sin(time) * 20 + 5;
-            // mesh.rotation.x = time * 0.5;
-            // mesh.rotation.z = time * 0.51;
-
-            water.material.uniforms['time'].value += 1.0 / 60.0;
-
-            renderer.render(scene, camera);
+                    this[`data${minColumnIndex + 1}`].push(data[insertIndex]);
+                    this.insertIndex = insertIndex + 1;
+                    this.insertData();
+                }
+            });
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-#container {
-    display: block;
+.masonry {
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    .colmun {
+        display: inline-block;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding: 0 2px;
+        .item {
+            margin-bottom: 5px;
+            width: 100%;
+        }
+    }
 }
 </style>

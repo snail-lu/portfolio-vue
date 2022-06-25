@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import Masonry from 'masonry-layout'
-import Demo from '@/components/Demo'
+import Masonry from 'masonry-layout';
+import Demo from '@/components/Demo';
 export default {
     components: {
         Demo
@@ -22,29 +22,24 @@ export default {
                 title: '瀑布流',
                 url: ''
             }
-        }
+        };
     },
     mounted() {
-        const grid = document.querySelector('.grid')
+        const grid = document.querySelector('.grid');
         const msnry = new Masonry(grid, {
             // options...
             itemSelector: '.grid-item',
             columnWidth: '.grid-sizer',
             gutter: 10,
             percentPosition: true
-        })
+        });
         // msnry.layout()
     },
     methods: {}
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@for $i from 0 through 100 {
-    .height-#{$i} {
-        height: random(30) + 30 + px;
-    }
-}
 .grid {
     width: 50%;
     margin: 25px auto;
