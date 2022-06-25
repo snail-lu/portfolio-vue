@@ -1,5 +1,5 @@
 <template>
-    <canvas id="container" ref="container"></canvas>
+    <div class="test-container"><canvas ref="container"></canvas></div>
 </template>
 
 <script>
@@ -25,15 +25,21 @@ export default {
             // 创建场景对象Scene
             scene = new THREE.Scene();
             // 创建渲染器对象
-            console.log(this.$refs.container, 'container');
             renderer = new THREE.WebGLRenderer({
                 canvas: this.$refs.container
             });
 
-            console.log(window, 'window');
+            const { innerWidth, innerHeight, devicePixelRatio } = window;
 
-            renderer.setPixelRatio(window.devicePixelRatio); // 设置设备像素比
-            renderer.setSize(window.innerWidth, window.innerHeight); // 设置渲染区域尺寸
+            renderer.setPixelRatio(devicePixelRatio); // 设置设备像素比
+
+            // 现在电脑的高分辨率屏幕一般都会设置缩放（我的屏幕设置了125%）
+            // 此时window.innerHeight = Math.round(屏幕缩放后分辨率)
+            // 这时候如果给元素设置的高度 = window.innerHeight，可能就会出现滚动条
+            // 这里利用devicePixelRatio计算一下window.innerHeight缩放前的高度
+            // 对缩放前的高度抹零后再计算缩放值，这样就能保证永远不会出现滚动条
+            const canvasHeight = (Math.floor(innerHeight * devicePixelRatio) / devicePixelRatio).toFixed(2);
+            renderer.setSize(innerWidth, canvasHeight); // 设置渲染区域尺寸
             renderer.toneMapping = THREE.ACESFilmicToneMapping; // 设置色调映射
 
             // 创建透视相机对象
@@ -98,7 +104,7 @@ export default {
 
             updateSun();
 
-            // 轨道控制器，控制相机围绕目标进行轨道运动
+            // 轨道控制器，实现缩放平移等效果
             controls = new OrbitControls(camera, renderer.domElement);
             controls.maxPolarAngle = Math.PI * 0.495;
             controls.target.set(0, 10, 0);
@@ -138,8 +144,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#container {
-    display: block;
+.test-container {
+    font-size: 0;
+    // display: block;
     // vertical-align: top;
 }
 </style>
