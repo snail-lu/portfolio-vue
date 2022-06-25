@@ -1,10 +1,13 @@
 <template>
     <div class="photo-wall-container">
-        <div class="btn-groups flex-box flex-h-center" :class="{ 'btn-groups-screenfull': isScreenFull }">
+        <div class="btn-groups flex-box flex-h-center">
             <el-upload action="#" multiple :auto-upload="false" :on-change="onUploadFile" :show-file-list="false">
                 <i class="btn el-icon-picture-outline upload-btn" title="打开本地图片"></i>
             </el-upload>
-            <i class="btn el-icon-full-screen" :title="isScreenFull ? '退出全屏' : '全屏'" @click="handleFullScreen"></i>
+
+            <div class="btn">
+                <full-screen-button />
+            </div>
         </div>
 
         <div class="photo-list" v-if="fileList.length == 0">
@@ -26,19 +29,19 @@
 </template>
 
 <script>
-import Photo from './components/photo'
-import photo_1 from '../../../assets/images/photo-1.jpg'
-import photo_2 from '../../../assets/images/photo-2.jpg'
-import photo_3 from '../../../assets/images/photo-3.jpg'
-import fullScreenMixins from '@/mixins/fullScreenMixins'
+import Photo from './components/photo';
+import photo_1 from '../../../assets/images/photo-1.jpg';
+import photo_2 from '../../../assets/images/photo-2.jpg';
+import photo_3 from '../../../assets/images/photo-3.jpg';
+import FullScreenButton from '@/components/FullScreenButton/index.vue';
 export default {
-    mixins: [fullScreenMixins],
     components: {
-        Photo
+        Photo,
+        FullScreenButton
     },
     filters: {
         imgUrlFilter(val) {
-            return URL.createObjectURL(val)
+            return URL.createObjectURL(val);
         }
     },
     data() {
@@ -70,25 +73,25 @@ export default {
                     startY: 38
                 }
             ]
-        }
+        };
     },
     methods: {
         onUploadFile(file, list) {
-            this.fileList = list
+            this.fileList = list;
         },
         // 删除
         onDelete(uid) {
-            let fileIndex = -1
+            let fileIndex = -1;
             if (this.fileList.length > 0) {
-                fileIndex = this.fileList.findIndex((item) => item.uid === uid)
-                this.fileList.splice(fileIndex, 1)
+                fileIndex = this.fileList.findIndex((item) => item.uid === uid);
+                this.fileList.splice(fileIndex, 1);
             } else {
-                fileIndex = this.exampleList.findIndex((item) => item.uid === uid)
-                this.exampleList.splice(fileIndex, 1)
+                fileIndex = this.exampleList.findIndex((item) => item.uid === uid);
+                this.exampleList.splice(fileIndex, 1);
             }
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>

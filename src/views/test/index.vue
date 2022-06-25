@@ -1,5 +1,5 @@
 <template>
-    <div class="test-container"><canvas ref="container"></canvas></div>
+    <div class="test-container"><canvas id="container" ref="container"></canvas></div>
 </template>
 
 <script>
@@ -144,9 +144,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.test-container {
-    font-size: 0;
-    // display: block;
-    // vertical-align: top;
+#container {
+    display: block;
 }
 </style>
