@@ -59,8 +59,8 @@ export default [
     {
         id: 8,
         path: 'three-js',
-        title: 'three.js实践',
-        desc: 'Three.js实践',
+        title: 'Three.js实践',
+        desc: '基于Three.js的海洋模型',
         coverUrl:
             'https://ouch-cdn2.icons8.com/giH7DU7vDdNSk4BDGIWVY8xRsZRX70nqM5kCJx_cFjU/rs:fit:256:224/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvNjU4/LzY0NDBhODlhLTJj/YzctNGE1ZS05NTAw/LTk1NDAxYzAxZDhm/YS5zdmc.png'
     },
@@ -120,4 +120,4 @@ export default [
         coverUrl:
             'https://ouch-cdn2.icons8.com/9d0piLltFpZkbokprA5VWRKl7jBOLybmEgKMH45EP-A/rs:fit:256:256/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvNzY2/L2I1NmQ2NzliLWEw/MGUtNDYyMy1hMDQ0/LTcyMTljZmRmMDc2/My5zdmc.png'
     }
-]
+];
