@@ -43,7 +43,7 @@ export default {
             this.data2.push(data[1]);
             this.data3.push(data[2]);
             this.insertIndex = 3;
-            this.data = data.slice(0, 10);
+            this.data = data.slice(0);
 
             this.insertData();
         },
@@ -57,6 +57,7 @@ export default {
                     const column2Height = this.$refs.column2.offsetHeight;
                     const column3Height = this.$refs.column3.offsetHeight;
                     const minColumnIndex = getMinValueIndexOfArr([column1Height, column2Height, column3Height]);
+                    // debugger;
 
                     this[`data${minColumnIndex + 1}`].push(data[insertIndex]);
                     this.insertIndex = insertIndex + 1;
