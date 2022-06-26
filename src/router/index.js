@@ -1,8 +1,8 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import demoRoutes from './demo'
+import Vue from 'vue';
+import Router from 'vue-router';
+import demoRoutes from './demo';
 
-Vue.use(Router)
+Vue.use(Router);
 
 /* Layout */
 export const routes = [
@@ -83,10 +83,10 @@ export const routes = [
         component: () => import('@/views/common/404.vue'),
         hidden: true
     }
-]
+];
 
 // 合并demo路由
-routes[0].children.push(demoRoutes)
+routes[0].children.push(demoRoutes);
 
 // 停用浏览器自动恢复滚动位置的默认行为，改为手动触发
 // if ('scrollRestoration' in history) {
@@ -100,9 +100,9 @@ const createRouter = () =>
         scrollBehavior: (to, from, savedPosition) => {
             // console.log(savedPosition, 'savedPostion')
             if (savedPosition) {
-                return savedPosition
+                return savedPosition;
             } else {
-                return { y: 0 }
+                return { y: 0 };
             }
             // return new Promise((resolve, reject) => {
             //     setTimeout(() => {
@@ -111,6 +111,6 @@ const createRouter = () =>
             // })
         },
         routes
-    })
+    });
 
-export default createRouter()
+export default createRouter();
