@@ -15,7 +15,7 @@
                     <el-table-column type="selection" />
                     <el-table-column prop="name" label="姓名" />
                     <el-table-column label="性别">
-                        <template slot-scope="scope">{{ scope.row.sex | sexFilter }}</template>
+                        <template v-slot="scope">{{ scope.row.sex | sexFilter }}</template>
                     </el-table-column>
                 </el-table>
             </el-col>
@@ -37,7 +37,7 @@
                     <el-table-column type="selection" />
                     <el-table-column prop="name" label="姓名" />
                     <el-table-column label="性别">
-                        <template slot-scope="scope">{{ scope.row.sex | sexFilter }}</template>
+                        <template v-slot="scope">{{ scope.row.sex | sexFilter }}</template>
                     </el-table-column>
                 </el-table>
             </el-col>
@@ -46,15 +46,15 @@
 </template>
 
 <script>
-import Demo from '@/components/Demo'
+import Demo from '@/components/Demo';
 export default {
     components: {
         Demo
     },
     filters: {
         sexFilter(val) {
-            const map = { 1: '男', 2: '女' }
-            return map[val]
+            const map = { 1: '男', 2: '女' };
+            return map[val];
         }
     },
     data() {
@@ -98,7 +98,7 @@ export default {
             table2Data: [],
             selectedTable1Data: [], // table1已选数据
             selectedTable2Data: [] // table2已选数据
-        }
+        };
     },
     methods: {
         /**
@@ -106,7 +106,7 @@ export default {
          * @param {array} rows 已勾选的数据
          */
         onTable1Select(rows) {
-            this.selectedTable1Data = [...rows]
+            this.selectedTable1Data = [...rows];
         },
 
         /**
@@ -114,24 +114,24 @@ export default {
          * @param {array} rows 已勾选的数据
          */
         onTable2Select(rows) {
-            this.selectedTable2Data = [...rows]
+            this.selectedTable2Data = [...rows];
         },
 
         /**
          * 添加按钮事件处理函数
          */
         onAdd() {
-            this.filterAdd(this.selectedTable1Data, this.table2Data, 'id')
-            this.selectedTable1Data = []
-            this.$refs.table1.clearSelection()
+            this.filterAdd(this.selectedTable1Data, this.table2Data, 'id');
+            this.selectedTable1Data = [];
+            this.$refs.table1.clearSelection();
         },
 
         /**
          * 删除按钮事件处理函数
          */
         onDelete() {
-            this.table2Data = this.filterDelete(this.selectedTable2Data, this.table2Data, 'id')
-            this.selectedTable2Data = []
+            this.table2Data = this.filterDelete(this.selectedTable2Data, this.table2Data, 'id');
+            this.selectedTable2Data = [];
         },
 
         /**
@@ -142,19 +142,19 @@ export default {
          * @param {boolean} isEnd   往尾部添加？默认往头部添加
          */
         filterAdd(records = [], targetRecords = [], compareProperty, isEnd = false) {
-            const o = new Set()
+            const o = new Set();
             targetRecords.forEach((record) => {
-                o.add(record[compareProperty])
-            })
+                o.add(record[compareProperty]);
+            });
             records.forEach((record) => {
                 if (!o.has(record[compareProperty])) {
                     if (isEnd) {
-                        targetRecords.push(record)
+                        targetRecords.push(record);
                     } else {
-                        targetRecords.unshift(record)
+                        targetRecords.unshift(record);
                     }
                 }
-            })
+            });
         },
 
         /**
@@ -165,15 +165,15 @@ export default {
          * @return {array} 删除待删除数据后的目标数据
          */
         filterDelete(records = [], targetRecords = [], compareProperty) {
-            const o = new Set()
+            const o = new Set();
             records.forEach((record) => {
-                o.add(record[compareProperty])
-            })
+                o.add(record[compareProperty]);
+            });
 
-            return targetRecords.filter((item) => !o.has(item[compareProperty]))
+            return targetRecords.filter((item) => !o.has(item[compareProperty]));
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>

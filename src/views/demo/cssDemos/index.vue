@@ -4,14 +4,18 @@
             <el-collapse v-model="activeNames">
                 <!-- demo 1 -->
                 <el-collapse-item name="1">
-                    <template slot="title">
+                    <template v-slot:title>
                         <div class="flex-box">
                             <div class="idx-label">1</div>
                             <div class="title-txt">文字光影掠过效果</div>
                         </div>
                     </template>
                     <div class="demo-content flex-box-column">
-                        <el-link class="view-code-btn color-black" icon="el-icon-connection" href="https://codepen.io/snaillu/pen/qBxgopK" target="_blank"
+                        <el-link
+                            class="view-code-btn color-black"
+                            icon="el-icon-connection"
+                            href="https://codepen.io/snaillu/pen/qBxgopK"
+                            target="_blank"
                             >查看代码</el-link
                         >
                         <div class="demo-1" data-text="长风破浪会有时，直挂云帆济沧海。">长风破浪会有时，直挂云帆济沧海。</div>
@@ -20,7 +24,7 @@
                 </el-collapse-item>
                 <!-- demo 2 -->
                 <el-collapse-item name="2">
-                    <template slot="title">
+                    <template v-slot:title>
                         <div class="flex-box">
                             <div class="idx-label">2</div>
                             <div class="title-txt">图片3D翻转及镜面投影</div>
@@ -49,8 +53,8 @@
 </template>
 
 <script>
-import Demo from '@/components/Demo'
-import CodeEditor from '@/components/CodeEditor'
+import Demo from '@/components/Demo';
+import CodeEditor from '@/components/CodeEditor';
 export default {
     components: {
         Demo,
@@ -63,9 +67,9 @@ export default {
                 url: ''
             },
             activeNames: []
-        }
+        };
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>

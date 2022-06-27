@@ -13,14 +13,14 @@
             <el-table-column prop="address" label="地址" />
             <el-table-column prop="sort" label="排序" sortable="custom" :sort-orders="['ascending', 'descending']" />
             <el-table-column label="状态">
-                <template slot-scope="scope">{{ scope.row.status | statusFormat }}</template>
+                <template v-slot="scope">{{ scope.row.status | statusFormat }}</template>
             </el-table-column>
         </el-table>
     </demo>
 </template>
 
 <script>
-import Demo from '@/components/Demo'
+import Demo from '@/components/Demo';
 export default {
     components: {
         Demo
@@ -61,11 +61,11 @@ export default {
                     status: 0
                 }
             ]
-        }
+        };
     },
     filters: {
         statusFormat: function (value) {
-            return value == '0' ? '已离职' : '在职'
+            return value == '0' ? '已离职' : '在职';
         }
     },
     methods: {
@@ -74,7 +74,7 @@ export default {
          * @param {object} {column,prop,order} 列数据|排序字段|排序方式
          */
         onSortChange({ prop, order }) {
-            this.tableData.sort(this.compare(prop, order))
+            this.tableData.sort(this.compare(prop, order));
         },
 
         /**
@@ -85,22 +85,22 @@ export default {
          */
         compare(propertyName, sort) {
             return function (obj1, obj2) {
-                var value1 = obj1[propertyName]
-                var value2 = obj2[propertyName]
+                var value1 = obj1[propertyName];
+                var value2 = obj2[propertyName];
                 if (typeof value1 === 'string' && typeof value2 === 'string') {
-                    const res = value1.localeCompare(value2, 'zh')
-                    return sort === 'ascending' ? res : -res
+                    const res = value1.localeCompare(value2, 'zh');
+                    return sort === 'ascending' ? res : -res;
                 } else {
                     if (value1 <= value2) {
-                        return sort === 'ascending' ? -1 : 1
+                        return sort === 'ascending' ? -1 : 1;
                     } else if (value1 > value2) {
-                        return sort === 'ascending' ? 1 : -1
+                        return sort === 'ascending' ? 1 : -1;
                     }
                 }
-            }
+            };
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>
