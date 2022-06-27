@@ -1,13 +1,7 @@
 module.exports = {
     root: true,
-    parserOptions: {
-        parser: 'babel-eslint',
-        sourceType: 'module'
-    },
     env: {
-        browser: true,
-        node: true,
-        es6: true
+        es2021: true
     },
     extends: ['plugin:vue/recommended', 'eslint:recommended'],
     plugins: ['vue', 'prettier'],
@@ -256,4 +250,4 @@ module.exports = {
         ],
         'array-bracket-spacing': [2, 'never']
     }
-}
+};
