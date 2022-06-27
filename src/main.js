@@ -1,11 +1,11 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
 import Clipboard from 'v-clipboard';
 
 import 'normalize.css/normalize.css'; // A modern alternative to CSS resets
 
 // 按需引入ElementUI组件
-import ElementUI from '@/components/ElementUI';
-import { Message } from 'element-ui';
+// import ElementUI from '@/components/ElementUI';
+// import { Message } from 'element-ui';
 
 import '@/styles/index.scss'; // global css
 
@@ -18,16 +18,16 @@ import '@/router/permission'; // permission control
 
 import uploader from 'vue-simple-uploader';
 
-Vue.use(ElementUI);
-Vue.use(uploader);
-Vue.use(Clipboard);
+// Vue.use(ElementUI);
+// Vue.use(uploader);
+// Vue.use(Clipboard);
 
-Vue.prototype.req = request;
-Vue.prototype.$message = Message;
+// Vue.prototype.req = request;
+// Vue.prototype.$message = Message;
 
-Vue.config.productionTip = false;
+// Vue.config.productionTip = false;
 
-const app = Vue.createApp(App);
+const app = createApp(App);
 app.use(router);
 app.use(store);
 app.mount('#app');

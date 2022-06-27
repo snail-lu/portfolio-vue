@@ -13,7 +13,7 @@ import { mapState } from 'vuex';
 export default {
     name: 'AppMain',
     computed: {
-        ...mapState('settings', ['isScreenFull']),
+        ...mapState(['isScreenFull']),
         key() {
             return this.$route.path;
         }

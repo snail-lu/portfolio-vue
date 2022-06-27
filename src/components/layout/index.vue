@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import AppMain from './AppMain'
-import Topbar from './Topbar'
+import AppMain from './AppMain';
+import Topbar from './Topbar';
 
 export default {
     name: 'Layout',
@@ -15,14 +15,14 @@ export default {
         AppMain,
         Topbar
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '~@/styles/mixin.scss';
+// @import '~@/styles/mixin.scss';
 
 .app-wrapper {
-    @include clearfix;
+    // @include clearfix;
     background-image: linear-gradient(-225deg, #cbbacc 0%, #2580b3 100%);
     // background-image: linear-gradient(60deg, #96deda 0%, #50c9c3 100%);
     // background-image: linear-gradient(to top, #4481eb 0%, #04befe 100%);

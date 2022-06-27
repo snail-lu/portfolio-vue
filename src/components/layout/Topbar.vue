@@ -13,21 +13,21 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex';
 
-const settings = require('@/settings.js')
+import settings from '@/settings';
 export default {
     name: 'Topbar',
     computed: {
-        ...mapGetters(['isScreenFull']),
+        ...mapState(['isScreenFull']),
         currentRoute() {
-            return '/' + this.$route.path.split('/')[1]
+            return '/' + this.$route.path.split('/')[1];
         },
         menuList() {
-            return settings.menu || []
+            return settings.menu || [];
         }
     }
-}
+};
 </script>
 <style lang="scss" scoped>
 .topbar-wrapper {
@@ -52,10 +52,12 @@ export default {
     .menu-list {
         .menu-item {
             padding: 0 30px;
-            color: $menuText;
+            // color: $menuText;
+            color: #fff;
 
             &-active {
-                color: $menuActiveText;
+                // color: $menuActiveText;
+                color: #3498db;
                 font-weight: bold;
                 position: relative;
 
