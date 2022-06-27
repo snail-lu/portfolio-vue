@@ -33,8 +33,9 @@ npm run deploy
 
 ### 待优化内容
 
--   `Element-UI`按需引入（已优化）
--   首屏白屏增加 loading 效果（已优化）
+-   <span style="color:green;">【已优化】</span>`Element-UI`按需引入
+-   <span style="color:green;">【已优化】</span>首屏白屏增加加载动画效果
+-   <span style="color:green;">【已优化】</span>过渡组件`transition`和`scrollBehavior`冲突，导致页面无法回退到指定位置
 
 ## 参考文档
 
