@@ -1,24 +1,24 @@
 <template>
     <section class="app-main" :class="{ 'app-main-fullscreen': isScreenFull }">
-        <!-- <transition name="fade" mode="out-in"> -->
-        <keep-alive>
-            <router-view :key="key" />
-        </keep-alive>
-        <!-- </transition> -->
+        <transition name="fade" mode="out-in">
+            <keep-alive>
+                <router-view :key="key" />
+            </keep-alive>
+        </transition>
     </section>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
 export default {
     name: 'AppMain',
     computed: {
         ...mapState('settings', ['isScreenFull']),
         key() {
-            return this.$route.path
+            return this.$route.path;
         }
     }
-}
+};
 </script>
 
 <style scoped lang="scss">

@@ -98,17 +98,17 @@ const createRouter = () =>
     new Router({
         mode: 'history',
         scrollBehavior: (to, from, savedPosition) => {
-            // console.log(savedPosition, 'savedPostion')
-            if (savedPosition) {
-                return savedPosition;
-            } else {
-                return { y: 0 };
-            }
-            // return new Promise((resolve, reject) => {
-            //     setTimeout(() => {
-            //         resolve(savedPosition ? savedPosition : { x: 0, y: 0 })
-            //     }, 500)
-            // })
+            // console.log(savedPosition, 'savedPostion');
+            // if (savedPosition) {
+            //     return savedPosition;
+            // } else {
+            //     return { y: 0 };
+            // }
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(savedPosition ? savedPosition : { x: 0, y: 0 });
+                }, 300);
+            });
         },
         routes
     });
