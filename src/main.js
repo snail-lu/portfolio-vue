@@ -27,7 +27,7 @@ Vue.prototype.$message = Message;
 
 Vue.config.productionTip = false;
 
-const app = Vue.createApp({});
+const app = Vue.createApp(App);
 app.use(router);
 app.use(store);
 app.mount('#app');
