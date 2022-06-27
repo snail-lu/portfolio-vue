@@ -11,6 +11,7 @@
         "preview": "node dist/index.js --preview"
     },
     "dependencies": {
+        "@vue/compat": "^3.2.37",
         "axios": "0.18.1",
         "codemirror": "^5.65.5",
         "core-js": "^3.6.5",
@@ -21,7 +22,7 @@
         "nprogress": "0.2.0",
         "three": "^0.138.0",
         "v-clipboard": "^2.2.3",
-        "vue": "2.6.10",
+        "vue": "^3.2.37",
         "vue-count-to": "^1.0.13",
         "vue-draggable-resizable": "^2.3.0",
         "vue-router": "3.0.6",
@@ -35,6 +36,7 @@
         "@vue/cli-plugin-eslint": "~5.0.4",
         "@vue/cli-plugin-unit-jest": "~5.0.4",
         "@vue/cli-service": "~5.0.4",
+        "@vue/compiler-sfc": "^3.2.37",
         "@vue/test-utils": "1.0.0-beta.29",
         "autoprefixer": "^9.5.1",
         "babel-plugin-component": "^1.1.1",
@@ -46,7 +48,6 @@
         "postcss": "^8.4.14",
         "sass": "^1.52.2",
         "sass-loader": "^13.0.0",
-        "vue-template-compiler": "2.6.10",
         "webpack-bundle-analyzer": "^4.5.0"
     },
     "browserslist": [

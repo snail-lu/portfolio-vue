@@ -1,20 +1,20 @@
-const { defineConfig } = require('@vue/cli-service')
-const path = require('path')
-const defaultSettings = require('./src/settings.js')
+const { defineConfig } = require('@vue/cli-service');
+const path = require('path');
+const defaultSettings = require('./src/settings.js');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const CompressionPlugin = require('compression-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin');
 
-const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)/i
+const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)/i;
 
 function resolve(dir) {
-    return path.join(__dirname, dir)
+    return path.join(__dirname, dir);
 }
 
-const name = defaultSettings.title || '' // page title
+const name = defaultSettings.title || ''; // page title
 
-const port = process.env.port || process.env.npm_config_port || 8080 // dev port
+const port = process.env.port || process.env.npm_config_port || 8080; // dev port
 
-const isDev = process.env.NODE_ENV === 'development' // 开发环境
+const isDev = process.env.NODE_ENV === 'development'; // 开发环境
 
 module.exports = defineConfig({
     publicPath: '/',
@@ -56,8 +56,7 @@ module.exports = defineConfig({
         }
     },
     chainWebpack(config) {
-        config.plugins.delete('preload') // TODO: need test
-        config.plugins.delete('prefetch') // TODO: need test
+        config.resolve.alias.set('vue', '@vue/compat');
 
         // set preserveWhitespace
         config.module
@@ -65,14 +64,20 @@ module.exports = defineConfig({
             .use('vue-loader')
             .loader('vue-loader')
             .tap((options) => {
-                options.compilerOptions.preserveWhitespace = true
-                return options
+                return {
+                    ...options,
+                    compilerOptions: {
+                        compatConfig: {
+                            MODE: 2
+                        }
+                    }
+                };
             })
-            .end()
+            .end();
 
         config
             // https://webpack.js.org/configuration/devtool/#development
-            .when(isDev, (config) => config.devtool('cheap-source-map'))
+            .when(isDev, (config) => config.devtool('cheap-source-map'));
 
         // 打包压缩成gz格式，需要配合nginx配置使用
         config.when(!isDev, (config) => {
@@ -84,8 +89,8 @@ module.exports = defineConfig({
                     minRatio: 0.8, // 默认压缩率，压缩结果低于该值才会进行压缩
                     deleteOriginalAssets: false // 是否删除源文件，建议不删，防止某些浏览器无法解析gzip时可以使用源文件显示
                 })
-            )
-        })
+            );
+        });
 
         config.when(!isDev, (config) => {
             config.optimization.splitChunks({
@@ -120,11 +125,11 @@ module.exports = defineConfig({
                         reuseExistingChunk: true
                     }
                 }
-            })
-            config.optimization.runtimeChunk('single')
-        })
+            });
+            config.optimization.runtimeChunk('single');
+        });
 
         // bundle analyzer
         // config.plugin('webpack-bundle-analyzer').use(BundleAnalyzerPlugin)
     }
-})
+});
