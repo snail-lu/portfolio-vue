@@ -24,9 +24,9 @@
         "vue": "^3.2.37",
         "vue-count-to": "^1.0.13",
         "vue-draggable-resizable": "^2.3.0",
-        "vue-router": "3.0.6",
+        "vue-router": "^4.0.16",
         "vue-simple-uploader": "^0.7.6",
-        "vuex": "3.1.0"
+        "vuex": "^4.0.2"
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^2.3.3",

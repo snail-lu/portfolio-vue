@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     title: 'VUE项目集',
 
     /**
@@ -11,4 +11,4 @@ module.exports = {
         { name: '实验室', path: '/demo' },
         { name: '关于', path: '/about' }
     ]
-}
+};

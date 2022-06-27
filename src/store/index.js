@@ -1,15 +1,23 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import getters from './getters'
-import settings from './modules/settings'
+import { createStore } from 'vuex';
 
-Vue.use(Vuex)
-
-const store = new Vuex.Store({
-    modules: {
-        settings
+const store = createStore({
+    state() {
+        return {
+            isScreenFull: false
+        };
     },
-    getters
-})
+    mutations: {
+        CHANGE_SETTING: (state, { key, value }) => {
+            if (state.hasOwnProperty(key)) {
+                state[key] = value;
+            }
+        }
+    },
+    actions: {
+        changeSetting({ commit }, data) {
+            commit('CHANGE_SETTING', data);
+        }
+    }
+});
 
-export default store
+export default store;

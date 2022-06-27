@@ -1,11 +1,9 @@
-import Vue from 'vue';
-import Router from 'vue-router';
 import demoRoutes from './demo';
-
-Vue.use(Router);
+import { h, resolveComponent } from 'vue';
+import { createRouter, createWebHashHistory } from 'vue-router';
 
 /* Layout */
-export const routes = [
+const routes = [
     // 主页面
     {
         path: '/',
@@ -22,7 +20,7 @@ export const routes = [
             {
                 path: '/projects',
                 component: {
-                    render: (h) => h('router-view')
+                    render: () => h(resolveComponent('router-view'))
                 },
                 children: [
                     {
@@ -37,7 +35,7 @@ export const routes = [
             {
                 path: '/about',
                 component: {
-                    render: (h) => h('router-view')
+                    render: () => h(resolveComponent('router-view'))
                 },
                 children: [
                     {
@@ -73,7 +71,7 @@ export const routes = [
         }
     },
     {
-        path: '*',
+        path: '/:pathMatch(.*)*',
         redirect: '/404',
         hidden: true
     },
@@ -94,23 +92,30 @@ routes[0].children.push(demoRoutes);
 //     // history.scrollRestoration = 'manual'
 // }
 
-const createRouter = () =>
-    new Router({
-        mode: 'history',
-        scrollBehavior: (to, from, savedPosition) => {
-            // console.log(savedPosition, 'savedPostion');
-            // if (savedPosition) {
-            //     return savedPosition;
-            // } else {
-            //     return { y: 0 };
-            // }
-            return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve(savedPosition ? savedPosition : { x: 0, y: 0 });
-                }, 300);
-            });
-        },
-        routes
-    });
+// const createRouter = () =>
+//     new Router({
+//         mode: 'history',
+//         scrollBehavior: (to, from, savedPosition) => {
+//             // console.log(savedPosition, 'savedPostion');
+//             // if (savedPosition) {
+//             //     return savedPosition;
+//             // } else {
+//             //     return { y: 0 };
+//             // }
+//             return new Promise((resolve, reject) => {
+//                 setTimeout(() => {
+//                     resolve(savedPosition ? savedPosition : { x: 0, y: 0 });
+//                 }, 300);
+//             });
+//         },
+//         routes
+//     });
 
-export default createRouter();
+const router = createRouter({
+    history: createWebHashHistory(),
+    routes
+});
+
+export default router;
+
+// export default createRouter();
