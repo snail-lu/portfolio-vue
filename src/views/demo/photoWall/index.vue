@@ -23,7 +23,7 @@
             />
         </div>
         <div class="photo-list" v-else>
-            <photo :src="file.raw | imgUrlFilter" v-for="file in fileList" :key="file.uid" @onDelete="onDelete(file.uid)" />
+            <photo :src="imgUrlFilter(file.raw)" v-for="file in fileList" :key="file.uid" @onDelete="onDelete(file.uid)" />
         </div>
     </div>
 </template>
@@ -38,11 +38,6 @@ export default {
     components: {
         Photo,
         FullScreenButton
-    },
-    filters: {
-        imgUrlFilter(val) {
-            return URL.createObjectURL(val);
-        }
     },
     data() {
         return {
@@ -89,6 +84,10 @@ export default {
                 fileIndex = this.exampleList.findIndex((item) => item.uid === uid);
                 this.exampleList.splice(fileIndex, 1);
             }
+        },
+
+        imgUrlFilter(val) {
+            return URL.createObjectURL(val);
         }
     }
 };

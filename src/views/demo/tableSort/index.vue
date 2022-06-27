@@ -13,7 +13,7 @@
             <el-table-column prop="address" label="地址" />
             <el-table-column prop="sort" label="排序" sortable="custom" :sort-orders="['ascending', 'descending']" />
             <el-table-column label="状态">
-                <template v-slot="scope">{{ scope.row.status | statusFormat }}</template>
+                <template v-slot="scope">{{ statusFormat(scope.row.status) }}</template>
             </el-table-column>
         </el-table>
     </demo>
@@ -63,11 +63,6 @@ export default {
             ]
         };
     },
-    filters: {
-        statusFormat: function (value) {
-            return value == '0' ? '已离职' : '在职';
-        }
-    },
     methods: {
         /**
          * 表格排序事件处理函数
@@ -98,6 +93,14 @@ export default {
                     }
                 }
             };
+        },
+
+        /**
+         * 状态中文转换
+         * @param {*} value
+         */
+        statusFormat(value) {
+            return value == '0' ? '已离职' : '在职';
         }
     }
 };

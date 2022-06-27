@@ -1,7 +1,7 @@
 <template>
     <demo :data="demoInfo">
         <calendar :schedule="schedule" @pick-day="onPickDay" @pick-schedule="onPickSchedule" />
-        <el-dialog title="新增促销活动" :visible.sync="dialogFormVisible" width="500px">
+        <el-dialog title="新增促销活动" :visible="dialogFormVisible" width="500px">
             <el-form :model="form" :rules="formRules" label-width="100px" ref="form">
                 <el-form-item label="活动名称:" prop="title">
                     <el-input v-model="form.title" autocomplete="off" style="width: 300px"></el-input>
@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import Demo from '@/components/Demo'
-import Calendar from '@/components/Calendar'
+import Demo from '@/components/Demo';
+import Calendar from '@/components/Calendar';
 export default {
     components: {
         Demo,
@@ -109,59 +109,59 @@ export default {
                 startDate: [{ required: true, message: '请选择日期', trigger: 'change' }],
                 endDate: [{ required: true, message: '请选择日期', trigger: 'change' }]
             }
-        }
+        };
     },
     methods: {
         // 点击某一天
         onPickDay(day) {
-            const { formatedDate } = day
-            this.dialogFormVisible = true
-            this.form.startDate = formatedDate
+            const { formatedDate } = day;
+            this.dialogFormVisible = true;
+            this.form.startDate = formatedDate;
         },
         // 点击某一日程
         onPickSchedule(schedule) {
-            const { id } = schedule
-            const scheduleItem = this.schedule.find((item) => item.id === id)
+            const { id } = schedule;
+            const scheduleItem = this.schedule.find((item) => item.id === id);
             if (scheduleItem) {
-                this.form = { ...scheduleItem }
-                this.dialogFormVisible = true
+                this.form = { ...scheduleItem };
+                this.dialogFormVisible = true;
             }
         },
         // 日程弹窗按钮事件处理
         onDialogBtnClick(type) {
             if (type === 'cancel') {
-                this.dialogFormVisible = false
-                this.$refs['form'].resetFields()
+                this.dialogFormVisible = false;
+                this.$refs['form'].resetFields();
                 this.form = {
                     title: '',
                     startDate: '',
                     endDate: ''
-                }
+                };
             } else if (type === 'confirm') {
                 this.$refs['form'].validate(async (valid) => {
                     if (valid) {
-                        const { schedule, form } = this
+                        const { schedule, form } = this;
                         // form中已有id，说明是已经插入过的日程
                         if (form.id) {
-                            const scheduleIndex = this.schedule.findIndex((item) => item.id === form.id)
-                            this.$set(this.schedule, scheduleIndex, form)
+                            const scheduleIndex = this.schedule.findIndex((item) => item.id === form.id);
+                            this.$set(this.schedule, scheduleIndex, form);
                         } else {
                             // 插入新数据
-                            const newId = schedule[schedule.length - 1].id + 1
+                            const newId = schedule[schedule.length - 1].id + 1;
                             const newScheduleItem = {
                                 ...form,
                                 id: newId
-                            }
-                            this.schedule.push(newScheduleItem)
+                            };
+                            this.schedule.push(newScheduleItem);
                         }
 
-                        this.dialogFormVisible = false
+                        this.dialogFormVisible = false;
                     }
-                })
+                });
             }
         }
     }
-}
+};
 </script>
 <style lang="scss" scoped>
 .demo-container {

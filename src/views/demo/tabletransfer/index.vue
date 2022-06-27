@@ -15,7 +15,7 @@
                     <el-table-column type="selection" />
                     <el-table-column prop="name" label="姓名" />
                     <el-table-column label="性别">
-                        <template v-slot="scope">{{ scope.row.sex | sexFilter }}</template>
+                        <template v-slot="scope">{{ sexFilter(scope.row.sex) }}</template>
                     </el-table-column>
                 </el-table>
             </el-col>
@@ -37,7 +37,7 @@
                     <el-table-column type="selection" />
                     <el-table-column prop="name" label="姓名" />
                     <el-table-column label="性别">
-                        <template v-slot="scope">{{ scope.row.sex | sexFilter }}</template>
+                        <template v-slot="scope">{{ sexFilter(scope.row.sex) }}</template>
                     </el-table-column>
                 </el-table>
             </el-col>
@@ -50,12 +50,6 @@ import Demo from '@/components/Demo';
 export default {
     components: {
         Demo
-    },
-    filters: {
-        sexFilter(val) {
-            const map = { 1: '男', 2: '女' };
-            return map[val];
-        }
     },
     data() {
         return {
@@ -171,6 +165,15 @@ export default {
             });
 
             return targetRecords.filter((item) => !o.has(item[compareProperty]));
+        },
+
+        /**
+         * 性别转换中文
+         * @param {*} val
+         */
+        sexFilter(val) {
+            const map = { 1: '男', 2: '女' };
+            return map[val];
         }
     }
 };
