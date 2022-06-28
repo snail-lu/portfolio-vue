@@ -1,7 +1,7 @@
 <template>
     <demo :data="demoInfo">
         <calendar :schedule="schedule" @pick-day="onPickDay" @pick-schedule="onPickSchedule" />
-        <el-dialog title="新增促销活动" :visible="dialogFormVisible" width="500px">
+        <el-dialog title="新增促销活动" v-model="dialogFormVisible" width="500px">
             <el-form :model="form" :rules="formRules" label-width="100px" ref="form">
                 <el-form-item label="活动名称:" prop="title">
                     <el-input v-model="form.title" autocomplete="off" style="width: 300px"></el-input>
@@ -13,10 +13,10 @@
                     <el-date-picker v-model="form.endDate" type="date" style="width: 300px" value-format="yyyy-MM-dd"> </el-date-picker>
                 </el-form-item>
             </el-form>
-            <div slot="footer">
+            <template #footer>
                 <el-button @click="onDialogBtnClick('cancel')">取 消</el-button>
                 <el-button type="primary" @click="onDialogBtnClick('confirm')">确 定</el-button>
-            </div>
+            </template>
         </el-dialog>
     </demo>
 </template>
