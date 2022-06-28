@@ -1,10 +1,12 @@
 <template>
     <section class="app-main" :class="{ 'app-main-fullscreen': isScreenFull }">
-        <transition name="fade" mode="out-in">
-            <keep-alive>
-                <router-view :key="key" />
-            </keep-alive>
-        </transition>
+        <router-view v-slot="{ Component }">
+            <transition name="fade" mode="out-in">
+                <keep-alive>
+                    <component :is="Component" />
+                </keep-alive>
+            </transition>
+        </router-view>
     </section>
 </template>
 

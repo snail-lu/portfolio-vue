@@ -1,7 +1,8 @@
+import { h, resolveComponent } from 'vue';
 export default {
     path: '/demo',
     component: {
-        render: (h) => h('router-view')
+        render: () => h(resolveComponent('router-view'))
     },
     children: [
         {
@@ -129,4 +130,4 @@ export default {
             }
         }
     ]
-}
+};
