@@ -3,7 +3,6 @@ export default {
     computed: {
         ...mapState(['isScreenFull'])
     },
-    destoryed() {},
     methods: {
         ...mapActions(['changeSetting']),
         // 全屏事件

@@ -1,5 +1,5 @@
 <template>
-    <i class="fullscreen-btn el-icon-full-screen" :title="isScreenFull ? '退出全屏' : '全屏'" @click="handleFullScreen"></i>
+    <i-ep-full-screen :title="isScreenFull ? '退出全屏' : '全屏'" @click="handleFullScreen"></i-ep-full-screen>
 </template>
 
 <script>
@@ -8,7 +8,7 @@ export default {
     name: 'FullScreenButton',
     mixins: [fullScreenMixins],
     mounted() {
-        this.handleFullScreen();
+        // this.handleFullScreen();
     }
 };
 </script>
