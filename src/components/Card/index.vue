@@ -25,26 +25,26 @@ export default {
         return {
             isLoading: true,
             isError: false
-        }
+        };
     },
     methods: {
         pushUrl() {
-            const { data } = this
+            const { data } = this;
             if ('url' in data || 'reposity' in data) {
-                window.open(data.url || data.reposity, '_blank')
+                window.open(data.url || data.reposity, '_blank');
             } else {
-                this.$router.push({ path: `/demo/${data.path}` })
+                this.$router.push({ path: `/demo/${data.path}` });
             }
         },
         load() {
-            this.isLoading = false
+            this.isLoading = false;
         },
         error() {
-            this.isError = true
-            this.isLoading = false
+            this.isError = true;
+            this.isLoading = false;
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>
