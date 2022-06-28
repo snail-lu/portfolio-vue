@@ -3,9 +3,10 @@
 </template>
 
 <script>
-import * as echarts from 'echarts/core'
-import 'echarts-liquidfill'
+import * as echarts from 'echarts/core';
+import 'echarts-liquidfill';
 
+let chart = null;
 export default {
     props: {
         width: {
@@ -17,28 +18,23 @@ export default {
             default: '100%'
         }
     },
-    data() {
-        return {
-            chart: null
-        }
-    },
     mounted() {
-        this.initCharts()
+        this.initCharts();
     },
     beforeDestroy() {
-        window.removeEventListener('resize', this.resizeCharts)
+        window.removeEventListener('resize', this.resizeCharts);
     },
     methods: {
         initCharts() {
-            this.chart = echarts.init(this.$el)
-            this.setOptions()
-            window.addEventListener('resize', this.resizeCharts)
+            chart = echarts.init(this.$el);
+            this.setOptions();
+            window.addEventListener('resize', this.resizeCharts);
         },
         resizeCharts() {
-            this.chart.resize()
+            chart && chart.resize();
         },
         setOptions() {
-            let value = 66 / 100
+            let value = 66 / 100;
             const option = {
                 series: [
                     {
@@ -78,12 +74,12 @@ export default {
                         }
                     }
                 ]
-            }
+            };
 
-            this.chart.setOption(option)
+            chart.setOption(option);
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped></style>

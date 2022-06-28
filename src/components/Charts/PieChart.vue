@@ -3,14 +3,14 @@
 </template>
 
 <script>
-import * as echarts from 'echarts/core'
-import { TitleComponent, TooltipComponent, LegendComponent } from 'echarts/components'
-import { PieChart } from 'echarts/charts'
-import { LabelLayout } from 'echarts/features'
-import { CanvasRenderer } from 'echarts/renderers'
+import * as echarts from 'echarts/core';
+import { TitleComponent, TooltipComponent, LegendComponent } from 'echarts/components';
+import { PieChart } from 'echarts/charts';
+import { LabelLayout } from 'echarts/features';
+import { CanvasRenderer } from 'echarts/renderers';
 
-echarts.use([TitleComponent, TooltipComponent, LegendComponent, PieChart, CanvasRenderer, LabelLayout])
-
+echarts.use([TitleComponent, TooltipComponent, LegendComponent, PieChart, CanvasRenderer, LabelLayout]);
+let chart = null;
 export default {
     props: {
         width: {
@@ -22,25 +22,20 @@ export default {
             default: '100%'
         }
     },
-    data() {
-        return {
-            chart: null
-        }
-    },
     mounted() {
-        this.initCharts()
+        this.initCharts();
     },
     beforeDestroy() {
-        window.removeEventListener('resize', this.resizeCharts)
+        window.removeEventListener('resize', this.resizeCharts);
     },
     methods: {
         initCharts() {
-            this.chart = echarts.init(this.$el)
-            this.setOptions()
-            window.addEventListener('resize', this.resizeCharts)
+            chart = echarts.init(this.$el);
+            this.setOptions();
+            window.addEventListener('resize', this.resizeCharts);
         },
         resizeCharts() {
-            this.chart.resize()
+            chart && chart.resize();
         },
         setOptions() {
             const option = {
@@ -91,12 +86,12 @@ export default {
                         }
                     }
                 ]
-            }
+            };
 
-            this.chart.setOption(option)
+            chart.setOption(option);
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped></style>

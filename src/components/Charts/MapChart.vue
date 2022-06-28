@@ -3,14 +3,15 @@
 </template>
 
 <script>
-import * as echarts from 'echarts/core'
-import { TitleComponent, TooltipComponent, VisualMapComponent } from 'echarts/components'
-import { MapChart } from 'echarts/charts'
-import { UniversalTransition } from 'echarts/features'
-import { CanvasRenderer } from 'echarts/renderers'
-import mapData from '@/assets/data/map.json'
+import * as echarts from 'echarts/core';
+import { TitleComponent, TooltipComponent, VisualMapComponent } from 'echarts/components';
+import { MapChart } from 'echarts/charts';
+import { UniversalTransition } from 'echarts/features';
+import { CanvasRenderer } from 'echarts/renderers';
+import mapData from '@/assets/data/map.json';
 
-echarts.use([TitleComponent, TooltipComponent, MapChart, CanvasRenderer, UniversalTransition, VisualMapComponent])
+let chart = null;
+echarts.use([TitleComponent, TooltipComponent, MapChart, CanvasRenderer, UniversalTransition, VisualMapComponent]);
 export default {
     props: {
         width: {
@@ -22,25 +23,20 @@ export default {
             default: '100%'
         }
     },
-    data() {
-        return {
-            chart: null
-        }
-    },
     mounted() {
-        this.initCharts()
+        this.initCharts();
     },
     beforeDestroy() {
-        window.removeEventListener('resize', this.resizeCharts)
+        window.removeEventListener('resize', this.resizeCharts);
     },
     methods: {
         initCharts() {
-            this.chart = echarts.init(this.$el)
-            this.setOptions()
-            window.addEventListener('resize', this.resizeCharts)
+            chart = echarts.init(this.$el);
+            this.setOptions();
+            window.addEventListener('resize', this.resizeCharts);
         },
         resizeCharts() {
-            this.chart.resize()
+            chart && chart.resize();
         },
         setOptions() {
             let provincesName = [
@@ -78,28 +74,28 @@ export default {
                 '香港',
                 '澳门',
                 '台湾'
-            ]
-            let item = []
+            ];
+            let item = [];
             provincesName.map((it) => {
                 // 生成随机数
-                const min = 10000
-                const max = 99999
-                const randomNum = Math.floor(Math.random() * (max - min + 1)) + min
+                const min = 10000;
+                const max = 99999;
+                const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
                 let obj = {
                     code: '12',
                     area: it,
                     name: it,
                     sales: randomNum,
                     value: randomNum
-                }
-                item.push(obj)
-            })
+                };
+                item.push(obj);
+            });
 
-            this.loadMap(item, 'China')
+            this.loadMap(item, 'China');
         },
         loadMap(item, name) {
             if (mapData) {
-                echarts.registerMap(name, mapData)
+                echarts.registerMap(name, mapData);
                 var option = {
                     title: {
                         text: '全国销售额统计图',
@@ -113,13 +109,14 @@ export default {
                     tooltip: {
                         formatter: function (params) {
                             if (params.data) {
-                                return `${params.name} <br />销售额:${params.data.sales}`
+                                return `${params.name} <br />销售额:${params.data.sales}`;
                             } else {
-                                return params.name + '<br>' + '销售额:' + 0
+                                return params.name + '<br>' + '销售额:' + 0;
                             }
                         }
                     },
                     visualMap: {
+                        type: 'continuous',
                         min: 0,
                         max: 100000,
                         left: 'left',
@@ -144,28 +141,28 @@ export default {
                     series: [
                         {
                             type: 'map',
-                            mapType: name,
+                            map: name,
                             selectedMode: 'false', //是否允许选中多个区域
                             roam: true, // 开启缩放和移动
                             label: {
-                                normal: {
-                                    show: true
-                                },
-                                emphasis: {
+                                show: true
+                            },
+                            emphasis: {
+                                label: {
                                     show: true
                                 }
                             },
                             data: item
                         }
                     ]
-                }
-                this.chart.setOption(option)
+                };
+                chart.setOption(option);
             } else {
-                alert('无法加载该地图')
+                alert('无法加载该地图');
             }
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped></style>

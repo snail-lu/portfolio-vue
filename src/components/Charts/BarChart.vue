@@ -34,7 +34,7 @@ export default {
             window.addEventListener('resize', this.resizeCharts);
         },
         resizeCharts() {
-            chart.resize();
+            chart && chart.resize();
         },
         setOptions() {
             const option = {

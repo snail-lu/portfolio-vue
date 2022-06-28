@@ -3,13 +3,14 @@
 </template>
 
 <script>
-import * as echarts from 'echarts/core'
-import { TitleComponent, TooltipComponent, GridComponent, ToolboxComponent } from 'echarts/components'
-import { LineChart } from 'echarts/charts'
-import { UniversalTransition } from 'echarts/features'
-import { CanvasRenderer } from 'echarts/renderers'
+import * as echarts from 'echarts/core';
+import { TitleComponent, TooltipComponent, GridComponent, ToolboxComponent } from 'echarts/components';
+import { LineChart } from 'echarts/charts';
+import { UniversalTransition } from 'echarts/features';
+import { CanvasRenderer } from 'echarts/renderers';
 
-echarts.use([TitleComponent, TooltipComponent, GridComponent, LineChart, CanvasRenderer, UniversalTransition, ToolboxComponent])
+echarts.use([TitleComponent, TooltipComponent, GridComponent, LineChart, CanvasRenderer, UniversalTransition, ToolboxComponent]);
+let chart = null;
 export default {
     props: {
         width: {
@@ -22,46 +23,45 @@ export default {
         }
     },
     mounted() {
-        this.initCharts()
+        this.initCharts();
     },
     beforeDestroy() {
-        window.removeEventListener('resize', this.resizeCharts)
+        window.removeEventListener('resize', this.resizeCharts);
     },
     methods: {
         initCharts() {
-            this.chart = echarts.init(this.$el)
-            this.setOptions()
-            window.addEventListener('resize', this.resizeCharts)
+            chart = echarts.init(this.$el);
+            this.setOptions();
+            window.addEventListener('resize', this.resizeCharts);
         },
         resizeCharts() {
-            this.chart.resize()
+            chart && chart.resize();
         },
         setOptions() {
             function randomData() {
-                now = new Date(+now + steps)
-                value = value + Math.random() * 21 - 10
+                now = new Date(+now + steps);
+                value = value + Math.random() * 21 - 10;
                 return {
                     name: now.toString(),
                     // value: [[now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'), Math.round(value)]
                     value: [now, Math.round(value)]
-                }
+                };
             }
-            let data = []
-            let now = new Date() - 60 * 1000
-            let steps = 1000
-            let value = Math.random() * 1000
+            let data = [];
+            let now = new Date() - 60 * 1000;
+            let steps = 1000;
+            let value = Math.random() * 1000;
             for (var i = 0; i < 60; i++) {
-                data.push(randomData())
+                data.push(randomData());
             }
-            console.log(data, 'data')
 
             const option = {
                 tooltip: {
                     trigger: 'axis',
                     formatter: function (params) {
-                        params = params[0]
-                        var date = new Date(params.name)
-                        return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1]
+                        params = params[0];
+                        var date = new Date(params.name);
+                        return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
                     },
                     axisPointer: {
                         animation: false
@@ -91,10 +91,10 @@ export default {
                         show: false
                     },
                     max: function (value) {
-                        return value.max + 20
+                        return value.max + 20;
                     },
                     min: function (value) {
-                        return value.min - 100
+                        return value.min - 100;
                     }
                 },
                 series: [
@@ -108,23 +108,23 @@ export default {
                         }
                     }
                 ]
-            }
+            };
             setInterval(() => {
-                data.shift()
-                data.push(randomData())
-                this.chart.setOption({
+                data.shift();
+                data.push(randomData());
+                chart.setOption({
                     series: [
                         {
                             data: data
                         }
                     ]
-                })
-            }, 1000)
+                });
+            }, 1000);
 
-            this.chart.setOption(option)
+            chart.setOption(option);
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped></style>

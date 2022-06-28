@@ -2,14 +2,14 @@
     <div :style="{ width, height }"></div>
 </template>
 <script>
-import * as echarts from 'echarts/core'
-import { DatasetComponent, GraphicComponent, GridComponent } from 'echarts/components'
-import { BarChart } from 'echarts/charts'
-import { CanvasRenderer } from 'echarts/renderers'
+import * as echarts from 'echarts/core';
+import { DatasetComponent, GraphicComponent, GridComponent } from 'echarts/components';
+import { BarChart } from 'echarts/charts';
+import { CanvasRenderer } from 'echarts/renderers';
 
 // 注册必须的组件
-echarts.use([DatasetComponent, GraphicComponent, GridComponent, BarChart, CanvasRenderer])
-
+echarts.use([DatasetComponent, GraphicComponent, GridComponent, BarChart, CanvasRenderer]);
+let chart = null;
 export default {
     props: {
         width: {
@@ -28,26 +28,26 @@ export default {
             startIndex: 10,
             flags: null,
             data: null
-        }
+        };
     },
     mounted() {
-        this.initCharts()
+        this.initCharts();
     },
     beforeDestroy() {
-        window.removeEventListener('resize', this.resizeCharts)
+        window.removeEventListener('resize', this.resizeCharts);
     },
     methods: {
         initCharts() {
-            this.chart = echarts.init(this.$el)
-            this.setOptions()
-            window.addEventListener('resize', this.resizeCharts)
+            chart = echarts.init(this.$el);
+            this.setOptions();
+            window.addEventListener('resize', this.resizeCharts);
         },
         resizeCharts() {
-            this.chart.resize()
+            chart && chart.resize();
         },
         setOptions() {
-            var option
-            const dimension = 0
+            var option;
+            const dimension = 0;
             const countryColors = {
                 Australia: '#FF6666',
                 Canada: '#FFFF00',
@@ -68,25 +68,25 @@ export default {
                 Turkey: '#993366',
                 'United Kingdom': '#9999CC',
                 'United States': '#CC99CC'
-            }
+            };
             const promise1 = this.req({
                 url: '/rankingChart/data',
                 method: 'GET'
-            })
+            });
             const promise2 = this.req({
                 url: '/rankingChart/life-expectancy-table',
                 method: 'GET'
-            })
+            });
             Promise.all([promise1, promise2]).then((values) => {
-                const flags = values[0]
-                const data = values[1]
-                const years = []
+                const flags = values[0];
+                const data = values[1];
+                const years = [];
                 for (let i = 0; i < data.length; ++i) {
                     if (years.length === 0 || years[years.length - 1] !== data[i][4]) {
-                        years.push(data[i][4])
+                        years.push(data[i][4]);
                     }
                 }
-                let startYear = years[this.startIndex]
+                let startYear = years[this.startIndex];
                 option = {
                     toolbox: {
                         feature: {
@@ -112,7 +112,7 @@ export default {
                     },
                     dataset: {
                         source: data.slice(1).filter(function (d) {
-                            return d[4] === startYear
+                            return d[4] === startYear;
                         })
                     },
                     yAxis: {
@@ -139,7 +139,7 @@ export default {
                             itemStyle: {
                                 borderRadius: [5, 5, 5, 5],
                                 color: function (param) {
-                                    return countryColors[param.value[3]] || '#5470c6'
+                                    return countryColors[param.value[3]] || '#5470c6';
                                 }
                             },
                             encode: {
@@ -176,32 +176,32 @@ export default {
                     //         }
                     //     ]
                     // }
-                }
+                };
                 // console.log(option);
-                this.option = option
-                this.flags = flags
-                this.data = data
-                this.chart.setOption(option)
-                this.updateData(years)
-            })
+                this.option = option;
+                this.flags = flags;
+                this.data = data;
+                chart.setOption(option);
+                this.updateData(years);
+            });
         },
         updateData(years) {
-            const { updateFrequency, startIndex } = this
+            const { updateFrequency, startIndex } = this;
             for (let i = startIndex; i < years.length - 1; ++i) {
                 setTimeout(() => {
-                    this.updateYear(years[i + 1])
-                }, (i - startIndex) * updateFrequency)
+                    this.updateYear(years[i + 1]);
+                }, (i - startIndex) * updateFrequency);
             }
         },
         updateYear(year) {
-            const { option } = this
+            const { option } = this;
             let source = this.data.slice(1).filter(function (d) {
-                return d[4] === year
-            })
-            option.series[0].data = source
+                return d[4] === year;
+            });
+            option.series[0].data = source;
             // option.graphic.elements[0].style.text = year
-            this.chart.setOption(option)
+            chart && chart.setOption(option);
         }
     }
-}
+};
 </script>
