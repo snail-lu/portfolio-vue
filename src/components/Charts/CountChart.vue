@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import countTo from 'vue-count-to'
-import { randomData } from '@/utils/index'
+import countTo from '@/components/VueCountTo/index';
+import { randomData } from '@/utils/index';
 export default {
     components: {
         countTo
@@ -31,32 +31,32 @@ export default {
             monthlyQuota: 3000765,
             dailyQuota: 10000,
             timer: null
-        }
+        };
     },
     beforeDestroy() {
         if (this.timer) {
-            clearInterval(this.timer)
-            this.timer = null
+            clearInterval(this.timer);
+            this.timer = null;
         }
     },
     mounted() {
-        this.updateData()
+        this.updateData();
     },
     methods: {
         updateData() {
             this.timer = setInterval(() => {
-                const { annualQuota, monthlyQuota, dailyQuota } = this
-                const n = randomData(1000, 10000)
-                this.oldAnnualQuota = annualQuota
-                this.oldMonthlyQuota = monthlyQuota
-                this.oldDailyQuota = dailyQuota
-                this.annualQuota = annualQuota + n
-                this.monthlyQuota = monthlyQuota + n
-                this.dailyQuota = dailyQuota + n
-            }, 3000)
+                const { annualQuota, monthlyQuota, dailyQuota } = this;
+                const n = randomData(1000, 10000);
+                this.oldAnnualQuota = annualQuota;
+                this.oldMonthlyQuota = monthlyQuota;
+                this.oldDailyQuota = dailyQuota;
+                this.annualQuota = annualQuota + n;
+                this.monthlyQuota = monthlyQuota + n;
+                this.dailyQuota = dailyQuota + n;
+            }, 3000);
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>
