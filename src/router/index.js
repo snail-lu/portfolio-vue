@@ -1,6 +1,6 @@
 import demoRoutes from './demo';
 import { h, resolveComponent } from 'vue';
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 
 /* Layout */
 const routes = [
@@ -112,7 +112,7 @@ routes[0].children.push(demoRoutes);
 //     });
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes
 });
 
