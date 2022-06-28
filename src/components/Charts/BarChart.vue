@@ -3,12 +3,13 @@
 </template>
 
 <script>
-import * as echarts from 'echarts/core'
-import { GridComponent } from 'echarts/components'
-import { BarChart } from 'echarts/charts'
-import { CanvasRenderer } from 'echarts/renderers'
+import * as echarts from 'echarts/core';
+import { GridComponent } from 'echarts/components';
+import { BarChart } from 'echarts/charts';
+import { CanvasRenderer } from 'echarts/renderers';
 
-echarts.use([GridComponent, BarChart, CanvasRenderer])
+let chart = null;
+echarts.use([GridComponent, BarChart, CanvasRenderer]);
 export default {
     props: {
         width: {
@@ -20,25 +21,20 @@ export default {
             default: '100%'
         }
     },
-    data() {
-        return {
-            chart: null
-        }
-    },
     mounted() {
-        this.initCharts()
+        this.initCharts();
     },
     beforeDestroy() {
-        window.removeEventListener('resize', this.resizeCharts)
+        window.removeEventListener('resize', this.resizeCharts);
     },
     methods: {
         initCharts() {
-            this.chart = echarts.init(this.$el)
-            this.setOptions()
-            window.addEventListener('resize', this.resizeCharts)
+            chart = echarts.init(this.$el);
+            this.setOptions();
+            window.addEventListener('resize', this.resizeCharts);
         },
         resizeCharts() {
-            this.chart.resize()
+            chart.resize();
         },
         setOptions() {
             const option = {
@@ -61,12 +57,12 @@ export default {
                         type: 'bar'
                     }
                 ]
-            }
+            };
 
-            this.chart.setOption(option)
+            chart.setOption(option);
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped></style>
