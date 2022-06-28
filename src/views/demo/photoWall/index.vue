@@ -6,7 +6,7 @@
             </el-upload>
 
             <div class="btn">
-                <full-screen-button />
+                <FullScreenButton />
             </div>
         </div>
 
@@ -25,72 +25,65 @@
         <div class="photo-list" v-else>
             <photo :src="imgUrlFilter(file.raw)" v-for="file in fileList" :key="file.uid" @onDelete="onDelete(file.uid)" />
         </div>
+        <DraggableResizableBox />
     </div>
 </template>
 
-<script>
+<script setup>
 import Photo from './components/photo';
 import photo_1 from '../../../assets/images/photo-1.jpg';
 import photo_2 from '../../../assets/images/photo-2.jpg';
 import photo_3 from '../../../assets/images/photo-3.jpg';
-import FullScreenButton from '@/components/FullScreenButton/index.vue';
-export default {
-    components: {
-        Photo,
-        FullScreenButton
-    },
-    data() {
-        return {
-            fileList: [],
-            exampleList: [
-                {
-                    uid: 1,
-                    src: photo_1,
-                    initialWidth: 577,
-                    initialHeight: 346,
-                    startX: 430,
-                    startY: 330
-                },
-                {
-                    uid: 2,
-                    src: photo_2,
-                    initialWidth: 426,
-                    initialHeight: 258,
-                    startX: 830,
-                    startY: 56
-                },
-                {
-                    uid: 3,
-                    src: photo_3,
-                    initialWidth: 486,
-                    initialHeight: 290,
-                    startX: 147,
-                    startY: 38
-                }
-            ]
-        };
-    },
-    methods: {
-        onUploadFile(file, list) {
-            this.fileList = list;
-        },
-        // 删除
-        onDelete(uid) {
-            let fileIndex = -1;
-            if (this.fileList.length > 0) {
-                fileIndex = this.fileList.findIndex((item) => item.uid === uid);
-                this.fileList.splice(fileIndex, 1);
-            } else {
-                fileIndex = this.exampleList.findIndex((item) => item.uid === uid);
-                this.exampleList.splice(fileIndex, 1);
-            }
-        },
+import FullScreenButton from '@/components/FullScreenButton/index';
+import DraggableResizableBox from '@/components/DraggableResizableBox/index';
+import { reactive } from 'vue';
 
-        imgUrlFilter(val) {
-            return URL.createObjectURL(val);
-        }
+const fileList = reactive([]);
+const exampleList = reactive([
+    {
+        uid: 1,
+        src: photo_1,
+        initialWidth: 577,
+        initialHeight: 346,
+        startX: 430,
+        startY: 330
+    },
+    {
+        uid: 2,
+        src: photo_2,
+        initialWidth: 426,
+        initialHeight: 258,
+        startX: 830,
+        startY: 56
+    },
+    {
+        uid: 3,
+        src: photo_3,
+        initialWidth: 486,
+        initialHeight: 290,
+        startX: 147,
+        startY: 38
     }
-};
+]);
+
+function onUploadFile(file, list) {
+    this.fileList = list;
+}
+// 删除
+function onDelete(uid) {
+    let fileIndex = -1;
+    if (this.fileList.length > 0) {
+        fileIndex = this.fileList.findIndex((item) => item.uid === uid);
+        this.fileList.splice(fileIndex, 1);
+    } else {
+        fileIndex = this.exampleList.findIndex((item) => item.uid === uid);
+        this.exampleList.splice(fileIndex, 1);
+    }
+}
+
+function imgUrlFilter(val) {
+    return URL.createObjectURL(val);
+}
 </script>
 
 <style lang="scss" scoped>

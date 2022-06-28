@@ -1,5 +1,5 @@
 <template>
-    <vue-draggable-resizable
+    <!-- <vue-draggable-resizable
         :x="x"
         :y="y"
         :w="width"
@@ -8,18 +8,20 @@
         @resizing="onResize"
         :parent="true"
         class-name="my-photo"
-    >
+    > -->
+    <DraggableResizableBox>
         <div class="close-icon" title="删除" @click="onDelete">×</div>
         <img class="pic" :src="src" @load="onImgLoad" />
-    </vue-draggable-resizable>
+    </DraggableResizableBox>
+
+    <!-- </vue-draggable-resizable> -->
 </template>
 
 <script>
-import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
-import VueDraggableResizable from 'vue-draggable-resizable'
+import DraggableResizableBox from '@/components/DraggableResizableBox/index.vue';
 export default {
     components: {
-        VueDraggableResizable
+        DraggableResizableBox
     },
     props: {
         src: {
@@ -49,27 +51,27 @@ export default {
             y: this.startY,
             width: this.initialWidth,
             height: this.initialHeight
-        }
+        };
     },
     methods: {
         onResize(x, y, width, height) {
-            this.x = x
-            this.y = y
-            this.width = width
-            this.height = height
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
         },
         onDrag(x, y) {
-            this.x = x
-            this.y = y
+            this.x = x;
+            this.y = y;
         },
         onDelete() {
-            this.$emit('onDelete')
+            this.$emit('onDelete');
         },
         onImgLoad(data) {
-            console.log(data, 'img data')
+            console.log(data, 'img data');
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -83,21 +85,21 @@ export default {
             display: block;
         }
     }
+}
 
-    .close-icon {
-        display: none;
-        position: absolute;
-        top: 2px;
-        right: 4px;
-        cursor: pointer;
-        font-size: 18px;
-        color: #999;
-    }
+.close-icon {
+    display: none;
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #999;
+}
 
-    .pic {
-        width: 100%;
-        object-fit: contain;
-        height: 100%;
-    }
+.pic {
+    width: 100%;
+    object-fit: contain;
+    height: 100%;
 }
 </style>
