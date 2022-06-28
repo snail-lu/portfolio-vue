@@ -68,7 +68,7 @@ export default {
             default: 'javascript'
         },
         // 代码内容
-        value: {
+        modelValue: {
             type: String,
             default: ''
         },
@@ -80,7 +80,7 @@ export default {
     data() {
         return {
             options: {
-                value: this.value, // 代码内容
+                value: this.modelValue, // 代码内容
                 mode: 'javascript', // 编辑器的语言
                 theme: 'lesser-dark', // 主题
                 indentWithTabs: true, // tab缩进
@@ -115,7 +115,7 @@ export default {
 
                 // 组件v-model实现
                 const value = myCodeEditor.getValue();
-                this.$emit('input', value);
+                this.$emit('update:modelValue', value);
             });
 
             this.myCodeEditor = myCodeEditor;
@@ -126,7 +126,7 @@ export default {
             const { toClipboard } = useClipboard();
 
             try {
-                await toClipboard(this.value);
+                await toClipboard(this.modelValue);
                 this.$message.success('复制成功');
             } catch (e) {
                 console.error(e);

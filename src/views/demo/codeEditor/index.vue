@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import CodeEditor from '@/components/CodeEditor'
+import CodeEditor from '@/components/CodeEditor';
 export default {
     components: {
         CodeEditor
@@ -13,9 +13,9 @@ export default {
     data() {
         return {
             code: 'function myScript(){\n  return 100;\n}\n'
-        }
+        };
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>
