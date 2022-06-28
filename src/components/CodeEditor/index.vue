@@ -3,15 +3,7 @@
         <div class="header">
             <div>{{ title }}</div>
             <div class="btn-groups">
-                <el-button
-                    type="text"
-                    icon="el-icon-document-copy"
-                    class="copy-btn"
-                    v-clipboard="value"
-                    v-clipboard:success="onCopySuccess"
-                    v-clipboard:error="onCopyError"
-                    >复制</el-button
-                >
+                <el-button link type="primary" class="copy-btn" @click="onCopy"> <i-ep-copy-document />复制</el-button>
             </div>
         </div>
         <div ref="codeEditor" :style="{ height }"></div>
@@ -54,6 +46,8 @@ import 'codemirror/addon/selection/selection-pointer';
 
 // 自动括号匹配
 import 'codemirror/addon/edit/matchbrackets';
+
+import useClipboard from 'vue-clipboard3';
 
 export default {
     name: 'CodeEditor',
@@ -110,7 +104,6 @@ export default {
     methods: {
         codeEditorInit() {
             const { options } = this;
-            console.log(options, 'options');
             // 在普通元素上创建编辑器
             const myCodeEditor = CodeMirror(this.$refs.codeEditor, options);
             // 在textarea元素上创建编辑器
@@ -127,11 +120,17 @@ export default {
 
             this.myCodeEditor = myCodeEditor;
         },
-        onCopySuccess() {
-            this.$message.success('复制成功');
-        },
-        onCopyError() {
-            this.$message.error('复制失败');
+
+        // 复制代码
+        async onCopy() {
+            const { toClipboard } = useClipboard();
+
+            try {
+                await toClipboard(this.value);
+                this.$message.success('复制成功');
+            } catch (e) {
+                console.error(e);
+            }
         }
     }
 };
