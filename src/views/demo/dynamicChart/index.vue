@@ -2,7 +2,7 @@
     <div class="dynamic-charts-container">
         <div class="page-title">
             全国销售数据可视化平台
-            <div class="date-time flex-box">
+            <div class="date-time flex-box flex-v-center">
                 {{ time }}
                 <div class="btn">
                     <full-screen-button />
@@ -72,24 +72,24 @@ export default {
     },
     data() {
         return {
-            time: ''
+            time: '',
+            timer: null
         };
     },
     created() {
         this.initTime();
     },
+    beforeUnmount() {
+        // 清理定时器
+        clearInterval(this.timer);
+        this.timer = null;
+    },
     methods: {
         // 初始化时间
         initTime() {
-            let timer = setInterval(() => {
+            this.timer = setInterval(() => {
                 this.time = getNowTime();
             }, 200);
-
-            // 清理定时器
-            this.$once('hook:beforeDestroy', () => {
-                clearInterval(timer);
-                timer = null;
-            });
         }
     }
 };
