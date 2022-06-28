@@ -29,6 +29,7 @@
         "vuex": "^4.0.2"
     },
     "devDependencies": {
+        "@iconify-json/ep": "^1.1.6",
         "@vitejs/plugin-vue": "^2.3.3",
         "autoprefixer": "^9.5.1",
         "compression-webpack-plugin": "^10.0.0",
@@ -40,6 +41,7 @@
         "sass": "^1.52.2",
         "sass-loader": "^13.0.0",
         "unplugin-auto-import": "^0.9.1",
+        "unplugin-icons": "^0.14.6",
         "unplugin-vue-components": "^0.20.1",
         "vite": "^2.9.13",
         "webpack-bundle-analyzer": "^4.5.0"
