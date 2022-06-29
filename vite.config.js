@@ -40,8 +40,9 @@ export default defineConfig({
         })
     ],
     resolve: {
-        // 文件类型扩展
+        // 导入时可省略的扩展名列表
         extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
+        // 路径别名
         alias: {
             '@': path.resolve(__dirname, './src')
         }
