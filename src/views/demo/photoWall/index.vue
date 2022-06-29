@@ -23,9 +23,8 @@
             />
         </div>
         <div class="photo-list" v-else>
-            <photo :src="imgUrlFilter(file.raw)" v-for="file in fileList" :key="file.uid" @onDelete="onDelete(file.uid)" />
+            <Photo :src="imgUrlFilter(file.raw)" v-for="file in fileList" :key="file.uid" @onDelete="onDelete(file.uid)" />
         </div>
-        <DraggableResizableBox />
     </div>
 </template>
 
@@ -35,7 +34,6 @@ import photo_1 from '../../../assets/images/photo-1.jpg';
 import photo_2 from '../../../assets/images/photo-2.jpg';
 import photo_3 from '../../../assets/images/photo-3.jpg';
 import FullScreenButton from '@/components/FullScreenButton/index';
-import DraggableResizableBox from '@/components/DraggableResizableBox/index';
 import { reactive } from 'vue';
 
 const fileList = reactive([]);

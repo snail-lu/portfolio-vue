@@ -9,9 +9,11 @@
         :parent="true"
         class-name="my-photo"
     > -->
-    <DraggableResizableBox>
-        <div class="close-icon" title="删除" @click="onDelete">×</div>
-        <img class="pic" :src="src" @load="onImgLoad" />
+    <DraggableResizableBox :x="x" :y="y" :w="width">
+        <div class="my-photo">
+            <div class="close-icon" title="删除" @click="onDelete">×</div>
+            <img class="pic" :src="src" @load="onImgLoad" draggable="false" />
+        </div>
     </DraggableResizableBox>
 
     <!-- </vue-draggable-resizable> -->
@@ -77,8 +79,7 @@ export default {
 <style lang="scss" scoped>
 .my-photo {
     background-color: #fff;
-    padding: 20px;
-    position: absolute;
+    // padding: 20px;
 
     &:hover {
         .close-icon {
@@ -101,5 +102,6 @@ export default {
     width: 100%;
     object-fit: contain;
     height: 100%;
+    display: block;
 }
 </style>
