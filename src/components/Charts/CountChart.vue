@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import countTo from '@/components/VueCountTo/index';
+import countTo from '@/components/VueCountTo/index.vue';
 import { randomData } from '@/utils/index';
 export default {
     components: {
