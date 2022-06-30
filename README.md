@@ -31,11 +31,19 @@ npm run build
 npm run deploy
 ```
 
-### 待优化内容
+## 待优化内容
 
 -   <span style="color:green;">【已优化】</span>`Element-UI`按需引入
 -   <span style="color:green;">【已优化】</span>首屏白屏增加加载动画效果
 -   <span style="color:green;">【已优化】</span>过渡组件`transition`和`scrollBehavior`冲突，导致页面无法回退到指定位置
+
+## 其他
+
+1. 项目中使用的图标为[iconify](http://icon-sets.iconify.design/ep/)中`Element-Plus`图标集的按需引入，使用方法为`<i-ep-图标名称></i-ep-图标名称`。示例：
+
+```html
+<i-ep-bell-filled></i-ep-bell-filled>
+```
 
 ## 参考文档
 
