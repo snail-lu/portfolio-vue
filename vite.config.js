@@ -49,5 +49,11 @@ export default defineConfig({
     },
     server: {
         host: '0.0.0.0'
+    },
+    css: {
+        postcss: {
+            // css自动添加浏览器前缀
+            plugins: [require('autoprefixer')]
+        }
     }
 });
