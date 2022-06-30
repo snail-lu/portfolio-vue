@@ -11,13 +11,13 @@ import { computed, ref } from 'vue';
 import { useDraggable, useResizeObserver } from '@vueuse/core';
 
 const props = defineProps({
-    width: {
+    w: {
         type: Number,
         default: 200
     },
-    height: {
-        type: [String, Number],
-        default: 'auto'
+    h: {
+        type: Number,
+        default: 200
     },
     x: {
         type: Number,
@@ -32,8 +32,8 @@ const props = defineProps({
 const dragger = ref(null);
 const resizer = ref(null);
 const text = ref('');
-const newWidth = ref(props.width);
-const newHeight = ref(props.height);
+const newWidth = ref(props.w);
+const newHeight = ref(props.h);
 
 // `style` will be a helper computed for `left: ?px; top: ?px;`
 const { x, y, style } = useDraggable(dragger, {
@@ -43,13 +43,16 @@ const { x, y, style } = useDraggable(dragger, {
 useResizeObserver(resizer, (entries) => {
     const entry = entries[0];
     const { width, height } = entry.contentRect;
-    newWidth.value = width;
-    newHeight.value = height;
+    if (width && height) {
+        newWidth.value = width;
+        newHeight.value = height;
+    }
+
     text.value = `width: ${width}, height: ${height}`;
 });
 
 const sizeStyle = computed(() => {
-    return `width:${newWidth.value - 5}px;height:${newHeight.height - 5}px`;
+    return `width:${newWidth.value - 5}px;height:${newHeight.value - 5}px`;
 });
 const fullStyle = computed(() => {
     return `${style.value}${sizeStyle.value}`;

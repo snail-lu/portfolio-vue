@@ -1,8 +1,8 @@
 <template>
     <div class="photo-wall-container">
-        <div class="btn-groups flex-box flex-h-center">
+        <div class="btn-groups flex-box flex-h-center flex-v-center">
             <el-upload action="#" multiple :auto-upload="false" :on-change="onUploadFile" :show-file-list="false">
-                <i class="btn el-icon-picture-outline upload-btn" title="打开本地图片"></i>
+                <i-ep-picture class="btn el-icon-picture-outline upload-btn" title="打开本地图片"></i-ep-picture>
             </el-upload>
 
             <div class="btn">
@@ -52,15 +52,15 @@ const exampleList = reactive([
         initialWidth: 426,
         initialHeight: 258,
         startX: 830,
-        startY: 56
+        startY: 68
     },
     {
         uid: 3,
         src: photo_3,
-        initialWidth: 486,
-        initialHeight: 290,
+        initialWidth: 403,
+        initialHeight: 231,
         startX: 147,
-        startY: 38
+        startY: 88
     }
 ]);
 
