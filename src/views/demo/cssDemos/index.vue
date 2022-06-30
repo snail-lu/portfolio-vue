@@ -53,12 +53,10 @@
 </template>
 
 <script>
-import Demo from '@/components/Demo';
-import CodeEditor from '@/components/CodeEditor';
+import Demo from '@/components/Demo/index.vue';
 export default {
     components: {
-        Demo,
-        CodeEditor
+        Demo
     },
     data() {
         return {

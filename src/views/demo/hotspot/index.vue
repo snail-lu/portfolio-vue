@@ -15,13 +15,7 @@
             />
 
             <!--已有的热区蒙版-->
-            <hot-spot-item
-                v-for="(item, index) in spotDataList"
-                :id="index"
-                :key="index"
-                :area-init="item"
-                @del="delSpot"
-            />
+            <hot-spot-item v-for="(item, index) in spotDataList" :id="index" :key="index" :area-init="item" @del="delSpot" />
         </div>
         <div class="hot-spot-list flex-box flex-wrap">
             <div class="hot-spot-item" v-for="(item, index) in spotDataList" :key="index">
@@ -44,8 +38,8 @@
 </template>
 
 <script>
-import Demo from '@/components/Demo'
-import HotSpotItem from './components/HotSpotItem.vue'
+import Demo from '@/components/Demo/index.vue';
+import HotSpotItem from './components/HotSpotItem.vue';
 export default {
     components: {
         Demo,
@@ -63,35 +57,35 @@ export default {
             width: 0,
             height: 0,
             drawBoxVisible: false
-        }
+        };
     },
     methods: {
         // 绘制热区开始
         mouseDown(e) {
-            this.drawBoxVisible = true
-            this.startX = e.layerX
-            this.startY = e.layerY
+            this.drawBoxVisible = true;
+            this.startX = e.layerX;
+            this.startY = e.layerY;
 
             if (!document.onmousemove) {
                 document.onmousemove = (ev) => {
-                    this.width = ev.layerX - this.startX
-                    this.height = ev.layerY - this.startY
-                }
+                    this.width = ev.layerX - this.startX;
+                    this.height = ev.layerY - this.startY;
+                };
             }
         },
 
         // 移动绘制热区
         mouseMove(ev) {
             if (this.drawBoxVisible) {
-                this.width = ev.layerX - this.startX
-                this.height = ev.layerY - this.startY
+                this.width = ev.layerX - this.startX;
+                this.height = ev.layerY - this.startY;
             }
         },
 
         // 绘制热区结束
         mouseUp(e) {
-            document.onmousemove = null
-            const { drawBoxVisible, startX, startY, width, height } = this
+            document.onmousemove = null;
+            const { drawBoxVisible, startX, startY, width, height } = this;
             if (drawBoxVisible && width > 10 && height > 10) {
                 const data = {
                     startX,
@@ -99,23 +93,23 @@ export default {
                     width,
                     height,
                     link: ''
-                }
-                this.spotDataList.push(data)
+                };
+                this.spotDataList.push(data);
             }
             // 数据重置
-            this.drawBoxVisible = false
-            this.startX = 0
-            this.startY = 0
-            this.width = 0
-            this.height = 0
+            this.drawBoxVisible = false;
+            this.startX = 0;
+            this.startY = 0;
+            this.width = 0;
+            this.height = 0;
         },
 
         // 删除指定热区
         delSpot(index) {
-            this.spotDataList.splice(index, 1)
+            this.spotDataList.splice(index, 1);
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>

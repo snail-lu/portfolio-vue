@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import Demo from '@/components/Demo';
-import Calendar from '@/components/Calendar';
+import Demo from '@/components/Demo/index.vue';
+import Calendar from '@/components/Calendar/index.vue';
 export default {
     components: {
         Demo,

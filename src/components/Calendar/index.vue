@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import DateTable from './date-table'
-import { dateFormat } from '@/utils/date'
+import DateTable from './date-table.vue';
+import { dateFormat } from '@/utils/date';
 
 export default {
     name: 'Calendar',
@@ -32,13 +32,13 @@ export default {
     provide() {
         return {
             Calendar: this
-        }
+        };
     },
     data() {
         return {
             selectedDay: '',
             now: new Date()
-        }
+        };
     },
 
     methods: {
@@ -49,65 +49,65 @@ export default {
          *
          */
         selectDate(type) {
-            let day = ''
+            let day = '';
             if (type === 'prev-month') {
-                day = `${this.prevMonthDatePrefix}-01` // 切换成上个月1号
+                day = `${this.prevMonthDatePrefix}-01`; // 切换成上个月1号
             } else if (type === 'next-month') {
-                day = `${this.nextMonthDatePrefix}-01` // 切换成下个月1号
+                day = `${this.nextMonthDatePrefix}-01`; // 切换成下个月1号
             } else {
-                day = this.formatedToday
+                day = this.formatedToday;
             }
 
-            this.selectedDay = day
+            this.selectedDay = day;
         },
 
         // 点选某一天
         pickDay(cell) {
-            this.$emit('pick-day', cell)
+            this.$emit('pick-day', cell);
         },
         // 点选某一日程
         pickSchedule(schedule) {
-            const { id, title } = schedule
-            this.$emit('pick-schedule', { id, title })
+            const { id, title } = schedule;
+            this.$emit('pick-schedule', { id, title });
         }
     },
 
     computed: {
         // 上个月月份前缀
         prevMonthDatePrefix() {
-            const temp = new Date(this.date.getTime())
-            temp.setDate(0)
-            return dateFormat(temp, 'yyyy-mm')
+            const temp = new Date(this.date.getTime());
+            temp.setDate(0);
+            return dateFormat(temp, 'yyyy-mm');
         },
 
         // 下个月月份前缀
         nextMonthDatePrefix() {
-            const temp = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1)
-            return dateFormat(temp, 'yyyy-mm')
+            const temp = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1);
+            return dateFormat(temp, 'yyyy-mm');
         },
 
         // 当前显示的月份
         currentDate() {
-            const year = this.date.getFullYear()
-            const month = this.date.getMonth() + 1
-            return `${year} 年 ${month} 月`
+            const year = this.date.getFullYear();
+            const month = this.date.getMonth() + 1;
+            return `${year} 年 ${month} 月`;
         },
 
         // 格式化今日
         formatedToday() {
-            return dateFormat(this.now, 'yyyy-mm-dd')
+            return dateFormat(this.now, 'yyyy-mm-dd');
         },
 
         // 日历要展示的日期
         date() {
             if (this.selectedDay) {
-                const d = this.selectedDay.split('-')
-                return new Date(d[0], d[1] - 1, d[2])
+                const d = this.selectedDay.split('-');
+                return new Date(d[0], d[1] - 1, d[2]);
             }
-            return this.now
+            return this.now;
         }
     }
-}
+};
 </script>
 <style lang="scss" scoped>
 .calendar {

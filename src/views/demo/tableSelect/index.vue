@@ -1,8 +1,6 @@
 <template>
     <demo :data="demoInfo">
-        <el-button @click="onPrint" type="primary" size="mini" style="margin-bottom: 20px"
-            >打印所有已选数据ID</el-button
-        >
+        <el-button @click="onPrint" type="primary" size="mini" style="margin-bottom: 20px">打印所有已选数据ID</el-button>
         <span v-if="showSelectedGoods">{{ selectedGoodsIdsAll.length ? selectedGoodsIdsAll.join(' ') : '' }}</span>
         <el-table
             ref="multipleTable"
@@ -36,7 +34,7 @@
 </template>
 
 <script>
-import Demo from '@/components/Demo'
+import Demo from '@/components/Demo/index.vue';
 export default {
     components: {
         Demo
@@ -61,82 +59,82 @@ export default {
                     pageSize: 5
                 }
             }
-        }
+        };
     },
     created() {
         // this.onSearch()
-        this.onSearchGoods()
+        this.onSearchGoods();
     },
     methods: {
         // 切换页码
         handleGoodsPageChange(currentPage) {
-            this.getAllSelectedGoodsId()
-            this.goodsForm.pageInfo.pageNum = currentPage
-            this.onSearchGoods()
+            this.getAllSelectedGoodsId();
+            this.goodsForm.pageInfo.pageNum = currentPage;
+            this.onSearchGoods();
         },
         // 切换每页条数
         handleGoodsSizeChange(currentPage) {
-            this.getAllSelectedGoodsId()
-            this.goodsForm.pageInfo.pageSize = currentPage
-            this.onSearchGoods()
+            this.getAllSelectedGoodsId();
+            this.goodsForm.pageInfo.pageSize = currentPage;
+            this.onSearchGoods();
         },
 
         // 搜索商品
         onSearchGoods() {
-            this.tableLoading = true
+            this.tableLoading = true;
             this.queryGoods(this.goodsForm).then(
                 (res) => {
-                    this.tableData = res.list
-                    this.toggleSelection()
-                    this.goodsTotal = res.total
-                    this.tableLoading = false
+                    this.tableData = res.list;
+                    this.toggleSelection();
+                    this.goodsTotal = res.total;
+                    this.tableLoading = false;
                 },
                 () => {
-                    this.tableLoading = false
+                    this.tableLoading = false;
                 }
-            )
+            );
         },
 
         // 设置表格选中效果
         toggleSelection() {
-            const selectedGoodsIds = []
-            const selectedGoodsIdsOther = this.selectedGoodsIdsAll.slice()
+            const selectedGoodsIds = [];
+            const selectedGoodsIdsOther = this.selectedGoodsIdsAll.slice();
             this.$nextTick(() => {
                 this.tableData.forEach((goods) => {
                     if (this.selectedGoodsIdsAll.includes(goods.id)) {
-                        this.$refs.multipleTable.toggleRowSelection(goods, true)
+                        this.$refs.multipleTable.toggleRowSelection(goods, true);
                         // 拆分当前页数据和其它页数据
-                        selectedGoodsIds.push(goods.id)
-                        const index = selectedGoodsIdsOther.indexOf(goods.id)
-                        selectedGoodsIdsOther.splice(index, 1)
+                        selectedGoodsIds.push(goods.id);
+                        const index = selectedGoodsIdsOther.indexOf(goods.id);
+                        selectedGoodsIdsOther.splice(index, 1);
                     }
-                })
-                this.selectedGoodsIds = selectedGoodsIds
-                this.selectedGoodsIdsOther = selectedGoodsIdsOther
-            })
+                });
+                this.selectedGoodsIds = selectedGoodsIds;
+                this.selectedGoodsIdsOther = selectedGoodsIdsOther;
+            });
         },
 
         // 商品选择
         handleSelectionChange(tableData) {
-            this.selectedGoodsIds = tableData.map((goods) => goods.id)
+            this.selectedGoodsIds = tableData.map((goods) => goods.id);
         },
 
         // 获得全部数据
         getAllSelectedGoodsId() {
-            const { selectedGoodsIds, selectedGoodsIdsOther } = this
-            this.selectedGoodsIdsAll = [...selectedGoodsIdsOther, ...selectedGoodsIds]
+            const { selectedGoodsIds, selectedGoodsIdsOther } = this;
+            this.selectedGoodsIdsAll = [...selectedGoodsIdsOther, ...selectedGoodsIds];
         },
 
         // 打印数据
         onPrint() {
-            this.showSelectedGoods = true
-            this.getAllSelectedGoodsId()
+            this.showSelectedGoods = true;
+            this.getAllSelectedGoodsId();
         },
 
         // 模拟接口获取数据
         queryGoods(params) {
-            const { pageInfo } = params
-            const { pageNum, pageSize } = pageInfo
+            const { pageInfo } = params;
+            const { pageNum, pageSize } = pageInfo;
             const data = [
                 { id: 1, goodsName: '测试商品1', goodsCode: '000001', goodsPrice: 101 },
                 { id: 2, goodsName: '测试商品2', goodsCode: '000002', goodsPrice: 102 },
@@ -148,18 +146,18 @@ export default {
                 { id: 8, goodsName: '测试商品8', goodsCode: '000008', goodsPrice: 108 },
                 { id: 9, goodsName: '测试商品9', goodsCode: '000009', goodsPrice: 109 },
                 { id: 10, goodsName: '测试商品10', goodsCode: '0000010', goodsPrice: 110 }
-            ]
+            ];
             return new Promise((resolve) => {
                 setTimeout(() => {
                     resolve({
                         list: data.slice((pageNum - 1) * pageSize, pageNum * pageSize),
                         total: data.length
-                    })
-                }, 1000)
-            })
+                    });
+                }, 1000);
+            });
         }
     }
-}
+};
 </script>
 <style lang="scss" scoped>
 .demo-container {

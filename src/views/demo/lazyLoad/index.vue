@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import LazyLoadImg from '@/components/LazyLoadImg/index.vue'
-import Demo from '@/components/Demo'
+import LazyLoadImg from '@/components/LazyLoadImg/index.vue';
+import Demo from '@/components/Demo/index.vue';
 export default {
     name: 'lazyLoad',
     components: {
@@ -34,11 +34,11 @@ export default {
                 'https://img2.baidu.com/it/u=3316751696,261998796&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500',
                 'https://img1.baidu.com/it/u=3906918928,3518209927&fm=253&fmt=auto&app=138&f=PNG?w=889&h=500'
             ]
-        }
+        };
     },
     mounted() {},
     methods: {}
-}
+};
 </script>
 
 <style lang="scss" scoped>

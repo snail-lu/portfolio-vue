@@ -13,27 +13,27 @@
 </template>
 
 <script>
-import config from '@/config/index'
-import Card from '@/components/Card'
+import config from '@/config/index';
+import Card from '@/components/Card/index.vue';
 export default {
     components: {
         Card
     },
     data() {
-        return {}
+        return {};
     },
     computed: {
         projectsList() {
-            return config.projectsList || []
+            return config.projectsList || [];
         }
     },
 
     methods: {
         pushUrl(path) {
-            this.$router.push({ path: `/demo/${path}` })
+            this.$router.push({ path: `/demo/${path}` });
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>

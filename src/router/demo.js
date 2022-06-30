@@ -7,7 +7,7 @@ export default {
     children: [
         {
             path: '',
-            component: () => import('../views/demo/index'),
+            component: () => import('../views/demo/index.vue'),
             meta: {
                 title: 'DEMO实验室'
             }

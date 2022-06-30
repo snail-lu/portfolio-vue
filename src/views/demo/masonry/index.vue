@@ -16,7 +16,7 @@
 
 <script>
 import { getMinValueIndexOfArr } from '@/utils/index';
-import Demo from '@/components/Demo';
+import Demo from '@/components/Demo/index.vue';
 export default {
     components: {
         Demo

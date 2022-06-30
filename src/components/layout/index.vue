@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import AppMain from './AppMain';
-import Topbar from './Topbar';
+import AppMain from './AppMain.vue';
+import Topbar from './Topbar.vue';
 
 export default {
     name: 'Layout',

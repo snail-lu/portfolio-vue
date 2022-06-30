@@ -29,11 +29,11 @@
 </template>
 
 <script setup>
-import Photo from './components/photo';
+import Photo from './components/photo.vue';
 import photo_1 from '../../../assets/images/photo-1.jpg';
 import photo_2 from '../../../assets/images/photo-2.jpg';
 import photo_3 from '../../../assets/images/photo-3.jpg';
-import FullScreenButton from '@/components/FullScreenButton/index';
+import FullScreenButton from '@/components/FullScreenButton/index.vue';
 import { reactive } from 'vue';
 
 const fileList = reactive([]);

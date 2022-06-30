@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Demo from '@/components/Demo'
+import Demo from '@/components/Demo/index.vue';
 export default {
     components: {
         Demo
@@ -102,29 +102,29 @@ export default {
                     ]
                 }
             ]
-        }
+        };
     },
     methods: {
         // 节点树
         async onExpand() {
-            this.expandAll = !this.expandAll
+            this.expandAll = !this.expandAll;
             // 改变每个节点的状态
-            this.changeTreeNodeStatus(this.$refs.tree.store.root)
+            this.changeTreeNodeStatus(this.$refs.tree.store.root);
         },
         // 改变节点的状态
         changeTreeNodeStatus(node) {
-            node.expanded = this.expandAll
+            node.expanded = this.expandAll;
             for (let i = 0; i < node.childNodes.length; i++) {
                 // 改变节点的自身expanded状态
-                node.childNodes[i].expanded = this.expandAll
+                node.childNodes[i].expanded = this.expandAll;
                 // 遍历子节点
                 if (node.childNodes[i].childNodes.length > 0) {
-                    this.changeTreeNodeStatus(node.childNodes[i])
+                    this.changeTreeNodeStatus(node.childNodes[i]);
                 }
             }
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>

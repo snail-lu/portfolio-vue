@@ -6,33 +6,34 @@
             </el-col>
         </el-row>
         <div class="footer">
-            Illustration by <a class="link" href="https://icons8.com/illustrations/" target="_blank">Icons 8</a> from <a class="link" href="https://icons8.com/illustrations" target="_blank">Ouch!</a>
+            Illustration by <a class="link" href="https://icons8.com/illustrations/" target="_blank">Icons 8</a> from
+            <a class="link" href="https://icons8.com/illustrations" target="_blank">Ouch!</a>
         </div>
     </div>
 </template>
 
 <script>
-import config from '@/config/index'
-import Card from '@/components/Card'
+import config from '@/config/index';
+import Card from '@/components/Card/index.vue';
 export default {
     components: {
         Card
     },
     data() {
-        return {}
+        return {};
     },
     computed: {
         demoList() {
-            return config.demoList || []
+            return config.demoList || [];
         }
     },
 
     methods: {
         pushUrl(path) {
-            this.$router.push({ path: `/demo/${path}` })
+            this.$router.push({ path: `/demo/${path}` });
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>

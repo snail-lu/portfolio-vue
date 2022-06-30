@@ -7,7 +7,7 @@ const routes = [
     // 主页面
     {
         path: '/',
-        component: () => import('@/components/layout/index'),
+        component: () => import('@/components/layout/index.vue'),
         redirect: '/home',
         children: [
             {
@@ -25,7 +25,7 @@ const routes = [
                 children: [
                     {
                         path: '',
-                        component: () => import('@/views/projects/index'),
+                        component: () => import('@/views/projects/index.vue'),
                         meta: {
                             title: '项目'
                         }

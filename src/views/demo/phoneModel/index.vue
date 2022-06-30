@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import Demo from '@/components/Demo'
+import Demo from '@/components/Demo/index.vue';
 export default {
     name: 'v-phone',
     components: {
@@ -52,32 +52,32 @@ export default {
                 url: ''
             },
             time: ':'
-        }
+        };
     },
     methods: {
         onTouch(e) {
-            console.log(e)
+            console.log(e);
         },
         checkTime(i) {
             if (i < 10) {
-                i = '0' + i
+                i = '0' + i;
             }
-            return i
+            return i;
         },
         timer() {
-            let now = new Date()
-            let h = this.checkTime(now.getHours())
-            let m = this.checkTime(now.getMinutes())
-            this.time = h + ':' + m
+            let now = new Date();
+            let h = this.checkTime(now.getHours());
+            let m = this.checkTime(now.getMinutes());
+            this.time = h + ':' + m;
             setTimeout(() => {
-                this.timer()
-            }, 1000)
+                this.timer();
+            }, 1000);
         }
     },
     created() {
-        this.timer()
+        this.timer();
     }
-}
+};
 </script>
 
 <style lang="scss">

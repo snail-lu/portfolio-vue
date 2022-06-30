@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import Demo from '@/components/Demo';
+import Demo from '@/components/Demo/index.vue';
 export default {
     components: {
         Demo

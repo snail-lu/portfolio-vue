@@ -41,7 +41,7 @@ export default defineConfig({
     ],
     resolve: {
         // 导入时可省略的扩展名列表
-        extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
+        extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
         // 路径别名
         alias: {
             '@': path.resolve(__dirname, './src')
