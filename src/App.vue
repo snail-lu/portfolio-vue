@@ -11,8 +11,3 @@ export default {
     methods: {}
 };
 </script>
-<style lang="scss">
-html {
-    // @include scrollBar;
-}
-</style>
