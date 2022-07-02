@@ -52,7 +52,7 @@ useResizeObserver(resizer, (entries) => {
 });
 
 const sizeStyle = computed(() => {
-    return `width:${newWidth.value - 5}px;height:${newHeight.value - 5}px`;
+    return `width:${newWidth.value - 3}px;height:${newHeight.value - 3}px`;
 });
 const fullStyle = computed(() => {
     return `${style.value}${sizeStyle.value}`;
@@ -81,8 +81,8 @@ const fullStyle = computed(() => {
         position: absolute;
         left: 0;
         top: 0;
-        width: calc(100% + 5px);
-        height: calc(100% + 5px);
+        width: calc(100% + 3px);
+        height: calc(100% + 3px);
         background: transparent;
         z-index: 1;
         border: none;
