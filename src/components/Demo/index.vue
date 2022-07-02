@@ -3,7 +3,9 @@
         <div class="header flex-box flex-v-center">
             <div class="flex-item-1 title">{{ data.title }}</div>
             <el-tooltip class="item" effect="dark" content="查看文章" placement="top-start" v-if="data.url">
-                <el-link class="article-link" :underline="false" icon="el-icon-view" :href="data.url"></el-link>
+                <el-link class="article-link" :underline="false" :href="data.url">
+                    <i-ep-view></i-ep-view>
+                </el-link>
             </el-tooltip>
         </div>
         <slot></slot>
@@ -15,7 +17,7 @@ export default {
     props: {
         data: Object
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>
