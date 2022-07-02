@@ -19,17 +19,18 @@
             <el-table-column prop="goodsCode" label="款号" />
             <el-table-column prop="goodsPrice" label="吊牌价格（元）" />
         </el-table>
-        <el-pagination
-            background
-            style="text-align: right"
-            layout="total,prev,sizes, pager, next"
-            :total="goodsTotal"
-            :page-size="goodsForm.pageInfo.pageSize"
-            :current-page="goodsForm.pageInfo.pageNum"
-            @size-change="handleGoodsSizeChange"
-            @current-change="handleGoodsPageChange"
-            :page-sizes="[5, 10]"
-        />
+        <div class="flex-box flex-h-end">
+            <el-pagination
+                background
+                layout="total,prev,sizes, pager, next"
+                :total="goodsTotal"
+                :page-size="goodsForm.pageInfo.pageSize"
+                :current-page="goodsForm.pageInfo.pageNum"
+                @size-change="handleGoodsSizeChange"
+                @current-change="handleGoodsPageChange"
+                :page-sizes="[5, 10]"
+            />
+        </div>
     </demo>
 </template>
 
