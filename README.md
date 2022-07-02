@@ -9,7 +9,8 @@
 
 ## 简介
 
-基于 `Vue2` 搭建的项目集，项目中多为平时开发遇到的需求或有趣的 demo。
+基于 `Vue` 搭建的项目集，项目中多为平时开发遇到的需求或有趣的 demo。
+目前`main`分支已经升级为`vite` + `Vue3`，各插件及依赖均已升级。`Vue2`版本代码已切为[dev-vue2](https://github.com/Snail-Lu/portfolio-vue/tree/dev-vue2)分支。
 
 ## 基本使用
 
