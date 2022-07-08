@@ -13,24 +13,32 @@
 </template>
 
 <script>
-import config from '@/config/index';
 import Card from '@/components/Card/index.vue';
 export default {
     components: {
         Card
     },
     data() {
-        return {};
+        return {
+            demoList: []
+        };
     },
-    computed: {
-        demoList() {
-            return config.demoList || [];
-        }
+
+    created() {
+        this.getDemoList();
     },
 
     methods: {
         pushUrl(path) {
             this.$router.push({ path: `/demo/${path}` });
+        },
+        async getDemoList() {
+            let res = await this.req({
+                url: '/demo/list'
+            });
+            if (res.data && res.data.list) {
+                this.demoList = res.data.list;
+            }
         }
     }
 };
