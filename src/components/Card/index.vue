@@ -1,6 +1,6 @@
 <template>
     <div class="card flex-box-column flex-h-between" @click="pushUrl">
-        <div :class="`header bg-color${data.id} ${isLoading ? 'animated-bg' : ''}`">
+        <div :class="`header bg-color${colorIndex} ${isLoading ? 'animated-bg' : ''}`">
             <img class="cover" :src="data.coverUrl" @load="load" @error="error" v-if="!isError" loading="lazy" />
             <div class="placeholder-cover" v-else>
                 <img class="placeholder-cover1" src="@/assets/icons/smile.svg" />
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { randomData } from '@/utils/index';
 export default {
     props: {
         data: {
@@ -24,8 +25,12 @@ export default {
     data() {
         return {
             isLoading: true,
-            isError: false
+            isError: false,
+            colorIndex: 0
         };
+    },
+    created() {
+        this.colorIndex = randomData(0, 30);
     },
     methods: {
         pushUrl() {
