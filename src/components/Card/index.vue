@@ -30,7 +30,7 @@ export default {
         };
     },
     created() {
-        this.colorIndex = randomData(0, 30);
+        this.colorIndex = randomData(1, 30);
     },
     methods: {
         pushUrl() {
