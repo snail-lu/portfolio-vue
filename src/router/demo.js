@@ -128,6 +128,13 @@ export default {
             meta: {
                 title: '促销日历'
             }
+        },
+        {
+            path: 'el-upload',
+            component: () => import('../views/demo/elUpload/index.vue'),
+            meta: {
+                title: 'el-upload文件上传用例'
+            }
         }
     ]
 };
