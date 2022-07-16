@@ -1,6 +1,6 @@
-@import './mixin.scss';
-@import './transition.scss';
-@import './variables.scss';
+@import "./mixin.scss";
+@import "./transition.scss";
+@import "./variables.scss";
 html {
     scroll-behavior: smooth;
     @include scrollBar;
@@ -36,7 +36,7 @@ a:hover {
         visibility: hidden;
         display: block;
         font-size: 0;
-        content: ' ';
+        content: " ";
         clear: both;
         height: 0;
     }

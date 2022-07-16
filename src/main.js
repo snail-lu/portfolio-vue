@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 
 import 'normalize.css/normalize.css'; // A modern alternative to CSS resets
+import 'animate.css'; // import animate.css
 
 import '@/styles/index.scss'; // global css
 

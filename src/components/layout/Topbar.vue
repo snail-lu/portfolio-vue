@@ -1,13 +1,15 @@
 <template>
     <div class="topbar-wrapper flex-box flex-v-center" v-if="!isScreenFull">
         <router-link key="collapse" class="topbar-logo" to="/">
-            <img src="../../assets/icons/logo.png" class="topbar-logo" />
+            <img src="../../assets/icons/logo.png" class="topbar-logo animate__animated animate__zoomIn animate__faster" />
         </router-link>
 
         <ul class="menu-list flex-box flex-v-center">
-            <li v-for="item in menuList" :key="item.path" class="menu-item" :class="{ 'menu-item-active': currentRoute == item.path }">
-                <router-link :to="item.path"> {{ item.name }}</router-link>
-            </li>
+            <transition v-for="item in menuList" :key="item.path" enter-active-class="animate__animated animate__zoomIn animate__faster">
+                <li class="menu-item" :class="{ 'menu-item-active animate__bounceIn': currentRoute == item.path }" v-if="isVisible">
+                    <router-link :to="item.path"> {{ item.name }}</router-link>
+                </li>
+            </transition>
         </ul>
     </div>
 </template>
@@ -18,6 +20,11 @@ import { mapState } from 'vuex';
 import settings from '@/settings';
 export default {
     name: 'Topbar',
+    data() {
+        return {
+            isVisible: false
+        };
+    },
     computed: {
         ...mapState(['isScreenFull']),
         currentRoute() {
@@ -26,6 +33,9 @@ export default {
         menuList() {
             return settings.menu || [];
         }
+    },
+    mounted() {
+        this.isVisible = true;
     }
 };
 </script>
