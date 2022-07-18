@@ -48,11 +48,9 @@ export default {
 @for $i from 0 through 30 {
     .bg-color#{$i} {
         color: #000;
-        background-image: linear-gradient(
-            random(360) + deg,
-            rgba(random(255), random(255), random(255), 0.5),
-            rgba(random(255), random(255), random(255), 0.5)
-        );
+        background-image: linear-gradient(random(360) + deg,
+                rgba(random(255), random(255), random(255), 0.5),
+                rgba(random(255), random(255), random(255), 0.5));
     }
 }
 
