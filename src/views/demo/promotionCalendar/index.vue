@@ -36,68 +36,7 @@ export default {
                 title: '促销日历',
                 url: ''
             },
-            schedule: [
-                {
-                    title: '日常促销1',
-                    startDate: '2022-06-01',
-                    endDate: '2022-06-03',
-                    id: 1
-                },
-                {
-                    title: '日常促销2',
-                    startDate: '2022-06-02',
-                    endDate: '2022-06-04',
-                    id: 2
-                },
-                {
-                    title: '日常促销3',
-                    startDate: '2022-06-03',
-                    endDate: '2022-06-06',
-                    id: 3
-                },
-                {
-                    title: '日常促销4',
-                    startDate: '2022-06-04',
-                    endDate: '2022-06-05',
-                    id: 4
-                },
-                {
-                    title: '日常促销5',
-                    startDate: '2022-06-06',
-                    endDate: '2022-06-08',
-                    id: 5
-                },
-                {
-                    title: '日常促销6',
-                    startDate: '2022-06-07',
-                    endDate: '2022-06-09',
-                    id: 6
-                },
-                {
-                    title: '日常促销7',
-                    startDate: '2022-06-18',
-                    endDate: '2022-06-20',
-                    id: 7
-                },
-                {
-                    title: '日常促销8',
-                    startDate: '2022-06-19',
-                    endDate: '2022-06-21',
-                    id: 8
-                },
-                {
-                    title: '日常促销9',
-                    startDate: '2022-06-23',
-                    endDate: '2022-06-24',
-                    id: 9
-                },
-                {
-                    title: '日常促销10',
-                    startDate: '2022-06-21',
-                    endDate: '2022-06-22',
-                    id: 10
-                }
-            ],
+            schedule: [],
             dialogFormVisible: false,
             form: {
                 title: '',
@@ -111,7 +50,18 @@ export default {
             }
         };
     },
+    created() {
+        this.getScheduleList();
+    },
     methods: {
+        async getScheduleList() {
+            let res = await this.req({
+                url: '/demo/calendar'
+            });
+            if (res.result && res.result.list) {
+                this.schedule = res.result.list;
+            }
+        },
         // 点击某一天
         onPickDay(day) {
             const { formatedDate } = day;
