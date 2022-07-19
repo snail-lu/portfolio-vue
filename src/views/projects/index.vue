@@ -35,8 +35,8 @@ export default {
             let res = await this.req({
                 url: '/project/list'
             });
-            if (res.data && res.data.list) {
-                this.projectsList = res.data.list;
+            if (res.result && res.result.list) {
+                this.projectsList = res.result.list;
             }
         }
     }

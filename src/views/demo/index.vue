@@ -36,8 +36,8 @@ export default {
             let res = await this.req({
                 url: '/demo/list'
             });
-            if (res.data && res.data.list) {
-                this.demoList = res.data.list;
+            if (res.result && res.result.list) {
+                this.demoList = res.result.list;
             }
         }
     }
@@ -48,9 +48,11 @@ export default {
 @for $i from 0 through 30 {
     .bg-color#{$i} {
         color: #000;
-        background-image: linear-gradient(random(360) + deg,
-                rgba(random(255), random(255), random(255), 0.5),
-                rgba(random(255), random(255), random(255), 0.5));
+        background-image: linear-gradient(
+            random(360) + deg,
+            rgba(random(255), random(255), random(255), 0.5),
+            rgba(random(255), random(255), random(255), 0.5)
+        );
     }
 }
 

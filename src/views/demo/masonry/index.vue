@@ -46,8 +46,8 @@ export default {
             let res = await this.req({
                 url: '/masonry/list'
             });
-            if (res.data && res.data.list) {
-                data = res.data.list;
+            if (res.result && res.result.list) {
+                data = res.result.list;
             }
             this.data1.push(data[0]);
             this.data2.push(data[1]);
