@@ -4,9 +4,13 @@
             <div>{{ title }}</div>
             <div class="btn-groups">
                 <el-button link type="primary" class="copy-btn" @click="onCopy"> <i-ep-copy-document />复制</el-button>
+                <el-button link type="primary" class="run-btn" @click="onRunCode"> <i-ep-video-play />运行</el-button>
             </div>
         </div>
-        <div ref="codeEditor" :style="{ height }"></div>
+        <div class="flex-box">
+            <div class="editor-box flex-item-1" ref="codeEditor" :style="{ height }"></div>
+            <iframe :src="previewSrc" class="preview-box flex-item-1" v-if="showPreviewBox" />
+        </div>
     </div>
 </template>
 
@@ -95,7 +99,9 @@ export default {
                     completeSingle: false
                 }
             },
-            myCodeEditor: null
+            myCodeEditor: null,
+            showPreviewBox: false,
+            previewSrc: ''
         };
     },
     mounted() {
@@ -131,6 +137,15 @@ export default {
             } catch (e) {
                 console.error(e);
             }
+        },
+
+        // 运行代码
+        onRunCode() {
+            const blob = new Blob([this.modelValue], {
+                type: 'text/html'
+            });
+            this.previewSrc = URL.createObjectURL(blob);
+            this.showPreviewBox = true;
         }
     }
 };
@@ -158,6 +173,10 @@ export default {
             cursor: pointer;
             padding: 0;
         }
+    }
+
+    .preview-box {
+        background-color: #fff;
     }
 }
 </style>
