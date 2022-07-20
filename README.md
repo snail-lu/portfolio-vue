@@ -23,7 +23,7 @@ cd portfolio-vue
 npm install
 
 // 本地运行
-npm run serve
+npm run dev
 
 // 生产打包
 npm run build
