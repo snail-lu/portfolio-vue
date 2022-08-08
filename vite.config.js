@@ -51,6 +51,11 @@ export default defineConfig({
         host: '0.0.0.0'
     },
     css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: `@import "@/styles/variables.scss";`
+            }
+        },
         postcss: {
             // css自动添加浏览器前缀
             plugins: [require('autoprefixer')]
