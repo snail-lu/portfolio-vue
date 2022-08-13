@@ -5,10 +5,6 @@
                 <card :data="demo" />
             </el-col>
         </el-row>
-        <!-- <div class="footer">
-            <span>插图：</span>
-            <a class="link" href="https://icons8.com" target="_blank">ICONS8</a>
-        </div> -->
         <div class="footer">
             Illustration by <a class="link" href="https://icons8.com/illustrations/" target="_blank">Icons 8</a> from
             <a class="link" href="https://icons8.com/illustrations" target="_blank">Ouch!</a>
