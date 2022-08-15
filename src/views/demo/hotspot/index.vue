@@ -1,21 +1,15 @@
 <template>
     <demo :data="demoInfo">
         <div class="img-box" @mouseup.left.stop="mouseUp($event)">
-            <img
-                class="img"
-                src="https://fastly.jsdelivr.net/gh/Snail-Lu/imageGalleries/gh-pages/2021-12/hotspot-example.webp"
-                alt=""
-                @mousedown.left.stop="mouseDown($event)"
-            />
+            <img class="img" src="https://s1.ax1x.com/2022/08/15/vdFt5F.jpg" alt=""
+                @mousedown.left.stop="mouseDown($event)" />
             <!--当前正在绘制的热区蒙版-->
-            <div
-                v-show="drawBoxVisible"
-                class="spot"
-                :style="{ width: width + 'px', height: height + 'px', left: startX + 'px', top: startY + 'px' }"
-            />
+            <div v-show="drawBoxVisible" class="spot"
+                :style="{ width: width + 'px', height: height + 'px', left: startX + 'px', top: startY + 'px' }" />
 
             <!--已有的热区蒙版-->
-            <hot-spot-item v-for="(item, index) in spotDataList" :id="index" :key="index" :area-init="item" @del="delSpot" />
+            <hot-spot-item v-for="(item, index) in spotDataList" :id="index" :key="index" :area-init="item"
+                @del="delSpot" />
         </div>
         <div class="hot-spot-list flex-box flex-wrap">
             <div class="hot-spot-item" v-for="(item, index) in spotDataList" :key="index">
@@ -143,6 +137,7 @@ export default {
 
 .hot-spot-list {
     margin-top: 10px;
+
     .hot-spot-item {
         width: 45%;
         background-color: #f5f5f5;
@@ -160,6 +155,7 @@ export default {
 
         .info-content {
             margin-bottom: 20px;
+
             .label {
                 font-size: 13px;
             }
