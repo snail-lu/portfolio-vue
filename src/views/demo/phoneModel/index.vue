@@ -10,18 +10,14 @@
                 <div class="phone-button"></div>
                 <div class="phone-tool-bar">
                     <span class="time">{{ time }}</span>
-                    <span class="network"
-                        >5G
+                    <span class="network">5G
                         <i class="power"></i>
                     </span>
                 </div>
                 <div class="phone-content" :style="{ background: background }" @touch="onTouch">
                     <!-- 模型内显示内容写在这里 -->
                     <!-- <slot></slot> -->
-                    <img
-                        class="phone-content-img"
-                        src="https://fastly.jsdelivr.net/gh/Snail-Lu/imageGalleries/gh-pages/2021-12/3820f11f44f6ba81.jpg"
-                    />
+                    <img class="phone-content-img" src="https://s1.ax1x.com/2022/08/15/vdFvMn.jpg" />
                 </div>
             </div>
         </div>
