@@ -1,1 +1,1 @@
-var s="/assets/logo.21f19cfe.png";export{s as _};
+var o="/portfolio-vue/assets/logo.21f19cfe.png";export{o as _};
