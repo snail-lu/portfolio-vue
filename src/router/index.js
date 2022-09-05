@@ -112,7 +112,7 @@ routes[0].children.push(demoRoutes);
 //     });
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory('/portfolio-vue/'),
     routes
 });
 
