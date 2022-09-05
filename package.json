@@ -8,7 +8,7 @@
         "preview": "vite preview",
         "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
         "predeploy": "vite build",
-        "deploy": "gh-pages -d dist"
+        "deploy": "gh-pages -d dist -t"
     },
     "dependencies": {
         "@vueuse/core": "^8.7.5",
