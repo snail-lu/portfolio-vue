@@ -61,5 +61,17 @@ export default defineConfig({
             // css自动添加浏览器前缀
             plugins: [require('autoprefixer')]
         }
+    },
+    build: {
+        // rollup生产分包配置
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    echarts: ['echarts'],
+                    elementPlus: ['element-plus'],
+                    threejs: ['three']
+                }
+            }
+        }
     }
 });
