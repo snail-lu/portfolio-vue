@@ -1,1 +1,0 @@
-import{_ as o,o as a,c as t,p as n,i as r,e as s}from"./index.44eb319d.js";const d={name:"Home"},i=e=>(n("data-v-7a53fd91"),e=e(),r(),e),c={class:"home-container flex-box-column flex-v-center flex-h-center"},p=i(()=>s("div",{class:"bear"},null,-1)),f=[p];function u(e,_,l,m,h,k){return a(),t("div",c,f)}var x=o(d,[["render",u],["__scopeId","data-v-7a53fd91"]]);export{x as default};
