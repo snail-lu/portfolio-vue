@@ -8,10 +8,9 @@ const routes = [
     {
         path: '/',
         component: () => import('@/components/layout/index.vue'),
-        redirect: '/home',
         children: [
             {
-                path: '/home',
+                path: '',
                 component: () => import('@/views/home/home.vue'),
                 meta: {
                     title: '首页'
