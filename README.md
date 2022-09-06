@@ -1,6 +1,6 @@
 <h2 align="center">Vue Portfolio</h2>
 <p align="center">
-    <a href="https://portfolio-snail.vercel.app" target="_blank">线上地址</a>
+    <a href="https://snaillu.gitee.io/portfolio-vue/" target="_blank">线上地址</a>
     ·
     <a href="https://github.com/Snail-Lu/portfolio-vue" target="_blank">仓库地址</a>
     ·
