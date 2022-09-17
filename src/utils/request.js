@@ -5,7 +5,8 @@ import axios from 'axios';
 const service = axios.create({
     baseURL: 'https://www.fastmock.site/mock/570d7b757920a8c74dd3d814aec1242d/portfolio', // url = base url + request url
     // withCredentials: true, // send cookies when cross-domain requests
-    timeout: 500000 // request timeout
+    // timeout: 500000 // request timeout
+    timeout: 1000
 });
 
 // request interceptor
@@ -44,7 +45,22 @@ service.interceptors.response.use(
         //     type: 'error',
         //     duration: 2 * 1000
         // });
-        return Promise.reject(error);
+        let config = error.config;
+        if (!config) return Promise.reject(error);
+        const { retryCount = 0, retryDelay = 300, retryTimes = 2 } = config;
+        // 记录已经重试的次数
+        config.retryCount = retryCount;
+
+        // 判断是否超过了重试次数
+        if (retryCount >= retryTimes) {
+            return Promise.reject(error);
+        }
+        // 增加重试次数
+        config.retryCount++;
+        // 延时处理后重新发起请求
+        setTimeout(() => {
+            service(config);
+        }, retryDelay);
     }
 );
 
