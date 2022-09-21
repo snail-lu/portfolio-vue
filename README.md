@@ -2,7 +2,7 @@
 <p align="center">
     <a href="https://snaillu.gitee.io/portfolio-vue/" target="_blank">线上地址</a>
     ·
-    <a href="https://github.com/Snail-Lu/portfolio-vue" target="_blank">仓库地址</a>
+    <a href="https://github.com/snail-lu/portfolio-vue" target="_blank">仓库地址</a>
     ·
     <a href="https://github.com/Snail-Lu/portfolio-vue/issues" target="_blank">建议意见</a>
 </p>

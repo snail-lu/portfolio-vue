@@ -8,7 +8,8 @@
         "preview": "vite preview",
         "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
         "predeploy": "vite build",
-        "deploy": "gh-pages -d dist -t"
+        "deploy": "gh-pages -d dist -t",
+        "prepare": "husky install"
     },
     "dependencies": {
         "@vueuse/core": "^8.7.5",
@@ -40,7 +41,8 @@
         "unplugin-auto-import": "^0.9.1",
         "unplugin-icons": "^0.14.6",
         "unplugin-vue-components": "^0.20.1",
-        "vite": "^2.9.13"
+        "vite": "^2.9.13",
+        "husky": "^8.0.0"
     },
     "browserslist": [
         "> 1%",
