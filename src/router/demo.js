@@ -135,6 +135,13 @@ export default {
             meta: {
                 title: 'el-upload文件上传用例'
             }
+        },
+        {
+            path: 'dynamic-form',
+            component: () => import('../views/demo/DynamicForm/index.vue'),
+            meta: {
+                title: '基于json数据动态生成表单'
+            }
         }
     ]
 };
