@@ -1,6 +1,6 @@
 <template>
     <div class="demo-wrapper">
-        <code-editor :read-only="false" v-model="code" height="calc(100vh - 100px)" title="代码编辑器" />
+        <code-editor :read-only="false" v-model="code" height="calc(100vh - 40px)" title="代码编辑器" />
     </div>
 </template>
 
@@ -20,6 +20,6 @@ export default {
 
 <style lang="scss" scoped>
 .demo-wrapper {
-    height: calc(100vh - 60px);
+    height: 100vh;
 }
 </style>

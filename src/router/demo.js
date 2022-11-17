@@ -70,14 +70,6 @@ export default {
             }
         },
         {
-            path: 'three-js',
-            component: () => import('../views/demo/threeJs/index.vue'),
-            name: '',
-            meta: {
-                title: 'three.js实践'
-            }
-        },
-        {
             path: 'lazy-load',
             component: () => import('../views/demo/lazyLoad/index.vue'),
             name: '',
@@ -94,32 +86,10 @@ export default {
             }
         },
         {
-            path: 'photo-wall',
-            component: () => import('../views/demo/photoWall/index.vue'),
-            name: '',
-            meta: {
-                title: '照片墙'
-            }
-        },
-        {
-            path: 'dynamic-chart',
-            component: () => import('../views/demo/dynamicChart/index.vue'),
-            meta: {
-                title: '动态图表'
-            }
-        },
-        {
             path: 'css-demos',
             component: () => import('../views/demo/cssDemos/index.vue'),
             meta: {
                 title: 'CSS DEMO'
-            }
-        },
-        {
-            path: 'code-editor',
-            component: () => import('../views/demo/codeEditor/index.vue'),
-            meta: {
-                title: '代码编辑器'
             }
         },
         {

@@ -75,6 +75,7 @@ declare module '@vue/runtime-core' {
     TextArea: typeof import('./src/components/DynamicForm/components/TextArea.vue')['default']
     TimePicker: typeof import('./src/components/DynamicForm/components/TimePicker.vue')['default']
     Topbar: typeof import('./src/components/layout/Topbar.vue')['default']
+    TrainModel: typeof import('./src/components/TrainModel/index.vue')['default']
     Uploader: typeof import('./src/components/DynamicForm/components/Uploader.vue')['default']
     VueCountTo: typeof import('./src/components/VueCountTo/index.vue')['default']
   }

@@ -70,10 +70,48 @@ const routes = [
         }
     },
     {
-        path: '/train',
-        component: () => import('../components/TrainModel/index.vue'),
+        path: '/demo/dynamic-chart',
+        component: () => import('../views/demo/dynamicChart/index.vue'),
         meta: {
-            title: '测试页面'
+            title: '可视化图表'
+        }
+    },
+    {
+        path: '/demo/photo-wall',
+        component: () => import('../views/demo/photoWall/index.vue'),
+        name: '',
+        meta: {
+            title: '照片墙'
+        }
+    },
+    {
+        path: '/demo/sea',
+        component: () => import('../views/demo/threeJs/sea/index.vue'),
+        name: '',
+        meta: {
+            title: 'three.js实践之海面'
+        }
+    },
+    {
+        path: '/demo/train',
+        component: () => import('../views/demo/threeJs/train/index.vue'),
+        meta: {
+            title: 'three.js实践之火车'
+        }
+    },
+    {
+        path: '/demo/earth',
+        component: () => import('../views/demo/threeJs/earth/index.vue'),
+        name: '',
+        meta: {
+            title: 'three.js实践之地月模型'
+        }
+    },
+    {
+        path: '/demo/code-editor',
+        component: () => import('../views/demo/codeEditor/index.vue'),
+        meta: {
+            title: '代码编辑器'
         }
     },
     {

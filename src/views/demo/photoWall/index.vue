@@ -89,6 +89,7 @@ function imgUrlFilter(val) {
     height: 100vh;
     width: 100%;
     position: relative;
+    background-color: skyblue;
 
     .btn-groups {
         position: absolute;
