@@ -70,6 +70,13 @@ const routes = [
         }
     },
     {
+        path: '/train',
+        component: () => import('../components/TrainModel/index.vue'),
+        meta: {
+            title: '测试页面'
+        }
+    },
+    {
         path: '/:pathMatch(.*)*',
         redirect: '/404',
         hidden: true
