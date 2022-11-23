@@ -62,7 +62,7 @@ export default {
         },
 
         stop() {
-            loop.stop;
+            loop.stop();
         }
     }
 };
