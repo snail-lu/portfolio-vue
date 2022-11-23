@@ -101,7 +101,7 @@ const routes = [
     },
     {
         path: '/demo/earth',
-        component: () => import('../views/demo/threeJs/earth/index.vue'),
+        component: () => import('../views/demo/threeJs/earthMoon/index.vue'),
         name: '',
         meta: {
             title: 'three.js实践之地月模型'
