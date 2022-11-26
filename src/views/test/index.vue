@@ -8,7 +8,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer';
-import moonTexture from '@/assets/three3d/moon.jpg';
+import moonTexture from '@/assets/texture/moon.jpg';
 
 let camera, scene, renderer, labelRenderer;
 let controls, light, moon, earth;
