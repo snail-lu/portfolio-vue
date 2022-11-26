@@ -8,6 +8,7 @@ import { createAxesHelper, createGridHelper } from './components/helpers.js';
 import { createLights } from './components/lights.js';
 import { createScene } from './components/scene.js';
 import { Moon } from './Moon/index.js';
+import { Earth } from './Earth/index.js';
 
 import { createControls } from './systems/controls.js';
 import { createRenderer } from './systems/renderer.js';
@@ -34,19 +35,22 @@ export default {
             container.append(renderer.domElement);
 
             const controls = createControls(camera, renderer.domElement);
-            const { light } = createLights();
+            const { mainLight, ambientLight } = createLights();
 
-            scene.add(light);
+            scene.add(mainLight, ambientLight);
 
             const resizer = new Resizer(container, camera, renderer);
 
-            scene.add(createAxesHelper(), createGridHelper());
+            // 坐标系及栅格
+            // scene.add(createAxesHelper(), createGridHelper());
 
             const moon = new Moon();
             scene.add(moon);
 
-            // earth = new
-            loop.updatables.push(controls, moon);
+            const earth = new Earth();
+            scene.add(earth);
+
+            loop.updatables.push(controls, moon, earth);
             this.start();
         },
 

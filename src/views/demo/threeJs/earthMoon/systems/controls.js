@@ -1,10 +1,10 @@
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
-function createControls(camera, canvas) {
-    const controls = new OrbitControls(camera, canvas);
+function createControls(camera, domElement) {
+    const controls = new OrbitControls(camera, domElement);
     // 垂直旋转的角度的上限
     controls.maxPolarAngle = Math.PI * 0.495;
-    controls.target.set(0, 6, 0);
+    controls.target.set(0, 0, 0);
 
     // 限制放大和缩小的距离
     // controls.minDistance = 40.0;
