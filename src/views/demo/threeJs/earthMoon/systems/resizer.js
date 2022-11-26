@@ -4,9 +4,6 @@ const setSize = ({ clientWidth, clientHeight }, camera, renderer) => {
 
     renderer.setSize(clientWidth, clientHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
-
-    // 渲染阴影
-    render.shadowMap.enabled = true;
 };
 
 class Resizer {
