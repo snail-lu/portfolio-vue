@@ -12,7 +12,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Water } from 'three/examples/jsm/objects/Water.js';
 import { Sky } from 'three/examples/jsm/objects/Sky.js';
-import waterTexture from '@/assets/three3d/waternormals.jpg';
+import waterTexture from '@/assets/texture/waternormals.jpg';
 import FullScreenButton from '@/components/FullScreenButton/index.vue';
 
 let camera, scene, renderer;
