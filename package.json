@@ -14,6 +14,7 @@
         "lint-staged": "lint-staged"
     },
     "dependencies": {
+        "@element-plus/icons-vue": "^2.0.10",
         "@vueuse/core": "^8.7.5",
         "animate.css": "^4.1.1",
         "axios": "^0.27.2",
@@ -53,7 +54,7 @@
         "unplugin-auto-import": "^0.9.1",
         "unplugin-icons": "^0.14.6",
         "unplugin-vue-components": "^0.20.1",
-        "vite": "^2.9.13"
+        "vite": "^3.2.4"
     },
     "browserslist": [
         "> 1%",
