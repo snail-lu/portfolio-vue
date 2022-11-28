@@ -1,6 +1,6 @@
 <template>
     <demo :data="demoInfo">
-        <uploader :options="options" class="uploader-example" :auto-start="false">
+        <!-- <uploader :options="options" class="uploader-example" :auto-start="false">
             <uploader-unsupport></uploader-unsupport>
             <uploader-drop>
                 <p>Drop files here to upload or</p>
@@ -9,7 +9,8 @@
                 <uploader-btn :directory="true">select folder</uploader-btn>
             </uploader-drop>
             <uploader-list></uploader-list>
-        </uploader>
+        </uploader> -->
+        <div style="text-align: center">开发中...</div>
     </demo>
 </template>
 
