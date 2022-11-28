@@ -50,6 +50,7 @@ declare module '@vue/runtime-core' {
     ElTree: typeof import('element-plus/es')['ElTree']
     ElUpload: typeof import('element-plus/es')['ElUpload']
     FullScreenButton: typeof import('./src/components/FullScreenButton/index.vue')['default']
+    IEpClose: typeof import('~icons/ep/close')['default']
     IEpCopyDocument: typeof import('~icons/ep/copy-document')['default']
     IEpFolderOpened: typeof import('~icons/ep/folder-opened')['default']
     IEpFullScreen: typeof import('~icons/ep/full-screen')['default']

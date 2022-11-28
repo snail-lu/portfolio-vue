@@ -4,7 +4,8 @@
             <div>{{ title }}</div>
             <div class="btn-groups">
                 <el-button link type="primary" class="copy-btn" @click="onCopy"> <i-ep-copy-document />复制</el-button>
-                <el-button link type="primary" class="run-btn" @click="onRunCode"> <i-ep-video-play />运行</el-button>
+                <el-button link type="primary" class="run-btn" @click="showPreviewBox = false" v-if="showPreviewBox"> <i-ep-close />关闭</el-button>
+                <el-button link type="primary" class="run-btn" @click="onRunCode" v-else> <i-ep-video-play />运行</el-button>
             </div>
         </div>
         <div class="flex-box">
