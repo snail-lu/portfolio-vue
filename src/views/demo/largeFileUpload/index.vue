@@ -1,5 +1,5 @@
 <template>
-    <demo :data="demoInfo">
+    <Demo :data="demoInfo">
         <!-- <uploader :options="options" class="uploader-example" :auto-start="false">
             <uploader-unsupport></uploader-unsupport>
             <uploader-drop>
@@ -11,33 +11,13 @@
             <uploader-list></uploader-list>
         </uploader> -->
         <div style="text-align: center">开发中...</div>
-    </demo>
+    </Demo>
 </template>
 
-<script>
+<script setup>
 import Demo from '@/components/Demo/index.vue';
-export default {
-    components: {
-        Demo
-    },
-    data() {
-        return {
-            demoInfo: {
-                title: '大文件上传',
-                url: ''
-            },
-            options: {
-                // https://github.com/simple-uploader/Uploader/tree/develop/samples/Node.js
-                target: '//localhost:8000/upload',
-                testChunks: true
-            },
-            attrs: {
-                accept: 'image/*'
-            }
-        };
-    },
-    methods: {}
-};
+
+const demoInfo = { title: '大文件上传', url: '' };
 </script>
 
 <style lang="scss" scoped>
