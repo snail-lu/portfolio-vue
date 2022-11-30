@@ -84,7 +84,7 @@ export default {
     overflow: hidden;
 }
 
-::v-deep .el-collapse-item__header {
+:deep(.el-collapse-item__header) {
     border-bottom: none;
 }
 
