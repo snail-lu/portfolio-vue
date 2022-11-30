@@ -7,6 +7,14 @@
         <link rel="icon" href="/portfolio-vue/favicon.ico" />
         <title>VUE 项目集</title>
         <style type="text/css">
+            body {
+                margin: 0;
+            }
+            #app {
+                width: 100%;
+                min-height: 100vh;
+                background-color: #282a36;
+            }
             .page-init-loading {
                 position: fixed;
                 top: 50%;
@@ -19,14 +27,13 @@
             .loading-icon {
                 width: 30px;
                 height: 30px;
-                -webkit-animation: animationContainer 1s ease infinite;
-                        animation: animationContainer 1s ease infinite;
+                animation: animationContainer 1s ease infinite;
             }
 
             .loading-text {
                 font-size: 14px;
-                color: #2580b3;
-                margin-top: 5px;
+                color: #fff;
+                margin-top: 8px;
             }
 
             .shape {
@@ -39,40 +46,26 @@
             .shape-1 {
                 background-color: #1875e5;
                 left: 0;
-                -webkit-animation: animationShape1 0.5s ease infinite alternate;
-                        animation: animationShape1 0.5s ease infinite alternate;
+                animation: animationShape1 0.5s ease infinite alternate;
             }
 
             .shape-2 {
                 background-color: #c5523f;
                 right: 0;
-                -webkit-animation: animationShape2 0.5s ease infinite alternate;
-                        animation: animationShape2 0.5s ease infinite alternate;
+                animation: animationShape2 0.5s ease infinite alternate;
             }
 
             .shape-3 {
                 background-color: #499255;
                 bottom: 0;
-                -webkit-animation: animationShape3 0.5s ease infinite alternate;
-                        animation: animationShape3 0.5s ease infinite alternate;
+                animation: animationShape3 0.5s ease infinite alternate;
             }
 
             .shape-4 {
                 background-color: #f2b736;
                 right: 0;
                 bottom: 0;
-                -webkit-animation: animationShape4 0.5s ease infinite alternate;
-                        animation: animationShape4 0.5s ease infinite alternate;
-            }
-
-            @-webkit-keyframes animationContainer {
-                0% {
-                    transform: rotate(0);
-                }
-
-                100% {
-                    transform: rotate(360deg);
-                }
+                animation: animationShape4 0.5s ease infinite alternate;
             }
 
             @keyframes animationContainer {
@@ -82,16 +75,6 @@
 
                 100% {
                     transform: rotate(360deg);
-                }
-            }
-
-            @-webkit-keyframes animationShape1 {
-                0% {
-                    transform: translate(0, 0);
-                }
-
-                100% {
-                    transform: translate(20px, 20px);
                 }
             }
 
@@ -105,16 +88,6 @@
                 }
             }
 
-            @-webkit-keyframes animationShape2 {
-                0% {
-                    transform: translate(0, 0);
-                }
-
-                100% {
-                    transform: translate(-20px, 20px);
-                }
-            }
-
             @keyframes animationShape2 {
                 0% {
                     transform: translate(0, 0);
@@ -122,16 +95,6 @@
 
                 100% {
                     transform: translate(-20px, 20px);
-                }
-            }
-
-            @-webkit-keyframes animationShape3 {
-                0% {
-                    transform: translate(0, 0);
-                }
-
-                100% {
-                    transform: translate(20px, -20px);
                 }
             }
 
@@ -145,16 +108,6 @@
                 }
             }
 
-            @-webkit-keyframes animationShape4 {
-                0% {
-                    transform: translate(0, 0);
-                }
-
-                100% {
-                    transform: translate(-20px, -20px);
-                }
-            }
-
             @keyframes animationShape4 {
                 0% {
                     transform: translate(0, 0);
@@ -165,9 +118,9 @@
                 }
             }
         </style>
-      <script type="module" crossorigin src="/portfolio-vue/assets/index.32a02fb5.js"></script>
-      <link rel="modulepreload" href="/portfolio-vue/assets/elementPlus.7f4dbe24.js">
-      <link rel="stylesheet" href="/portfolio-vue/assets/index.72663550.css">
+      <script type="module" crossorigin src="/portfolio-vue/assets/index.bca012f4.js"></script>
+      <link rel="modulepreload" crossorigin href="/portfolio-vue/assets/elementPlus.012b8bf8.js">
+      <link rel="stylesheet" href="/portfolio-vue/assets/index.dca76873.css">
     </head>
     <body>
         <div id="app">
