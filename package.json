@@ -23,6 +23,7 @@
         "echarts-liquidfill": "^3.1.0",
         "element-china-area-data": "^5.0.2",
         "element-plus": "^2.2.6",
+        "gsap": "^3.11.3",
         "normalize.css": "7.0.0",
         "nprogress": "0.2.0",
         "three": "^0.138.0",

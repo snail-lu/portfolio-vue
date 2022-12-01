@@ -1,9 +1,6 @@
-import { h, resolveComponent } from 'vue';
 export default {
     path: '/demo',
-    component: {
-        render: () => h(resolveComponent('router-view'))
-    },
+    component: () => import('@/components/layout/index.vue'),
     children: [
         {
             path: '',

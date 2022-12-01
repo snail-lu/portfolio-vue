@@ -23,6 +23,7 @@ specifiers:
   eslint-plugin-promise: ^6.1.1
   eslint-plugin-vue: ^9.7.0
   gh-pages: ^4.0.0
+  gsap: ^3.11.3
   husky: ^8.0.1
   lint-staged: ^13.0.3
   normalize.css: 7.0.0
@@ -50,6 +51,7 @@ dependencies:
   echarts-liquidfill: registry.npmmirror.com/echarts-liquidfill/3.1.0_echarts@5.4.0
   element-china-area-data: registry.npmmirror.com/element-china-area-data/5.0.2
   element-plus: registry.npmmirror.com/element-plus/2.2.25_vue@3.2.45
+  gsap: registry.npmmirror.com/gsap/3.11.3
   normalize.css: registry.npmmirror.com/normalize.css/7.0.0
   nprogress: registry.npmmirror.com/nprogress/0.2.0
   three: registry.npmmirror.com/three/0.138.3
@@ -2753,6 +2755,12 @@ packages:
     name: grapheme-splitter
     version: 1.0.4
     dev: true
+
+  registry.npmmirror.com/gsap/3.11.3:
+    resolution: {integrity: sha512-xc/iIJy+LWiMbRa4IdMtdnnKa/7PXEK6NNzV71gdOYUVeTZN7UWnLU0fB7Hi1iwiz4ZZoYkBZPPYGg+2+zzFHA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/gsap/-/gsap-3.11.3.tgz}
+    name: gsap
+    version: 3.11.3
+    dev: false
 
   registry.npmmirror.com/hard-rejection/2.1.0:
     resolution: {integrity: sha512-VIZB+ibDhx7ObhAe7OVtoEbuP4h/MuOTHJ+J8h/eBXotJYl0fBgR72xDFCKgIh22OJZIOVNxBMWuhAr10r8HdA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/hard-rejection/-/hard-rejection-2.1.0.tgz}
