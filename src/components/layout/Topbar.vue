@@ -43,10 +43,11 @@ export default {
 .topbar-wrapper {
     padding-left: 20%;
     box-sizing: border-box;
+    width: 100%;
     height: 60px;
     backdrop-filter: blur(12px) saturate(100%);
-    background-color: rgba(245, 244, 241, 0.25);
-    position: sticky;
+    // background-color: rgba(245, 244, 241, 0.25);
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 10;

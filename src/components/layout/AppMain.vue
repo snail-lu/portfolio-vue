@@ -28,8 +28,9 @@ export default {
 <style scoped lang="scss">
 .app-main {
     /*60 = topbar  */
-    min-height: calc(100vh - 60px);
+    // min-height: calc(100vh - 60px);
     // width: 100%;
+    min-height: 100vh;
     position: relative;
     overflow: auto;
     box-sizing: border-box;

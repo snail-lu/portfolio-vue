@@ -22,7 +22,7 @@ export default {
 
 <style lang="scss" scoped>
 .demo-wrapper {
-    margin: 50px 25%;
+    margin: 100px 25%;
     background-color: #fff;
     border-radius: 6px;
     padding: 20px;

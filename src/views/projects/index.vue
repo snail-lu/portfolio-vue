@@ -52,6 +52,7 @@ export default {
 }
 
 .demo-list-container {
+    padding-top: 60px;
     overflow-x: hidden;
 }
 

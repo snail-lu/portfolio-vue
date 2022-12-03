@@ -7,10 +7,16 @@ const routes = [
     // 首页
     {
         path: '/',
-        component: () => import('@/views/home/home.vue'),
-        meta: {
-            title: '首页'
-        }
+        component: () => import('@/components/layout/index.vue'),
+        children: [
+            {
+                path: '',
+                component: () => import('@/views/home/home.vue'),
+                meta: {
+                    title: '首页'
+                }
+            }
+        ]
     },
     // 项目
     {
