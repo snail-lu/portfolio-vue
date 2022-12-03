@@ -41,7 +41,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .topbar-wrapper {
-    padding-left: 20%;
+    padding-left: 25%;
     box-sizing: border-box;
     width: 100%;
     height: 60px;
