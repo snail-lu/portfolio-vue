@@ -132,7 +132,7 @@ const userInfo = {
     name: 'Snail Lu',
     introduction: 'A web developer based in Shanghai.',
     blog: 'https://snaillu.gitee.io',
-    portfolio: 'https://snail-lu.gitee.io/portfolio-vue',
+    portfolio: 'https://snail-lu.gitee.io/portfolio',
     github: 'https://github.com/Snail-Lu/',
     email: 'snaillu@yeah.net'
 };

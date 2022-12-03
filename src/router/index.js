@@ -154,7 +154,7 @@ routes.push(demoRoutes);
 //     });
 
 const router = createRouter({
-    history: createWebHistory('/portfolio-vue/'),
+    history: createWebHistory('/portfolio/'),
     routes
 });
 

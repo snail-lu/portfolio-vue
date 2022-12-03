@@ -10,7 +10,7 @@ const path = require('path')
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/portfolio-vue/',
+  base: '/portfolio/',
   plugins: [
     vue(),
     AutoImport({
