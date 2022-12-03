@@ -1,0 +1,37 @@
+{
+  "id": "3807014",
+  "name": "portfolio-vue",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "10044289",
+      "name": "关于",
+      "font_class": "about",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "28782350",
+      "name": "代码生成",
+      "font_class": "demo",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "12149798",
+      "name": "项目管理",
+      "font_class": "project",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "7587742",
+      "name": "首页",
+      "font_class": "home",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    }
+  ]
+}

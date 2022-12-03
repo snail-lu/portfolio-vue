@@ -11,6 +11,7 @@ import router from './router';
 import request from '@/utils/request';
 import { ElMessage } from 'element-plus';
 import 'element-plus/es/components/message/style/css';
+import '@/assets/iconfonts/iconfont.css';
 
 import '@/router/permission'; // permission control
 

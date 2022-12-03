@@ -98,7 +98,6 @@ const init = () => {
         transformed += vec3(cos(moveS) * sin(moveT), cos(moveT), sin(moveS) * sin(moveT)) * shift.w;
       `
                 );
-            console.log(shader.vertexShader);
             shader.fragmentShader = `
       varying vec3 vColor;
       ${shader.fragmentShader}
@@ -114,7 +113,6 @@ const init = () => {
                     `vec4 diffuseColor = vec4( diffuse, opacity );`,
                     `vec4 diffuseColor = vec4( vColor, smoothstep(0.5, 0.1, d)/* * 0.5 + 0.5*/ );`
                 );
-            console.log(shader.fragmentShader);
         }
     });
     let p = new Points(g, m);
