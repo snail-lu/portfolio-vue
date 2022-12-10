@@ -1,1 +1,0 @@
-import{_ as e}from"./index.78121ff1.js";/* empty css                 */import{o,c as r,a5 as c}from"./elementPlus.4cb80ee8.js";const n={};function a(_,s){const t=c;return o(),r(t,{type:"textarea"})}const i=e(n,[["render",a]]);export{i as default};
