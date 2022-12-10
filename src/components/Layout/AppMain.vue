@@ -12,17 +12,12 @@
     </section>
 </template>
 
-<script>
-import { mapState } from 'vuex';
-export default {
-    name: 'AppMain',
-    computed: {
-        ...mapState(['isScreenFull']),
-        key() {
-            return this.$route.path;
-        }
-    }
-};
+<script setup>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+
+const store = useStore();
+const isScreenFull = computed(() => store.state.isScreenFull);
 </script>
 
 <style scoped lang="scss">

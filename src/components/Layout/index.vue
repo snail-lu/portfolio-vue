@@ -5,17 +5,9 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import AppMain from './AppMain.vue';
 import Topbar from './Topbar.vue';
-
-export default {
-    name: 'Layout',
-    components: {
-        AppMain,
-        Topbar
-    }
-};
 </script>
 
 <style lang="scss" scoped>

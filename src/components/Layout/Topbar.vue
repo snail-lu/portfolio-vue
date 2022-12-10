@@ -28,16 +28,22 @@ const store = useStore();
 const isScreenFull = computed(() => store.state.isScreenFull);
 
 const left = ref(0);
+
+function setActiveItemStyle() {
+    const activeItem = document.querySelector('.menu-item-active');
+    const { offsetLeft, offsetWidth } = activeItem;
+    const bgLeft = offsetLeft + (offsetWidth - 50) / 2;
+    left.value = `${bgLeft}px`;
+}
+
 onMounted(() => {
     setTimeout(() => {
-        const activeItem = document.querySelector('.menu-item-active');
-        left.value = `${activeItem.offsetLeft}px`;
+        setActiveItemStyle();
     }, 100);
 });
 
 onUpdated(() => {
-    const activeItem = document.querySelector('.menu-item-active');
-    left.value = `${activeItem.offsetLeft}px`;
+    setActiveItemStyle();
 });
 </script>
 <style lang="scss" scoped>
