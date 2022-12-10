@@ -1,7 +1,7 @@
 <template>
     <div class="demo-list-container">
-        <el-row class="demo-list" :gutter="40">
-            <el-col class="demo-item" v-for="demo in demoList" :key="demo.path" :span="8">
+        <el-row class="demo-list" :gutter="20">
+            <el-col class="demo-item" v-for="demo in demoList" :key="demo.path" :sm="12" :md="12" :lg="8">
                 <card :data="demo" />
             </el-col>
         </el-row>
