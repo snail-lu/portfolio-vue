@@ -78,6 +78,7 @@ declare module '@vue/runtime-core' {
     Topbar: typeof import('./src/components/layout/Topbar.vue')['default']
     Uploader: typeof import('./src/components/DynamicForm/components/Uploader.vue')['default']
     VueCountTo: typeof import('./src/components/VueCountTo/index.vue')['default']
+    Waterfall: typeof import('./src/components/Waterfall/index.vue')['default']
   }
 }
 
