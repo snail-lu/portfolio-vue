@@ -7,7 +7,7 @@ const routes = [
     // 首页
     {
         path: '/',
-        component: () => import('@/components/layout/index.vue'),
+        component: () => import('@/components/Layout/index.vue'),
         children: [
             {
                 path: '',
@@ -21,7 +21,7 @@ const routes = [
     // 项目
     {
         path: '/projects',
-        component: () => import('@/components/layout/index.vue'),
+        component: () => import('@/components/Layout/index.vue'),
         children: [
             {
                 path: '',
@@ -35,7 +35,7 @@ const routes = [
     // 关于
     {
         path: '/about',
-        component: () => import('@/components/layout/index.vue'),
+        component: () => import('@/components/Layout/index.vue'),
         children: [
             {
                 path: '',

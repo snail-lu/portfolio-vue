@@ -1,6 +1,6 @@
 export default {
     path: '/demo',
-    component: () => import('@/components/layout/index.vue'),
+    component: () => import('@/components/Layout/index.vue'),
     children: [
         {
             path: '',
