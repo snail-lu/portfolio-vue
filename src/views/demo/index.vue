@@ -5,9 +5,9 @@
                 <Card :data="demo" />
             </el-col>
         </el-row>
-        <el-row>
-            <Loading :loading-text="loadingStatus" :visible="true" />
-        </el-row>
+        <div class="loading-box flex-box flex-h-center flex-v-center" v-else>
+            <Loading :loading-status="loadingStatus" @refresh="onRefresh" />
+        </div>
         <div class="footer">
             Illustration by <a class="link" href="https://icons8.com/illustrations/" target="_blank">Icons 8</a> from
             <a class="link" href="https://icons8.com/illustrations" target="_blank">Ouch!</a>
@@ -23,7 +23,7 @@ import Loading from '@/components/Loading/index.vue';
 const demoList = ref([]);
 
 const instance = getCurrentInstance();
-const loadingStatus = ref('加载中...'); //  加载中 | 加载成功 | 加载失败
+const loadingStatus = ref('加载中'); //  加载中 | 加载成功 | 加载失败
 async function getDemoList() {
     try {
         let res = await instance.proxy.req({
@@ -40,6 +40,12 @@ async function getDemoList() {
 }
 
 getDemoList();
+
+// 刷新
+function onRefresh() {
+    loadingStatus.value = '加载中';
+    getDemoList();
+}
 </script>
 
 <style lang="scss" scoped>
@@ -65,6 +71,10 @@ getDemoList();
     .demo-item {
         margin-bottom: 20px;
     }
+}
+
+.loading-box {
+    height: 100vh;
 }
 
 .footer {

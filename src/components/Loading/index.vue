@@ -1,26 +1,30 @@
 <template>
-    <div class="-loading-container" v-if="visible">
+    <div class="loading-container" v-if="loadingStatus === '加载中'">
         <div class="loading-icon">
             <div class="shape shape-1"></div>
             <div class="shape shape-2"></div>
             <div class="shape shape-3"></div>
             <div class="shape shape-4"></div>
         </div>
-        <div class="loading-text">{{ loadingText }}</div>
+        <div class="loading-text">{{ loadingStatus }}</div>
+    </div>
+    <div class="loading-error" v-else-if="loadingStatus === '加载失败'">
+        加载失败，<span class="refresh-btn" title="刷新" @click="onRefresh">刷新重试</span>
     </div>
 </template>
 
 <script setup>
 const props = defineProps({
-    visible: {
-        type: Boolean,
-        default: false
-    },
-    loadingText: {
+    loadingStatus: {
         type: String,
-        default: '页面加载中，请稍候...'
+        default: '加载中'
     }
 });
+
+const emit = defineEmits(['refresh']);
+function onRefresh() {
+    emit('refresh');
+}
 </script>
 
 <style lang="scss" scoped>
@@ -39,6 +43,21 @@ const props = defineProps({
     font-size: 14px;
     color: #fff;
     margin-top: 8px;
+}
+
+.loading-error {
+    color: #fff;
+    font-size: 14px;
+
+    .refresh-btn {
+        display: inline-block;
+        background-color: #3498db;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 10px;
+        border-radius: 30px;
+        cursor: pointer;
+    }
 }
 
 .shape {
