@@ -1,10 +1,13 @@
 <template>
     <div class="demo-list-container">
-        <el-row class="demo-list" :gutter="20">
+        <el-row class="demo-list" :gutter="20" v-if="loadingStatus === '加载成功'">
             <el-col class="demo-item" v-for="demo in projectsList" :key="demo.path" :sm="12" :md="12" :lg="8">
-                <card :data="demo" />
+                <Card :data="demo" />
             </el-col>
         </el-row>
+        <div class="loading-box flex-box flex-h-center flex-v-center" v-else>
+            <Loading :loading-status="loadingStatus" @refresh="onRefresh" />
+        </div>
         <div class="footer">
             Illustration by <a class="link" href="https://icons8.com/illustrations/" target="_blank">Icons 8</a> from
             <a class="link" href="https://icons8.com/illustrations" target="_blank">Ouch!</a>
@@ -12,35 +15,37 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import { getCurrentInstance } from 'vue';
 import Card from '@/components/Card/index.vue';
-export default {
-    components: {
-        Card
-    },
-    data() {
-        return {
-            projectsList: []
-        };
-    },
-    created() {
-        this.getProjectList();
-    },
-    methods: {
-        pushUrl(path) {
-            this.$router.push({ path: `/demo/${path}` });
-        },
+import Loading from '@/components/Loading/index.vue';
 
-        async getProjectList() {
-            let res = await this.req({
-                url: '/project/list'
-            });
-            if (res.result && res.result.list) {
-                this.projectsList = res.result.list;
-            }
+const projectsList = ref([]);
+
+const instance = getCurrentInstance();
+const loadingStatus = ref('加载中'); //  加载中 | 加载成功 | 加载失败
+async function getProjectList() {
+    try {
+        let res = await instance.proxy.req({
+            url: '/project/list'
+        });
+        if (res.result && res.result.list) {
+            projectsList.value = res.result.list;
+            loadingStatus.value = '加载成功';
         }
+    } catch (e) {
+        console.log(e, 'e');
+        loadingStatus.value = '加载失败';
     }
-};
+}
+
+getProjectList();
+
+// 刷新
+function onRefresh() {
+    loadingStatus.value = '加载中';
+    getProjectList();
+}
 </script>
 
 <style lang="scss" scoped>
@@ -105,6 +110,9 @@ export default {
     }
 }
 
+.loading-box {
+    height: 100vh;
+}
 .footer {
     text-align: center;
     margin-bottom: 20px;
