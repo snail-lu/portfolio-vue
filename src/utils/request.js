@@ -6,7 +6,7 @@ const service = axios.create({
     baseURL: 'https://www.fastmock.site/mock/570d7b757920a8c74dd3d814aec1242d/portfolio', // url = base url + request url
     // withCredentials: true, // send cookies when cross-domain requests
     // timeout: 500000 // request timeout
-    timeout: 1000
+    timeout: 20000 // 超时时间
 });
 
 // request interceptor
