@@ -5,9 +5,15 @@
         </router-link>
 
         <ul class="menu-list flex-box flex-v-center">
-            <li class="menu-item" :class="{ 'menu-item-active': currentRoute == item.path }" v-for="item in menuList" :key="item.path">
+            <li
+                class="menu-item animate__animated animate__zoomIn animate__faster"
+                :class="{ 'menu-item-active': currentRoute == item.path }"
+                v-for="item in menuList"
+                :key="item.path"
+                @click="linkTo(item.path)"
+            >
                 <i class="iconfont menu-item-icon" :class="item.icon" v-if="item.icon"></i>
-                <router-link :to="item.path"> {{ item.name }}</router-link>
+                <span> {{ item.name }}</span>
             </li>
             <span class="menu-item-active-bg" :style="{ left }"></span>
         </ul>
@@ -15,7 +21,7 @@
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import settings from '@/settings';
 import { useStore } from 'vuex';
 import { onUpdated } from 'vue';
@@ -32,6 +38,7 @@ const left = ref(0);
 function setActiveItemStyle() {
     const activeItem = document.querySelector('.menu-item-active');
     const { offsetLeft, offsetWidth } = activeItem;
+    console.log(offsetLeft, offsetWidth);
     const bgLeft = offsetLeft + (offsetWidth - 50) / 2;
     left.value = `${bgLeft}px`;
 }
@@ -39,12 +46,17 @@ function setActiveItemStyle() {
 onMounted(() => {
     setTimeout(() => {
         setActiveItemStyle();
-    }, 100);
+    }, 300);
 });
 
 onUpdated(() => {
     setActiveItemStyle();
 });
+
+const router = useRouter();
+const linkTo = (path) => {
+    router.push(path);
+};
 </script>
 <style lang="scss" scoped>
 .topbar-wrapper {
@@ -75,6 +87,7 @@ onUpdated(() => {
             margin-right: 70px;
             padding-top: 10px;
             color: #fff;
+            cursor: pointer;
 
             &-icon {
                 margin-right: 6px;
