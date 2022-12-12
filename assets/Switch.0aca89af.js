@@ -1,1 +1,0 @@
-import{_ as t}from"./index.dbcba01a.js";import{ak as o,o as e,c as n}from"./elementPlus.726e19da.js";const r={};function s(_,a){const c=o;return e(),n(c)}const l=t(r,[["render",s]]);export{l as default};

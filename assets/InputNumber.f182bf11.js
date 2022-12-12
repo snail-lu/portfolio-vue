@@ -1,1 +1,0 @@
-import{_ as t}from"./index.dbcba01a.js";/* empty css                 */import{af as n,o,c as r}from"./elementPlus.726e19da.js";const c={};function _(s,m){const e=n;return o(),r(e)}const f=t(c,[["render",_]]);export{f as default};
