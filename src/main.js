@@ -15,9 +15,14 @@ import '@/assets/iconfonts/iconfont.css';
 
 import '@/router/permission'; // permission control
 
+import 'vue-fullpage.js/dist/style.css'
+// import './fullpage.scrollHorizontally.min' // Optional. When using fullpage extensions
+import VueFullPage from 'vue-fullpage.js'
+
 const app = createApp(App);
 app.use(router);
 app.use(store);
+app.use(VueFullPage);
 
 // 替代Vue.prototype.xxx = xxxx;
 app.config.globalProperties.req = request;
