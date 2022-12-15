@@ -2,7 +2,7 @@
     <div class="anniversary-container">
         <full-page ref="fullpage" :options="options" id="fullpage">
             <div class="section">
-                <div class="section-1 flex-box-column flex-h-center flex-v-center" @click="changeMusicStatus">
+                <div class="section-1 flex-box-column flex-h-center flex-v-center" @touchstart="changeMusicStatus">
                     <div class="title">一封情书</div>
                     <div class="letter">
                         <img class="section-1-letter" src="../../assets/anniversary/page1.webp" />
