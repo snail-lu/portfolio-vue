@@ -1,0 +1,1 @@
+import{_ as t}from"./index.32bf6504.js";import{ak as o,o as e,c as n}from"./elementPlus.b99cfd50.js";const r={};function s(_,a){const c=o;return e(),n(c)}const l=t(r,[["render",s]]);export{l as default};
