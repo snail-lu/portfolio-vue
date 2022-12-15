@@ -80,6 +80,7 @@ function onDelete(uid) {
 }
 
 function imgUrlFilter(val) {
+    // 创建file对象的URL
     return URL.createObjectURL(val);
 }
 </script>
