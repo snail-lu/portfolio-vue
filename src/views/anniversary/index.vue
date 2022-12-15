@@ -9,7 +9,6 @@
                         <img class="section-1-flower" src="../../assets/anniversary/page1-s1.webp" />
                     </div>
                     <div class="sub-title">For 张佳丽</div>
-                    <div class="sub-title-2">8周年快乐❥(^_-)</div>
                 </div>
             </div>
             <div class="section">
