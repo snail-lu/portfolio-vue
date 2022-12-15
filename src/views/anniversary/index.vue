@@ -2,7 +2,7 @@
     <div class="anniversary-container">
         <full-page ref="fullpage" :options="options" id="fullpage">
             <div class="section">
-                <div class="section-1 flex-box-column flex-h-center flex-v-center">
+                <div class="section-1 flex-box-column flex-h-center flex-v-center" @click="changeMusicStatus">
                     <div class="title">一封情书</div>
                     <div class="letter">
                         <img class="section-1-letter" src="../../assets/anniversary/page1.webp" />
@@ -98,7 +98,7 @@
                     </div>
                     <div class="desc-1">2022年，</div>
                     <div class="desc-2">我们产生了矛盾</div>
-                    <div class="desc-2">但最终我们还是战胜了一切困难</div>
+                    <div class="desc-2">但最终我们还是战胜了困难</div>
                 </div>
             </div>
             <div class="section">
@@ -125,11 +125,13 @@
                 </div>
             </div>
         </full-page>
+        <div class="bgm-btn" :class="{ 'bgm-btn-rotate': !paused }" @click="changeMusicStatus"></div>
+        <audio ref="player" class="music-box" src="https://music.163.com/song/media/outer/url?id=1828026086.mp3" autoplay></audio>
     </div>
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 
 const options = {
     licenseKey: '',
@@ -154,6 +156,17 @@ const show = reactive({
 const changeShow = (year) => {
     show[year] = !show[year];
 };
+
+const paused = ref(true);
+const player = ref(null);
+const changeMusicStatus = () => {
+    if (paused.value) {
+        player.value.play();
+    } else {
+        player.value.pause();
+    }
+    paused.value = !paused.value;
+};
 </script>
 
 <style lang="scss" scoped>
@@ -166,6 +179,24 @@ const changeShow = (year) => {
     height: 100%;
     font-family: ZCOOLK;
     background-image: url(../../assets/anniversary/bg-1.webp);
+}
+
+.bgm-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-image: url(../../assets/icons/bgmBtn.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: rotating 1.2s linear infinite;
+    animation-play-state: paused;
+
+    &-rotate {
+        animation-play-state: running;
+    }
 }
 
 .section-1 {
