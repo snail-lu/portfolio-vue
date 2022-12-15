@@ -71,7 +71,8 @@ const routes = [
         path: '/anniversary/8th',
         component: () => import('../views/anniversary/index.vue'),
         meta: {
-            title: '8周年快乐'
+            title: '8周年快乐',
+            showTitleOnly: true
         }
     },
     {

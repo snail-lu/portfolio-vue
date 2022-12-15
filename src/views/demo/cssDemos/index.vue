@@ -212,7 +212,7 @@ export default {
             backface-visibility: hidden;
             transition: 1s ease-in-out;
             // 镜像效果，暂不支持firefox及IE
-            -webkit-box-reflect: below 0 linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.6));
+            // -webkit-box-reflect: below 0 linear-gradient(transparent, transparent, rgba(0, 0, 0, 0.6));
 
             &-img {
                 width: 100%;

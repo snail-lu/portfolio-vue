@@ -14,24 +14,42 @@
             </div>
             <div class="section">
                 <div class="section-2 flex-box-column flex-h-center flex-v-center">
-                    <img class="page-img" src="../../assets/anniversary/2014.jpg" v-if="show[2014]" @click="changeShow(2014)" />
-                    <img class="page2-img" src="../../assets/anniversary/page2.webp" v-else @click="changeShow(2014)" />
+                    <div class="card" :class="{ 'card-rotate': show[2014] }" @click="changeShow(2014)">
+                        <div class="card-item card-item-front">
+                            <img class="card-item-img page2-img" src="../../assets/anniversary/page2.webp" />
+                        </div>
+                        <div class="card-item card-item-back">
+                            <img class="card-item-img page-img" src="../../assets/anniversary/2014.jpg" />
+                        </div>
+                    </div>
                     <div class="desc-1">2014年12月16日</div>
                     <div class="desc-2">我们正式在一起</div>
                 </div>
             </div>
             <div class="section">
                 <div class="section-3 flex-box-column flex-h-center flex-v-center">
-                    <img class="page-img" src="../../assets/anniversary/2015.jpg" v-if="show[2015]" @click="changeShow(2015)" />
-                    <img src="../../assets/anniversary/page3.webp" v-else @click="changeShow(2015)" />
+                    <div class="card" :class="{ 'card-rotate': show[2015] }" @click="changeShow(2015)">
+                        <div class="card-item card-item-front">
+                            <img class="card-item-img" src="../../assets/anniversary/page3.webp" />
+                        </div>
+                        <div class="card-item card-item-back">
+                            <img class="card-item-img page-img" src="../../assets/anniversary/2015.jpg" />
+                        </div>
+                    </div>
                     <div class="desc-1">到今天，</div>
                     <div class="desc-2">我们已经恋爱了8个年头</div>
                 </div>
             </div>
             <div class="section">
                 <div class="section-4 flex-box-column flex-h-center flex-v-center">
-                    <img class="page-img" src="../../assets/anniversary/2016.jpg" v-if="show[2016]" @click="changeShow(2016)" />
-                    <img class="page-img" src="../../assets/anniversary/page4.webp" v-else @click="changeShow(2016)" />
+                    <div class="card" :class="{ 'card-rotate': show[2016] }" @click="changeShow(2016)">
+                        <div class="card-item card-item-front">
+                            <img class="card-item-img page-img" src="../../assets/anniversary/page4.webp" />
+                        </div>
+                        <div class="card-item card-item-back">
+                            <img class="card-item-img page-img" src="../../assets/anniversary/2016.jpg" />
+                        </div>
+                    </div>
                     <div class="desc-1">在这8年宝贵的时光里，</div>
                     <div class="desc-2">我们彼此陪伴，</div>
                     <div class="desc-2">一起度过了人生中很多重要的阶段，</div>
@@ -40,8 +58,14 @@
             </div>
             <div class="section">
                 <div class="section-5 flex-box-column flex-h-center flex-v-center">
-                    <img class="page-img" src="../../assets/anniversary/2017.jpg" v-if="show[2017]" @click="changeShow(2017)" />
-                    <img class="page-img" src="../../assets/anniversary/page5.webp" v-else @click="changeShow(2017)" />
+                    <div class="card" :class="{ 'card-rotate': show[2017] }" @click="changeShow(2017)">
+                        <div class="card-item card-item-front">
+                            <img class="card-item-img page-img" src="../../assets/anniversary/page5.webp" />
+                        </div>
+                        <div class="card-item card-item-back">
+                            <img class="card-item-img page-img" src="../../assets/anniversary/2017.jpg" />
+                        </div>
+                    </div>
                     <div class="desc-1">感谢你在我一无所有的时候，</div>
                     <div class="desc-1">一直对我不离不弃，</div>
                     <div class="desc-1">你的陪伴，</div>
@@ -50,8 +74,14 @@
             </div>
             <div class="section">
                 <div class="section-6 flex-box-column flex-h-center flex-v-center">
-                    <img class="page-img" src="../../assets/anniversary/2019.jpg" v-if="show[2019]" @click="changeShow(2019)" />
-                    <img class="page-img" src="../../assets/anniversary/page6.webp" v-else @click="changeShow(2019)" />
+                    <div class="card" :class="{ 'card-rotate': show[2019] }" @click="changeShow(2019)">
+                        <div class="card-item card-item-front">
+                            <img class="card-item-img page-img" src="../../assets/anniversary/page6.webp" />
+                        </div>
+                        <div class="card-item card-item-back">
+                            <img class="card-item-img page-img" src="../../assets/anniversary/2019.jpg" />
+                        </div>
+                    </div>
                     <div class="desc-1">2021年，</div>
                     <div class="desc-2">我们终于见了家长，</div>
                     <div class="desc-2">也买了属于我们两个的第一套房子</div>
@@ -59,8 +89,14 @@
             </div>
             <div class="section">
                 <div class="section-7 flex-box-column flex-h-center flex-v-center">
-                    <img class="page-img" src="../../assets/anniversary/2022.jpg" v-if="show[2022]" @click="changeShow(2022)" />
-                    <img src="../../assets/anniversary/page7.webp" v-else @click="changeShow(2022)" />
+                    <div class="card" :class="{ 'card-rotate': show[2022] }" @click="changeShow(2022)">
+                        <div class="card-item card-item-front">
+                            <img class="card-item-img" src="../../assets/anniversary/page7.webp" />
+                        </div>
+                        <div class="card-item card-item-back">
+                            <img class="card-item-img page-img" src="../../assets/anniversary/2022.jpg" />
+                        </div>
+                    </div>
                     <div class="desc-1">2022年，</div>
                     <div class="desc-2">我们产生了矛盾</div>
                     <div class="desc-2">但最终我们还是战胜了一切困难</div>
@@ -68,8 +104,14 @@
             </div>
             <div class="section">
                 <div class="section-8 flex-box-column flex-h-center flex-v-center">
-                    <img class="page-img" src="../../assets/anniversary/2023.jpg" v-if="show[2023]" @click="changeShow(2023)" />
-                    <img src="../../assets/anniversary/page8.webp" v-else @click="changeShow(2023)" />
+                    <div class="card" :class="{ 'card-rotate': show[2023] }" @click="changeShow(2023)">
+                        <div class="card-item card-item-front">
+                            <img class="card-item-img" src="../../assets/anniversary/page8.webp" />
+                        </div>
+                        <div class="card-item card-item-back">
+                            <img class="card-item-img page-img" src="../../assets/anniversary/2023.jpg" />
+                        </div>
+                    </div>
                     <div class="desc-1">2023年，</div>
                     <div class="desc-2">我们即将一起组建我们自己的小家，</div>
                     <div class="desc-2">我会好好爱你，</div>
@@ -94,7 +136,7 @@ const options = {
     licenseKey: '',
     menu: '#menu',
     verticalCentered: false,
-    anchors: ['page1', 'page2', 'page3', 'page4', 'page5', 'page6', 'page7', 'page8']
+    anchors: ['page1', 'page2', 'page3', 'page4', 'page5', 'page6', 'page7', 'page8', 'page9']
     // sectionsColor: ['#41b883', '#ff5f45', '#0798ec']
 };
 
@@ -106,7 +148,8 @@ const show = reactive({
     2018: false,
     2019: false,
     2021: false,
-    2022: false
+    2022: false,
+    2023: false
 });
 
 const changeShow = (year) => {
@@ -185,5 +228,42 @@ const changeShow = (year) => {
 
 .fp-warning .fp-watermark {
     bottom: -100px;
+}
+
+.card {
+    position: relative;
+    width: 200px;
+    height: 280px;
+    cursor: pointer;
+    transition: 1s ease-in-out;
+    transform-style: preserve-3d;
+
+    &-rotate {
+        transform: rotateY(0.5turn);
+    }
+
+    &-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        // 隐藏背面的元素
+        backface-visibility: hidden;
+        transition: 1s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        &-img {
+            width: 100%;
+            // height: 100%;
+            object-fit: cover;
+        }
+
+        &-back {
+            transform: rotateY(0.5turn);
+        }
+    }
 }
 </style>

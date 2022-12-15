@@ -14,7 +14,7 @@ router.beforeEach(async (to, from, next) => {
     NProgress.start()
 
     // 设置网页标签title
-    document.title = getPageTitle(to.meta.title)
+    document.title = getPageTitle(to.meta.title, to.meta.showTitleOnly)
     next()
 })
 
