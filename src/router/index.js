@@ -64,7 +64,8 @@ const routes = [
         path: '/test',
         component: () => import('../views/test/index.vue'),
         meta: {
-            title: '测试页面'
+            title: '测试页面',
+            showTitleOnly: true
         }
     },
     {

@@ -1,21 +1,71 @@
 <template>
-    <div>
-        <div class="markImg"></div>
-
-        <el-upload action="#" multiple :auto-upload="false" :on-change="onUploadFile" :show-file-list="false">
-            <i-ep-picture class="btn el-icon-picture-outline upload-btn" title="打开本地图片"></i-ep-picture>
-        </el-upload>
+    <div class="test-container">
+        <el-form :model="form" label-width="120px">
+            <el-form-item label="水印内容：">
+                <el-input v-model="form.text" />
+            </el-form-item>
+            <el-form-item label="图片类型：">
+                <el-radio-group v-model="form.type">
+                    <el-radio :label="1">网络图片</el-radio>
+                    <el-radio :label="2">本地图片</el-radio>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item label="图片地址：" v-if="form.type == 1">
+                <el-input v-model="form.imgUrl">
+                    <template #append>
+                        <el-button @click="add">添加水印</el-button>
+                    </template>
+                </el-input>
+            </el-form-item>
+            <el-form-item label="本地图片：" v-if="form.type == 2">
+                <el-upload class="avatar-uploader" action="#" :auto-upload="false" :on-change="onUploadFile" :show-file-list="false">
+                    <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+                    <el-icon v-else class="avatar-uploader-icon"><i-ep-plus /></el-icon>
+                </el-upload>
+            </el-form-item>
+            <el-form-item label="水印效果：">
+                <el-image style="width: 150px; height: 150px" :src="form.transformedImgUrl" :preview-src-list="previewList" fit="contain" />
+            </el-form-item>
+        </el-form>
+        <!-- <div class="markImg"></div> -->
     </div>
 </template>
 
 <script setup>
-import { getCurrentInstance, ref } from 'vue';
+import { getCurrentInstance, reactive, ref } from 'vue';
+import { getNowTime } from '@/utils/date';
+import { imgUrlToFile } from '@/utils/file';
+
+const instance = getCurrentInstance();
+
+const form = reactive({
+    text: getNowTime(),
+    imgUrl: 'https://t7.baidu.com/it/u=2168645659,3174029352&fm=193&f=GIF',
+    transformedImgUrl: '',
+    type: 1
+});
+
+// 预览列表
+const previewList = ref([]);
 
 function onUploadFile(file, list) {
-    addWaterMarker(file);
+    console.log(file, 'upload file');
+    // addWaterMarker(file);
 }
 const data = ref([]);
-const instance = getCurrentInstance();
+
+async function add() {
+    if (form.imgUrl) {
+        // 将url转换得到file文件
+        const imgFile = await imgUrlToFile(form.imgUrl);
+        // 将文件转换为可以展示的URL
+        const imgUrl = URL.createObjectURL(imgFile);
+        form.transformedImgUrl = imgUrl;
+        previewList.value = [imgUrl];
+    } else {
+        instance.proxy.$message.error('请输入网络图片地址');
+    }
+}
 /**
  * 添加水印
  */
@@ -96,8 +146,32 @@ function htmlToCanvas(el, backgroundColor = 'rgba(0,0,0,.1)') {
 </script>
 
 <style lang="scss" scoped>
-.masonry {
-    display: flex;
-    justify-content: center;
+.test-container {
+    background-color: #fff;
+    width: 50%;
+    // height: 100vh;
+    padding: 40px;
+    margin: 40px auto 0;
+}
+
+:deep(.el-upload) {
+    border: 1px dashed var(--el-border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: var(--el-transition-duration-fast);
+
+    &:hover {
+        border-color: var(--el-color-primary);
+    }
+}
+
+.el-icon.avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    text-align: center;
 }
 </style>
