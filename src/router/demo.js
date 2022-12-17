@@ -109,6 +109,13 @@ export default {
             meta: {
                 title: '基于json数据动态生成表单'
             }
+        },
+        {
+            path: 'watermarker',
+            component: () => import('../views/demo/watermarker/index.vue'),
+            meta: {
+                title: '图片水印'
+            }
         }
     ]
 };
