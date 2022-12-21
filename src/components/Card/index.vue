@@ -144,6 +144,7 @@ export default {
             color: #999;
             font-size: 13px;
             margin-top: 10px;
+            line-height: 1.5;
         }
     }
 }
