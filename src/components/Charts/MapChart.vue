@@ -26,7 +26,7 @@ export default {
     mounted() {
         this.initCharts();
     },
-    beforeDestroy() {
+    beforeUnmount() {
         window.removeEventListener('resize', this.resizeCharts);
     },
     methods: {
@@ -76,7 +76,7 @@ export default {
                 '台湾'
             ];
             let item = [];
-            provincesName.map((it) => {
+            provincesName.forEach((it) => {
                 // 生成随机数
                 const min = 10000;
                 const max = 99999;
@@ -96,7 +96,7 @@ export default {
         loadMap(item, name) {
             if (mapData) {
                 echarts.registerMap(name, mapData);
-                var option = {
+                let option = {
                     title: {
                         text: '全国销售额统计图',
                         left: 'center',
@@ -142,7 +142,7 @@ export default {
                         {
                             type: 'map',
                             map: name,
-                            selectedMode: 'false', //是否允许选中多个区域
+                            selectedMode: 'false', // 是否允许选中多个区域
                             roam: true, // 开启缩放和移动
                             label: {
                                 show: true

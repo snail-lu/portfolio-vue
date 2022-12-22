@@ -80,8 +80,8 @@ export default {
          */
         compare(propertyName, sort) {
             return function (obj1, obj2) {
-                var value1 = obj1[propertyName];
-                var value2 = obj2[propertyName];
+                let value1 = obj1[propertyName];
+                let value2 = obj2[propertyName];
                 if (typeof value1 === 'string' && typeof value2 === 'string') {
                     const res = value1.localeCompare(value2, 'zh');
                     return sort === 'ascending' ? res : -res;

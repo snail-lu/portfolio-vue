@@ -1,12 +1,6 @@
 <template>
     <el-checkbox-group>
-        <el-checkbox
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-            :disabled="item.disabled"
-        />
+        <el-checkbox v-for="item in options" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled" />
     </el-checkbox-group>
 </template>
 
@@ -14,7 +8,7 @@
 const props = defineProps({
     options: {
         type: Array,
-        default: []
+        default: () => []
     }
 });
 </script>

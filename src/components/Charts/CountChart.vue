@@ -33,7 +33,7 @@ export default {
             timer: null
         };
     },
-    beforeDestroy() {
+    beforeUnmount() {
         if (this.timer) {
             clearInterval(this.timer);
             this.timer = null;

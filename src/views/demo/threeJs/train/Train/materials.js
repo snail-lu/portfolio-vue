@@ -3,12 +3,12 @@ import { MeshStandardMaterial } from 'three';
 function createMaterials() {
     const body = new MeshStandardMaterial({
         color: 'firebrick',
-        flatShading: true,
+        flatShading: true
     });
 
     const detail = new MeshStandardMaterial({
         color: 'darkslategray',
-        flatShading: true,
+        flatShading: true
     });
 
     return { body, detail };

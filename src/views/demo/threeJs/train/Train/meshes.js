@@ -38,7 +38,7 @@ function createMeshes() {
         smallWheelRear,
         smallWheelCenter,
         smallWheelFront,
-        bigWheel,
+        bigWheel
     };
 }
 

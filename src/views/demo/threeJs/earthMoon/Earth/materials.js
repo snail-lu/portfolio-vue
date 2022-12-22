@@ -10,7 +10,6 @@ function createMaterials() {
     });
 
     return earthMaterial;
-
 }
 
 export { createMaterials };

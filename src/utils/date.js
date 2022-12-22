@@ -5,9 +5,9 @@
  */
 export function getNowTime() {
     let now = new Date()
-    let year = now.getFullYear() //得到年份
-    let month = now.getMonth() //得到月份
-    let day = now.getDate().toString().padStart(2, '0') //得到日期
+    let year = now.getFullYear() // 得到年份
+    let month = now.getMonth() // 得到月份
+    let day = now.getDate().toString().padStart(2, '0') // 得到日期
     let hours = now.getHours().toString().padStart(2, '0') // 得到时
     let minutes = now.getMinutes().toString().padStart(2, '0') // 得到分
     let seconds = now.getSeconds().toString().padStart(2, '0') // 得到秒
@@ -70,7 +70,7 @@ export function formatTime(time, option) {
  */
 
 export const dateFormat = (function () {
-    var token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZ]|"[^"]*"|'[^']*'/g,
+    let token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZ]|"[^"]*"|'[^']*'/g,
         timezone =
             /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,
         timezoneClip = /[^-+\dA-Z]/g,
@@ -83,7 +83,7 @@ export const dateFormat = (function () {
 
     // Regexes and supporting functions are cached through closure
     return function (date, mask, utc) {
-        var dF = dateFormat
+        let dF = dateFormat
 
         // You can't provide utc if you skip other args (use the "UTC:" mask prefix)
         if (arguments.length == 1 && Object.prototype.toString.call(date) == '[object String]' && !/\d/.test(date)) {
@@ -95,7 +95,7 @@ export const dateFormat = (function () {
         date = date ? new Date(date) : new Date()
         if (isNaN(date)) throw SyntaxError('invalid date')
 
-        mask = String(dF.masks[mask] || mask || dF.masks['default'])
+        mask = String(dF.masks[mask] || mask || dF.masks.default)
 
         // Allow setting the utc argument via the mask
         if (mask.slice(0, 4) == 'UTC:') {
@@ -103,7 +103,7 @@ export const dateFormat = (function () {
             utc = true
         }
 
-        var _ = utc ? 'getUTC' : 'get',
+        let _ = utc ? 'getUTC' : 'get',
             d = date[_ + 'Date'](),
             D = date[_ + 'Day'](),
             m = date[_ + 'Month'](),
@@ -114,7 +114,7 @@ export const dateFormat = (function () {
             L = date[_ + 'Milliseconds'](),
             o = utc ? 0 : date.getTimezoneOffset(),
             flags = {
-                d: d,
+                d,
                 dd: pad(d),
                 ddd: dF.i18n.dayNames[D],
                 dddd: dF.i18n.dayNames[D + 7],
@@ -126,11 +126,11 @@ export const dateFormat = (function () {
                 yyyy: y,
                 h: H % 12 || 12,
                 hh: pad(H % 12 || 12),
-                H: H,
+                H,
                 HH: pad(H),
-                M: M,
+                M,
                 MM: pad(M),
-                s: s,
+                s,
                 ss: pad(s),
                 l: pad(L, 3),
                 L: pad(L > 99 ? Math.round(L / 10) : L),

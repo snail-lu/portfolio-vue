@@ -81,14 +81,14 @@ export default {
         onDialogBtnClick(type) {
             if (type === 'cancel') {
                 this.dialogFormVisible = false;
-                this.$refs['form'].resetFields();
+                this.$refs.form.resetFields();
                 this.form = {
                     title: '',
                     startDate: '',
                     endDate: ''
                 };
             } else if (type === 'confirm') {
-                this.$refs['form'].validate(async (valid) => {
+                this.$refs.form.validate(async (valid) => {
                     if (valid) {
                         const { schedule, form } = this;
                         // form中已有id，说明是已经插入过的日程

@@ -15,7 +15,7 @@ function createGeometries() {
         cabin,
         nose,
         wheel,
-        chimney,
+        chimney
     };
 }
 

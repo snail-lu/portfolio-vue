@@ -2,8 +2,8 @@
 export function imgUrlToFile(url, watermarker, filename = 'a') {
     return new Promise(resolve => {
         const image = new Image();
-        //如果图片url是网络url，要加下一句代码，解决跨域
-        image.crossOrigin = "*";
+        // 如果图片url是网络url，要加下一句代码，解决跨域
+        image.crossOrigin = '*';
         image.onload = function () {
             const dataUrl = imgToDataURL(image, watermarker);
             const imgFile = dataURLToFile(dataUrl, filename);
@@ -11,21 +11,20 @@ export function imgUrlToFile(url, watermarker, filename = 'a') {
         };
         image.src = url;
     })
-
 }
 
 // 将img经过canvas绘图后输出为dataURL
 export function imgToDataURL(img, watermarker = '我是一段水印') {
     const { width, height } = img;
-    const canvas = document.createElement("canvas");
+    const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     ctx.drawImage(img, 0, 0, width, height);
     ctx.fillStyle = 'red';
     ctx.font = '50px sans-serif';
     ctx.fillText(watermarker, 100, 100);
-    const ext = img.src.substring(img.src.lastIndexOf(".") + 1).toLowerCase();
+    const ext = img.src.substring(img.src.lastIndexOf('.') + 1).toLowerCase();
     const type = `image/${ext}`
     const dataURL = canvas.toDataURL(type);
     return dataURL

@@ -31,9 +31,9 @@ export default {
                 {
                     url: 'https://note.youdao.com/yws/api/personal/file/ABFA0379796B4053A331FB5D0A526DC7?method=download&shareKey=a49e990099734412e5dc0ab6950ae195',
                     title: '美邦会员中心小程序首页'
-                },
+                }
             ],
-            previewList:[
+            previewList: [
                 'https://note.youdao.com/yws/api/personal/file/5918A54A2D5F4F568808F16B0A4B3D15?method=download&shareKey=dc794b30394795f2fd8575812011c2c8',
                 'https://note.youdao.com/yws/api/personal/file/7C58C1ECED3A416993055ACB9D8253D9?method=download&shareKey=623b66911b53354019e3aa6b44288dc5',
                 'https://note.youdao.com/yws/api/personal/file/3735ECE8A74A4AC280C476E3EABCB462?method=download&shareKey=e1e70e46a9ecf1482d247491598a478f',
@@ -61,5 +61,5 @@ export default {
     methods: {
     },
     mounted () {
-    },
+    }
 };

@@ -118,7 +118,7 @@ const httpUploadFile = (content) => {
             headers: { 'content-type': 'multipart/form-data' }
         })
         .then((res) => {
-            //自行处理各种情况
+            // 自行处理各种情况
             const code = res && parseInt(res.code, 10);
             if (code === 200) {
                 // xxx

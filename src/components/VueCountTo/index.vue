@@ -184,7 +184,7 @@ export default {
       return this.prefix + x1 + x2 + this.suffix;
     }
   },
-  destroyed() {
+  unmounted() {
     cancelAnimationFrame(this.rAF)
   }
 };

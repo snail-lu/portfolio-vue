@@ -33,7 +33,7 @@ export default {
     mounted() {
         this.initCharts();
     },
-    beforeDestroy() {
+    beforeUnmount() {
         window.removeEventListener('resize', this.resizeCharts);
     },
     methods: {
@@ -46,7 +46,7 @@ export default {
             chart && chart.resize();
         },
         setOptions() {
-            var option;
+            let option;
             const dimension = 0;
             const countryColors = {
                 Australia: '#FF6666',

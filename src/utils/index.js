@@ -36,7 +36,7 @@ export function getMinValueIndexOfArr(arr) {
 
 /**
  * 校验当前浏览器是否支持IntersectionObserver
- * @returns 
+ * @returns
  */
 export function checkIntersectionObserver() {
     const inBrowser = typeof window !== 'undefined' && window !== null

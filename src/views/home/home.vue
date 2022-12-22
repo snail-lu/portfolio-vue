@@ -80,9 +80,9 @@ const init = () => {
       varying vec3 vColor;
       ${shader.vertexShader}
     `
-                .replace(`gl_PointSize = size;`, `gl_PointSize = size * sizes;`)
+                .replace('gl_PointSize = size;', 'gl_PointSize = size * sizes;')
                 .replace(
-                    `#include <color_vertex>`,
+                    '#include <color_vertex>',
                     `#include <color_vertex>
         float d = length(abs(position) / vec3(40., 10., 40));
         d = clamp(d, 0., 1.);
@@ -90,7 +90,7 @@ const init = () => {
       `
                 )
                 .replace(
-                    `#include <begin_vertex>`,
+                    '#include <begin_vertex>',
                     `#include <begin_vertex>
         float t = time;
         float moveT = mod(shift.x + shift.z * t, PI2);
@@ -103,15 +103,15 @@ const init = () => {
       ${shader.fragmentShader}
     `
                 .replace(
-                    `#include <clipping_planes_fragment>`,
+                    '#include <clipping_planes_fragment>',
                     `#include <clipping_planes_fragment>
         float d = length(gl_PointCoord.xy - 0.5);
         //if (d > 0.5) discard;
       `
                 )
                 .replace(
-                    `vec4 diffuseColor = vec4( diffuse, opacity );`,
-                    `vec4 diffuseColor = vec4( vColor, smoothstep(0.5, 0.1, d)/* * 0.5 + 0.5*/ );`
+                    'vec4 diffuseColor = vec4( diffuse, opacity );',
+                    'vec4 diffuseColor = vec4( vColor, smoothstep(0.5, 0.1, d)/* * 0.5 + 0.5*/ );'
                 );
         }
     });

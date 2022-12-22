@@ -1,12 +1,12 @@
 export function getCookie(name) {
-    var arr,
+    let arr,
         reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)')
     if ((arr = document.cookie.match(reg))) return arr[2]
     else return null
 }
 
 export function queryCookie(name) {
-    var arr = document.cookie.split('; ')
+    let arr = document.cookie.split('; ')
     arr.forEach((item) => {
         console.log(item)
         if (item.indexOf(name) > -1) {

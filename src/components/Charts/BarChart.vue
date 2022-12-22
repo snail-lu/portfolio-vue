@@ -24,7 +24,7 @@ export default {
     mounted() {
         this.initCharts();
     },
-    beforeDestroy() {
+    beforeUnmount() {
         window.removeEventListener('resize', this.resizeCharts);
     },
     methods: {

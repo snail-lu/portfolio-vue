@@ -12,12 +12,10 @@
 import { ref, reactive } from 'vue';
 import { Plus } from '@element-plus/icons-vue';
 
-import type { UploadProps } from 'element-plus';
-
 const props = defineProps({
     modelValue: {
         type: Array,
-        default: []
+        default: () => []
     }
 });
 const fileList = reactive(props.modelValue);
@@ -25,12 +23,12 @@ const fileList = reactive(props.modelValue);
 const dialogImageUrl = ref('');
 const dialogVisible = ref(false);
 
-const handleRemove: UploadProps['onRemove'] = (uploadFile, uploadFiles) => {
+const handleRemove = (uploadFile, uploadFiles) => {
     console.log(uploadFile, uploadFiles);
 };
 
-const handlePictureCardPreview: UploadProps['onPreview'] = (uploadFile) => {
-    dialogImageUrl.value = uploadFile.url!;
+const handlePictureCardPreview = (uploadFile) => {
+    dialogImageUrl.value = uploadFile.url;
     dialogVisible.value = true;
 };
 </script>

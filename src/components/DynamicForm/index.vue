@@ -1,12 +1,7 @@
 <template>
     <el-form :model="initForm" v-bind="formProps">
         <el-form-item v-for="item in items" :key="item.key" :label="item.label" :prop="item.key" :rules="item.rules">
-            <component
-                :is="FormItemMaps[item.type]"
-                v-model="initForm[item.key]"
-                :options="item.options"
-                v-bind="item.props"
-            ></component>
+            <component :is="FormItemMaps[item.type]" v-model="initForm[item.key]" :options="item.options" v-bind="item.props"></component>
         </el-form-item>
     </el-form>
 </template>
@@ -16,15 +11,15 @@ import FormItemMaps from './form-item-maps.ts';
 const props = defineProps({
     items: {
         type: Array,
-        default: []
+        default: () => []
     },
     form: {
         type: Object,
-        default: {}
+        default: () => {}
     },
     formProps: {
         type: Object,
-        default: {}
+        default: () => {}
     }
 });
 

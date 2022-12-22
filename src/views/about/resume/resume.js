@@ -17,7 +17,7 @@ export default {
                 closeOnPressEscape: false,
                 closeOnHashChange: false
             }).then((val) => {
-                if(val.value=="668812"){
+                if (val.value == '668812') {
                     this.$message({
                         type: 'success',
                         message: '校验成功！'
@@ -30,16 +30,15 @@ export default {
                     })
                     this.checkPassword();
                 }
-
             }).catch(() => {
                 this.$message({
                   type: 'error',
                   message: '取消输入！'
-                });       
+                });
             });
         }
     },
     mounted () {
         this.checkPassword();
-    },
+    }
 };

@@ -60,7 +60,7 @@
                     <el-row class="list-item" type="flex">
                         <el-col :span="8">2019年04月至今</el-col>
                         <el-col :span="12">上海华邦科创信息科技有限公司</el-col>
-                        <el-col :span="4">前端工程师</el-col>   
+                        <el-col :span="4">前端工程师</el-col>
                     </el-row>
                     <ul class="list-item-content">
                         <li>工作内容1</li>
@@ -73,7 +73,7 @@
                 <div class="content">
                     <el-row class="list-item">
                         <el-col :span="8">2019年04月-2014年05月</el-col>
-                        <el-col :span="16">离店销售小程序</el-col> 
+                        <el-col :span="16">离店销售小程序</el-col>
                     </el-row>
                     <ul class="list-item-content">
                         <li>功能点：</li>

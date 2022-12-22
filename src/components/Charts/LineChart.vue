@@ -25,7 +25,7 @@ export default {
     mounted() {
         this.initCharts();
     },
-    beforeDestroy() {
+    beforeUnmount() {
         window.removeEventListener('resize', this.resizeCharts);
     },
     methods: {
@@ -51,7 +51,7 @@ export default {
             let now = new Date() - 60 * 1000;
             let steps = 1000;
             let value = Math.random() * 1000;
-            for (var i = 0; i < 60; i++) {
+            for (let i = 0; i < 60; i++) {
                 data.push(randomData());
             }
 
@@ -60,7 +60,7 @@ export default {
                     trigger: 'axis',
                     formatter: function (params) {
                         params = params[0];
-                        var date = new Date(params.name);
+                        let date = new Date(params.name);
                         return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
                     },
                     axisPointer: {
@@ -102,7 +102,7 @@ export default {
                         name: 'Fake Data',
                         type: 'line',
                         showSymbol: false,
-                        data: data,
+                        data,
                         itemStyle: {
                             color: 'rgba(255, 255, 255, 1)'
                         }
@@ -115,7 +115,7 @@ export default {
                 chart.setOption({
                     series: [
                         {
-                            data: data
+                            data
                         }
                     ]
                 });
