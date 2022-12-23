@@ -39,7 +39,7 @@ module.exports = {
         'no-undef': 0,
         'vue/return-in-computed-property': 0,
         'func-names': 0,
-        indent: ['off', 2],
+        indent: [2, 4],
         semi: 0,
         'space-before-function-paren': 0,
         'one-var': 0
