@@ -116,6 +116,13 @@ export default {
             meta: {
                 title: '图片水印'
             }
+        },
+        {
+            path: 'music-player',
+            component: () => import('../views/demo/musicPlayer/index.vue'),
+            meta: {
+                title: '音乐播放器'
+            }
         }
     ]
 };
