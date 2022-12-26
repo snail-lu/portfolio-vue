@@ -57,9 +57,13 @@
 
                 <!-- 播放控制 -->
                 <div class="controls flex-box flex-h-center flex-v-center">
-                    <span class="prev iconfont icon-prev" title="previous"></span>
-                    <span :class="['switch iconfont', paused ? 'icon-play' : 'icon-pause']" @click="playControl"></span>
-                    <span class="next iconfont icon-next" title="next"></span>
+                    <span class="prev iconfont icon-prev" title="上一首"></span>
+                    <span
+                        :class="['switch iconfont', paused ? 'icon-play' : 'icon-pause']"
+                        @click="playControl"
+                        :title="paused ? '播放' : '暂停'"
+                    ></span>
+                    <span class="next iconfont icon-next" title="下一首"></span>
 
                     <!-- 音量调节 -->
                     <div class="volume">
@@ -361,11 +365,11 @@ const timeupdate = () => {
     currentTime.value = time;
     playedTime.value = transformTime(time);
 
-    const lyricHeight = 25;
+    const lyricHeight = 30;
 
     // 歌词位置移动
     lyricArray.forEach((lyricItem, lyricIndex) => {
-        let currentSecond = Math.floor(currentTime);
+        let currentSecond = Math.floor(time);
         if (currentSecond === lyricItem.t) {
             currentLine.value = lyricIndex;
             if (currentLine.value * lyricHeight >= 150) {
@@ -447,10 +451,11 @@ const ended = () => {
             transition: margin-top 0.5s;
             .lyric-text {
                 color: #999;
-                line-height: 25px;
-                height: 25px;
+                line-height: 30px;
+                height: 30px;
                 font-size: 14px;
                 margin-bottom: 0;
+                margin-top: 0;
                 &-current {
                     color: #fff;
                     font-size: 16px;
@@ -461,9 +466,11 @@ const ended = () => {
         }
     }
     .footer {
+        height: 100px;
         color: #fff;
         font-size: 13px;
         background-color: #212124;
+        border-top: 1px solid #666;
         .music-info {
             display: flex;
             justify-content: space-between;
@@ -475,26 +482,39 @@ const ended = () => {
         .controls {
             position: relative;
             .switch {
-                font-size: 30px;
-                line-height: 50px;
+                font-size: 20px;
                 text-align: center;
                 cursor: pointer;
                 margin: 0 30px;
-                color: #d33a31;
+                background-color: rgba(255, 255, 255, 0.1);
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                border-radius: 40px;
+
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.2);
+                }
             }
             .prev {
                 font-size: 20px;
                 line-height: 35px;
                 text-align: center;
                 cursor: pointer;
-                color: #d33a31;
+
+                &:hover {
+                    color: #d33a31;
+                }
             }
             .next {
                 font-size: 20px;
                 line-height: 35px;
                 text-align: center;
                 cursor: pointer;
-                color: #d33a31;
+
+                &:hover {
+                    color: #d33a31;
+                }
             }
             .volume {
                 position: absolute;
@@ -502,7 +522,6 @@ const ended = () => {
                 right: 20px;
                 top: 50%;
                 margin-top: -15px;
-                color: #d33a31;
                 &-icon {
                     height: 30px;
                     line-height: 30px;
@@ -513,7 +532,7 @@ const ended = () => {
 
                 &-controls {
                     position: absolute;
-                    top: -40px;
+                    top: -50px;
                     left: 50%;
                     height: 90px;
                     padding: 7px 0 15px;
