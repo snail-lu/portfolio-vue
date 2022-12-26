@@ -45,6 +45,7 @@
                 <!-- 播放进度 -->
                 <div class="progress">
                     <el-slider :max="duration" :min="0" v-model="currentTime" @change="adjustProgress" :show-tooltip="false" size="small" />
+                    <slider />
                     <!-- <Slider
                         defaultValue="{0}"
                         min="{0}"
@@ -85,6 +86,7 @@
 
 <script setup>
 import Demo from '@/components/Demo/index.vue';
+import Slider from '@/components/Slider/index.vue';
 import { onMounted, ref } from 'vue';
 
 const demoInfo = {
@@ -503,7 +505,7 @@ const ended = () => {
                 cursor: pointer;
 
                 &:hover {
-                    color: #d33a31;
+                    color: #ec4141;
                 }
             }
             .next {
@@ -513,7 +515,7 @@ const ended = () => {
                 cursor: pointer;
 
                 &:hover {
-                    color: #d33a31;
+                    color: #ec4141;
                 }
             }
             .volume {

@@ -74,6 +74,7 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Select: typeof import('./src/components/DynamicForm/components/Select.vue')['default']
+    Slider: typeof import('./src/components/Slider/index.vue')['default']
     Switch: typeof import('./src/components/DynamicForm/components/Switch.vue')['default']
     TextArea: typeof import('./src/components/DynamicForm/components/TextArea.vue')['default']
     TimePicker: typeof import('./src/components/DynamicForm/components/TimePicker.vue')['default']
