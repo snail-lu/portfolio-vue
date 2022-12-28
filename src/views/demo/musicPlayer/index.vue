@@ -62,7 +62,8 @@
                     <div class="volume">
                         <span class="volume-icon iconfont icon-volume" @click="changeVolumeControlsVisible"></span>
                         <div class="volume-controls" v-if="volumeControlsVisible">
-                            <el-slider :value="volume" :max="1" :step="0.1" vertical @change="adjustVolume" :show-tooltip="false" />
+                            <!-- <el-slider :value="volume" :max="1" :step="0.1" vertical @change="adjustVolume" :show-tooltip="false" /> -->
+                            <slider v-model="volume" :max="1" :step="0.1" vertical />
                         </div>
                     </div>
                 </div>
@@ -545,10 +546,10 @@ const ended = () => {
 
                 &-controls {
                     position: absolute;
-                    top: -50px;
+                    top: -55px;
                     left: 50%;
                     height: 90px;
-                    padding: 7px 0 15px;
+                    padding: 15px 4px;
                     transform: translate(-50%, -50%);
                     background-color: #333;
                     border-radius: 5px;
