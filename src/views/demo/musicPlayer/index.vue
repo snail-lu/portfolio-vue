@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="footer">
-                <!-- 歌曲信息 * -->
+                <!-- 歌曲信息 -->
                 <div class="music-info">
                     <!-- 音乐名 -->
                     <div>
@@ -45,15 +45,7 @@
                 <!-- 播放进度 -->
                 <div class="progress">
                     <!-- <el-slider :max="duration" :min="0" v-model="currentTime" @change="adjustProgress" :show-tooltip="false" size="small" /> -->
-                    <slider />
-                    <!-- <Slider
-                        defaultValue="{0}"
-                        min="{0}"
-                        max="{duration}"
-                        tooltipVisible="{false}"
-                        onChange="{adjustProgress}"
-                        value="{currentTime}"
-                    /> -->
+                    <slider v-model="sliderCurrentTime" :max="duration" @change="onChangeProgress" @drag="onDraggingProgress" />
                 </div>
 
                 <!-- 播放控制 -->
@@ -71,7 +63,6 @@
                         <span class="volume-icon iconfont icon-volume" @click="changeVolumeControlsVisible"></span>
                         <div class="volume-controls" v-if="volumeControlsVisible">
                             <el-slider :value="volume" :max="1" :step="0.1" vertical @change="adjustVolume" :show-tooltip="false" />
-                            <!-- <Slider defaultValue="{0.2}" max="{1}" vertical step="{0.1}" tooltipVisible="{false}" /> -->
                         </div>
                     </div>
                 </div>
@@ -86,20 +77,30 @@
 
 <script setup>
 import Demo from '@/components/Demo/index.vue';
-import Slider from '@/components/Slider/index.vue';
-import { onMounted, ref } from 'vue';
+import Slider from '@/components/Slider/Slider.vue';
+import { ref, computed } from 'vue';
 
 const demoInfo = {
     title: '音乐播放器',
     url: ''
 };
-const paused = ref(true); // 音频是否暂停
-const currentTime = ref(0); // 已播放时间（未转换）
-const playedTime = ref('00:00'); // 已播放时间
-const duration = ref(0); // 音乐总时长（未转换）
-const totalTime = ref('00:00'); // 音乐总时长（已转换）
-const currentLine = ref(0); // 歌词当前行
-const lyricPosition = ref('0'); // 歌词位置
+
+// 总时长，单位：秒
+const duration = ref(0);
+// 总时长 mm:ss
+const totalTime = computed(() => {
+    return transformTime(duration.value);
+});
+
+// 已播放时长，单位：秒
+const currentTime = ref(0);
+const sliderCurrentTime = ref(0);
+// 已播放时长 mm:ss
+const playedTime = computed(() => {
+    return transformTime(sliderCurrentTime.value);
+});
+
+// 歌词数据
 const lyricArray = [
     {
         t: 0,
@@ -314,8 +315,27 @@ const lyricArray = [
         c: '夏末秋凉里带一点温热 有换季的颜色'
     }
 ];
-const volumeControlsVisible = ref(false); // 显示音量调节器
 
+// 当前歌词行
+const currentLine = computed(() => {
+    let currentSecond = Math.floor(currentTime.value);
+    const newLine = lyricArray.findIndex((lyricItem) => currentSecond === lyricItem.t);
+    if (newLine > 0) {
+        return lyricArray.findIndex((lyricItem) => currentSecond === lyricItem.t);
+    } else {
+        return currentLine.value || 0;
+    }
+});
+
+// 歌词位置
+const lyricPosition = computed(() => {
+    const lyricHeight = 30;
+    if (currentLine.value * lyricHeight >= 150) {
+        return -(currentLine.value * lyricHeight - 150) + 'px';
+    }
+});
+
+const paused = ref(true); // 音频是否暂停
 // 播放/暂停
 const audio = ref(null);
 const playControl = () => {
@@ -334,16 +354,24 @@ const adjustVolume = (value) => {
     audio.value.volume = value;
 };
 
+// 正在拖拽进度
+const isDragging = ref(false);
+const onDraggingProgress = (value) => {
+    isDragging.value = true;
+};
 // 调节进度
-const adjustProgress = (value) => {
+const onChangeProgress = (value) => {
     audio.value.currentTime = value;
+    isDragging.value = false;
 };
 
 // 显示/隐藏音量调节框
+const volumeControlsVisible = ref(false);
 const changeVolumeControlsVisible = () => {
     volumeControlsVisible.value = !volumeControlsVisible.value;
 };
 
+// 数字转换为 mm:ss 的格式
 const transformTime = (num) => {
     let min = Math.floor(num / 60);
     let sec = Math.floor(num % 60);
@@ -357,36 +385,20 @@ const transformTime = (num) => {
 // canplay监听
 const canplay = () => {
     duration.value = Math.round(audio.value.duration);
-    totalTime.value = transformTime(duration.value);
 };
 
-// timeupdate监听，更新播放时长与进度条
+// timeupdate监听，更新播放时长
 const timeupdate = () => {
+    if (isDragging.value) return;
     let time = Math.round(audio.value.currentTime);
+    sliderCurrentTime.value = time;
     currentTime.value = time;
-    playedTime.value = transformTime(time);
-
-    const lyricHeight = 30;
-
-    // 歌词位置移动
-    lyricArray.forEach((lyricItem, lyricIndex) => {
-        let currentSecond = Math.floor(time);
-        if (currentSecond === lyricItem.t) {
-            currentLine.value = lyricIndex;
-            if (currentLine.value * lyricHeight >= 150) {
-                lyricPosition.value = -(currentLine.value * lyricHeight - 150) + 'px';
-            }
-        }
-    });
 };
 
 // 结束时
 const ended = () => {
     paused.value = true;
     currentTime.value = 0;
-    playedTime.value = '00:00';
-    currentLine.value = 0;
-    lyricPosition.value = '0';
 };
 </script>
 

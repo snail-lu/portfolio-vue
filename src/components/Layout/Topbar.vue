@@ -38,7 +38,6 @@ const left = ref(0);
 function setActiveItemStyle() {
     const activeItem = document.querySelector('.menu-item-active');
     const { offsetLeft, offsetWidth } = activeItem;
-    console.log(offsetLeft, offsetWidth);
     const bgLeft = offsetLeft + (offsetWidth - 50) / 2;
     left.value = `${bgLeft}px`;
 }
