@@ -44,7 +44,7 @@
 
                 <!-- 播放进度 -->
                 <div class="progress">
-                    <el-slider :max="duration" :min="0" v-model="currentTime" @change="adjustProgress" :show-tooltip="false" size="small" />
+                    <!-- <el-slider :max="duration" :min="0" v-model="currentTime" @change="adjustProgress" :show-tooltip="false" size="small" /> -->
                     <slider />
                     <!-- <Slider
                         defaultValue="{0}"
@@ -356,7 +356,6 @@ const transformTime = (num) => {
 
 // canplay监听
 const canplay = () => {
-    console.log('canplay');
     duration.value = Math.round(audio.value.duration);
     totalTime.value = transformTime(duration.value);
 };
