@@ -18,7 +18,7 @@
                 <div class="lyric" :style="{ marginTop: lyricPosition }">
                     <p
                         :class="['lyric-text', currentLine === lyricIndex ? 'lyric-text-current' : '']"
-                        v-for="(lyric, lyricIndex) in lyricArray"
+                        v-for="(lyric, lyricIndex) in lyricObj.ms"
                         :key="lyric.t"
                     >
                         {{ lyric.c }}
@@ -30,9 +30,9 @@
                 <div class="music-info">
                     <!-- 音乐名 -->
                     <div>
-                        <span class="song-name">有何不可</span>
+                        <span class="song-name">{{ lyricObj.ti }}</span>
                         <span>---</span>
-                        <span class="song-singer">许嵩</span>
+                        <span class="song-singer">{{ lyricObj.ar }}</span>
                     </div>
 
                     <!-- 音乐时长 -->
@@ -79,7 +79,7 @@
 <script setup>
 import Demo from '@/components/Demo/index.vue';
 import Slider from '@/components/Slider/Slider.vue';
-import { ref, computed } from 'vue';
+import { ref, computed, reactive } from 'vue';
 import getLyric from '@/utils/lyric.js';
 
 const demoInfo = {
@@ -103,233 +103,23 @@ const playedTime = computed(() => {
 });
 
 // 歌词数据
-// const lyricArray = [
-//     {
-//         t: 0,
-//         c: '有何不可'
-//     },
-//     {
-//         t: 1,
-//         c: '作词：许嵩 作曲：许嵩'
-//     },
-//     {
-//         t: 2,
-//         c: '演唱：许嵩'
-//     },
-//     {
-//         t: 20,
-//         c: '天空好想下雨'
-//     },
-//     {
-//         t: 24,
-//         c: '我好想住你隔壁'
-//     },
-//     {
-//         t: 27,
-//         c: '傻站在你家楼下'
-//     },
-//     {
-//         t: 29,
-//         c: '抬起头 数乌云'
-//     },
-//     {
-//         t: 31,
-//         c: '如果场景里出现一架钢琴'
-//     },
-//     {
-//         t: 34,
-//         c: '我会唱歌给你听'
-//     },
-//     {
-//         t: 36,
-//         c: '哪怕好多盆水往下淋'
-//     },
-//     {
-//         t: 42,
-//         c: '夏天快要过去'
-//     },
-//     {
-//         t: 44,
-//         c: '请你少买冰淇淋'
-//     },
-//     {
-//         t: 46,
-//         c: '天凉就别穿短裙'
-//     },
-//     {
-//         t: 48,
-//         c: '别再那么淘气'
-//     },
-//     {
-//         t: 51,
-//         c: '如果有时不那么开心'
-//     },
-//     {
-//         t: 53,
-//         c: '我愿意将格洛米借给你'
-//     },
-//     {
-//         t: 55,
-//         c: '你其实明白我心意'
-//     },
-//     {
-//         t: 59,
-//         c: '为你唱这首歌 没有什么风格'
-//     },
-//     {
-//         t: 63,
-//         c: '它仅仅代表着 我想给你快乐'
-//     },
-//     {
-//         t: 68,
-//         c: '为你解冻冰河 为你做一只扑火的飞蛾'
-//     },
-//     {
-//         t: 74,
-//         c: '没有什么事情是不值得'
-//     },
-//     {
-//         t: 78,
-//         c: '为你唱这首歌 没有什么风格'
-//     },
-//     {
-//         t: 82,
-//         c: '它仅仅代表着 我希望你快乐'
-//     },
-//     {
-//         t: 87,
-//         c: '为你辗转反侧 为你放弃世界有何不可'
-//     },
-//     {
-//         t: 93,
-//         c: '夏末秋凉里带一点温热 有换季的颜色'
-//     },
-//     {
-//         t: 117,
-//         c: '天空好想下雨'
-//     },
-//     {
-//         t: 119,
-//         c: '我好想住你隔壁'
-//     },
-//     {
-//         t: 122,
-//         c: '傻站在你家楼下'
-//     },
-//     {
-//         t: 124,
-//         c: '抬起头 数乌云'
-//     },
-//     {
-//         t: 127,
-//         c: '如果场景里出现一架钢琴'
-//     },
-//     {
-//         t: 129,
-//         c: '我会唱歌给你听'
-//     },
-//     {
-//         t: 131,
-//         c: '哪怕好多盆水往下淋'
-//     },
-//     {
-//         t: 135,
-//         c: '夏天快要过去'
-//     },
-//     {
-//         t: 139,
-//         c: '请你少买冰淇淋'
-//     },
-//     {
-//         t: 141,
-//         c: '天凉就别穿短裙'
-//     },
-//     {
-//         t: 143,
-//         c: '别再那么淘气'
-//     },
-//     {
-//         t: 146,
-//         c: '如果有时不那么开心'
-//     },
-//     {
-//         t: 148,
-//         c: '我愿意将格洛米借给你'
-//     },
-//     {
-//         t: 150,
-//         c: '你其实明白我心意'
-//     },
-//     {
-//         t: 154,
-//         c: '为你唱这首歌 没有什么风格'
-//     },
-//     {
-//         t: 158,
-//         c: '它仅仅代表着 我想给你快乐'
-//     },
-//     {
-//         t: 163,
-//         c: '为你解冻冰河 为你做一只扑火的飞蛾'
-//     },
-//     {
-//         t: 168,
-//         c: '没有什么事情是不值得'
-//     },
-//     {
-//         t: 172,
-//         c: '为你唱这首歌 没有什么风格'
-//     },
-//     {
-//         t: 177,
-//         c: '它仅仅代表着 我希望你快乐'
-//     },
-//     {
-//         t: 182,
-//         c: '为你辗转反侧 为你放弃世界有何不可'
-//     },
-//     {
-//         t: 188,
-//         c: '夏末秋凉里带一点温热'
-//     },
-//     {
-//         t: 200,
-//         c: '为你解冻冰河 为你做一只扑火的飞蛾'
-//     },
-//     {
-//         t: 207,
-//         c: '没有什么事情是不值得'
-//     },
-//     {
-//         t: 212,
-//         c: '为你唱这首歌 没有什么风格'
-//     },
-//     {
-//         t: 215,
-//         c: '它仅仅代表着 我希望你快乐'
-//     },
-//     {
-//         t: 220,
-//         c: '为你辗转反侧 为你放弃世界有何不可'
-//     },
-//     {
-//         t: 226,
-//         c: '夏末秋凉里带一点温热 有换季的颜色'
-//     }
-// ];
-const lyricArray = [];
+const lyricObj = ref({});
 getLyric('', '../有何不可.lrc').then((data) => {
-    console.log(data, 'lyricObj');
+    lyricObj.value = data;
 });
 
 // 当前歌词行
 const currentLine = computed(() => {
     let currentSecond = Math.floor(currentTime.value);
-    const newLine = lyricArray.findIndex((lyricItem) => currentSecond === lyricItem.t);
-    if (newLine > 0) {
-        return lyricArray.findIndex((lyricItem) => currentSecond === lyricItem.t);
+    if (lyricObj.value.ms && currentSecond > 0) {
+        if (currentLine.value < lyricObj.value.ms.length - 2) {
+            let nextLine = lyricObj.value.ms.findIndex((lyricItem) => currentSecond < lyricItem.t);
+            return nextLine > 0 ? nextLine - 1 : 0;
+        } else {
+            return lyricObj.value.ms.length - 1;
+        }
     } else {
-        return currentLine.value || 0;
+        return 0;
     }
 });
 
