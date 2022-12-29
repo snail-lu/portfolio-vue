@@ -349,11 +349,17 @@ const playControl = () => {
     paused.value = audio.value.paused;
 };
 
-const volume = ref(0);
 // 音量调节
-const adjustVolume = (value) => {
-    audio.value.volume = value;
-};
+const volume = ref(0.2);
+watch(
+    volume,
+    (volume) => {
+        if (audio.value) {
+            audio.value.volume = volume;
+        }
+    },
+    { immediate: true }
+);
 
 // 正在拖拽进度
 const isDragging = ref(false);
@@ -488,7 +494,7 @@ const ended = () => {
         .music-info {
             display: flex;
             justify-content: space-between;
-            padding: 4px 16px;
+            padding: 8px 16px 4px;
         }
         .progress {
             margin: 0 16px;

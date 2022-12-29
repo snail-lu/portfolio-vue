@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
 // v-model实现
 const props = defineProps({
@@ -32,9 +32,6 @@ const props = defineProps({
 });
 const emits = defineEmits(['update:modelValue', 'change', 'drag']);
 
-const stle = reactive({
-    width: '40%'
-});
 const barStyle = computed(() => {
     return props.vertical ? { height: progress.value } : { width: progress.value };
 });
@@ -58,13 +55,17 @@ const precision = computed(() => {
 });
 
 const initData = {};
+
+let sliderWidth = 0;
+onMounted(() => {
+    const { offsetWidth, offsetHeight } = runway.value;
+    sliderWidth = props.vertical ? offsetHeight : offsetWidth;
+});
 // 开始拖动
 const onDragStart = (ev) => {
     ev.preventDefault();
     initData.start = props.vertical ? ev.clientY : ev.clientX;
-    // 按钮距左侧距离
-    const { offsetLeft: dotL } = dot.value;
-    initData.startPosition = dotL;
+    initData.startPosition = (props.modelValue / (props.max - props.min)) * sliderWidth;
     window.addEventListener('mousemove', onDragging);
     window.addEventListener('mouseup', onDragEnd);
     emits('drag');
@@ -83,7 +84,7 @@ const onDragging = (ev) => {
     let e = ev || window.event;
 
     // 拖动的距离
-    let diff = props.vertical ? e.clientY - initData.start : e.clientX - initData.start;
+    let diff = props.vertical ? initData.start - e.clientY : e.clientX - initData.start;
 
     // 新的位置 = 按钮距左侧距离 + 拖动距离
     let newL = initData.startPosition + diff;
@@ -100,8 +101,6 @@ const onPick = (ev) => {
 
 // 更新value
 const updateNewValue = (newL) => {
-    const { offsetWidth, offsetHeight } = runway.value;
-    const sliderWidth = props.vertical ? offsetHeight : offsetWidth;
     // 新的位置不可为负
     if (newL < 0) {
         newL = 0;
