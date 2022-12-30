@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-console.log(1234);
+console.log(1235);
 </script>
 
 <style lang="scss" scoped>
