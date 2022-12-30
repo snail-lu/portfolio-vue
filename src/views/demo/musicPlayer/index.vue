@@ -31,14 +31,13 @@
                     <!-- 音乐名 -->
                     <div>
                         <span class="song-name">{{ lyricObj.ti }}</span>
-                        <span>---</span>
-                        <span class="song-singer">{{ lyricObj.ar }}</span>
+                        <span class="song-singer"> - {{ lyricObj.ar }}</span>
                     </div>
 
                     <!-- 音乐时长 -->
                     <div class="music-duration">
-                        <span>{{ playedTime }}</span
-                        >/<span>{{ totalTime }}</span>
+                        <span>{{ playedTime }}</span>
+                        <span> / {{ totalTime }}</span>
                     </div>
                 </div>
 
@@ -69,7 +68,8 @@
                 </div>
             </div>
             <audio ref="audio" @canplay="canplay" @timeupdate="timeupdate" @ended="ended">
-                <source src="./有何不可.mp3" />
+                <!-- <source src="https://music.163.com/media/outer/url?id=167876.mp3" type="audio/mpeg" /> -->
+                <source src="./有何不可.mp3" type="audio/mpeg" />
                 Your browser does not support the<code>audio</code> element.
             </audio>
         </div>
@@ -285,13 +285,26 @@ const ended = () => {
     .footer {
         height: 100px;
         color: #fff;
-        font-size: 13px;
         background-color: #212124;
         border-top: 1px solid #666;
         .music-info {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 8px 16px 4px;
+            color: #aaa;
+
+            .song-name {
+                font-size: 14px;
+            }
+
+            .song-singer {
+                font-size: 12px;
+            }
+        }
+
+        .music-duration {
+            font-size: 12px;
         }
         .progress {
             margin: 0 16px;
