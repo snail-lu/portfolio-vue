@@ -9,9 +9,7 @@
         "predeploy": "vite build",
         "deploy": "gh-pages -d dist -t",
         "prepare": "husky install",
-        "lint": "eslint . --ext .js,.vue --fix",
-        "commitlint": "commitlint --config commitlint.config.js -e -V",
-        "lint-staged": "lint-staged"
+        "lint": "eslint . --ext .js,.vue --fix"
     },
     "dependencies": {
         "@element-plus/icons-vue": "^2.0.10",
@@ -64,6 +62,6 @@
         "not dead"
     ],
     "lint-staged": {
-        "src/**/*.{js,jsx,vue}": "npm run lint"
+        "src/**/*.{js,jsx,vue}": "eslint . --ext .js,.vue --fix"
     }
 }
