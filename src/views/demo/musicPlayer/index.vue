@@ -68,8 +68,7 @@
                 </div>
             </div>
             <audio ref="audio" @canplay="canplay" @timeupdate="timeupdate" @ended="ended">
-                <!-- <source src="https://music.163.com/media/outer/url?id=167876.mp3" type="audio/mpeg" /> -->
-                <source src="./有何不可.mp3" type="audio/mpeg" />
+                <source src="https://music.163.com/song/media/outer/url?id=167876.mp3" type="audio/mpeg" />
                 Your browser does not support the<code>audio</code> element.
             </audio>
         </div>
@@ -79,7 +78,7 @@
 <script setup>
 import Demo from '@/components/Demo/index.vue';
 import Slider from '@/components/Slider/Slider.vue';
-import { ref, computed, reactive } from 'vue';
+import { ref, computed } from 'vue';
 import getLyric from '@/utils/lyric.js';
 
 const demoInfo = {
