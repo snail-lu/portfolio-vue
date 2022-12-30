@@ -113,9 +113,11 @@ const currentLine = computed(() => {
     let currentSecond = Math.floor(currentTime.value);
     if (lyricObj.value.ms && currentSecond > 0) {
         if (currentLine.value < lyricObj.value.ms.length - 2) {
+            // 找到下一行歌词，减一后得到当前行歌词
             let nextLine = lyricObj.value.ms.findIndex((lyricItem) => currentSecond < lyricItem.t);
             return nextLine > 0 ? nextLine - 1 : 0;
         } else {
+            // 已经播到了最后一行歌词
             return lyricObj.value.ms.length - 1;
         }
     } else {
