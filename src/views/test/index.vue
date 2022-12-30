@@ -2,7 +2,9 @@
     <div class="test-container">测试页面</div>
 </template>
 
-<script setup></script>
+<script setup>
+console.log(1234);
+</script>
 
 <style lang="scss" scoped>
 .test-container {
