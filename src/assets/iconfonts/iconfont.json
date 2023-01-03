@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "7594170",
+      "name": "24gf-playlistMusic5",
+      "font_class": "playlist",
+      "unicode": "ea87",
+      "unicode_decimal": 60039
+    },
+    {
       "icon_id": "9606432",
       "name": "音乐演奏",
       "font_class": "music",
