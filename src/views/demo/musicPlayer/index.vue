@@ -28,18 +28,19 @@
                             <auto-scroll-text :text="item.author" />
                         </div>
                         <span
-                            :class="['play-btn iconfont', songIdx === index && !paused ? 'icon-pause' : 'icon-play']"
+                            :class="['play-btn iconfont', songIdx !== index || paused ? 'icon-play' : 'icon-pause']"
                             @click="playControl(index)"
-                            :title="paused ? '播放' : '暂停'"
+                            :title="songIdx !== index || paused ? '播放' : '暂停'"
                         ></span>
                     </div>
                 </div>
-                <!-- {/* CD机 */} -->
+                <!-- CD机 -->
                 <div class="disc flex-box flex-v-center flex-h-center">
                     <div class="disc-outer flex-box flex-v-center flex-h-center">
                         <div class="disc-inner">
                             <img
-                                src="@/views/demo/musicPlayer/music_cover.jpg"
+                                v-if="playlist[songIdx]"
+                                :src="playlist[songIdx].coverUrl"
                                 :class="['cover-img-rotate', paused ? 'cover-img-rotate-paused' : '']"
                                 alt=""
                             />
@@ -155,31 +156,6 @@ const playedTime = computed(() => {
     return transformTime(sliderCurrentTime.value);
 });
 
-// 当前歌词行
-const currentLine = computed(() => {
-    let currentSecond = Math.floor(currentTime.value);
-    if (lyricObj.value.ms && currentSecond > 0) {
-        if (currentLine.value < lyricObj.value.ms.length - 2) {
-            // 找到下一行歌词，减一后得到当前行歌词
-            let nextLine = lyricObj.value.ms.findIndex((lyricItem) => currentSecond < lyricItem.t);
-            return nextLine > 0 ? nextLine - 1 : 0;
-        } else {
-            // 已经播到了最后一行歌词
-            return lyricObj.value.ms.length - 1;
-        }
-    } else {
-        return 0;
-    }
-});
-
-// 歌词位置
-const lyricPosition = computed(() => {
-    const lyricHeight = 30;
-    if (currentLine.value * lyricHeight >= 150) {
-        return -(currentLine.value * lyricHeight - 150) + 'px';
-    }
-});
-
 // 音频是否暂停
 const paused = ref(true);
 // 播放/暂停
@@ -187,7 +163,6 @@ const audio = ref(null);
 const playControl = (index) => {
     if (typeof index !== 'undefined') {
         songIdx.value = index;
-        return;
     }
     if (audio.value.paused) {
         audio.value.play();
@@ -240,7 +215,14 @@ const transformTime = (num) => {
 };
 
 // 歌词数据
-const lyricObj = ref({});
+let lyricObj = reactive({
+    ms: [],
+    al: '',
+    ar: '',
+    by: '',
+    offset: 0,
+    ti: ''
+});
 const isInit = ref(true);
 // canplay监听
 const canplay = () => {
@@ -248,12 +230,42 @@ const canplay = () => {
 
     // 获取歌词数据
     getLyric('', playlist.value[songIdx.value].lyricUrl).then((data) => {
-        lyricObj.value = data;
+        if (data) {
+            for (let key in data) {
+                lyricObj[key] = data[key];
+            }
+        }
     });
     if (!isInit.value) {
         audio.value.play();
     }
 };
+
+// 当前歌词行
+const currentLine = ref(0);
+watch(currentTime, (newCurrentTime) => {
+    if (lyricObj.ms && newCurrentTime > 0) {
+        const len = lyricObj.ms.length;
+        if (newCurrentTime > parseFloat(lyricObj.ms[len - 1].t)) {
+            // 已经播到了最后一行歌词
+            currentLine.value = len - 1;
+        } else if (currentLine.value < len - 2) {
+            // 找到下一行歌词，减一后得到当前行歌词
+            let nextLine = lyricObj.ms.findIndex((lyricItem) => newCurrentTime < lyricItem.t);
+            if (nextLine > 0) {
+                currentLine.value = nextLine - 1;
+            }
+        }
+    }
+});
+
+// 歌词位置
+const lyricPosition = computed(() => {
+    const lyricHeight = 30;
+    if (currentLine.value * lyricHeight >= 150) {
+        return -(currentLine.value * lyricHeight - 150) + 'px';
+    }
+});
 
 // timeupdate监听，更新播放时长
 const timeupdate = () => {
@@ -268,12 +280,15 @@ const timeupdate = () => {
 const ended = () => {
     paused.value = true;
     currentTime.value = 0;
+    onClickNext();
 };
 
 // 切换歌曲
 const onClickNext = () => {
     if (songIdx.value < playlist.value.length - 1) {
         songIdx.value++;
+    } else {
+        songIdx.value = 0;
     }
 };
 const onClickPrev = () => {
@@ -500,11 +515,10 @@ const onClickPrev = () => {
                 }
             }
             .volume {
-                // position: absolute;
                 height: 30px;
                 right: 20px;
-                // top: 50%;
-                // margin-top: -15px;
+                position: relative;
+
                 &-icon {
                     height: 30px;
                     line-height: 30px;
@@ -522,6 +536,7 @@ const onClickPrev = () => {
                     transform: translate(-50%, -50%);
                     background-color: #333;
                     border-radius: 5px;
+                    z-index: 1000;
                 }
             }
         }
