@@ -6,6 +6,7 @@ import '@vue/runtime-core'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AppMain: typeof import('./src/components/Layout/AppMain.vue')['default']
+    AutoScrollText: typeof import('./src/components/AutoScrollText/AutoScrollText.vue')['default']
     BarChart: typeof import('./src/components/Charts/BarChart.vue')['default']
     Calendar: typeof import('./src/components/Calendar/index.vue')['default']
     Card: typeof import('./src/components/Card/index.vue')['default']
