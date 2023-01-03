@@ -6,11 +6,43 @@
                 音乐播放器
             </div>
             <div class="content">
+                <div
+                    class="playlist animate__animated animate__faster"
+                    :class="{
+                        playlist__hidden: showPlaylistStatus === 0,
+                        animate__slideInLeft: showPlaylistStatus === 1,
+                        animate__slideOutLeft: showPlaylistStatus === 2
+                    }"
+                    v-if="showPlaylistStatus !== 0"
+                >
+                    <div
+                        class="playlist-item flex-box flex-v-center"
+                        :class="{ 'playlist-item-active': songIdx === index }"
+                        v-for="(item, index) in playlist"
+                        :key="item.url"
+                    >
+                        <div class="playlist-item-name">
+                            <auto-scroll-text :text="item.name" />
+                        </div>
+                        <div class="playlist-item-author">
+                            <auto-scroll-text :text="item.author" />
+                        </div>
+                        <span
+                            :class="['play-btn iconfont', songIdx === index && !paused ? 'icon-pause' : 'icon-play']"
+                            @click="playControl(index)"
+                            :title="paused ? '播放' : '暂停'"
+                        ></span>
+                    </div>
+                </div>
                 <!-- {/* CD机 */} -->
                 <div class="disc flex-box flex-v-center flex-h-center">
                     <div class="disc-outer flex-box flex-v-center flex-h-center">
                         <div class="disc-inner">
-                            <img src="./music_cover.jpg" :class="['cover-img-rotate', paused ? 'cover-img-rotate-paused' : '']" alt="" />
+                            <img
+                                src="@/views/demo/musicPlayer/music_cover.jpg"
+                                :class="['cover-img-rotate', paused ? 'cover-img-rotate-paused' : '']"
+                                alt=""
+                            />
                         </div>
                     </div>
                 </div>
@@ -30,8 +62,8 @@
                 <div class="music-info">
                     <!-- 音乐名 -->
                     <div>
-                        <span class="song-name">{{ lyricObj.ti }}</span>
-                        <span class="song-singer"> - {{ lyricObj.ar }}</span>
+                        <span class="song-name">{{ playlist[songIdx]?.name }}</span>
+                        <span class="song-singer"> - {{ playlist[songIdx]?.author }}</span>
                     </div>
 
                     <!-- 音乐时长 -->
@@ -43,34 +75,39 @@
 
                 <!-- 播放进度 -->
                 <div class="progress">
-                    <!-- <el-slider :max="duration" :min="0" v-model="currentTime" @change="adjustProgress" :show-tooltip="false" size="small" /> -->
                     <slider v-model="sliderCurrentTime" :max="duration" @change="onChangeProgress" @drag="onDraggingProgress" />
                 </div>
 
                 <!-- 播放控制 -->
-                <div class="controls flex-box flex-h-center flex-v-center">
-                    <span class="prev iconfont icon-prev" title="上一首"></span>
-                    <span
-                        :class="['switch iconfont', paused ? 'icon-play' : 'icon-pause']"
-                        @click="playControl"
-                        :title="paused ? '播放' : '暂停'"
-                    ></span>
-                    <span class="next iconfont icon-next" title="下一首"></span>
+                <div class="controls flex-box flex-v-center flex-h-between">
+                    <div class="playlist-btn iconfont icon-playlist" title="播放列表" @click="switchShowPlaylist"></div>
+                    <div>
+                        <span class="prev iconfont icon-prev" title="上一首" @click="onClickPrev"></span>
+                        <span
+                            :class="['switch iconfont', paused ? 'icon-play' : 'icon-pause']"
+                            @click="playControl()"
+                            :title="paused ? '播放' : '暂停'"
+                        ></span>
+                        <span class="next iconfont icon-next" title="下一首" @click="onClickNext"></span>
+                    </div>
 
                     <!-- 音量调节 -->
                     <div class="volume">
                         <span class="volume-icon iconfont icon-volume" @click="changeVolumeControlsVisible"></span>
                         <div class="volume-controls" v-if="volumeControlsVisible">
-                            <!-- <el-slider :value="volume" :max="1" :step="0.1" vertical @change="adjustVolume" :show-tooltip="false" /> -->
                             <slider v-model="volume" :max="1" :step="0.1" vertical />
                         </div>
                     </div>
                 </div>
             </div>
-            <audio ref="audio" @canplay="canplay" @timeupdate="timeupdate" @ended="ended">
-                <source src="https://music.163.com/song/media/outer/url?id=167876.mp3" type="audio/mpeg" />
-                Your browser does not support the<code>audio</code> element.
-            </audio>
+            <audio
+                ref="audio"
+                @canplay="canplay"
+                @timeupdate="timeupdate"
+                @ended="ended"
+                v-if="playlist.length > 0"
+                :src="playlist[songIdx].url"
+            ></audio>
         </div>
     </demo>
 </template>
@@ -78,13 +115,30 @@
 <script setup>
 import Demo from '@/components/Demo/index.vue';
 import Slider from '@/components/Slider/Slider.vue';
-import { ref, computed } from 'vue';
+import AutoScrollText from '@/components/AutoScrollText/AutoScrollText.vue';
+import { ref, computed, getCurrentInstance } from 'vue';
 import getLyric from '@/utils/lyric.js';
 
 const demoInfo = {
     title: '音乐播放器',
     url: ''
 };
+
+const { proxy: _this } = getCurrentInstance();
+// 播放列表
+const playlist = ref([]);
+const showPlaylistStatus = ref(0);
+const switchShowPlaylist = () => {
+    if (showPlaylistStatus.value === 1) {
+        showPlaylistStatus.value = 2;
+    } else {
+        showPlaylistStatus.value = 1;
+    }
+};
+_this.req({ url: '/demo/playlist' }).then((res) => {
+    playlist.value = res.result.list;
+});
+const songIdx = ref(0);
 
 // 总时长，单位：秒
 const duration = ref(0);
@@ -99,12 +153,6 @@ const sliderCurrentTime = ref(0);
 // 已播放时长 mm:ss
 const playedTime = computed(() => {
     return transformTime(sliderCurrentTime.value);
-});
-
-// 歌词数据
-const lyricObj = ref({});
-getLyric('', '../有何不可.lrc').then((data) => {
-    lyricObj.value = data;
 });
 
 // 当前歌词行
@@ -132,10 +180,15 @@ const lyricPosition = computed(() => {
     }
 });
 
-const paused = ref(true); // 音频是否暂停
+// 音频是否暂停
+const paused = ref(true);
 // 播放/暂停
 const audio = ref(null);
-const playControl = () => {
+const playControl = (index) => {
+    if (typeof index !== 'undefined') {
+        songIdx.value = index;
+        return;
+    }
     if (audio.value.paused) {
         audio.value.play();
     } else {
@@ -143,6 +196,7 @@ const playControl = () => {
     }
 
     paused.value = audio.value.paused;
+    isInit.value = false;
 };
 
 // 音量调节
@@ -185,9 +239,20 @@ const transformTime = (num) => {
     return `${min}:${sec}`;
 };
 
+// 歌词数据
+const lyricObj = ref({});
+const isInit = ref(true);
 // canplay监听
 const canplay = () => {
     duration.value = Math.round(audio.value.duration);
+
+    // 获取歌词数据
+    getLyric('', playlist.value[songIdx.value].lyricUrl).then((data) => {
+        lyricObj.value = data;
+    });
+    if (!isInit.value) {
+        audio.value.play();
+    }
 };
 
 // timeupdate监听，更新播放时长
@@ -196,12 +261,25 @@ const timeupdate = () => {
     let time = Math.round(audio.value.currentTime);
     sliderCurrentTime.value = time;
     currentTime.value = time;
+    paused.value = audio.value.paused;
 };
 
 // 结束时
 const ended = () => {
     paused.value = true;
     currentTime.value = 0;
+};
+
+// 切换歌曲
+const onClickNext = () => {
+    if (songIdx.value < playlist.value.length - 1) {
+        songIdx.value++;
+    }
+};
+const onClickPrev = () => {
+    if (songIdx.value > 0) {
+        songIdx.value--;
+    }
 };
 </script>
 
@@ -232,6 +310,74 @@ const ended = () => {
         display: flex;
         height: 0;
         overflow-y: hidden;
+        position: relative;
+
+        .playlist {
+            position: absolute;
+            z-index: 100;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 260px;
+            background-color: rgba(33, 33, 36, 0.7);
+            color: #fff;
+            border-right: 1px solid #333;
+            overflow-y: auto;
+
+            &::-webkit-scrollbar-track-piece {
+                background: #333;
+            }
+
+            &::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: #666;
+                border-radius: 20px;
+            }
+
+            &__hidden {
+                visibility: hidden;
+            }
+
+            &-item {
+                height: 36px;
+                border-bottom: 1px solid #2a2a2a;
+                padding-left: 16px;
+                color: #999;
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                &-name {
+                    width: 120px;
+                    font-size: 13px;
+                    margin-right: 10px;
+                    display: inline-block;
+                }
+
+                &-author {
+                    width: 80px;
+                    font-size: 12px;
+                    display: inline-block;
+                }
+            }
+
+            &-item-active {
+                .playlist-item-name {
+                    color: #ec4141;
+                }
+            }
+
+            .play-btn {
+                font-size: 10px;
+                cursor: pointer;
+                margin-left: 5px;
+            }
+        }
+
         .disc {
             flex: 1;
             .disc-outer {
@@ -285,7 +431,7 @@ const ended = () => {
         height: 100px;
         color: #fff;
         background-color: #212124;
-        border-top: 1px solid #666;
+        border-top: 1px solid #333;
         .music-info {
             display: flex;
             justify-content: space-between;
@@ -308,9 +454,17 @@ const ended = () => {
         .progress {
             margin: 0 16px;
         }
+
         .controls {
-            position: relative;
+            padding: 0 16px;
+
+            .playlist-btn {
+                font-size: 20px;
+                font-weight: bold;
+                cursor: pointer;
+            }
             .switch {
+                display: inline-block;
                 font-size: 20px;
                 text-align: center;
                 cursor: pointer;
@@ -346,11 +500,11 @@ const ended = () => {
                 }
             }
             .volume {
-                position: absolute;
+                // position: absolute;
                 height: 30px;
                 right: 20px;
-                top: 50%;
-                margin-top: -15px;
+                // top: 50%;
+                // margin-top: -15px;
                 &-icon {
                     height: 30px;
                     line-height: 30px;
