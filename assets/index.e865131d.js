@@ -1,0 +1,1 @@
+import{_ as e}from"./index.f97dbc7f.js";import{o as _,m as o}from"./elementPlus.d15cb521.js";const t={class:"test-container"},s={__name:"index",setup(c){return console.log(1234),(n,a)=>(_(),o("div",t,"\u6D4B\u8BD5\u9875\u9762"))}},d=e(s,[["__scopeId","data-v-15073bc8"]]);export{d as default};
