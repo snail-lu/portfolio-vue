@@ -47,27 +47,49 @@
                     </div>
                     <div></div>
                 </el-collapse-item>
+                <!-- demo 3 -->
+                <el-collapse-item name="3">
+                    <template v-slot:title>
+                        <div class="flex-box">
+                            <div class="idx-label">3</div>
+                            <div class="title-txt">超长文本自动滚动</div>
+                        </div>
+                    </template>
+                    <div class="demo-content flex-box-column">
+                        <el-link
+                            class="view-code-btn color-black"
+                            icon="el-icon-connection"
+                            href="https://codepen.io/snaillu/pen/WNMPddX"
+                            target="_blank"
+                            >查看代码</el-link
+                        >
+                        <div class="demo-3 flex-box-column">
+                            <div class="demo-3-1">
+                                <auto-scroll-text text="莫听穿林打叶声，何妨吟啸且徐行。" />
+                            </div>
+                            <div class="demo-3-2">
+                                <auto-scroll-text text="竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。" />
+                            </div>
+                            <div class="demo-3-3">
+                                <auto-scroll-text text="料峭春风吹酒醒，微冷，山头斜照却相迎。回首向来萧瑟处，归去，也无风雨也无晴。" />
+                            </div>
+                        </div>
+                    </div>
+                </el-collapse-item>
             </el-collapse>
         </div>
     </demo>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue';
 import Demo from '@/components/Demo/index.vue';
-export default {
-    components: {
-        Demo
-    },
-    data() {
-        return {
-            demoInfo: {
-                title: 'CSS DEMO合集',
-                url: ''
-            },
-            activeNames: []
-        };
-    }
+import AutoScrollText from '@/components/AutoScrollText/AutoScrollText.vue';
+const demoInfo = {
+    title: 'CSS DEMO合集',
+    url: ''
 };
+const activeNames = ref([]);
 </script>
 
 <style lang="scss" scoped>
@@ -224,6 +246,18 @@ export default {
                 transform: rotateY(0.5turn);
             }
         }
+    }
+}
+
+.demo-3 {
+    width: 100%;
+    padding: 60px 20%;
+    box-sizing: border-box;
+
+    &-2,
+    &-3 {
+        width: 300px;
+        overflow: hidden;
     }
 }
 </style>

@@ -2,3 +2,4 @@ build/*.js
 server
 public
 dist
+components.d.ts
