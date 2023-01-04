@@ -59,7 +59,7 @@
                         <el-link
                             class="view-code-btn color-black"
                             icon="el-icon-connection"
-                            href="https://codepen.io/snaillu/pen/WNMPddX"
+                            href="https://codepen.io/snaillu/pen/yLqabNo"
                             target="_blank"
                             >查看代码</el-link
                         >
