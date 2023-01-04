@@ -41,7 +41,8 @@
                             <img
                                 v-if="playlist[songIdx]"
                                 :src="playlist[songIdx].coverUrl"
-                                :class="['cover-img-rotate', paused ? 'cover-img-rotate-paused' : '']"
+                                class="cover-img"
+                                :class="{ 'cover-img-rotate': enableRotate, 'cover-img-rotate-paused': paused }"
                                 alt=""
                             />
                         </div>
@@ -166,11 +167,13 @@ const playControl = (index) => {
     }
     if (audio.value.paused) {
         audio.value.play();
+        enableRotate.value = true;
     } else {
         audio.value.pause();
+        paused.value = audio.value.paused;
     }
 
-    paused.value = audio.value.paused;
+    // 手动播放过音乐，播放器就不再是初始状态
     isInit.value = false;
 };
 
@@ -223,7 +226,10 @@ let lyricObj = reactive({
     offset: 0,
     ti: ''
 });
+// 播放器初始状态
 const isInit = ref(true);
+// cd机是否开启旋转功能
+const enableRotate = ref(false);
 // canplay监听
 const canplay = () => {
     duration.value = Math.round(audio.value.duration);
@@ -236,8 +242,10 @@ const canplay = () => {
             }
         }
     });
+    // 非初始状态下，切歌后会触发自动播放
     if (!isInit.value) {
         audio.value.play();
+        enableRotate.value = true;
     }
 };
 
@@ -278,9 +286,10 @@ const timeupdate = () => {
 
 // 结束时
 const ended = () => {
-    paused.value = true;
-    currentTime.value = 0;
-    onClickNext();
+    paused.value = true; // 切换为暂停状态
+    currentTime.value = 0; // currentTime清零
+    enableRotate.value = false; // cd机恢复原装
+    onClickNext(); // 自动播放下一首
 };
 
 // 切换歌曲
@@ -294,6 +303,8 @@ const onClickNext = () => {
 const onClickPrev = () => {
     if (songIdx.value > 0) {
         songIdx.value--;
+    } else {
+        songIdx.value = playlist.value.length - 1;
     }
 };
 </script>
@@ -410,13 +421,15 @@ const onClickPrev = () => {
                 border-radius: 50%;
                 overflow: hidden;
             }
-            .cover-img-rotate {
+            .cover-img {
                 width: 100%;
                 height: 100%;
-                animation: rotate 20s linear infinite;
-                animation-play-state: running;
+                &-rotate {
+                    animation: rotate 20s linear infinite;
+                    animation-play-state: running;
+                }
 
-                &-paused {
+                &-rotate-paused {
                     animation-play-state: paused;
                 }
             }
@@ -540,15 +553,6 @@ const onClickPrev = () => {
                 }
             }
         }
-    }
-}
-
-@keyframes move {
-    0% {
-        transform: translate(0px);
-    }
-    100% {
-        transform: translate(-2400px);
     }
 }
 
