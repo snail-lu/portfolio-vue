@@ -381,13 +381,13 @@ const onClickPrev = () => {
                     width: 120px;
                     font-size: 13px;
                     margin-right: 10px;
-                    display: inline-block;
+                    // display: inline-block;
                 }
 
                 &-author {
                     width: 80px;
                     font-size: 12px;
-                    display: inline-block;
+                    // display: inline-block;
                 }
             }
 

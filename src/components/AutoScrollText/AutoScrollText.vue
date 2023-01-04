@@ -15,8 +15,7 @@ defineProps({
 .scroll-wrap {
     max-width: 100%;
     display: inline-block;
-    // vertical-align: top;
-    overflow: hidden;
+    vertical-align: top;
     white-space: nowrap;
 }
 
