@@ -36,7 +36,7 @@ npm run deploy
 
 -   <span style="color:green;">【已优化】</span>`Element-UI`按需引入
 -   <span style="color:green;">【已优化】</span>首屏白屏增加加载动画效果
--   <span style="color:green;">【已优化】</span>过渡组件`transition`和`scrollBehavior`冲突，导致页面无法回退到指定位置
+-   <span style="color:red;">【待优化】</span>过渡组件`transition`和`scrollBehavior`冲突，导致页面无法回退到指定位置
 -   <span style="color:green;">【已优化】</span>项目内使用 Ctrl+鼠标左键跳转到引用文件【使用 VS Code 插件“路径别名跳转”】
 -   <span style="color:green">【已优化】</span>音乐播放器点选进度时，歌词无法快速匹配位置（因为跳转的时间没有匹配到歌词，需要对歌词进行优化）
 -   <span style="color:green">【已优化】</span>Slider 组件不支持垂直模式

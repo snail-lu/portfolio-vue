@@ -164,6 +164,21 @@ routes.push(demoRoutes);
 
 const router = createRouter({
     history: createWebHistory('/portfolio/'),
+    scrollBehavior: (to, from, savedPosition) => {
+        console.log(to, 'to');
+
+        return new Promise((resolve, reject) => {
+            if (to.path === '/demo') {
+                setTimeout(() => {
+                    resolve(savedPosition || { top: 0 });
+                }, 500);
+            } else {
+                setTimeout(() => {
+                    resolve({ top: 0 });
+                }, 500);
+            }
+        });
+    },
     routes
 });
 
