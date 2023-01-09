@@ -1,5 +1,5 @@
 <template>
-    <div class="card flex-box-column flex-h-between" @click="pushUrl">
+    <div class="card flex-box-column" @click="pushUrl">
         <div :class="`header bg-color${colorIndex} ${isLoading ? 'animated-bg' : ''}`">
             <img class="cover" :src="data.coverUrl" @load="load" @error="error" v-if="!isError" loading="lazy" />
             <div class="placeholder-cover" v-else>
@@ -68,6 +68,7 @@ export default {
     cursor: pointer;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     overflow: hidden;
+    height: 100%;
 
     .header {
         height: 180px;
@@ -79,20 +80,19 @@ export default {
         }
 
         .placeholder-cover {
-            width: 50%;
-            height: auto;
-            transform: translateX(50%) translateY(25%);
+            height: 90px;
+            width: 90px;
+            margin-left: 50%;
+            transform: translate(-50%, 50%);
         }
 
         .placeholder-cover1 {
             display: block;
-            width: 100%;
-            height: auto;
+            height: 100%;
+            width: auto;
         }
         .placeholder-cover2 {
             display: none;
-            width: 100%;
-            height: auto;
         }
 
         &:hover {
@@ -101,6 +101,8 @@ export default {
             }
             .placeholder-cover2 {
                 display: block;
+                height: 100%;
+                width: auto;
             }
         }
     }
@@ -133,8 +135,7 @@ export default {
     }
 
     &-info {
-        height: 80px;
-        padding: 10px 20px;
+        padding: 12px 16px;
         &-title {
             font-size: 14px;
             font-weight: bold;
