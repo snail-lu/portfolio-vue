@@ -30,6 +30,7 @@ declare module '@vue/runtime-core' {
         ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider'];
         ElDatePicker: typeof import('element-plus/es')['ElDatePicker'];
         ElDialog: typeof import('element-plus/es')['ElDialog'];
+        ElDrawer: typeof import('element-plus/es')['ElDrawer'];
         ElForm: typeof import('element-plus/es')['ElForm'];
         ElFormItem: typeof import('element-plus/es')['ElFormItem'];
         ElIcon: typeof import('element-plus/es')['ElIcon'];
@@ -55,6 +56,7 @@ declare module '@vue/runtime-core' {
         IEpCopyDocument: typeof import('~icons/ep/copy-document')['default'];
         IEpFolderOpened: typeof import('~icons/ep/folder-opened')['default'];
         IEpFullScreen: typeof import('~icons/ep/full-screen')['default'];
+        IEpMenu: typeof import('~icons/ep/menu')['default'];
         IEpPicture: typeof import('~icons/ep/picture')['default'];
         IEpPlus: typeof import('~icons/ep/plus')['default'];
         IEpUpload: typeof import('~icons/ep/upload')['default'];

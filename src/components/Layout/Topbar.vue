@@ -17,6 +17,26 @@
             </li>
             <span class="menu-item-active-bg" :style="{ left }"></span>
         </ul>
+
+        <!-- 移动端菜单 -->
+        <div class="menu-mobile-wrapper">
+            <i-ep-menu class="menu-btn" @click="drawer = true"></i-ep-menu>
+
+            <el-drawer v-model="drawer" title="Vue项目集" direction="rtl" append-to-body size="50%">
+                <ul class="menu-list-mobile">
+                    <li
+                        class="menu-item"
+                        :class="{ 'menu-item-active': currentRoute == item.path }"
+                        v-for="item in menuList"
+                        :key="item.path"
+                        @click="linkTo(item.path)"
+                    >
+                        <i class="iconfont menu-item-icon" :class="item.icon" v-if="item.icon"></i>
+                        <span> {{ item.name }}</span>
+                    </li>
+                </ul>
+            </el-drawer>
+        </div>
     </nav>
 </template>
 
@@ -24,17 +44,19 @@
 import { useRoute, useRouter } from 'vue-router';
 import settings from '@/settings';
 import { useStore } from 'vuex';
-import { onUpdated } from 'vue';
+import { onUpdated, ref } from 'vue';
 
+// 获取当前激活的菜单
 const route = useRoute();
 const currentRoute = computed(() => '/' + route.path.split('/')[1]);
 const menuList = computed(() => settings.menu || []);
 
+// 全屏状态
 const store = useStore();
 const isScreenFull = computed(() => store.state.isScreenFull);
 
+// 菜单动态切换效果
 const left = ref(0);
-
 function setActiveItemStyle() {
     const activeItem = document.querySelector('.menu-item-active');
     const { offsetLeft, offsetWidth } = activeItem;
@@ -52,14 +74,16 @@ onUpdated(() => {
     setActiveItemStyle();
 });
 
+// 菜单跳转
 const router = useRouter();
 const linkTo = (path) => {
     router.push(path);
 };
+
+const drawer = ref(false);
 </script>
 <style lang="scss" scoped>
 .topbar-wrapper {
-    padding-left: 25%;
     box-sizing: border-box;
     width: 100%;
     height: 60px;
@@ -71,13 +95,10 @@ const linkTo = (path) => {
     z-index: 10;
 
     .topbar-logo {
-        position: absolute;
         width: 50px;
         height: 50px;
         vertical-align: middle;
         border-radius: 25px;
-        margin-right: 50px;
-        left: 36px;
     }
 
     .menu-list {
@@ -108,6 +129,45 @@ const linkTo = (path) => {
                 transition: left 0.2s;
             }
         }
+    }
+}
+@media (min-width: 768px) {
+    .topbar-wrapper {
+        padding-left: 25%;
+
+        .topbar-logo {
+            position: absolute;
+            margin-right: 50px;
+            left: 36px;
+        }
+
+        .menu-btn {
+            display: none;
+        }
+    }
+}
+
+// 移动端样式
+@media (max-width: 768px) {
+    .topbar-wrapper {
+        justify-content: space-between;
+        padding: 0 20px;
+
+        .menu-btn {
+            color: #fff;
+            font-size: 20px;
+        }
+
+        .menu-list {
+            display: none;
+        }
+    }
+}
+
+.menu-list-mobile {
+    width: 200px;
+    .menu-item {
+        margin-bottom: 30px;
     }
 }
 </style>
