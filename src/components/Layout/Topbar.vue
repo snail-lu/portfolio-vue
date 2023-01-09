@@ -168,6 +168,15 @@ const drawer = ref(false);
     width: 200px;
     .menu-item {
         margin-bottom: 30px;
+
+        &-icon {
+            margin-right: 6px;
+        }
+
+        &-active {
+            color: #3498db;
+            font-weight: bold;
+        }
     }
 }
 </style>
