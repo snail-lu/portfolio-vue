@@ -1,7 +1,7 @@
 <template>
     <div class="demo-list-container">
         <el-row class="demo-list" :gutter="20" v-if="loadingStatus === '加载成功'">
-            <el-col class="demo-item" v-for="demo in demoList" :key="demo.path" :sm="12" :md="12" :lg="8">
+            <el-col class="demo-item" v-for="demo in demoList" :key="demo.path" :xs="12" :sm="12" :md="12" :lg="8">
                 <Card :data="demo" />
             </el-col>
         </el-row>
@@ -59,7 +59,6 @@ function onRefresh() {
         );
     }
 }
-
 .demo-list-container {
     overflow-x: hidden;
     padding-top: 60px;
@@ -70,6 +69,18 @@ function onRefresh() {
 
     .demo-item {
         margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .demo-list {
+        padding: 50px 20px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .demo-list {
+        padding: 50px 10%;
     }
 }
 
