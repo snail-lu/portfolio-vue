@@ -27,6 +27,10 @@ export default {
     border-radius: 6px;
     padding: 20px;
 
+    @media (max-width: 768px) {
+        margin: 100px 20px;
+    }
+
     .header {
         margin-bottom: 20px;
     }
