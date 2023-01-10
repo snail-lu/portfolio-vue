@@ -231,17 +231,14 @@ body {
 }
 
 .contact {
-    position: relative;
-    max-width: 420px;
-    padding: 40px 20px;
-    overflow: hidden;
-    margin: 0 auto;
+    width: 380px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include transform(translate(-50%, -50%));
 
-    @media (min-width: 1024px) {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        @include transform(translate(-50%, -50%));
+    @media (max-width: 768px) {
+        width: 350px;
     }
 
     main {
