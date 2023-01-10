@@ -165,7 +165,6 @@ const drawer = ref(false);
 }
 
 .menu-list-mobile {
-    width: 200px;
     .menu-item {
         margin-bottom: 30px;
 
