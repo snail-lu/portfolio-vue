@@ -1,6 +1,6 @@
 <template>
     <demo :data="demoInfo">
-        <el-form :model="form" label-width="120px">
+        <el-form :model="form">
             <el-form-item label="水印内容：">
                 <el-input v-model="form.text" />
             </el-form-item>
