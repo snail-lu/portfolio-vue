@@ -1,7 +1,7 @@
 <template>
     <div class="demo-list-container">
         <el-row class="demo-list" :gutter="20" v-if="loadingStatus === '加载成功'">
-            <el-col class="demo-item" v-for="demo in projectsList" :key="demo.path" :sm="12" :md="12" :lg="8">
+            <el-col class="demo-item" v-for="demo in projectsList" :key="demo.path" :xs="12" :sm="12" :md="12" :lg="8">
                 <Card :data="demo" />
             </el-col>
         </el-row>
@@ -66,50 +66,20 @@ function onRefresh() {
 
     .demo-item {
         margin-bottom: 20px;
-
-        .grid-content {
-            cursor: pointer;
-            border-radius: 5px;
-            background-color: #fff;
-            overflow: hidden;
-
-            &:hover {
-                box-shadow: 0 0 10px #ccc;
-            }
-        }
-
-        &-header {
-            // background-color: rgb(224, 63, 63);
-            color: #fff;
-            height: 100px;
-            line-height: 100px;
-            text-align: center;
-        }
-
-        &-content {
-            height: 150px;
-            padding: 20px 10px 10px 10px;
-            text-align: center;
-        }
-
-        &-title {
-            display: inline-block;
-            font-size: 18px;
-            margin-bottom: 30px;
-            box-sizing: border-box;
-
-            &:hover {
-                border-bottom: 1px solid #aaa;
-            }
-        }
-
-        &-desc {
-            color: #999;
-            font-size: 13px;
-        }
     }
 }
 
+@media (max-width: 768px) {
+    .demo-list {
+        padding: 50px 20px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .demo-list {
+        padding: 50px 10%;
+    }
+}
 .loading-box {
     height: 100vh;
 }
