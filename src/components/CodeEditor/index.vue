@@ -8,9 +8,9 @@
                 <el-button link type="primary" class="run-btn" @click="onRunCode" v-else> <i-ep-video-play />运行</el-button>
             </div>
         </div>
-        <div class="flex-box">
-            <div class="editor-box flex-item-1" ref="codeEditor" :style="{ height }"></div>
-            <iframe :src="previewSrc" class="preview-box flex-item-1" v-if="showPreviewBox" />
+        <div class="content">
+            <div class="editor-box" :class="{ 'editor-box-preview': showPreviewBox }" ref="codeEditor" :style="{ height }"></div>
+            <iframe :src="previewSrc" class="preview-box" v-if="showPreviewBox" />
         </div>
     </div>
 </template>
@@ -160,6 +160,10 @@ export default {
 </style>
 <style lang="scss">
 .code-editor-container {
+    @media (max-width: 768px) {
+        height: 100vh;
+    }
+
     .header {
         background-color: #333;
         color: #fff;
@@ -176,8 +180,38 @@ export default {
         }
     }
 
+    .content {
+        display: flex;
+        overflow-x: hidden;
+        flex-direction: row;
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
+    }
+
+    .editor-box {
+        flex: 1;
+        @media (max-width: 768px) {
+            flex: 0 1 auto;
+            height: calc(100vh - 40px);
+        }
+    }
+
+    .editor-box-preview {
+        @media (max-width: 768px) {
+            height: 50vh !important;
+        }
+    }
+
     .preview-box {
         background-color: #fff;
+        flex: 1;
+
+        @media (max-width: 768px) {
+            flex: 0 1 auto;
+            height: calc(50vh - 40px);
+        }
     }
 }
 </style>
