@@ -4,6 +4,9 @@
             <img src="../../assets/icons/logo.png" class="topbar-logo animate__animated animate__zoomIn animate__faster" />
         </router-link>
 
+        <i-ep-menu class="menu-btn" @click="drawer = true"></i-ep-menu>
+
+        <!-- pc端菜单 -->
         <ul class="menu-list flex-box flex-v-center">
             <li
                 class="menu-item animate__animated animate__zoomIn animate__faster"
@@ -19,24 +22,20 @@
         </ul>
 
         <!-- 移动端菜单 -->
-        <div class="menu-mobile-wrapper">
-            <i-ep-menu class="menu-btn" @click="drawer = true"></i-ep-menu>
-
-            <el-drawer v-model="drawer" title="Vue项目集" direction="rtl" append-to-body size="50%">
-                <ul class="menu-list-mobile">
-                    <li
-                        class="menu-item"
-                        :class="{ 'menu-item-active': currentRoute == item.path }"
-                        v-for="item in menuList"
-                        :key="item.path"
-                        @click="linkTo(item.path)"
-                    >
-                        <i class="iconfont menu-item-icon" :class="item.icon" v-if="item.icon"></i>
-                        <span> {{ item.name }}</span>
-                    </li>
-                </ul>
-            </el-drawer>
-        </div>
+        <el-drawer v-model="drawer" title="Vue项目集" direction="rtl" append-to-body size="50%">
+            <ul class="menu-list-mobile">
+                <li
+                    class="menu-item"
+                    :class="{ 'menu-item-active': currentRoute == item.path }"
+                    v-for="item in menuList"
+                    :key="item.path"
+                    @click="linkTo(item.path)"
+                >
+                    <i class="iconfont menu-item-icon" :class="item.icon" v-if="item.icon"></i>
+                    <span> {{ item.name }}</span>
+                </li>
+            </ul>
+        </el-drawer>
     </nav>
 </template>
 
@@ -93,16 +92,31 @@ const drawer = ref(false);
     top: 0;
     left: 0;
     z-index: 10;
+    padding-left: 25%;
+
+    @media (max-width: 768px) {
+        justify-content: space-between;
+        padding: 0 20px;
+    }
 
     .topbar-logo {
         width: 50px;
         height: 50px;
         vertical-align: middle;
         border-radius: 25px;
+        @media (min-width: 768px) {
+            position: absolute;
+            margin-right: 50px;
+            left: 36px;
+        }
     }
 
     .menu-list {
         position: relative;
+
+        @media (max-width: 768px) {
+            display: none;
+        }
         .menu-item {
             margin-right: 70px;
             padding-top: 10px;
@@ -130,43 +144,23 @@ const drawer = ref(false);
             }
         }
     }
-}
-@media (min-width: 768px) {
-    .topbar-wrapper {
-        padding-left: 25%;
+    .menu-btn {
+        display: none;
 
-        .topbar-logo {
-            position: absolute;
-            margin-right: 50px;
-            left: 36px;
-        }
-
-        .menu-btn {
-            display: none;
-        }
-    }
-}
-
-// 移动端样式
-@media (max-width: 768px) {
-    .topbar-wrapper {
-        justify-content: space-between;
-        padding: 0 20px;
-
-        .menu-btn {
+        @media (max-width: 768px) {
+            display: block;
             color: #fff;
             font-size: 20px;
-        }
-
-        .menu-list {
-            display: none;
         }
     }
 }
 
 .menu-list-mobile {
+    position: relative;
     .menu-item {
+        cursor: pointer;
         margin-bottom: 30px;
+        color: #000;
 
         &-icon {
             margin-right: 6px;
@@ -174,7 +168,6 @@ const drawer = ref(false);
 
         &-active {
             color: #3498db;
-            font-weight: bold;
         }
     }
 }
