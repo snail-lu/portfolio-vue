@@ -123,6 +123,13 @@ export default {
             meta: {
                 title: '音乐播放器'
             }
+        },
+        {
+            path: 'poster',
+            component: () => import('../views/demo/poster/index.vue'),
+            meta: {
+                title: '商品海报'
+            }
         }
     ]
 };
