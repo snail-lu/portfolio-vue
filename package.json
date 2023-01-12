@@ -29,6 +29,7 @@
         "vue": "^3.2.37",
         "vue-clipboard3": "^2.0.0",
         "vue-fullpage.js": "^0.2.9",
+        "vue-qr": "^4.0.9",
         "vue-router": "^4.0.16",
         "vuex": "^4.0.2"
     },
