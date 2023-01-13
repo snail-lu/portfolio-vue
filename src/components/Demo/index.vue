@@ -1,6 +1,6 @@
 <template>
     <div class="demo-wrapper">
-        <div class="header flex-box flex-v-center">
+        <div class="header flex-box flex-v-center" v-if="showHeader">
             <div class="flex-item-1 title">{{ data.title }}</div>
             <el-tooltip class="item" effect="dark" content="查看文章" placement="top-start" v-if="data.url">
                 <el-link class="article-link" :underline="false" :href="data.url">
@@ -12,12 +12,14 @@
     </div>
 </template>
 
-<script>
-export default {
-    props: {
-        data: Object
-    }
-};
+<script setup>
+import { computed } from 'vue';
+
+const props = defineProps(['data']);
+
+const showHeader = computed(() => {
+    return props.data.title || props.data.url;
+});
 </script>
 
 <style lang="scss" scoped>

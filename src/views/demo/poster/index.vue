@@ -1,78 +1,113 @@
 <template>
-    <Demo :data="demoInfo">
+    <div class="poster-container">
         <!-- <canvas ref="posterCanvas"></canvas> -->
-        <div class="poster-html" ref="posterRef">
-            <div class="share-info">
-                <img src="../../../assets/icons/logo.png" alt="" class="logo" />
-                <div>Snail</div>
+
+        <!-- html方式实现海报生成 -->
+        <div class="demo-box">
+            <div class="poster-success" v-if="posterUrl">
+                <img :src="posterUrl" alt="" />
             </div>
-            <img class="poster-img" src="https://s1.ax1x.com/2023/01/12/pSujg2T.jpg" alt="" @load="imgLoad()" />
-            <div class="goods-info">
-                <p class="title">{{ goods.goodsName }}</p>
-                <p class="price">
-                    <span class="new"><span>RM</span> {{ goods.goodsSalePrice }}</span>
-                    <span class="old">RM {{ goods.goodsPrice }}</span>
-                </p>
-            </div>
-            <div class="poster-info">
-                <vue-qr class="qr-img" :text="goods.url"></vue-qr>
-                <div>扫码立即购买</div>
+            <div class="poster-html" ref="posterRef" v-else>
+                <div class="share-info">
+                    <div class="logo-wrapper">
+                        <img src="../../../assets/icons/logo.png" alt="" class="logo" />
+                    </div>
+                    <div>导购9527</div>
+                </div>
+                <img
+                    class="poster-img"
+                    src="//m.360buyimg.com/mobilecms/s1265x1265_jfs/t1/20988/35/20240/36277/637e5127Ee10e66b3/03b212c37d98de5f.jpg!q70.dpg.webp"
+                    alt=""
+                    @load="onImgLoad"
+                />
+                <div class="goods-info">
+                    <div class="title">{{ goods.goodsName }}</div>
+                    <div class="price">
+                        <span class="new"><span>¥</span> {{ goods.goodsSalePrice }}</span>
+                        <span class="old">¥ {{ goods.goodsPrice }}</span>
+                    </div>
+                </div>
+                <div class="poster-info">
+                    <vue-qr class="qr-img" :text="goods.url"></vue-qr>
+                    <div class="tips">扫码立即购买</div>
+                </div>
             </div>
         </div>
-        <!-- <div class="poster-success" v-show="!isPoster">
-            <img :src="posterSrc" alt="" crossorigin="anonymous" @load="generatorSuccess" />
-        </div> -->
-    </Demo>
+
+        <div class="download-btn" @click="onDownload">下载海报</div>
+    </div>
 </template>
 
 <script setup>
-import Demo from '@/components/Demo/index.vue';
 import vueQr from 'vue-qr/src/packages/vue-qr.vue';
 import { onMounted, ref } from 'vue';
-const demoInfo = {
-    title: '',
-    url: ''
-};
+import { toPng } from 'html-to-image';
 
 const goods = {
     url: 'https://snaillu.gitee.io/portfolio/demo/poster',
-    goodsName: '2023神秘盲盒',
+    goodsName: '西服套装男西装整套修身商务正装 黑色',
     goodsCode: '123456',
     goodsPrice: 5431,
     goodsSalePrice: 1233
 };
 
-const posterCanvas = ref(null);
+const posterRef = ref(null);
+const posterUrl = ref('');
+const onImgLoad = () => {
+    // 此种方式，元素的margin也会被截进去，所以posterRef元素尽量不要设置margin
+    toPng(posterRef.value).then((dataUrl) => {
+        posterUrl.value = dataUrl;
+    });
+};
+
+const onDownload = () => {
+    let link = document.createElement('a');
+    link.download = 'my-image-name.jpeg';
+    link.href = posterUrl.value;
+    link.click();
+};
+
 const draw = () => {
-    const ctx = posterCanvas.value.getContext('2d');
+    const ctx = posterRef.value.getContext('2d');
     ctx.fillStyle = 'green';
     ctx.fillRect(10, 10, 150, 100);
 };
 onMounted(() => {
     // draw();
 });
-
-const imgLoad = () => {
-    //   if (this.qrVisible && this.firstLoad) {
-    //     this.$nextTick().then(() => {
-    //       this.htmlToCanvas()
-    //     })
-    //   }
-};
 </script>
 
 <style lang="scss" scoped>
-.poster-html {
-    background-color: #fff;
+.poster-container {
+    margin-top: 100px;
+}
+
+.demo-box {
     margin: 0 auto;
+}
+.poster-html {
+    width: 340px;
+    background-color: #fff;
+    padding: 20px;
+
+    border-radius: 10px;
+    box-sizing: border-box;
 
     .share-info {
         display: flex;
         align-items: center;
-        .logo {
+
+        .logo-wrapper {
             width: 50px;
             height: 50px;
+            border-radius: 50px;
             margin-right: 20px;
+            background-color: #eee;
+            overflow: hidden;
+        }
+        .logo {
+            width: 100%;
+            height: auto;
         }
     }
 
@@ -80,17 +115,17 @@ const imgLoad = () => {
         width: 100%;
         height: auto;
         vertical-align: middle;
+        margin-top: 10px;
     }
 
     .goods-info {
         font-size: 15px;
         color: #040000;
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        padding: 10px 15px 0;
+        padding-top: 20px;
         .title {
-            margin-right: 60px;
+            margin-right: 20px;
         }
         .price {
             display: flex;
@@ -104,15 +139,9 @@ const imgLoad = () => {
             text-decoration: line-through;
         }
         .new {
-            font-family: 'fzlthjw';
             display: flex;
             align-items: center;
-            font-size: 14px;
-            margin-top: 10px;
-            span {
-                font-size: 16px;
-                margin-right: 20px;
-            }
+            font-size: 20px;
         }
     }
 
@@ -127,11 +156,26 @@ const imgLoad = () => {
             width: 98px;
             height: 98px;
         }
+
+        .tips {
+            font-size: 12px;
+        }
     }
 }
+
+.download-btn {
+    width: 340px;
+    height: 36px;
+    background-color: #fff;
+    margin: 20px auto;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 36px;
+    font-size: 15px;
+}
 .poster-success {
-    // display: flex;
-    width: 100%;
+    width: 340px;
+    margin: 0 auto;
     img {
         width: 100%;
         height: auto;
