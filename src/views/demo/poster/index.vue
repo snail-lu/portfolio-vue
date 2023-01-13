@@ -1,25 +1,19 @@
 <template>
     <div class="poster-container">
-        <!-- <canvas ref="posterCanvas"></canvas> -->
-
-        <!-- html方式实现海报生成 -->
-        <div class="demo-box">
-            <div class="poster-success" v-if="posterUrl">
-                <img :src="posterUrl" alt="" />
-            </div>
-            <div class="poster-html" ref="posterRef" v-else>
+        <el-radio-group v-model="type" class="type-btn">
+            <el-radio-button label="HTML" />
+            <el-radio-button label="Canvas" />
+        </el-radio-group>
+        <!-- html方式绘制海报 -->
+        <div class="demo-box" v-if="type === 'HTML'">
+            <div class="poster-html" ref="posterHtml">
                 <div class="share-info">
                     <div class="logo-wrapper">
                         <img src="../../../assets/icons/logo.png" alt="" class="logo" />
                     </div>
                     <div>导购9527</div>
                 </div>
-                <img
-                    class="poster-img"
-                    src="//m.360buyimg.com/mobilecms/s1265x1265_jfs/t1/20988/35/20240/36277/637e5127Ee10e66b3/03b212c37d98de5f.jpg!q70.dpg.webp"
-                    alt=""
-                    @load="onImgLoad"
-                />
+                <img class="poster-img" :src="goods.goodsImg" alt="" @load="onImgLoad" />
                 <div class="goods-info">
                     <div class="title">{{ goods.goodsName }}</div>
                     <div class="price">
@@ -34,47 +28,62 @@
             </div>
         </div>
 
+        <!-- canvas方式绘制海报 -->
+        <div class="demo-box" v-else>
+            <canvas ref="posterCanvas"></canvas>
+        </div>
+
         <div class="download-btn" @click="onDownload">下载海报</div>
     </div>
 </template>
 
 <script setup>
 import vueQr from 'vue-qr/src/packages/vue-qr.vue';
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import { toPng } from 'html-to-image';
 
+// 商品信息
 const goods = {
     url: 'https://snaillu.gitee.io/portfolio/demo/poster',
     goodsName: '西服套装男西装整套修身商务正装 黑色',
+    goodsImg: 'https://m.360buyimg.com/mobilecms/s1265x1265_jfs/t1/20988/35/20240/36277/637e5127Ee10e66b3/03b212c37d98de5f.jpg',
     goodsCode: '123456',
     goodsPrice: 5431,
     goodsSalePrice: 1233
 };
 
-const posterRef = ref(null);
+const type = ref('HTML');
+const posterHtml = ref(null);
 const posterUrl = ref('');
 const onImgLoad = () => {
     // 此种方式，元素的margin也会被截进去，所以posterRef元素尽量不要设置margin
-    toPng(posterRef.value).then((dataUrl) => {
+    toPng(posterHtml.value).then((dataUrl) => {
         posterUrl.value = dataUrl;
     });
 };
 
+// canvas绘制海报
+watch(type, (newType) => {
+    if (newType === 'Canvas') {
+        setTimeout(() => {
+            draw();
+        }, 300);
+    }
+});
+const posterCanvas = ref(null);
+const draw = () => {
+    const ctx = posterCanvas.value.getContext('2d');
+    ctx.fillStyle = 'green';
+    ctx.fillRect(10, 10, 150, 100);
+};
+
+// 下载海报
 const onDownload = () => {
     let link = document.createElement('a');
     link.download = 'my-image-name.jpeg';
     link.href = posterUrl.value;
     link.click();
 };
-
-const draw = () => {
-    const ctx = posterRef.value.getContext('2d');
-    ctx.fillStyle = 'green';
-    ctx.fillRect(10, 10, 150, 100);
-};
-onMounted(() => {
-    // draw();
-});
 </script>
 
 <style lang="scss" scoped>
@@ -82,8 +91,16 @@ onMounted(() => {
     margin-top: 100px;
 }
 
+.type-btn {
+    margin-left: 50%;
+    margin-bottom: 20px;
+    transform: translateX(-50%);
+}
+
 .demo-box {
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .poster-html {
     width: 340px;
