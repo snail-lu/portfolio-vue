@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="poster-info">
-                    <vue-qr class="qr-img" :text="goods.url"></vue-qr>
+                    <vue-qr class="qr-img" :text="goods.url" :callback="onQrCallback"></vue-qr>
                     <div class="tips">扫码立即购买</div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
 
         <!-- canvas方式绘制海报 -->
         <div class="demo-box" v-else>
-            <canvas ref="posterCanvas"></canvas>
+            <canvas ref="posterCanvas" width="340" height="570"></canvas>
         </div>
 
         <div class="download-btn" @click="onDownload">下载海报</div>
@@ -61,27 +61,113 @@ const onImgLoad = () => {
         posterUrl.value = dataUrl;
     });
 };
+// 二维码图片
+const qrUrl = ref('');
+const onQrCallback = (dataUrl, id) => {
+    qrUrl.value = dataUrl;
+};
 
 // canvas绘制海报
-watch(type, (newType) => {
-    if (newType === 'Canvas') {
-        setTimeout(() => {
-            draw();
-        }, 300);
+watch(
+    type,
+    (newType) => {
+        if (newType === 'Canvas') {
+            setTimeout(() => {
+                draw();
+            }, 300);
+        }
+    },
+    {
+        immediate: true
     }
-});
+);
 const posterCanvas = ref(null);
 const draw = () => {
     const ctx = posterCanvas.value.getContext('2d');
-    ctx.fillStyle = 'green';
-    ctx.fillRect(10, 10, 150, 100);
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, 340, 570);
+    const logoImg = new Image();
+    logoImg.onload = function () {
+        ctx.drawImage(logoImg, 20, 20, 50, 50);
+    };
+    logoImg.src = '/portfolio/src/assets/icons/logo.png';
+    ctx.fillStyle = '#000';
+    ctx.font = '16px 微软雅黑';
+    ctx.fillText('导购9527', 90, 50);
+    const goodImg = new Image();
+    goodImg.crossOrigin = 'Anonymous'; // 跨域图片需配置此项，不然canvas.toDataURL会报错
+    goodImg.onload = function () {
+        ctx.drawImage(goodImg, 20, 80, 300, 300);
+    };
+    goodImg.src = goods.goodsImg;
+    drawText(goods.goodsName, 20, 390, 200, 15, 1.15, ctx);
+    ctx.fillStyle = '#C21E1F';
+    ctx.font = '20px 微软雅黑';
+    ctx.textBaseline = 'top';
+    ctx.fillText(`¥${goods.goodsSalePrice}`, 250, 400);
+    ctx.fillStyle = '#BBBBBB';
+    ctx.font = '12px 微软雅黑';
+    ctx.fillText(`¥${goods.goodsPrice}`, 260, 420);
+    const textWidth = ctx.measureText(`¥${goods.goodsPrice}`).width;
+    ctx.moveTo(260, 425);
+    ctx.lineTo(260 + textWidth, 425);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = '#bbb';
+    ctx.stroke();
+
+    const qrImg = new Image();
+    qrImg.onload = function () {
+        ctx.drawImage(qrImg, 121, 430, 98, 98);
+    };
+    qrImg.src = qrUrl.value;
+    ctx.fillStyle = '#000';
+    ctx.fillText('扫码立即购买', 134, 530);
 };
+
+/**
+ * text         文本
+ * x,y          轴
+ * width        行宽
+ * fontSize     字体大小
+ * rowHeight    行高，如果字体16px，1.5倍行距应该是24px
+ * ctx          画板内容对象
+ */
+function drawText(text, x, y, width, fs, rowHeight, ctx) {
+    // 1 将字符串转换成数组
+    let test = text.split('');
+    let temp = '';
+    let row = [];
+    // // 1.1 设置样式
+    ctx.font = `${fs}px 微软雅黑`;
+    ctx.fillStyle = 'black';
+    ctx.textBaseline = 'middle';
+    // 1.2 计算文字宽度，若文字宽度大于设定的宽度，则push到数组下一个元素，否则将字符串++
+    for (let i = 0; i < test.length; i++) {
+        if (ctx.measureText(temp).width > width) {
+            row.push(temp);
+            temp = '';
+        }
+        temp += test[i];
+    }
+    // 1.3 循环结束将temp最后一段字符push
+    row.push(temp);
+    // 1.4 遍历数组,输出文字
+    for (let j = 0; j < row.length; j++) {
+        ctx.fillText(row[j], x, y + (j + 1) * fs * rowHeight);
+    }
+}
 
 // 下载海报
 const onDownload = () => {
     let link = document.createElement('a');
     link.download = 'my-image-name.jpeg';
-    link.href = posterUrl.value;
+    if (type.value === 'HTML') {
+        link.href = posterUrl.value;
+    } else {
+        const dataUrl = posterCanvas.value.toDataURL('image/png');
+        console.log(dataUrl, 'dataUrl');
+        link.href = dataUrl;
+    }
     link.click();
 };
 </script>
