@@ -137,7 +137,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@import 'https://fonts.googleapis.com/css2?family=Megrim&display=swap';
+// @import 'https://fonts.googleapis.com/css2?family=Megrim&display=swap';
 #star-river {
     overflow: hidden;
 }
