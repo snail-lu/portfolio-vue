@@ -5,7 +5,7 @@
             <el-radio-button label="Canvas" />
         </el-radio-group>
         <!-- html方式绘制海报 -->
-        <div class="demo-box" v-if="type === 'HTML'">
+        <div class="demo-box" v-show="type === 'HTML'">
             <div class="poster-html" ref="posterHtml">
                 <div class="share-info">
                     <div class="logo-wrapper">
@@ -29,8 +29,8 @@
         </div>
 
         <!-- canvas方式绘制海报 -->
-        <div class="demo-box" v-else>
-            <canvas ref="posterCanvas" width="340" height="570"></canvas>
+        <div class="demo-box" v-show="type === 'Canvas'">
+            <canvas ref="posterCanvas" :width="canvasWidth" :height="canvasHeight" :style="{ width: '340px', height: '570px' }"></canvas>
         </div>
 
         <div class="download-btn" @click="onDownload">下载海报</div>
@@ -68,12 +68,15 @@ const onQrCallback = (dataUrl, id) => {
 };
 
 // canvas绘制海报
+const isInit = ref(true);
 watch(
     type,
     (newType) => {
         if (newType === 'Canvas') {
             setTimeout(() => {
-                draw();
+                if (isInit.value) {
+                    draw();
+                }
             }, 300);
         }
     },
@@ -82,46 +85,53 @@ watch(
     }
 );
 const posterCanvas = ref(null);
+// 解决高分屏下，文字和图片显示模糊的问题
+const dpr = Math.round(window.devicePixelRatio || window.webkitDevicePixelRatio || window.mozDevicePixelRatio || 1);
+const canvasWidth = Math.round(340 * dpr);
+const canvasHeight = Math.round(570 * dpr);
 const draw = () => {
+    console.log(dpr, 'dpr');
     const ctx = posterCanvas.value.getContext('2d');
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(0, 0, 340, 570);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
     const logoImg = new Image();
     logoImg.onload = function () {
-        ctx.drawImage(logoImg, 20, 20, 50, 50);
+        ctx.drawImage(logoImg, 20 * dpr, 20 * dpr, 50 * dpr, 50 * dpr);
     };
     logoImg.src = '/portfolio/src/assets/icons/logo.png';
     ctx.fillStyle = '#000';
-    ctx.font = '16px 微软雅黑';
-    ctx.fillText('导购9527', 90, 50);
+    ctx.font = `${16 * dpr}px 微软雅黑`;
+    ctx.fillText('导购9527', 90 * dpr, 50 * dpr);
     const goodImg = new Image();
     goodImg.crossOrigin = 'Anonymous'; // 跨域图片需配置此项，不然canvas.toDataURL会报错
     goodImg.onload = function () {
-        ctx.drawImage(goodImg, 20, 80, 300, 300);
+        ctx.drawImage(goodImg, 20 * dpr, 80 * dpr, 300 * dpr, 300 * dpr);
     };
     goodImg.src = goods.goodsImg;
-    drawText(goods.goodsName, 20, 390, 200, 15, 1.15, ctx);
+    drawText(goods.goodsName, 20 * dpr, 390 * dpr, 200 * dpr, 15 * dpr, 1.15, ctx);
     ctx.fillStyle = '#C21E1F';
-    ctx.font = '20px 微软雅黑';
+    ctx.font = `${20 * dpr}px 微软雅黑`;
     ctx.textBaseline = 'top';
-    ctx.fillText(`¥${goods.goodsSalePrice}`, 250, 400);
+    ctx.fillText(`¥${goods.goodsSalePrice}`, 250 * dpr, 400 * dpr);
     ctx.fillStyle = '#BBBBBB';
-    ctx.font = '12px 微软雅黑';
-    ctx.fillText(`¥${goods.goodsPrice}`, 260, 420);
+    ctx.font = `${13 * dpr}px 微软雅黑`;
+    ctx.fillText(`¥${goods.goodsPrice}`, 260 * dpr, 420 * dpr);
     const textWidth = ctx.measureText(`¥${goods.goodsPrice}`).width;
-    ctx.moveTo(260, 425);
-    ctx.lineTo(260 + textWidth, 425);
+    ctx.moveTo(260 * dpr, 425 * dpr);
+    ctx.lineTo(260 * dpr + textWidth, 425 * dpr);
     ctx.lineWidth = 1;
     ctx.strokeStyle = '#bbb';
     ctx.stroke();
 
     const qrImg = new Image();
     qrImg.onload = function () {
-        ctx.drawImage(qrImg, 121, 430, 98, 98);
+        ctx.drawImage(qrImg, 121 * dpr, 430 * dpr, 98 * dpr, 98 * dpr);
     };
     qrImg.src = qrUrl.value;
     ctx.fillStyle = '#000';
-    ctx.fillText('扫码立即购买', 134, 530);
+    ctx.font = `${12 * dpr}px 微软雅黑`;
+    ctx.fillText('扫码立即购买', 134 * dpr, 530 * dpr);
+    isInit.value = false;
 };
 
 /**
@@ -192,6 +202,7 @@ const onDownload = () => {
     width: 340px;
     background-color: #fff;
     padding: 20px;
+    font-family: 'Microsoft YaHei';
 
     border-radius: 10px;
     box-sizing: border-box;
