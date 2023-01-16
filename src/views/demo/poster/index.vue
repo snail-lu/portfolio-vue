@@ -30,7 +30,14 @@
 
         <!-- canvas方式绘制海报 -->
         <div class="demo-box" v-show="type === 'Canvas'">
-            <canvas ref="posterCanvas" :width="canvasWidth" :height="canvasHeight" :style="{ width: '340px', height: '570px' }"></canvas>
+            <!-- <canvas
+                id="posterCanvas"
+                ref="posterCanvas"
+                :width="canvasWidth"
+                :height="canvasHeight"
+                :style="{ width: '340px', height: '570px' }"
+            ></canvas> -->
+            <canvas id="posterCanvas" ref="posterCanvas" width="340" height="570" :style="{ width: '340px', height: '570px' }"></canvas>
         </div>
 
         <div class="download-btn" @click="onDownload">下载海报</div>
@@ -41,6 +48,8 @@
 import vueQr from 'vue-qr/src/packages/vue-qr.vue';
 import { ref } from 'vue';
 import { toPng } from 'html-to-image';
+import { fabric } from 'fabric';
+import logoImg from '@/assets/icons/logo.png';
 
 // 商品信息
 const goods = {
@@ -49,7 +58,8 @@ const goods = {
     goodsImg: 'https://m.360buyimg.com/mobilecms/s1265x1265_jfs/t1/20988/35/20240/36277/637e5127Ee10e66b3/03b212c37d98de5f.jpg',
     goodsCode: '123456',
     goodsPrice: 5431,
-    goodsSalePrice: 1233
+    goodsSalePrice: 1233,
+    guide: '导购9527'
 };
 
 const type = ref('HTML');
@@ -75,7 +85,8 @@ watch(
         if (newType === 'Canvas') {
             setTimeout(() => {
                 if (isInit.value) {
-                    draw();
+                    // draw();
+                    fabricDraw();
                 }
             }, 300);
         }
@@ -134,6 +145,147 @@ const draw = () => {
     isInit.value = false;
 };
 
+const fabricDraw = () => {
+    const canvas = new fabric.Canvas('posterCanvas');
+    // 绘制海报背景
+    const rect = new fabric.Rect({
+        left: 0,
+        top: 0,
+        fill: '#fff',
+        width: 340,
+        height: 570,
+        rx: 10, // 圆角
+        ry: 10, // 圆角
+        selectable: false // 禁止选中操作
+    });
+    canvas.add(rect);
+
+    // 绘制头像
+    fabric.Image.fromURL(
+        logoImg,
+        function (oImg) {
+            // 背景
+            const bg = new fabric.Rect({
+                left: 0,
+                top: 0,
+                fill: '#eee',
+                width: 300,
+                height: 300,
+                rx: 150,
+                ry: 150
+            });
+            const group = new fabric.Group([bg, oImg], {
+                left: 20,
+                top: 20,
+                selectable: false
+            });
+            group.scale(0.15);
+            canvas.add(group);
+        },
+        {
+            left: 0,
+            top: 0,
+            width: 300,
+            height: 300
+        }
+    );
+
+    // 绘制昵称
+    const nickName = new fabric.Text(goods.guide, {
+        fill: '#000',
+        left: 85,
+        top: 43,
+        originY: 'center',
+        fontSize: 16,
+        fontFamily: 'Microsoft YaHei',
+        selectable: false
+    });
+    canvas.add(nickName);
+
+    // 绘制商品图片
+    fabric.Image.fromURL(
+        goods.goodsImg,
+        function (oImg) {
+            oImg.scaleToWidth(300);
+            canvas.add(oImg);
+        },
+        {
+            left: 20,
+            top: 75,
+            width: 1265,
+            height: 1265,
+            selectable: false
+        }
+    );
+
+    // 绘制商品名称
+    const goodsName = new fabric.Textbox(goods.goodsName, {
+        left: 20,
+        top: 395,
+        width: 220,
+        fontSize: 15,
+        lineHeight: 1.15,
+        // fontFamily: 'Microsoft YaHei',
+        splitByGrapheme: true,
+        selectable: false
+    });
+    canvas.add(goodsName);
+
+    // 商品价格
+    const goodsSalePrice = new fabric.Text(`¥${goods.goodsSalePrice}`, {
+        fill: '#C21E1F',
+        left: 320,
+        top: 395,
+        width: 80,
+        originX: 'right',
+        fontSize: 20,
+        fontFamily: 'Microsoft YaHei',
+        selectable: false
+    });
+    const goodsPrice = new fabric.Text(`¥${goods.goodsPrice}`, {
+        fill: '#BBBBBB',
+        left: 320,
+        top: 415,
+        width: 120,
+        originX: 'right',
+        fontSize: 13,
+        fontFamily: 'Microsoft YaHei',
+        linethrough: true,
+        selectable: false
+    });
+    canvas.add(goodsSalePrice);
+    canvas.add(goodsPrice);
+
+    // 绘制二维码
+    fabric.Image.fromURL(
+        qrUrl.value,
+        function (oImg) {
+            oImg.scale(0.5);
+            canvas.add(oImg);
+        },
+        {
+            left: 121,
+            top: 430,
+            width: 200,
+            height: 200,
+            selectable: false
+        }
+    );
+
+    // 绘制提示语
+    const qrDesc = new fabric.Text('扫码立即购买', {
+        left: 170, // 配合originX实现文字居中
+        top: 530,
+        width: 340,
+        originX: 'center',
+        fontSize: 12,
+        fontFamily: 'Microsoft YaHei',
+        selectable: false
+    });
+    canvas.add(qrDesc);
+
+    isInit.value = false;
+};
 /**
  * text         文本
  * x,y          轴
@@ -200,6 +352,7 @@ const onDownload = () => {
 }
 .poster-html {
     width: 340px;
+    min-height: 570px;
     background-color: #fff;
     padding: 20px;
     font-family: 'Microsoft YaHei';
@@ -212,9 +365,9 @@ const onDownload = () => {
         align-items: center;
 
         .logo-wrapper {
-            width: 50px;
-            height: 50px;
-            border-radius: 50px;
+            width: 45px;
+            height: 45px;
+            border-radius: 45px;
             margin-right: 20px;
             background-color: #eee;
             overflow: hidden;
