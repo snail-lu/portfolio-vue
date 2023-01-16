@@ -214,7 +214,8 @@ const fabricDraw = () => {
             top: 75,
             width: 1265,
             height: 1265,
-            selectable: false
+            selectable: false,
+            crossOrigin: 'Anonymous' // 配置商品图跨域，解决canvas.toDataURL报错问题
         }
     );
 
