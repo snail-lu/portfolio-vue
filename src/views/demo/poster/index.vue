@@ -179,7 +179,7 @@ const fabricDraw = () => {
                 top: 20,
                 selectable: false
             });
-            group.scale(0.15);
+            group.scaleToWidth(45);
             canvas.add(group);
         },
         {
@@ -212,8 +212,6 @@ const fabricDraw = () => {
         {
             left: 20,
             top: 75,
-            width: 1265,
-            height: 1265,
             selectable: false,
             crossOrigin: 'Anonymous' // 配置商品图跨域，解决canvas.toDataURL报错问题
         }
@@ -261,12 +259,12 @@ const fabricDraw = () => {
     fabric.Image.fromURL(
         qrUrl.value,
         function (oImg) {
-            oImg.scale(0.5);
+            oImg.scaleToWidth(100);
             canvas.add(oImg);
         },
         {
             left: 121,
-            top: 430,
+            top: 432,
             width: 200,
             height: 200,
             selectable: false
@@ -421,8 +419,8 @@ const onDownload = () => {
         color: #3e3a39;
         position: relative;
         .qr-img {
-            width: 98px;
-            height: 98px;
+            width: 100px;
+            height: 100px;
         }
 
         .tips {
