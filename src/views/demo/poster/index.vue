@@ -146,7 +146,9 @@ const draw = () => {
 };
 
 const fabricDraw = () => {
-    const canvas = new fabric.Canvas('posterCanvas');
+    const canvas = new fabric.Canvas('posterCanvas', {
+        selection: false
+    });
     // 绘制海报背景
     const rect = new fabric.Rect({
         left: 0,
