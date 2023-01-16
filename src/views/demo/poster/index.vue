@@ -147,7 +147,8 @@ const draw = () => {
 
 const fabricDraw = () => {
     const canvas = new fabric.Canvas('posterCanvas', {
-        selection: false
+        selection: false,
+        allowTouchScrolling: true
     });
     // 绘制海报背景
     const rect = new fabric.Rect({
@@ -323,15 +324,16 @@ function drawText(text, x, y, width, fs, rowHeight, ctx) {
 // 下载海报
 const onDownload = () => {
     let link = document.createElement('a');
-    link.download = 'my-image-name.jpeg';
+    link.download = 'poster.jpg';
     if (type.value === 'HTML') {
         link.href = posterUrl.value;
     } else {
-        const dataUrl = posterCanvas.value.toDataURL('image/png');
-        console.log(dataUrl, 'dataUrl');
+        const dataUrl = posterCanvas.value.toDataURL('image/jpg');
         link.href = dataUrl;
     }
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
 };
 </script>
 
