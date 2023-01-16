@@ -100,6 +100,7 @@ const posterCanvas = ref(null);
 const dpr = Math.round(window.devicePixelRatio || window.webkitDevicePixelRatio || window.mozDevicePixelRatio || 1);
 const canvasWidth = Math.round(340 * dpr);
 const canvasHeight = Math.round(570 * dpr);
+// 使用canvas API进行海报绘制
 const draw = () => {
     console.log(dpr, 'dpr');
     const ctx = posterCanvas.value.getContext('2d');
@@ -148,7 +149,7 @@ const draw = () => {
 const fabricDraw = () => {
     const canvas = new fabric.Canvas('posterCanvas', {
         selection: false,
-        allowTouchScrolling: true
+        allowTouchScrolling: true // fabric库的bug，_onTouchStart中阻止了滚动的默认行为，待修复
     });
     // 绘制海报背景
     const rect = new fabric.Rect({
