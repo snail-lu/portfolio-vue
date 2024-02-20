@@ -15,20 +15,20 @@
 ## 基本使用
 
 ```bash
-// 克隆代码
+# 克隆代码
 git clone https://github.com/Snail-Lu/portfolio-vue.git
 
-// 安装依赖
+# 安装依赖
 cd portfolio-vue
 npm install
 
-// 本地运行
+# 本地运行
 npm run dev
 
-// 生产打包
+# 生产打包
 npm run build
 
-// 部署到 github pages
+# 部署到 github pages
 npm run deploy
 ```
 
