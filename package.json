@@ -33,6 +33,7 @@
         "vue-fullpage.js": "^0.2.9",
         "vue-qr": "^4.0.9",
         "vue-router": "^4.0.16",
+        "vuedraggable": "^4.1.0",
         "vuex": "^4.0.2"
     },
     "devDependencies": {

@@ -157,8 +157,6 @@ routes.push(demoRoutes);
 const router = createRouter({
     history: createWebHistory('/portfolio/'),
     scrollBehavior: (to, from, savedPosition) => {
-        console.log(to, 'to');
-
         return new Promise((resolve, reject) => {
             if (to.path === '/demo') {
                 setTimeout(() => {
