@@ -69,14 +69,6 @@ const routes = [
         }
     },
     {
-        path: '/anniversary/8th',
-        component: () => import('../views/anniversary/index.vue'),
-        meta: {
-            title: '8周年快乐',
-            showTitleOnly: true
-        }
-    },
-    {
         path: '/demo/dynamic-chart',
         component: () => import('../views/demo/dynamicChart/index.vue'),
         meta: {
