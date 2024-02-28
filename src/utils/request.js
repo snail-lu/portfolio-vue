@@ -3,7 +3,7 @@ import axios from 'axios';
 // create an axios instance
 
 const service = axios.create({
-    baseURL: 'https://www.fastmock.site/mock/570d7b757920a8c74dd3d814aec1242d/portfolio', // url = base url + request url
+    baseURL: 'https://portfolio.usemock.com', // url = base url + request url
     // withCredentials: true, // send cookies when cross-domain requests
     // timeout: 500000 // request timeout
     timeout: 20000 // 超时时间
