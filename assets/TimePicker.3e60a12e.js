@@ -1,0 +1,1 @@
+import{_ as o}from"./index.6c979ba2.js";/* empty css                 *//* empty css                     */import"./index.2f64659b.js";import{ao as c,o as r,c as t}from"./elementPlus.8845be7b.js";const i={};function m(n,_){const e=c;return r(),t(e)}const l=o(i,[["render",m]]);export{l as default};
