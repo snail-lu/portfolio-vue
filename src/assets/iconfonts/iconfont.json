@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2076242",
+      "name": " 图片",
+      "font_class": "tupian",
+      "unicode": "e889",
+      "unicode_decimal": 59529
+    },
+    {
+      "icon_id": "3383467",
+      "name": "商品列表_列表排列",
+      "font_class": "shangpinliebiao_liebiaopailie",
+      "unicode": "e71b",
+      "unicode_decimal": 59163
+    },
+    {
+      "icon_id": "26358851",
+      "name": "轮播图",
+      "font_class": "lunbotu",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
       "icon_id": "7594170",
       "name": "24gf-playlistMusic5",
       "font_class": "playlist",

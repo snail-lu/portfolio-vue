@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3807014 */
-  src: url('iconfont.woff2?t=1672725689039') format('woff2'),
-       url('iconfont.woff?t=1672725689039') format('woff'),
-       url('iconfont.ttf?t=1672725689039') format('truetype');
+  src: url('iconfont.woff2?t=1709186879100') format('woff2'),
+       url('iconfont.woff?t=1709186879100') format('woff'),
+       url('iconfont.ttf?t=1709186879100') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,18 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tupian:before {
+  content: "\e889";
+}
+
+.icon-shangpinliebiao_liebiaopailie:before {
+  content: "\e71b";
+}
+
+.icon-lunbotu:before {
+  content: "\e625";
 }
 
 .icon-playlist:before {
