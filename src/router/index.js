@@ -39,21 +39,21 @@ const routes = [
         children: [
             {
                 path: '',
-                component: () => import('../views/about/index.vue'),
+                component: () => import('@/views/about/index.vue'),
                 meta: {
                     title: '关于'
                 }
             },
             {
                 path: 'resume',
-                component: () => import('../views/about/resume/resume.vue'),
+                component: () => import('@/views/about/resume/resume.vue'),
                 meta: {
                     title: '我的简历'
                 }
             },
             {
                 path: 'image',
-                component: () => import('../views/about/resume/images/images.vue'),
+                component: () => import('@/views/about/resume/images/images.vue'),
                 meta: {
                     title: '作品图'
                 }
@@ -62,7 +62,7 @@ const routes = [
     },
     {
         path: '/test',
-        component: () => import('../views/test/index.vue'),
+        component: () => import('@/views/test/index.vue'),
         meta: {
             title: '测试页面',
             showTitleOnly: true
@@ -70,14 +70,14 @@ const routes = [
     },
     {
         path: '/demo/dynamic-chart',
-        component: () => import('../views/demo/dynamicChart/index.vue'),
+        component: () => import('@/views/demo/dynamicChart/index.vue'),
         meta: {
             title: '可视化图表'
         }
     },
     {
         path: '/demo/photo-wall',
-        component: () => import('../views/demo/photoWall/index.vue'),
+        component: () => import('@/views/demo/photoWall/index.vue'),
         name: '',
         meta: {
             title: '照片墙'
@@ -85,7 +85,7 @@ const routes = [
     },
     {
         path: '/demo/sea',
-        component: () => import('../views/demo/threeJs/sea/index.vue'),
+        component: () => import('@/views/demo/threeJs/sea/index.vue'),
         name: '',
         meta: {
             title: 'three.js实践之海面'
@@ -93,14 +93,14 @@ const routes = [
     },
     {
         path: '/demo/train',
-        component: () => import('../views/demo/threeJs/train/index.vue'),
+        component: () => import('@/views/demo/threeJs/train/index.vue'),
         meta: {
             title: 'three.js实践之火车'
         }
     },
     {
         path: '/demo/earth',
-        component: () => import('../views/demo/threeJs/earthMoon/index.vue'),
+        component: () => import('@/views/demo/threeJs/earthMoon/index.vue'),
         name: '',
         meta: {
             title: 'three.js实践之地月模型'
@@ -108,7 +108,7 @@ const routes = [
     },
     {
         path: '/demo/code-editor',
-        component: () => import('../views/demo/codeEditor/index.vue'),
+        component: () => import('@/views/demo/codeEditor/index.vue'),
         meta: {
             title: '代码编辑器'
         }

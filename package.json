@@ -60,7 +60,7 @@
         "unplugin-auto-import": "^0.9.1",
         "unplugin-icons": "^0.14.6",
         "unplugin-vue-components": "^0.20.1",
-        "vite": "^3.2.4"
+        "vite": "^5.1.4"
     },
     "browserslist": [
         "> 1%",
