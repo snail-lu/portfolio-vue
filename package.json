@@ -1,6 +1,8 @@
 {
     "name": "protfolio-vue",
     "version": "2.0.0",
+    "license": "MIT",
+    "author": "snail-lu",
     "description": "protfolio-vue",
     "scripts": {
         "dev": "vite",
