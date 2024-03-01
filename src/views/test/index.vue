@@ -37,6 +37,7 @@
       <div class="col-2">
         <div class="col-content">
           <div class="col-content-title">组件配置</div>
+          <vue-form v-model="formData" :ui-schema="uiSchema" :schema="schema" />
         </div>
       </div>
     </div>
@@ -46,28 +47,102 @@
 <script setup>
 import draggable from 'vuedraggable';
 import nestedDraggable from '@/components/PageEditor/NestedDraggable.vue';
+import VueForm from '@lljj/vue3-form-element';
+
 const componentList = ref([
     {
         name: '图片',
-        icon: 'icon-tupian',
+        icon: 'icon-image',
         component: 'Image',
         children: []
     },
     {
         name: '轮播图',
-        icon: 'icon-lunbotu',
-        component: 'Slider',
+        icon: 'icon-swiper',
+        component: 'Swiper',
         children: []
     },
     {
         name: '商品列表',
-        icon: 'icon-shangpinliebiao_liebiaopailie',
+        icon: 'icon-goodslist2',
         component: 'GoodsList',
         children: []
     }
 ]);
 
 const targetList = ref([]);
+
+const formData = reactive({});
+const schema = {
+    title: '测试注册表单',
+    description: 'A simple form example.',
+    type: 'object',
+    required: ['firstName', 'lastName'],
+    'ui:order': ['lastName', 'firstName', '*', 'password'],
+    properties: {
+        firstName: {
+            type: 'string',
+            title: 'First name',
+            default: 'Jun'
+        },
+        lastName: {
+            type: 'string',
+            title: 'Last name',
+            'ui:options': {
+                description: '请输入你的姓'
+            },
+            'err:required': '必须输入Last Name'
+        },
+        price: {
+            type: 'string',
+            description: '最多输入两位小数点，最大值 999999.99',
+            title: '价格',
+            format: 'price'
+        },
+        age: {
+            type: 'integer',
+            title: 'Age',
+            maximum: 80,
+            minimum: 16
+        },
+        bio: {
+            type: 'string',
+            title: 'Bio',
+            minLength: 10
+        },
+        password: {
+            type: 'string',
+            title: 'Password',
+            minLength: 3
+        },
+        telephone: {
+            type: 'string',
+            title: 'Telephone',
+            minLength: 10
+        }
+    }
+};
+const uiSchema = {
+    'ui:description': '简单表单例子（这里通过UiSchema覆盖了默认description描述配置）',
+    firstName: {
+        'ui:title': '名字',
+        'ui:description': '比如：李白姓李、孙尚香姓孙、马可波罗姓马可波',
+        'ui:emptyValue': '',
+        'ui:options': {
+            placeholder: '请输入你的姓',
+            attrs: {
+                autofocus: true
+            }
+        }
+    },
+    bio: {
+        'ui:options': {
+            placeholder: '请输入你的签名',
+            type: 'textarea',
+            rows: 6
+        }
+    }
+};
 </script>
 
 <style lang="scss" scoped>

@@ -6,23 +6,30 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "4315705",
+      "name": "商品列表1",
+      "font_class": "goodslist2",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
       "icon_id": "2076242",
-      "name": " 图片",
-      "font_class": "tupian",
+      "name": "图片",
+      "font_class": "image",
       "unicode": "e889",
       "unicode_decimal": 59529
     },
     {
       "icon_id": "3383467",
       "name": "商品列表_列表排列",
-      "font_class": "shangpinliebiao_liebiaopailie",
+      "font_class": "goodslist1",
       "unicode": "e71b",
       "unicode_decimal": 59163
     },
     {
       "icon_id": "26358851",
       "name": "轮播图",
-      "font_class": "lunbotu",
+      "font_class": "swiper",
       "unicode": "e625",
       "unicode_decimal": 58917
     },
