@@ -2,73 +2,48 @@ import Image from './Image.vue';
 export default {
     component: Image,
     schema: {
-        title: '图片',
+        title: '图片配置',
         description: 'A simple form example.',
         type: 'object',
-        required: ['firstName', 'lastName'],
-        'ui:order': ['lastName', 'firstName', '*', 'password'],
+        required: ['url', 'width'],
+        'ui:order': ['url', 'width', 'height'],
         properties: {
-            firstName: {
+            url: {
+                title: '图片地址',
                 type: 'string',
-                title: 'First name',
-                default: 'Jun'
-            },
-            lastName: {
-                type: 'string',
-                title: 'Last name',
+                default: 'https://img11.360buyimg.com/imagetools/jfs/t1/98857/10/46727/701459/65eac152Fd89326e4/62da04c320575dcb.gif',
                 'ui:options': {
-                    description: '请输入你的姓'
-                },
-                'err:required': '必须输入Last Name'
+                    placeholder: '请输入图片地址'
+                }
             },
-            price: {
+            width: {
+                title: '宽度',
                 type: 'string',
-                description: '最多输入两位小数点，最大值 999999.99',
-                title: '价格',
-                format: 'price'
+                default: '750px',
+                'ui:options': {
+                    placeholder: '请输入图片宽度'
+                }
             },
-            age: {
-                type: 'integer',
-                title: 'Age',
-                maximum: 80,
-                minimum: 16
-            },
-            bio: {
+            height: {
+                title: '高度',
                 type: 'string',
-                title: 'Bio',
-                minLength: 10
-            },
-            password: {
-                type: 'string',
-                title: 'Password',
-                minLength: 3
-            },
-            telephone: {
-                type: 'string',
-                title: 'Telephone',
-                minLength: 10
+                default: '750px',
+                'ui:options': {
+                    placeholder: '请输入'
+                }
             }
         }
     },
     uiSchema: {
-        'ui:description': '简单表单例子（这里通过UiSchema覆盖了默认description描述配置）',
-        firstName: {
-            'ui:title': '名字',
-            'ui:description': '比如：李白姓李、孙尚香姓孙、马可波罗姓马可波',
-            'ui:emptyValue': '',
-            'ui:options': {
-                placeholder: '请输入你的姓',
-                attrs: {
-                    autofocus: true
-                }
-            }
-        },
-        bio: {
-            'ui:options': {
-                placeholder: '请输入你的签名',
-                type: 'textarea',
-                rows: 6
-            }
-        }
+        'ui:description': '配置图片参数，图片初始宽度750px，高度750px，可修改'
+    },
+    formFooter: {
+        show: false,
+        okBtn: '应用'
+    },
+    formProps: {
+        labelPosition: 'right',
+        labelWidth: '100px',
+        labelSuffix: '：'
     }
 };

@@ -3,72 +3,73 @@ export default {
     component: Swiper,
     schema: {
         title: '轮播图',
-        description: 'A simple form example.',
         type: 'object',
-        required: ['firstName', 'lastName'],
-        'ui:order': ['lastName', 'firstName', '*', 'password'],
         properties: {
-            firstName: {
+            autoplay: {
+                title: '自动切换',
                 type: 'string',
-                title: 'First name',
-                default: 'Jun'
+                'ui:widget': 'SelectWidget',
+                default: 'true',
+                enum: ['true', 'false'],
+                enumNames: ['是', '否']
             },
-            lastName: {
+            loop: {
+                title: '循环切换',
                 type: 'string',
-                title: 'Last name',
+                'ui:widget': 'SelectWidget',
+                description: '轮播切换到第一张或最后一张时，是否可以循环显示',
+                default: 'true',
+                enum: ['true', 'false'],
+                enumNames: ['是', '否']
+            },
+            interval: {
+                title: '自动切换间隔',
+                type: 'string',
+                description: '单位：毫秒，默认3000',
+                default: '3000',
                 'ui:options': {
-                    description: '请输入你的姓'
-                },
-                'err:required': '必须输入Last Name'
-            },
-            price: {
-                type: 'string',
-                description: '最多输入两位小数点，最大值 999999.99',
-                title: '价格',
-                format: 'price'
-            },
-            age: {
-                type: 'integer',
-                title: 'Age',
-                maximum: 80,
-                minimum: 16
-            },
-            bio: {
-                type: 'string',
-                title: 'Bio',
-                minLength: 10
-            },
-            password: {
-                type: 'string',
-                title: 'Password',
-                minLength: 3
-            },
-            telephone: {
-                type: 'string',
-                title: 'Telephone',
-                minLength: 10
-            }
-        }
-    },
-    uiSchema: {
-        'ui:description': '简单表单例子（这里通过UiSchema覆盖了默认description描述配置）',
-        firstName: {
-            'ui:title': '名字',
-            'ui:description': '比如：李白姓李、孙尚香姓孙、马可波罗姓马可波',
-            'ui:emptyValue': '',
-            'ui:options': {
-                placeholder: '请输入你的姓',
-                attrs: {
-                    autofocus: true
+                    placeholder: '请输入'
                 }
+            },
+            imgList: {
+                title: '图片项配置',
+                type: 'array',
+                items: {
+                    type: 'object',
+                    required: ['imgUrl'],
+                    properties: {
+                        imgUrl: {
+                            title: '图片地址',
+                            type: 'string',
+                            'ui:options': {
+                                placeholder: '请输入'
+                            }
+                        },
+                        linkUrl: {
+                            title: '跳转链接',
+                            type: 'string',
+                            'ui:options': {
+                                placeholder: '请输入'
+                            }
+                        }
+                    },
+                    'ui:order': ['imgUrl', 'linkUrl']
+                },
+                uniqueItems: false,
+                minItems: 1,
+                maxItems: 100
             }
         },
-        bio: {
-            'ui:options': {
-                placeholder: '请输入你的签名',
-                type: 'textarea',
-                rows: 6
-            }
-        }
+        'ui:order': ['autoplay', 'loop', 'interval', 'imgList']
+    },
+    uiSchema: {},
+    formFooter: {
+        show: false,
+        okBtn: '应用'
+    },
+    formProps: {
+        labelPosition: 'right',
+        labelWidth: '172px',
+        labelSuffix: '：'
     }
 };

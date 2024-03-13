@@ -1,6 +1,6 @@
 <template>
-    <div class="block-title">常用组件</div>
-    <draggable class="list-group" :list="toolsList" :group="{ name: 'componentsGroup', pull: 'clone', put: false }" @change="log" item-key="name">
+    <div class="block-title">组件库</div>
+    <draggable class="list-group" :list="toolsList" :group="{ name: 'componentsGroup', pull: 'clone', put: false }" item-key="name">
         <template #item="{ element }">
             <div class="list-group-item">
                 <div :class="`icon iconfont ${element.icon}`"></div>
@@ -40,12 +40,12 @@ const toolsList = ref([
     padding: 0 10px;
     background-color: #f5f5f5;
     text-align: center;
-    border-right: 1px dashed #ccc;
+    // border-right: 1px dashed #ccc;
 }
 .list-group {
     height: calc(100vh - 50px);
     padding: 0 40px;
-    border-right: 1px dashed #ccc;
+    // border-right: 1px dashed #ccc;
     &-item {
         display: inline-block;
         text-align: center;
