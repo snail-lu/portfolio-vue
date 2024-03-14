@@ -7,14 +7,21 @@
             <div class="btn-groups">
                 <el-button type="primary">保存</el-button>
                 <el-button>预览</el-button>
+                <el-button @click="onClearPage">清空</el-button>
             </div>
-            <draggable class="editor" v-model="componentList" :group="{ name: 'componentsGroup' }" item-key="name" @change="onChange">
+            <draggable
+                class="editor"
+                :class="{ 'empty-editor': componentList.length == 0 }"
+                v-model="componentList"
+                group="componentsGroup"
+                item-key="id"
+            >
                 <template #item="{ element }">
                     <div
                         :class="`${activeComponent?.id === element.id ? 'component-wrapper-active' : 'component-wrapper'}`"
                         @click="onChoose(element)"
                     >
-                        <component :is="supportedComponents[element.component].component" />
+                        <component :is="element.component.view" :config="element?.configData" />
                     </div>
                 </template>
             </draggable>
@@ -31,58 +38,41 @@
                     @submit="onSubmitForm"
                 />
             </div>
+            <div v-else class="empty-tips">请选择需要配置的组件~</div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { v4 as uuidv4 } from 'uuid';
+import _ from 'lodash';
 import draggable from 'vuedraggable';
 import VueForm from '@lljj/vue3-form-element';
 import PageEditorToolBars from '@/components/PageEditor/PageEditorToolBars.vue';
-import Image from './Image/index';
-import Swiper from './Swiper/index';
-import GoodsList from './GoodsList/index';
 
-const supportedComponents = {
-    Image,
-    Swiper,
-    GoodsList
-};
 const componentList = ref([]);
 const emits = defineEmits(['choose']);
 
 const activeComponent = ref(null);
+const formData = ref(null);
 const onChoose = (element) => {
-    console.log(element, 'element');
     if (activeComponent.value?.id !== element.id) {
-        activeComponent.value = element;
+        activeComponent.value = _.cloneDeep(element);
+        formData.value = _.cloneDeep(element.configData);
     } else {
         activeComponent.value = null;
     }
 };
 
-const onChange = (evt) => {
-    if (evt.added && evt.added.element) {
-        // 新加的元素处理特殊配置信息
-        evt.added.element.id = uuidv4();
-    }
-};
-
-const formData = reactive({});
-
 const schema = computed(() => {
-    if (activeComponent.value?.component) {
-        const componentName = activeComponent.value.component;
-        return supportedComponents[componentName].schema;
+    if (activeComponent.value) {
+        return activeComponent.value.component.schema;
     } else {
         return {};
     }
 });
 const uiSchema = computed(() => {
-    if (activeComponent.value?.component) {
-        const componentName = activeComponent.value.component;
-        return supportedComponents[componentName].uiSchema;
+    if (activeComponent.value) {
+        return activeComponent.value.component.uiSchema;
     } else {
         return {};
     }
@@ -99,7 +89,26 @@ const formProps = {
 };
 
 const onSubmitForm = () => {
-    console.log(formData, 'formData');
+    console.log(activeComponent, '');
+    console.log(formData.value, 'formData');
+    componentList.value.forEach((component) => {
+        if (component.id === activeComponent.value.id) {
+            component.configData = formData.value;
+        }
+    });
+};
+
+const onClearPage = () => {
+    ElMessageBox.confirm('确定要清空页面?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+    })
+        .then(() => {
+            componentList.value = [];
+            activeComponent.value = null;
+        })
+        .catch(() => {});
 };
 </script>
 
@@ -123,10 +132,16 @@ const onSubmitForm = () => {
 
 .box-r {
     border-left: 1px dashed #ccc;
+
+    .empty-tips {
+        text-align: center;
+        margin-top: 100px;
+    }
 }
 
 .component-wrapper {
     position: relative;
+    // font-size: 0;
 
     &-active {
         position: relative;
@@ -187,6 +202,20 @@ const onSubmitForm = () => {
     background-color: #fff;
     overflow: auto;
     position: relative;
+
+    &.empty-editor {
+        &::before {
+            content: '拖动左侧组件至此';
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #7aaee9;
+            line-height: 1.5;
+        }
+    }
 
     // 滚动条整体样式
     &::-webkit-scrollbar {

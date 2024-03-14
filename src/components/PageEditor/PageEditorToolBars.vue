@@ -1,6 +1,13 @@
 <template>
     <div class="block-title">组件库</div>
-    <draggable class="list-group" :list="toolsList" :group="{ name: 'componentsGroup', pull: 'clone', put: false }" item-key="name">
+    <draggable
+        class="list-group"
+        :list="toolsList"
+        :group="{ name: 'componentsGroup', pull: 'clone', put: false }"
+        item-key="component"
+        :sort="false"
+        :clone="deepClone"
+    >
         <template #item="{ element }">
             <div class="list-group-item">
                 <div :class="`icon iconfont ${element.icon}`"></div>
@@ -12,24 +19,19 @@
 
 <script setup>
 import draggable from 'vuedraggable';
+import _ from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
+import { getDefaultFormState } from '@lljj/vue3-form-element';
+import toolsList from './component-lib';
 
-const toolsList = ref([
-    {
-        name: '图片',
-        icon: 'icon-image',
-        component: 'Image'
-    },
-    {
-        name: '轮播图',
-        icon: 'icon-swiper',
-        component: 'Swiper'
-    },
-    {
-        name: '商品列表',
-        icon: 'icon-goodslist2',
-        component: 'GoodsList'
-    }
-]);
+// 在复制元素的时候深拷贝一下
+const deepClone = (original) => {
+    const id = uuidv4();
+    const clonedElement = _.cloneDeep(original);
+    clonedElement.id = id;
+    clonedElement.configData = getDefaultFormState(original.component.schema)
+    return clonedElement;
+};
 </script>
 
 <style lang="scss" scoped>

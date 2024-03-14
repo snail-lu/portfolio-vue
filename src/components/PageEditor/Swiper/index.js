@@ -1,16 +1,15 @@
 import Swiper from './Swiper.vue';
 export default {
-    component: Swiper,
+    view: Swiper,
     schema: {
         title: '轮播图',
         type: 'object',
         properties: {
             autoplay: {
                 title: '自动切换',
-                type: 'string',
+                type: 'boolean',
                 'ui:widget': 'SelectWidget',
-                default: 'true',
-                enum: ['true', 'false'],
+                default: true,
                 enumNames: ['是', '否']
             },
             loop: {
@@ -18,8 +17,7 @@ export default {
                 type: 'string',
                 'ui:widget': 'SelectWidget',
                 description: '轮播切换到第一张或最后一张时，是否可以循环显示',
-                default: 'true',
-                enum: ['true', 'false'],
+                default: true,
                 enumNames: ['是', '否']
             },
             interval: {

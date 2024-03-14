@@ -9,7 +9,7 @@ import App from './App.vue';
 import store from './store';
 import router from './router';
 import request from '@/utils/request';
-import { ElMessage, ElForm, ElFormItem, ElInput, ElButton, ElInputNumber, ElSelect, ElOption } from 'element-plus';
+import { ElMessage, ElMessageBox, ElForm, ElFormItem, ElInput, ElButton, ElInputNumber, ElSelect, ElOption, ElPopover } from 'element-plus';
 // import 'element-plus/es/components/message/style/css';
 import 'element-plus/dist/index.css';
 import '@/assets/iconfonts/iconfont.css';
@@ -33,7 +33,9 @@ const registerComponents = {
     ElButton,
     ElInputNumber,
     ElSelect,
-    ElOption
+    ElOption,
+    ElMessageBox,
+    ElPopover
 };
 for (let name in registerComponents) {
     app.component(name, registerComponents[name]);

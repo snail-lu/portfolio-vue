@@ -1,14 +1,15 @@
 import Image from './Image.vue';
 export default {
-    component: Image,
+    view: Image,
+    // 组件对应的动态表单json schema
     schema: {
         title: '图片配置',
         description: 'A simple form example.',
         type: 'object',
-        required: ['url', 'width'],
-        'ui:order': ['url', 'width', 'height'],
+        required: ['imgUrl', 'width'],
+        'ui:order': ['imgUrl', 'width', 'height'],
         properties: {
-            url: {
+            imgUrl: {
                 title: '图片地址',
                 type: 'string',
                 default: 'https://img11.360buyimg.com/imagetools/jfs/t1/98857/10/46727/701459/65eac152Fd89326e4/62da04c320575dcb.gif',
@@ -19,7 +20,7 @@ export default {
             width: {
                 title: '宽度',
                 type: 'string',
-                default: '750px',
+                default: '100%',
                 'ui:options': {
                     placeholder: '请输入图片宽度'
                 }
@@ -27,7 +28,7 @@ export default {
             height: {
                 title: '高度',
                 type: 'string',
-                default: '750px',
+                default: 'auto',
                 'ui:options': {
                     placeholder: '请输入'
                 }
