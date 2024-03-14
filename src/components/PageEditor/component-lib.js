@@ -2,6 +2,7 @@ import Image from './Image/index';
 import Swiper from './Swiper/index';
 import GoodsList from './GoodsList/index';
 
+// 组件库配置数据
 export default [
     {
         name: '图片',
