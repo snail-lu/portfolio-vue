@@ -22,7 +22,7 @@ import draggable from 'vuedraggable';
 import _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import { getDefaultFormState } from '@lljj/vue3-form-element';
-import toolsList from './component-lib';
+import toolsList from './toolbars-config';
 
 // 在复制元素的时候深拷贝一下
 const deepClone = (original) => {

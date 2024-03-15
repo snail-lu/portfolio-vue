@@ -9,22 +9,23 @@
                 <el-button>预览</el-button>
                 <el-button @click="onClearPage">清空</el-button>
             </div>
-            <draggable
-                class="editor"
-                :class="{ 'empty-editor': componentList.length == 0 }"
-                v-model="componentList"
-                group="componentsGroup"
-                item-key="id"
-            >
-                <template #item="{ element }">
-                    <div
-                        :class="`${activeComponent?.id === element.id ? 'component-wrapper-active' : 'component-wrapper'}`"
-                        @click="onChoose(element)"
-                    >
-                        <component :is="element.component.view" :config="element?.configData" />
-                    </div>
-                </template>
-            </draggable>
+            <div class="editor" :class="{ 'empty-editor': componentList.length == 0 }">
+                <draggable
+                    v-model="componentList"
+                    item-key="id"
+                    group="componentsGroup"
+                    animation="200"
+                >
+                    <template #item="{ element }">
+                        <div
+                            :class="`${activeComponent?.id === element.id ? 'component-wrapper-active' : 'component-wrapper'}`"
+                            @click="onChoose(element)"
+                        >
+                            <component :is="element.component.view" :config="element?.configData" />
+                        </div>
+                    </template>
+                </draggable>
+            </div>
         </div>
         <div class="col-2 box-r">
             <div class="box-r-title">组件配置</div>
@@ -235,6 +236,18 @@ const onClearPage = () => {
         background: #ccc;
         border-radius: 20px;
     }
+}
+.flip-list-move {
+    transition: transform 0.5s;
+}
+
+.no-move {
+    transition: transform 0s;
+}
+
+.ghost {
+    opacity: 0.5;
+    background: #c8ebfb;
 }
 
 .box-r {
