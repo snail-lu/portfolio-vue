@@ -5,8 +5,8 @@
         </div>
         <div class="col-6 editor-box">
             <div class="btn-groups">
-                <el-button type="primary">保存</el-button>
-                <el-button>预览</el-button>
+                <el-button type="primary" @click="onSavePage">保存</el-button>
+                <el-button @click="onPreviewPage">预览</el-button>
                 <el-button @click="onClearPage">清空</el-button>
             </div>
             <div class="editor" :class="{ 'empty-editor': componentList.length == 0 }">
@@ -99,6 +99,17 @@ const onSubmitForm = () => {
         }
     });
 };
+const onSavePage = () => {
+    const pageData = componentList.value.map(item => {
+        return {
+            componentName: item.componentName
+        }
+    })
+}
+
+const onPreviewPage = () => {
+
+}
 
 const onClearPage = () => {
     ElMessageBox.confirm('确定要清空页面?', '提示', {

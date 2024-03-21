@@ -5,18 +5,21 @@ import GoodsList from './GoodsList/index';
 // 组件库配置数据
 export default [
     {
-        name: '图片',
+        title: '图片',
         icon: 'icon-image',
-        component: Image
+        componentName: 'Image',
+        componentPack: Image
     },
     {
-        name: '轮播图',
+        title: '轮播图',
         icon: 'icon-swiper',
-        component: Swiper
+        componentName: 'Swiper',
+        componentPack: Swiper
     },
     {
         name: '商品列表',
         icon: 'icon-goodslist2',
-        component: GoodsList
+        componentName: 'GoodsList',
+        componentPack: GoodsList
     }
 ];
