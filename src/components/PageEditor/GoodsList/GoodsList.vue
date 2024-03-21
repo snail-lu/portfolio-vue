@@ -1,6 +1,6 @@
 <template>
   <div class="goods-list">
-    <div class="goods-item" v-for="i in 7" :key="i">
+    <div class="goods-item" v-for="i in 3" :key="i">
       <img
         class="goods-img"
         src="https://img14.360buyimg.com/mobilecms/s360x360_jfs/t1/93701/37/15663/119974/614464c4Efb407602/f95c78e0938579db.jpg!q70.dpg.webp"

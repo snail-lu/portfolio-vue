@@ -21,10 +21,8 @@ console.log(props.config, 'img setup')
 </script>
 
 <style lang="scss" scoped>
-.image-wrapper {
-    font-size: 0;
-}
 .image {
     width: 100%;
+    vertical-align: middle;
 }
 </style>
