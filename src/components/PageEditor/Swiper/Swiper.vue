@@ -1,7 +1,7 @@
 <template>
-    <el-carousel height="150px">
-        <el-carousel-item v-for="item in 4" :key="item">
-            <h3 class="small justify-center" text="2xl">{{ item }}</h3>
+    <el-carousel :height="config.height" :autoplay="config.autoplay" :loop="config.loop" :interval="config.interval">
+        <el-carousel-item v-for="(item, index) in config.imgList" :key="index">
+            <img :src="item.imgUrl" :style="{height: config.height}"/>
         </el-carousel-item>
     </el-carousel>
 </template>
@@ -10,13 +10,8 @@
 const props = defineProps({
     config: Object
 });
+
+console.log(props.config, 'swiper setup')
 </script>
 
-<style lang="scss" scoped>
-.el-carousel__item:nth-child(2n) {
-    background-color: #99a9bf;
-}
-.el-carousel__item:nth-child(2n + 1) {
-    background-color: #39a11f;
-}
-</style>
+<style lang="scss" scoped></style>

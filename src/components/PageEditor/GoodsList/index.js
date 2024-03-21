@@ -1,6 +1,6 @@
 import GoodsList from './GoodsList.vue';
 export default {
-    view: GoodsList,
+    component: GoodsList,
     schema: {
         title: '商品列表',
         description: 'A simple form example.',

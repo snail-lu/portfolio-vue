@@ -1,6 +1,6 @@
 import Image from './Image.vue';
 export default {
-    view: Image,
+    component: Image,
     // 组件对应的动态表单json schema
     schema: {
         title: '图片配置',
@@ -13,6 +13,7 @@ export default {
                 title: '图片地址',
                 type: 'string',
                 default: 'https://img11.360buyimg.com/imagetools/jfs/t1/98857/10/46727/701459/65eac152Fd89326e4/62da04c320575dcb.gif',
+                description: '合法的网络图片地址',
                 'ui:options': {
                     placeholder: '请输入图片地址'
                 }
@@ -21,6 +22,7 @@ export default {
                 title: '宽度',
                 type: 'string',
                 default: '100%',
+                description: '需带单位px, %或vw',
                 'ui:options': {
                     placeholder: '请输入图片宽度'
                 }
@@ -29,6 +31,7 @@ export default {
                 title: '高度',
                 type: 'string',
                 default: 'auto',
+                description: '需带单位px, %或vh，也可设置为auto',
                 'ui:options': {
                     placeholder: '请输入'
                 }

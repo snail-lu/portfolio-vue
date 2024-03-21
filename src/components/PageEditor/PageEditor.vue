@@ -22,7 +22,7 @@
                             :class="`${activeComponent?.id === element.id ? 'component-wrapper-active' : 'component-wrapper'}`"
                             @click="onChoose(element)"
                         >
-                            <component :is="element.component.view" :config="element?.configData" />
+                            <component :is="element.componentPack.component" :config="element?.configData" />
                         </div>
                     </template>
                 </draggable>
@@ -67,14 +67,14 @@ const onChoose = (element) => {
 
 const schema = computed(() => {
     if (activeComponent.value) {
-        return activeComponent.value.component.schema;
+        return activeComponent.value.componentPack.schema;
     } else {
         return {};
     }
 });
 const uiSchema = computed(() => {
     if (activeComponent.value) {
-        return activeComponent.value.component.uiSchema;
+        return activeComponent.value.componentPack.uiSchema;
     } else {
         return {};
     }
@@ -90,6 +90,7 @@ const formProps = {
     labelSuffix: '：'
 };
 
+// 组件配置应用
 const onSubmitForm = () => {
     console.log(activeComponent, '');
     console.log(formData.value, 'formData');
@@ -99,18 +100,33 @@ const onSubmitForm = () => {
         }
     });
 };
+
+// 页面保存
 const onSavePage = () => {
     const pageData = componentList.value.map(item => {
         return {
-            componentName: item.componentName
+            componentName: item.componentName,
+            data: item.configData
         }
     })
+    ElMessageBox.alert('可打开控制台查看页面数据', '保存数据', {
+        confirmButtonText: '确定',
+        callback: (action) => {
+            ElMessage({
+                type: 'success',
+                message: '提交成功'
+            })
+        }
+    })
+    console.log(pageData, '保存的页面数据')
 }
 
+// 预览页面
 const onPreviewPage = () => {
 
 }
 
+// 清空页面
 const onClearPage = () => {
     ElMessageBox.confirm('确定要清空页面?', '提示', {
         confirmButtonText: '确定',
@@ -210,7 +226,7 @@ const onClearPage = () => {
 }
 .editor {
     width: 375px;
-    height: 750px;
+    height: 90vh;
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.3);
     background-color: #fff;
     overflow: auto;

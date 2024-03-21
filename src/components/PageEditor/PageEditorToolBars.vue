@@ -11,7 +11,7 @@
         <template #item="{ element }">
             <div class="list-group-item">
                 <div :class="`icon iconfont ${element.icon}`"></div>
-                <div class="name">{{ element.name }}</div>
+                <div class="name">{{ element.title }}</div>
             </div>
         </template>
     </draggable>
@@ -29,7 +29,7 @@ const deepClone = (original) => {
     const id = uuidv4();
     const clonedElement = _.cloneDeep(original);
     clonedElement.id = id;
-    clonedElement.configData = getDefaultFormState(original.component.schema)
+    clonedElement.configData = getDefaultFormState(original.componentPack.schema)
     return clonedElement;
 };
 </script>
