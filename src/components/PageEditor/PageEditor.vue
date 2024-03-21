@@ -11,6 +11,7 @@
             </div>
             <div class="editor" :class="{ 'empty-editor': componentList.length == 0 }">
                 <draggable
+                    class="drag-area"
                     v-model="componentList"
                     item-key="id"
                     group="componentsGroup"
@@ -203,6 +204,11 @@ const onClearPage = () => {
     background-color: #fff;
     overflow: auto;
     position: relative;
+
+    .drag-area {
+        width: 100%;
+        min-height: 100%;
+    }
 
     &.empty-editor {
         &::before {
