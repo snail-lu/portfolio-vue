@@ -155,7 +155,7 @@ routes.push(demoRoutes);
 //     });
 
 const router = createRouter({
-    history: createWebHistory('/portfolio/'),
+    history: createWebHistory('/portfolio-vue/'),
     scrollBehavior: (to, from, savedPosition) => {
         return new Promise((resolve, reject) => {
             if (to.path === '/demo') {
