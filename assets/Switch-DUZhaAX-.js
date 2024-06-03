@@ -1,1 +1,0 @@
-import{_ as o}from"./index-qd-9JBwJ.js";import{o as t,c as e,aV as r}from"./elementPlus-OXnB-esK.js";const n={};function s(_,a){const c=r;return t(),e(c)}const m=o(n,[["render",s]]);export{m as default};

@@ -1,0 +1,1 @@
+import{_ as o}from"./index-BPsOo1ew.js";/* empty css                 */import{o as r,c as t,C as n}from"./elementPlus-OXnB-esK.js";const c={};function _(s,m){const e=n;return r(),t(e)}const f=o(c,[["render",_]]);export{f as default};
