@@ -1,1 +1,0 @@
-import{_ as e}from"./index.6c979ba2.js";import{o,m as s,z as _,J as c}from"./elementPlus.8845be7b.js";const r={class:"scroll-wrap"},a={class:"scroll-item"},l={__name:"AutoScrollText",props:{text:String},setup(t){return(n,p)=>(o(),s("div",r,[_("div",a,c(t.text),1)]))}},m=e(l,[["__scopeId","data-v-272283bd"]]);export{m as A};
