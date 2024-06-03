@@ -2,7 +2,7 @@
     <div class="wscn-http404-container">
         <div class="bullshit flex-box-column flex-h-center flex-v-center">
             <div class="bullshit__oops">Page Not Found!</div>
-            <a href="/portfolio" class="bullshit__return-home">Back to home</a>
+            <a href="/portfolio-vue" class="bullshit__return-home">Back to home</a>
         </div>
         <div class="pic-404">
             <img class="pic-404__parent" src="@/assets/404_images/404.png" alt="404" />

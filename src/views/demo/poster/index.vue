@@ -53,7 +53,7 @@ import logoImg from '@/assets/icons/logo.png';
 
 // 商品信息
 const goods = {
-    url: 'https://snaillu.gitee.io/portfolio/demo/poster',
+    url: 'https://snail-lu.github.io/portfolio-vue/demo/poster',
     goodsName: '西服套装男西装整套修身商务正装 黑色',
     goodsImg: 'https://m.360buyimg.com/mobilecms/s1265x1265_jfs/t1/20988/35/20240/36277/637e5127Ee10e66b3/03b212c37d98de5f.jpg',
     goodsCode: '123456',
@@ -110,7 +110,7 @@ const draw = () => {
     logoImg.onload = function () {
         ctx.drawImage(logoImg, 20 * dpr, 20 * dpr, 50 * dpr, 50 * dpr);
     };
-    logoImg.src = '/portfolio/src/assets/icons/logo.png';
+    logoImg.src = '/portfolio-vue/src/assets/icons/logo.png';
     ctx.fillStyle = '#000';
     ctx.font = `${16 * dpr}px 微软雅黑`;
     ctx.fillText('导购9527', 90 * dpr, 50 * dpr);
