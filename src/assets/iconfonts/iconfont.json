@@ -6,6 +6,48 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "10423268",
+      "name": "吸烟室",
+      "font_class": "smookingroom",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "18666378",
+      "name": "母婴室",
+      "font_class": "nursery",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "18667135",
+      "name": "电梯",
+      "font_class": "elevator",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "18667136",
+      "name": "扶梯",
+      "font_class": "escalator",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "18667161",
+      "name": "卫生间",
+      "font_class": "toilet",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "26545761",
+      "name": "服务台",
+      "font_class": "reception",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
       "icon_id": "4315705",
       "name": "商品列表1",
       "font_class": "goodslist2",

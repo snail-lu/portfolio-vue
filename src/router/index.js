@@ -114,6 +114,13 @@ const routes = [
         }
     },
     {
+        path: '/demo/leaflet',
+        component: () => import('@/views/demo/leaflet/index.vue'),
+        meta: {
+            title: 'Leaflet地图'
+        }
+    },
+    {
         path: '/:pathMatch(.*)*',
         redirect: '/404',
         hidden: true

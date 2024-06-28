@@ -17,6 +17,7 @@ import '@/assets/iconfonts/iconfont.css';
 import '@/router/permission'; // permission control
 
 import 'vue-fullpage.js/dist/style.css';
+import 'leaflet/dist/leaflet.css';
 // import './fullpage.scrollHorizontally.min' // Optional. When using fullpage extensions
 import VueFullPage from 'vue-fullpage.js';
 

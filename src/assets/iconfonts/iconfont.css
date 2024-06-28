@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3807014 */
-  src: url('iconfont.woff2?t=1709275470176') format('woff2'),
-       url('iconfont.woff?t=1709275470176') format('woff'),
-       url('iconfont.ttf?t=1709275470176') format('truetype');
+  src: url('iconfont.woff2?t=1719563084328') format('woff2'),
+       url('iconfont.woff?t=1719563084328') format('woff'),
+       url('iconfont.ttf?t=1719563084328') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,30 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-smookingroom:before {
+  content: "\e60c";
+}
+
+.icon-nursery:before {
+  content: "\e607";
+}
+
+.icon-elevator:before {
+  content: "\e60d";
+}
+
+.icon-escalator:before {
+  content: "\e60e";
+}
+
+.icon-toilet:before {
+  content: "\e613";
+}
+
+.icon-reception:before {
+  content: "\e60a";
 }
 
 .icon-goodslist2:before {
